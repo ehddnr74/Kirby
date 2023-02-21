@@ -14,9 +14,13 @@ namespace My
 
 	void PlayScene::Initialize()
 	{
-		Kirby* kirby = new Kirby();
-		AddGameObject(kirby, eLayerType::Player);
-
+		for (float i = 0; i < 2; i++)
+		{
+			Kirby* kirby = new Kirby();
+			//kirby->SetPos(Vector2(0.0f, 0.0f);
+			kirby->SetName(L"Player");
+			AddGameObject(kirby, eLayerType::Player);
+		}
 		Scene::Initialize();
 	}
 
