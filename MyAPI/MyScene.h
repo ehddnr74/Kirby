@@ -16,8 +16,12 @@ namespace My
 		virtual void Render(HDC hdc);
 		virtual void Release();
 
+		virtual void OnEnter();
+		virtual void OnExit();
+
 		void AddGameObject(GameObject* obj, eLayerType layer);
 	
+		
 
 	private:
 		std::vector<Layer> mLayers;

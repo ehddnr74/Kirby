@@ -4,6 +4,8 @@
 #include "framework.h"
 #include "MyAPI.h"
 #include "MyApplication.h"
+#include "MySceneManager.h"
+#include "MyResources.h"
 
 #define MAX_LOADSTRING 100
 
@@ -65,12 +67,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
     }
 
-
-    if (WM_QUIT == msg.message)
-    {
-
-    }
-
+    My::SceneManager::Release();
+    My::Resources::Release();
     return (int)msg.wParam;
 }
 

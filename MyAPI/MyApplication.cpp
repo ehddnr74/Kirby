@@ -13,7 +13,7 @@ namespace My
 
 	Application::~Application()
 	{
-		SceneManager::Release();
+		//SceneManager::Release();
 
 	}
 

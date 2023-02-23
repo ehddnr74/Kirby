@@ -14,9 +14,6 @@
     <Filter Include="Contents">
       <UniqueIdentifier>{752621a0-2c1a-49eb-acd8-4e7956ec2c7d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Common">
-      <UniqueIdentifier>{dad570d8-1d2f-41e3-afb4-66e2930bf380}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\GameObject">
       <UniqueIdentifier>{c8f3dd68-c91a-4b35-b620-64cdad4842e9}</UniqueIdentifier>
     </Filter>
@@ -47,6 +44,21 @@
     <Filter Include="Engine\Input">
       <UniqueIdentifier>{91413d4c-4c91-4a8b-8f96-852ab8ed465e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Resource">
+      <UniqueIdentifier>{9f177c78-8b60-487b-8e2b-6311d0632356}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Common">
+      <UniqueIdentifier>{dad570d8-1d2f-41e3-afb4-66e2930bf380}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\MyMainScene">
+      <UniqueIdentifier>{bc596d72-e4a8-4797-9cd9-b57e3c3f14ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\MyTitleScene">
+      <UniqueIdentifier>{70bc8e35-de43-467d-8b79-f9b11a2ef5af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\MyMainScene\stageScene">
+      <UniqueIdentifier>{c65ba4a5-0210-469a-b179-19efdac9bb8c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -62,22 +74,22 @@
       <Filter>main</Filter>
     </ClInclude>
     <ClInclude Include="Commoninclude.h">
-      <Filter>Engine\Common</Filter>
+      <Filter>Engine\Component\Common</Filter>
     </ClInclude>
     <ClInclude Include="MyEngine.h">
-      <Filter>Engine\Common</Filter>
+      <Filter>Engine\Component\Common</Filter>
     </ClInclude>
     <ClInclude Include="MyEnums.h">
-      <Filter>Engine\Common</Filter>
+      <Filter>Engine\Component\Common</Filter>
     </ClInclude>
     <ClInclude Include="MyMath.h">
-      <Filter>Engine\Common</Filter>
+      <Filter>Engine\Component\Common</Filter>
     </ClInclude>
     <ClInclude Include="MyGameObject.h">
       <Filter>Engine\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="MyEntity.h">
-      <Filter>Engine\Common</Filter>
+      <Filter>Engine\Component\Common</Filter>
     </ClInclude>
     <ClInclude Include="MyApplication.h">
       <Filter>Engine\High Level interface</Filter>
@@ -106,6 +118,19 @@
     <ClInclude Include="MyTime.h">
       <Filter>Engine\Time</Filter>
     </ClInclude>
+    <ClInclude Include="MyResource.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="MyResources.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="MyImage.h" />
+    <ClInclude Include="MyTransform.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTitleScene.h">
+      <Filter>Contents\Scene\MyTitleScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc">
@@ -125,13 +150,13 @@
       <Filter>main</Filter>
     </ClCompile>
     <ClCompile Include="MyMath.cpp">
-      <Filter>Engine\Common</Filter>
+      <Filter>Engine\Component\Common</Filter>
     </ClCompile>
     <ClCompile Include="MyGameObject.cpp">
       <Filter>Engine\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="MyEntity.cpp">
-      <Filter>Engine\Common</Filter>
+      <Filter>Engine\Component\Common</Filter>
     </ClCompile>
     <ClCompile Include="MyApplication.cpp">
       <Filter>Engine\High Level interface</Filter>
@@ -159,6 +184,19 @@
     </ClCompile>
     <ClCompile Include="MyTime.cpp">
       <Filter>Engine\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="MyResource.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="MyResources.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="MyImage.cpp" />
+    <ClCompile Include="MyTransform.cpp">
+      <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="MyTitleScene.cpp">
+      <Filter>Contents\Scene\MyTitleScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

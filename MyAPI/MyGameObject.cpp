@@ -1,11 +1,14 @@
 #include "MyGameObject.h"
 
+#include "MyTransform.h"
+
 
 namespace My
 {
 	GameObject::GameObject()
 	{
-
+		mComponents.resize((UINT)eComponentType::End);
+		AddComponent<Transform>();
 	}
 	GameObject::~GameObject()
 	{

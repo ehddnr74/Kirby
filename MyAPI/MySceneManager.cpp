@@ -1,17 +1,23 @@
 #include "MySceneManager.h"
 #include "MyPlayScene.h"
+#include "MyTitleScene.h"
 
 namespace My
 {
 
 
 	std::vector<Scene*> SceneManager::mScenes = {};
+	Scene* SceneManager::mActiveScene = nullptr;
+
 	void SceneManager::Initialize()
 	{
-		mScenes.resize((UINT)eSceneType::Max);
+		mScenes.resize((UINT)eSceneType::End);
 
+		mScenes[(UINT)eSceneType::Title] = new TitleScene();
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
-		mScenes[(UINT)eSceneType::Play]->SetName(L"PLAYER");
+		
+
+		mActiveScene = mScenes[(UINT)eSceneType::Title];
 
 		for (Scene* scene : mScenes)
 		{
@@ -24,23 +30,12 @@ namespace My
 
 	void SceneManager::Update()
 	{
-		for (Scene* scene : mScenes)
-		{
-			if (scene == nullptr)
-				continue;
-
-			scene->Update();
-		}
+			mActiveScene->Update();
 	}
 	void SceneManager::Render(HDC hdc)
 	{
-		for (Scene* scene : mScenes)
-		{
-			if (scene == nullptr)
-				continue;
+			mActiveScene->Render(hdc);
 
-			scene->Render(hdc);
-		}
 	}
 	void SceneManager::Release()
 	{
@@ -52,4 +47,15 @@ namespace My
 			scene->Release();
 		}
 	}
+
+	void SceneManager::LoadScene(eSceneType type)
+	{
+		// ÇöÀç¾À
+		mActiveScene->OnExit();
+
+		// ´ÙÀ½¾À
+		mActiveScene = mScenes[(UINT)type];
+		mActiveScene->OnEnter();
+	}
+
 }

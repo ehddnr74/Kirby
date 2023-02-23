@@ -1,5 +1,10 @@
 #include "MyKirby.h"
 #include "MyTime.h"
+#include "MyResources.h"
+#include "MySceneManager.h"
+#include "MyInput.h"
+#include "MyTransform.h"
+
 
 namespace My
 {
@@ -11,45 +16,43 @@ namespace My
 	}
 	void Kirby::Initialize()
 	{
+		mImage = Resources::Load<Image>(L"Kirby", L"..\\Resources\\Kirby.bmp");
 		GameObject::Initialize();
 	}
 	void Kirby::Update()
 	{
 		GameObject::Update();
-		if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		if (Input::GetKeyState(eKeyCode::A) == eKeyState::Pressed)
 		{
-			mPos.x -= 100.0f * Time::DeltaTime();
+			pos.x -= 100.0f * Time::DeltaTime();
 		}
-		if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+
+		if (Input::GetKeyState(eKeyCode::D) == eKeyState::Pressed)
 		{
-			mPos.x += 100.0f * Time::DeltaTime();
+			pos.x += 100.0f * Time::DeltaTime();
 		}
-		if (GetAsyncKeyState(VK_UP) & 0x8000)
+
+		if (Input::GetKeyState(eKeyCode::W) == eKeyState::Pressed)
 		{
-			mPos.y -= 100.0f * Time::DeltaTime();
+			pos.y -= 100.0f * Time::DeltaTime();
 		}
-		if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+
+		if (Input::GetKeyState(eKeyCode::S) == eKeyState::Pressed)
 		{
-			mPos.y += 100.0f * Time::DeltaTime();
+			pos.y += 100.0f * Time::DeltaTime();
 		}
+		tr->SetPos(pos);
 	}
 	void Kirby::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
-
-		HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
-	HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
-	//Rectangle(mHdc, -1, -1, 1601, 901);
-
-	HPEN pen = CreatePen(PS_SOLID, 2, RGB(255, 0, 255));
-	HPEN oldPen = (HPEN)SelectObject(hdc, pen);
-
-	Rectangle(hdc, mPos.x, mPos.y, mPos.x+100, mPos.y+100);
-
-	SelectObject(hdc, oldPen);
-	DeleteObject(pen);
-	SelectObject(hdc, oldBrush);
-	DeleteObject(brush);
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+		BitBlt(hdc, pos.x, pos.y, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);
 	}
 	void Kirby::Release()
 	{

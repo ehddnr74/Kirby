@@ -3,12 +3,12 @@
 
 namespace My
 {
-	class Kirby;
-	class PlayScene : public Scene
+	class TitleScene : public Scene
 	{
 	public:
-		PlayScene();
-		~PlayScene();
+		TitleScene();
+		~TitleScene();
+
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
@@ -17,8 +17,8 @@ namespace My
 		virtual void OnEnter() override;
 		virtual void OnExit() override;
 
+
 	private:
-		Kirby* mKirby;
+
 	};
 }
-

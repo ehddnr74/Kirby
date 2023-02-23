@@ -137,15 +137,20 @@
     <ClInclude Include="MyEntity.h" />
     <ClInclude Include="MyEnums.h" />
     <ClInclude Include="MyGameObject.h" />
+    <ClInclude Include="MyImage.h" />
     <ClInclude Include="MyInput.h" />
     <ClInclude Include="MyKirby.h" />
     <ClInclude Include="MyLayer.h" />
     <ClInclude Include="MyMath.h" />
     <ClInclude Include="MyPlayScene.h" />
+    <ClInclude Include="MyResource.h" />
     <ClInclude Include="MyScene.h" />
     <ClInclude Include="MySceneManager.h" />
     <ClInclude Include="MyTime.h" />
+    <ClInclude Include="MyTitleScene.h" />
+    <ClInclude Include="MyTransform.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="MyResources.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -154,14 +159,19 @@
     <ClCompile Include="MyComponent.cpp" />
     <ClCompile Include="MyEntity.cpp" />
     <ClCompile Include="MyGameObject.cpp" />
+    <ClCompile Include="MyImage.cpp" />
     <ClCompile Include="MyInput.cpp" />
     <ClCompile Include="MyKirby.cpp" />
     <ClCompile Include="MyLayer.cpp" />
     <ClCompile Include="MyMath.cpp" />
     <ClCompile Include="MyPlayScene.cpp" />
+    <ClCompile Include="MyResource.cpp" />
     <ClCompile Include="MyScene.cpp" />
     <ClCompile Include="MySceneManager.cpp" />
     <ClCompile Include="MyTime.cpp" />
+    <ClCompile Include="MyResources.cpp" />
+    <ClCompile Include="MyTitleScene.cpp" />
+    <ClCompile Include="MyTransform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc" />

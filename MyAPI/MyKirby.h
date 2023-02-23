@@ -1,5 +1,6 @@
 #pragma once
 #include "MyGameObject.h"
+#include "MyImage.h"
 
 namespace My
 {
@@ -16,6 +17,7 @@ namespace My
 
 
 	private:
+		Image* mImage;
 	};
 }
 

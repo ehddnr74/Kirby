@@ -1,11 +1,14 @@
 #include "MyPlayScene.h"
 #include "MyKirby.h"
+#include "MyInput.h"
+#include "MySceneManager.h"
 
 
 namespace My
 {
 	PlayScene::PlayScene()
 	{
+
 	}
 
 	PlayScene::~PlayScene()
@@ -14,18 +17,20 @@ namespace My
 
 	void PlayScene::Initialize()
 	{
-		for (float i = 0; i < 2; i++)
-		{
-			Kirby* kirby = new Kirby();
-			//kirby->SetPos(Vector2(0.0f, 0.0f);
-			kirby->SetName(L"Player");
-			AddGameObject(kirby, eLayerType::Player);
-		}
+    	mKirby = new Kirby();
+    	AddGameObject(mKirby, eLayerType::Player);
+
 		Scene::Initialize();
 	}
 
 	void PlayScene::Update()
 	{
+
+		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
+		{
+			SceneManager::LoadScene(eSceneType::Title);
+		}
+
 		Scene::Update();
 	}
 
@@ -37,6 +42,15 @@ namespace My
 	void PlayScene::Release()
 	{
 		Scene::Release();
+	}
+
+	void PlayScene::OnEnter()
+	{
+	}
+
+	void PlayScene::OnExit()
+	{
+		//mKirby->SetPos(Vector2(0.0f, 0.0f));
 	}
 
 }
