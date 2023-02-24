@@ -2,6 +2,8 @@
 #include "MyKirby.h"
 #include "MyInput.h"
 #include "MySceneManager.h"
+#include "Room1.h"
+#include "MyApplication.h"
 
 
 namespace My
@@ -19,6 +21,14 @@ namespace My
 	{
     	mKirby = new Kirby();
     	AddGameObject(mKirby, eLayerType::Player);
+
+		Room1* stage1 = new Room1();
+		AddGameObject(stage1, eLayerType::Stage);
+
+		
+
+		
+		
 
 		Scene::Initialize();
 	}

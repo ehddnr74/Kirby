@@ -6,7 +6,7 @@ namespace My
 	{
 	public:
 		Image();
-		~Image();
+		virtual ~Image();
 
 		virtual HRESULT Load(const std::wstring& path) override;
 

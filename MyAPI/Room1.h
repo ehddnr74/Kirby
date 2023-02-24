@@ -1,25 +1,25 @@
 #pragma once
-#include "MyScene.h"
+
+#include "MyGameObject.h"
+#include "MyImage.h"
 
 namespace My
 {
-	class Kirby;
-	class PlayScene : public Scene
+	class Room1 : public GameObject
 	{
 	public:
-		PlayScene();
-		~PlayScene();
+		Room1();
+		~Room1();
+
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
-		virtual void OnEnter() override;
-		virtual void OnExit() override;
+
 
 	private:
-		Kirby* mKirby;
-
+		Image* room1;
 	};
 }
 

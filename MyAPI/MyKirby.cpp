@@ -26,22 +26,22 @@ namespace My
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
-		if (Input::GetKeyState(eKeyCode::A) == eKeyState::Pressed)
+		if (Input::GetKeyState(eKeyCode::Left) == eKeyState::Pressed)
 		{
 			pos.x -= 100.0f * Time::DeltaTime();
 		}
 
-		if (Input::GetKeyState(eKeyCode::D) == eKeyState::Pressed)
+		if (Input::GetKeyState(eKeyCode::Right) == eKeyState::Pressed)
 		{
 			pos.x += 100.0f * Time::DeltaTime();
 		}
 
-		if (Input::GetKeyState(eKeyCode::W) == eKeyState::Pressed)
+		if (Input::GetKeyState(eKeyCode::Up) == eKeyState::Pressed)
 		{
 			pos.y -= 100.0f * Time::DeltaTime();
 		}
 
-		if (Input::GetKeyState(eKeyCode::S) == eKeyState::Pressed)
+		if (Input::GetKeyState(eKeyCode::Down) == eKeyState::Pressed)
 		{
 			pos.y += 100.0f * Time::DeltaTime();
 		}

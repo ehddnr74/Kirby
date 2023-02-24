@@ -17,7 +17,7 @@ namespace My
 		mScenes[(UINT)eSceneType::Play] = new PlayScene();
 		
 
-		mActiveScene = mScenes[(UINT)eSceneType::Title];
+		mActiveScene = mScenes[(UINT)eSceneType::Play];
 
 		for (Scene* scene : mScenes)
 		{

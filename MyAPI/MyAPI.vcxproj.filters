@@ -50,14 +50,32 @@
     <Filter Include="Engine\Component\Common">
       <UniqueIdentifier>{dad570d8-1d2f-41e3-afb4-66e2930bf380}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Scene\MyMainScene">
-      <UniqueIdentifier>{bc596d72-e4a8-4797-9cd9-b57e3c3f14ad}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Scene\MyTitleScene">
       <UniqueIdentifier>{70bc8e35-de43-467d-8b79-f9b11a2ef5af}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Scene\MyMainScene\stageScene">
-      <UniqueIdentifier>{c65ba4a5-0210-469a-b179-19efdac9bb8c}</UniqueIdentifier>
+    <Filter Include="Engine\GameObject\Stage">
+      <UniqueIdentifier>{eeafbd31-31f7-4d2e-946c-43651637fad6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\MyEndScene">
+      <UniqueIdentifier>{688cac28-28be-40ff-bb6b-1090c2e34947}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\MyPlayScene">
+      <UniqueIdentifier>{9d0d7c36-ee03-4167-8fb0-6596bc27e985}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\MyPlayScene\MyStageScene">
+      <UniqueIdentifier>{bc596d72-e4a8-4797-9cd9-b57e3c3f14ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\MyPlayScene\MyStageScene\Stage1">
+      <UniqueIdentifier>{08623598-f76c-462c-987f-e25d91fb878f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\MyPlayScene\MyStageScene\stage3">
+      <UniqueIdentifier>{c4944107-fb7c-4052-96d2-cb00ed43fdfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\MyPlayScene\MyStageScene\stage2">
+      <UniqueIdentifier>{7fc9200e-4a50-485d-a1fc-e91d097434ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\MyPlayScene\MyStageScene\Stage1\Room1">
+      <UniqueIdentifier>{03375157-d416-470d-80c0-9d1e807f9282}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -106,9 +124,6 @@
     <ClInclude Include="MyLayer.h">
       <Filter>Engine\Layer</Filter>
     </ClInclude>
-    <ClInclude Include="MyPlayScene.h">
-      <Filter>Contents\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="MyKirby.h">
       <Filter>Contents\Player</Filter>
     </ClInclude>
@@ -130,6 +145,12 @@
     </ClInclude>
     <ClInclude Include="MyTitleScene.h">
       <Filter>Contents\Scene\MyTitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Room1.h">
+      <Filter>Contents\Scene\MyPlayScene\MyStageScene\Stage1</Filter>
+    </ClInclude>
+    <ClInclude Include="MyPlayScene.h">
+      <Filter>Contents\Scene\MyPlayScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -173,9 +194,6 @@
     <ClCompile Include="MyLayer.cpp">
       <Filter>Engine\Layer</Filter>
     </ClCompile>
-    <ClCompile Include="MyPlayScene.cpp">
-      <Filter>Contents\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="MyKirby.cpp">
       <Filter>Contents\Player</Filter>
     </ClCompile>
@@ -197,6 +215,12 @@
     </ClCompile>
     <ClCompile Include="MyTitleScene.cpp">
       <Filter>Contents\Scene\MyTitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Room1.cpp">
+      <Filter>Contents\Scene\MyPlayScene\MyStageScene\Stage1</Filter>
+    </ClCompile>
+    <ClCompile Include="MyPlayScene.cpp">
+      <Filter>Contents\Scene\MyPlayScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
