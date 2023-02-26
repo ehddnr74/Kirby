@@ -16,7 +16,9 @@ namespace My
 	}
 	void Kirby::Initialize()
 	{
-		mImage = Resources::Load<Image>(L"Kirby", L"..\\Resources\\Kirby.bmp");
+		mKirby = Resources::Load<Image>(L"Kirby", L"..\\Resources\\Kirby.bmp");
+		
+
 		GameObject::Initialize();
 	}
 	void Kirby::Update()
@@ -28,11 +30,14 @@ namespace My
 
 		if (Input::GetKeyState(eKeyCode::Left) == eKeyState::Pressed)
 		{
+			
+
 			pos.x -= 100.0f * Time::DeltaTime();
 		}
 
 		if (Input::GetKeyState(eKeyCode::Right) == eKeyState::Pressed)
 		{
+			
 			pos.x += 100.0f * Time::DeltaTime();
 		}
 
@@ -52,7 +57,11 @@ namespace My
 		GameObject::Render(hdc);
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
-		BitBlt(hdc, pos.x, pos.y, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);
+
+		TransparentBlt(hdc, pos.x+50, pos.y+195, mKirby->GetWidth(), mKirby->GetHeight()
+			, mKirby->GetHdc(), 0, 0, mKirby->GetWidth(), mKirby->GetHeight(), RGB(255, 255, 255));
+
+		//BitBlt(hdc, pos.x, pos.y, mKirby->GetWidth(), mKirby->GetHeight(), mKirby->GetHdc(), 0, 0, SRCCOPY);
 	}
 	void Kirby::Release()
 	{

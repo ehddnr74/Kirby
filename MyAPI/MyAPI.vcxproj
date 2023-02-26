@@ -130,6 +130,8 @@
   <ItemGroup>
     <ClInclude Include="Commoninclude.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="MyAnimation.h" />
+    <ClInclude Include="MyAnimator.h" />
     <ClInclude Include="MyAPI.h" />
     <ClInclude Include="MyApplication.h" />
     <ClInclude Include="Room1.h" />
@@ -155,6 +157,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MyAnimation.cpp" />
+    <ClCompile Include="MyAnimator.cpp" />
     <ClCompile Include="MyAPI.cpp" />
     <ClCompile Include="MyApplication.cpp" />
     <ClCompile Include="Room1.cpp" />

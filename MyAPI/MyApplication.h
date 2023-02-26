@@ -15,12 +15,18 @@ namespace My
 		void Update();
 		void Render();
 
+
 		HWND GetHwnd() { return mHwnd; }
 		HDC GetHdc() { return mHdc;}
 
 	private:
+		void clear();
+
+
+	private:
 		HWND mHwnd;
 		HDC mHdc;
+
 
 		//¹é¹öÆÛ
 		HBITMAP mBackBuffer;

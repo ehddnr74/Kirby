@@ -28,7 +28,7 @@ namespace My
 
 	void My::Room1::Render(HDC hdc)
 	{
-		BitBlt(hdc, 50, 50, room1->GetWidth(), room1->GetHeight(), room1->GetHdc(), 0, 0, SRCCOPY);
+		BitBlt(hdc, 0, 0, room1->GetWidth(), room1->GetHeight(), room1->GetHdc(), 0, 0, SRCCOPY);
 	}
 
 	void My::Room1::Release()

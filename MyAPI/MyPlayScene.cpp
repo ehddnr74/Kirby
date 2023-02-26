@@ -25,11 +25,6 @@ namespace My
 		Room1* stage1 = new Room1();
 		AddGameObject(stage1, eLayerType::Stage);
 
-		
-
-		
-		
-
 		Scene::Initialize();
 	}
 

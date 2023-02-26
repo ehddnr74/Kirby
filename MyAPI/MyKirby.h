@@ -17,7 +17,7 @@ namespace My
 
 
 	private:
-		Image* mImage;
+		Image* mKirby;
 	};
 }
 
