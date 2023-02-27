@@ -74,6 +74,9 @@
     <Filter Include="Engine\Component\Transform">
       <UniqueIdentifier>{7c0f9a69-c98f-4323-868d-740bb16fdfce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Scene\MyStageScene\Stage1\Room2">
+      <UniqueIdentifier>{c3393ae6-727d-4281-ad81-4a7449402962}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -140,12 +143,6 @@
     <ClInclude Include="MyTitleScene.h">
       <Filter>Contents\Scene\MyTitleScene</Filter>
     </ClInclude>
-    <ClInclude Include="Room1.h">
-      <Filter>Contents\Scene\MyStageScene</Filter>
-    </ClInclude>
-    <ClInclude Include="MyPlayScene.h">
-      <Filter>Contents\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="MyTransform.h">
       <Filter>Engine\Component\Transform</Filter>
     </ClInclude>
@@ -154,6 +151,18 @@
     </ClInclude>
     <ClInclude Include="MyAnimation.h">
       <Filter>Engine\Component\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Room1.h">
+      <Filter>Contents\Scene\MyStageScene\Stage1\Room1</Filter>
+    </ClInclude>
+    <ClInclude Include="Room2.h">
+      <Filter>Contents\Scene\MyStageScene\Stage1\Room2</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage1_1.h">
+      <Filter>Contents\Scene\MyStageScene\Stage1\Room1</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage1_2.h">
+      <Filter>Contents\Scene\MyStageScene\Stage1\Room2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -216,12 +225,6 @@
     <ClCompile Include="MyTitleScene.cpp">
       <Filter>Contents\Scene\MyTitleScene</Filter>
     </ClCompile>
-    <ClCompile Include="Room1.cpp">
-      <Filter>Contents\Scene\MyStageScene</Filter>
-    </ClCompile>
-    <ClCompile Include="MyPlayScene.cpp">
-      <Filter>Contents\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="MyTransform.cpp">
       <Filter>Engine\Component\Transform</Filter>
     </ClCompile>
@@ -230,6 +233,18 @@
     </ClCompile>
     <ClCompile Include="MyAnimation.cpp">
       <Filter>Engine\Component\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Room1.cpp">
+      <Filter>Contents\Scene\MyStageScene\Stage1\Room1</Filter>
+    </ClCompile>
+    <ClCompile Include="Room2.cpp">
+      <Filter>Contents\Scene\MyStageScene\Stage1\Room2</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage1_1.cpp">
+      <Filter>Contents\Scene\MyStageScene\Stage1\Room1</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage1_2.cpp">
+      <Filter>Contents\Scene\MyStageScene\Stage1\Room2</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

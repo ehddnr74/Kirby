@@ -145,7 +145,7 @@
     <ClInclude Include="MyKirby.h" />
     <ClInclude Include="MyLayer.h" />
     <ClInclude Include="MyMath.h" />
-    <ClInclude Include="MyPlayScene.h" />
+    <ClInclude Include="Stage1_1.h" />
     <ClInclude Include="MyResource.h" />
     <ClInclude Include="MyScene.h" />
     <ClInclude Include="MySceneManager.h" />
@@ -154,6 +154,8 @@
     <ClInclude Include="MyTransform.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="MyResources.h" />
+    <ClInclude Include="Room2.h" />
+    <ClInclude Include="Stage1_2.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -170,7 +172,7 @@
     <ClCompile Include="MyKirby.cpp" />
     <ClCompile Include="MyLayer.cpp" />
     <ClCompile Include="MyMath.cpp" />
-    <ClCompile Include="MyPlayScene.cpp" />
+    <ClCompile Include="Stage1_1.cpp" />
     <ClCompile Include="MyResource.cpp" />
     <ClCompile Include="MyScene.cpp" />
     <ClCompile Include="MySceneManager.cpp" />
@@ -178,6 +180,8 @@
     <ClCompile Include="MyResources.cpp" />
     <ClCompile Include="MyTitleScene.cpp" />
     <ClCompile Include="MyTransform.cpp" />
+    <ClCompile Include="Room2.cpp" />
+    <ClCompile Include="Stage1_2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc" />

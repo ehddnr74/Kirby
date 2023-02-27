@@ -1,14 +1,16 @@
 #pragma once
+#pragma once
 #include "MyScene.h"
 
 namespace My
 {
+	class Room2;
 	class Kirby;
-	class PlayScene : public Scene
+	class Stage2Scene : public Scene
 	{
 	public:
-		PlayScene();
-		~PlayScene();
+		Stage2Scene();
+		~Stage2Scene();
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
@@ -19,6 +21,7 @@ namespace My
 
 	private:
 		Kirby* mKirby;
+		Room2* mroom2;
 
 	};
 }

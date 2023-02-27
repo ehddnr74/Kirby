@@ -1,6 +1,7 @@
 #include "MySceneManager.h"
-#include "MyPlayScene.h"
 #include "MyTitleScene.h"
+#include "Stage1_1.h"
+#include "Stage1_2.h"
 
 namespace My
 {
@@ -14,7 +15,9 @@ namespace My
 		mScenes.resize((UINT)eSceneType::End);
 
 		mScenes[(UINT)eSceneType::Title] = new TitleScene();
-		mScenes[(UINT)eSceneType::Play] = new PlayScene();
+		mScenes[(UINT)eSceneType::Stage1_1] = new Stage1Scene();
+		mScenes[(UINT)eSceneType::Stage1_2] = new Stage2Scene();
+
 		
 
 		mActiveScene = mScenes[(UINT)eSceneType::Title];

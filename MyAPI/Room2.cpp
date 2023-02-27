@@ -1,4 +1,4 @@
-#include "Room1.h"
+#include "Room2.h"
 #include "MyResources.h"
 #include "MySceneManager.h"
 #include "MyInput.h"
@@ -7,25 +7,24 @@
 
 namespace My
 {
-	Room1::Room1()
+	Room2::Room2()
 	{
 
 	}
-	Room1::~Room1()
+	Room2::~Room2()
 	{
 
 	}
 
-	void My::Room1::Initialize()
+	void My::Room2::Initialize()
 	{
-		
-		mroom1 = Resources::Load<Image>(L"Stage1_1", L"..\\Resources\\stage1_1.bmp");
+		mroom2 = Resources::Load<Image>(L"Stage1_2", L"..\\Resources\\stage1_2.bmp");
 
 
 		GameObject::Initialize();
 	}
 
-	void My::Room1::Update()
+	void My::Room2::Update()
 	{
 		GameObject::Update();
 
@@ -35,14 +34,14 @@ namespace My
 		}
 	}
 
-	void My::Room1::Render(HDC hdc)
+	void My::Room2::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
 
-		BitBlt(hdc, 0, 0, mroom1->GetWidth(), mroom1->GetHeight(), mroom1->GetHdc(), 0, 0, SRCCOPY);
+		BitBlt(hdc, 0, 0, mroom2->GetWidth(), mroom2->GetHeight(), mroom2->GetHdc(), 0, 0, SRCCOPY);
 	}
 
-	void My::Room1::Release()
+	void My::Room2::Release()
 	{
 		GameObject::Release();
 	}

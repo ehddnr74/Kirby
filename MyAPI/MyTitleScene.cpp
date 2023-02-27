@@ -17,7 +17,7 @@ namespace My
 	{
 		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
 			{
-			SceneManager::LoadScene(eSceneType::Play);
+			SceneManager::LoadScene(eSceneType::Stage1_1);
 			}
 	}
 	void TitleScene::Render(HDC hdc)

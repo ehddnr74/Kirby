@@ -4,11 +4,11 @@
 
 namespace My
 {
-	class Room1 : public GameObject
+	class Room2 : public GameObject
 	{
 	public:
-		Room1();
-		~Room1();
+		Room2();
+		~Room2();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -16,8 +16,9 @@ namespace My
 		virtual void Release() override;
 
 
+
 	private:
-		Image* mroom1;
+		Image* mroom2;
 	};
 }
 
