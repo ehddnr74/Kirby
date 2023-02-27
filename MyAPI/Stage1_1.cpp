@@ -32,7 +32,7 @@ namespace My
 
 	void Stage1Scene::Update()
 	{
-		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
+		if (Input::GetKeyState(eKeyCode::X) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(eSceneType::Stage1_2);
 		}

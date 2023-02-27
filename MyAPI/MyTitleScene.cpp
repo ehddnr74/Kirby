@@ -15,7 +15,7 @@ namespace My
 	}
 	void TitleScene::Update()
 	{
-		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
+		if (Input::GetKeyState(eKeyCode::Z) == eKeyState::Down)
 			{
 			SceneManager::LoadScene(eSceneType::Stage1_1);
 			}
