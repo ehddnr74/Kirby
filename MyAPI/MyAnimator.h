@@ -10,27 +10,25 @@ namespace My
 	public:
 		struct Event
 		{
-			void operator =(std::function<void()> func)
+			void operator=(std::function<void()> func)
 			{
 				mEvent = std::move(func);
 			}
 			void operator()()
 			{
 				if (mEvent)
-				{
 					mEvent();
-				}
 			}
 
-			//void(*name)(int,int);
+			//void(*name)(int, int);
 			std::function<void()> mEvent;
 		};
 
 		struct Events
 		{
-			Event mStartEvent; // 처음에 애니메이션이 시작될 때 나와야하는 이벤트
-			Event mCompleteEvent; // 한 애니메이션이 끝났을때 호출되는 이벤트
-			Event mEndEvent;//애니메이션을 돌다가 특정 키를 눌러 전환될 때 호출되는 이벤트
+			Event mStartEvent;
+			Event mCompleteEvent;
+			Event mEndEvent;
 
 			//mStartEvent();
 			//mStartEvent = test;
@@ -44,22 +42,29 @@ namespace My
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
-		void CreateAnimation(); // sprite 로딩 한칸씩 애니메이션을 실행시킬 수 있음
-		void CreateAnimations(); // 파일로 되어있는 애니메이션 실행 시킬 수 있음
+		//완성된 스프라이트 시트를 지정해서 애니메이션 제작하는 함수
+		void CreateAnimation(const std::wstring& name
+			, Image* sheet
+			, Vector2 leftTop
+			, UINT coulmn, UINT row, UINT spriteLength
+			, Vector2 offset, float duration);
+
+		// 폴더에 들어있는 스프라이트들을 이용해서 애니메이션 제작해주는 함수
+		void CreateAnimations();
 
 		Animation* FindAnimation(const std::wstring& name);
 		void Play(const std::wstring& name, bool loop);
 
 		Events* FindEvents(const std::wstring& name);
-		std::function<void>& GetStartEvent(const std::wstring& name);
+		/*std::function<void>& GetStartEvent(const std::wstring& name);
 		std::function<void>& GetCompleteEvent(const std::wstring& name);
-		std::function<void>& GetEndEvent(const std::wstring& name);
+		std::function<void>& GetEndEvent(const std::wstring& name);*/
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations;
-		std::map<std::wstring, Events*> mEvenets;
+		std::map<std::wstring, Events*> mEvents;
 		Animation* mActiveAnimation;
 		Image* mSpriteSheet;
+		bool mbLoop;
 	};
 }
-

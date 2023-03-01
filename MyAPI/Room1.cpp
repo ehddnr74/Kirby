@@ -28,11 +28,6 @@ namespace My
 	void My::Room1::Update()
 	{
 		GameObject::Update();
-
-		if (Input::GetKeyState(eKeyCode::N) == eKeyState::Down)
-		{
-			SceneManager::LoadScene(eSceneType::Title);
-		}
 	}
 
 	void My::Room1::Render(HDC hdc)

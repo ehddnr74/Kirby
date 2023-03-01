@@ -20,8 +20,8 @@ namespace My
 
 	void Stage1Scene::Initialize()
 	{
-    	mKirby = new Kirby();
-    	AddGameObject(mKirby, eLayerType::Player);
+		mKirby = new Kirby();
+		AddGameObject(mKirby, eLayerType::Player);
 
 		mroom1 = new Room1();
 		AddGameObject(mroom1, eLayerType::Stage);
@@ -32,7 +32,7 @@ namespace My
 
 	void Stage1Scene::Update()
 	{
-		if (Input::GetKeyState(eKeyCode::X) == eKeyState::Down)
+		if (Input::GetKeyState(eKeyCode::W) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(eSceneType::Stage1_2);
 		}

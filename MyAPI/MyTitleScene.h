@@ -3,6 +3,7 @@
 
 namespace My
 {
+	class Title;
 	class TitleScene : public Scene
 	{
 	public:
@@ -19,6 +20,7 @@ namespace My
 
 
 	private:
+		Title* mtitle;
 
 	};
 }

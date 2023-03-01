@@ -4,9 +4,27 @@
 
 namespace My
 {
+	class Animator;
 	class Kirby : public GameObject
 	{
 	public:
+		enum class eKirbyState
+		{
+			LeftMove,
+			RightMove,
+			LeftIdle,
+			RightIdle,
+			LeftSliding,
+			RightSliding,
+			Death,
+			LeftAbsorb,
+			RightAbsorb,
+			LeftDash,
+			RightDash,
+			LeftCrouch,
+			RightCrouch,
+		};
+
 		Kirby();
 		~Kirby();
 
@@ -15,9 +33,26 @@ namespace My
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
+	private:
+		void leftmove();
+		void rightmove();
+		void leftidle();
+		void rightidle();
+		void death();
+		void sliding();
+		void leftabsorb();
+		void rightabsorb();
+		void leftdash();
+		void rightdash();
+		void leftcrouch();
+		void rightcrouch();
+		void leftsliding();
+		void rightsliding();
 
 	private:
-		Image* mKirby;
+		eKirbyState mState;
+		Animator* mAnimator;
+	
 	};
 }
 

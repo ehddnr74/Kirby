@@ -139,7 +139,6 @@
     <ClInclude Include="MyResources.h">
       <Filter>Engine\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="MyImage.h" />
     <ClInclude Include="MyTitleScene.h">
       <Filter>Contents\Scene\MyTitleScene</Filter>
     </ClInclude>
@@ -163,6 +162,12 @@
     </ClInclude>
     <ClInclude Include="Stage1_2.h">
       <Filter>Contents\Scene\MyStageScene\Stage1\Room2</Filter>
+    </ClInclude>
+    <ClInclude Include="MyImage.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Ttitle.h">
+      <Filter>Contents\Scene\MyTitleScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -221,7 +226,6 @@
     <ClCompile Include="MyResources.cpp">
       <Filter>Engine\Resource</Filter>
     </ClCompile>
-    <ClCompile Include="MyImage.cpp" />
     <ClCompile Include="MyTitleScene.cpp">
       <Filter>Contents\Scene\MyTitleScene</Filter>
     </ClCompile>
@@ -245,6 +249,12 @@
     </ClCompile>
     <ClCompile Include="Stage1_2.cpp">
       <Filter>Contents\Scene\MyStageScene\Stage1\Room2</Filter>
+    </ClCompile>
+    <ClCompile Include="MyImage.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Ttitle.cpp">
+      <Filter>Contents\Scene\MyTitleScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

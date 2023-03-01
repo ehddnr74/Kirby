@@ -2,6 +2,14 @@
 
 struct Vector2
 {
+	static Vector2 Up;
+	static Vector2 Right;
+
+	static Vector2 One;
+	static Vector2 Zero;
+	static Vector2 Two;
+	static Vector2 Kirbytr;
+
 	float x;
 	float y;
 

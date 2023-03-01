@@ -20,7 +20,6 @@ namespace My
 		virtual void OnExit() override;
 
 	private:
-		Kirby* mKirby;
 		Room2* mroom2;
 
 	};

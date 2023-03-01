@@ -2,6 +2,7 @@
 
 namespace My
 {
+    
     Component::Component(eComponentType type)
         : mType(type)
     {
