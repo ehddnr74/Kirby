@@ -32,10 +32,7 @@ namespace My
 	}
 	void Scene::Release()
 	{
-		for (Layer& layer : mLayers)
-		{
-			layer.Release();
-		}
+
 	}
 	void Scene::OnEnter()
 	{
@@ -46,5 +43,9 @@ namespace My
 	void Scene::AddGameObject(GameObject* obj, eLayerType layer)
 	{
 		mLayers[(UINT)layer].AddGameObject(obj);
+	}
+	const std::vector<GameObject*>& Scene::GetGameObjects(eLayerType layer)
+	{
+		return mLayers[(UINT)layer].GetGameObjects();
 	}
 }

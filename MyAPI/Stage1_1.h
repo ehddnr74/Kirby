@@ -1,10 +1,12 @@
 #pragma once
 #include "MyScene.h"
+#include "MyImage.h"
 
 namespace My
 {
 	class Room1;
 	class Kirby;
+	class Stage11bk;
 	class Stage1Scene : public Scene
 	{
 	public:
@@ -21,6 +23,7 @@ namespace My
 	private:
 		Kirby* mKirby;
 		Room1* mroom1;
+		Stage11bk* mbg1;
 
 	};
 }

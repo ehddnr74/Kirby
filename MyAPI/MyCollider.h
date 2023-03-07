@@ -1,27 +1,29 @@
 #pragma once
 #include "MyComponent.h"
 
+
 namespace My
 {
-	class Transform : public Component
+	class Collider : public Component
 	{
 	public:
-		Transform();
-		~Transform();
+		Collider();
+		~Collider();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
-		void SetPos(Vector2 pos) { mPos = pos; }
-		void SetScale(Vector2 size) { mScale = size; }
+		void SetCenter(Vector2 center) { mCenter = center; };
+		void SetSize(Vector2 size) { mSize = size; };
 		Vector2 GetPos() { return mPos; }
-		Vector2 GetScale() { return mScale; }
+		Vector2 GetSize() { return mSize; }
 
 	private:
+		Vector2 mCenter;
+		Vector2 mSize;
 		Vector2 mPos;
-		Vector2 mScale;
 	};
 }
 

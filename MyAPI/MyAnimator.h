@@ -50,15 +50,15 @@ namespace My
 			, Vector2 offset, float duration);
 
 		// 폴더에 들어있는 스프라이트들을 이용해서 애니메이션 제작해주는 함수
-		void CreateAnimations();
+		//void CreateAnimations();
 
 		Animation* FindAnimation(const std::wstring& name);
 		void Play(const std::wstring& name, bool loop);
 
 		Events* FindEvents(const std::wstring& name);
-		/*std::function<void>& GetStartEvent(const std::wstring& name);
-		std::function<void>& GetCompleteEvent(const std::wstring& name);
-		std::function<void>& GetEndEvent(const std::wstring& name);*/
+		std::function<void()>& GetStartEvent(const std::wstring& name);
+		std::function<void()>& GetCompleteEvent(const std::wstring& name);
+		std::function<void()>& GetEndEvent(const std::wstring& name);
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations;

@@ -4,7 +4,11 @@
 #include "MySceneManager.h"
 #include "Room1.h"
 #include "MyApplication.h"
+#include "Stage1_1bk.h"
 #include "MyImage.h"
+#include "MyWaddle.h"
+#include "MyCappy.h"
+#include "MyTwizzy.h"
 
 
 namespace My
@@ -23,9 +27,20 @@ namespace My
 		mKirby = new Kirby();
 		AddGameObject(mKirby, eLayerType::Player);
 
+		mbg1 = new Stage11bk();
+		AddGameObject(mbg1, eLayerType::BG);
+
 		mroom1 = new Room1();
 		AddGameObject(mroom1, eLayerType::Stage);
 
+		Waddle* mWaddle = new Waddle();
+		AddGameObject(mWaddle, eLayerType::Monster);
+		
+		Cappy* mCappy = new Cappy();
+		AddGameObject(mCappy, eLayerType::Monster);
+
+		Twizzy* mTwizzy = new Twizzy();
+		AddGameObject(mTwizzy, eLayerType::Monster);
 
 		Scene::Initialize();
 	}

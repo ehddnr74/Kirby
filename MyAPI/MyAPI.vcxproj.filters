@@ -53,9 +53,6 @@
     <Filter Include="Contents\Scene\MyTitleScene">
       <UniqueIdentifier>{70bc8e35-de43-467d-8b79-f9b11a2ef5af}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\GameObject\Stage">
-      <UniqueIdentifier>{eeafbd31-31f7-4d2e-946c-43651637fad6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Scene\MyEndScene">
       <UniqueIdentifier>{688cac28-28be-40ff-bb6b-1090c2e34947}</UniqueIdentifier>
     </Filter>
@@ -76,6 +73,12 @@
     </Filter>
     <Filter Include="Contents\Scene\MyStageScene\Stage1\Room2">
       <UniqueIdentifier>{c3393ae6-727d-4281-ad81-4a7449402962}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Collider">
+      <UniqueIdentifier>{54db552f-f5a3-43fa-95d5-69f57dccbb2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Monster">
+      <UniqueIdentifier>{679ddc53-7b82-4b2a-aac6-9082caeff742}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +172,24 @@
     <ClInclude Include="Ttitle.h">
       <Filter>Contents\Scene\MyTitleScene</Filter>
     </ClInclude>
+    <ClInclude Include="MyCollider.h">
+      <Filter>Engine\Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="MyCollisionManager.h">
+      <Filter>Engine\Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage1_1bk.h">
+      <Filter>Contents\Scene\MyStageScene\Stage1\Room1</Filter>
+    </ClInclude>
+    <ClInclude Include="MyWaddle.h">
+      <Filter>Contents\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="MyCappy.h">
+      <Filter>Contents\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTwizzy.h">
+      <Filter>Contents\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc">
@@ -255,6 +276,24 @@
     </ClCompile>
     <ClCompile Include="Ttitle.cpp">
       <Filter>Contents\Scene\MyTitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="MyCollider.cpp">
+      <Filter>Engine\Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="MyCollisionManager.cpp">
+      <Filter>Engine\Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage1_1bk.cpp">
+      <Filter>Contents\Scene\MyStageScene\Stage1\Room1</Filter>
+    </ClCompile>
+    <ClCompile Include="MyWaddle.cpp">
+      <Filter>Contents\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="MyCappy.cpp">
+      <Filter>Contents\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="MyTwizzy.cpp">
+      <Filter>Contents\Monster</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

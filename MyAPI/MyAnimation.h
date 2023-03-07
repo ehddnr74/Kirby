@@ -18,7 +18,7 @@ namespace My
 			Sprite()
 				: leftTop(Vector2::Zero)
 				, size(Vector2::Zero)
-				, offset(Vector2::Kirbytr)
+				, offset(Vector2::Zero)
 				, duration(0.0f)
 			{
 

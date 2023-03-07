@@ -4,6 +4,7 @@
 #include "MyInput.h"
 #include "MyTime.h"
 #include "MyTransform.h"
+#include "MyScene.h"
 
 namespace My
 {
@@ -18,7 +19,7 @@ namespace My
 
 	void My::Room1::Initialize()
 	{
-		
+
 		mroom1 = Resources::Load<Image>(L"Stage1_1", L"..\\Resources\\stage1_1.bmp");
 
 
@@ -34,7 +35,17 @@ namespace My
 	{
 		GameObject::Render(hdc);
 
-		BitBlt(hdc, 0, 0, mroom1->GetWidth(), mroom1->GetHeight(), mroom1->GetHdc(), 0, 0, SRCCOPY);
+
+		TransparentBlt(hdc, 0, 0
+			,mroom1->GetWidth() 
+			,mroom1->GetHeight()
+			, mroom1->GetHdc()
+			, 0 , 0
+			, mroom1->GetWidth()
+			, mroom1->GetHeight() 
+			,RGB(72,104,112));
+
+		//BitBlt(hdc, 0, 0, mroom1->GetWidth(), mroom1->GetHeight(), mroom1->GetHdc(), 0, 0, SRCCOPY);
 	}
 
 	void My::Room1::Release()

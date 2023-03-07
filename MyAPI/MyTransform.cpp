@@ -6,7 +6,7 @@ namespace My
 	Transform::Transform()
 		:Component(eComponentType::Transform)
 		, mPos(Vector2::Zero)
-		, mScale(Vector2::Two)
+		, mScale(Vector2::One)
 	{
 	}
 	Transform::~Transform()

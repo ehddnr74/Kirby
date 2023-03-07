@@ -1,6 +1,6 @@
 #pragma once
 #include "MyEngine.h"
-
+#include "MyTime.h"
 namespace My
 {
 	enum class eKeyCode
@@ -17,6 +17,7 @@ namespace My
 		Down,
 		Pressed,
 		Up,
+		Double,
 		None,
 	};
 
@@ -28,6 +29,7 @@ namespace My
 			eKeyCode key;
 			eKeyState state;
 			bool bPressed;
+			bool bDouble;
 		};
 
 		static void Initialize();
@@ -62,5 +64,6 @@ namespace My
 
 	private:
 		static std::vector<Key> mKeys;
+		
 	};
 }

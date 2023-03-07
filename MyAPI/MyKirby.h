@@ -49,10 +49,13 @@ namespace My
 		void leftsliding();
 		void rightsliding();
 
+		void idleCompleteEvent();
+
 	private:
 		eKirbyState mState;
 		Animator* mAnimator;
-	
+		double kirbytime;
+		bool KeyCheck;
 	};
 }
 
