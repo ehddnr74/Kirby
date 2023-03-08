@@ -80,6 +80,9 @@
     <Filter Include="Contents\Monster">
       <UniqueIdentifier>{679ddc53-7b82-4b2a-aac6-9082caeff742}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Camera">
+      <UniqueIdentifier>{a8aca8cb-9c6a-4397-ab86-ed7a64ad3832}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -190,6 +193,9 @@
     <ClInclude Include="MyTwizzy.h">
       <Filter>Contents\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="MyCamera.h">
+      <Filter>Engine\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc">
@@ -294,6 +300,9 @@
     </ClCompile>
     <ClCompile Include="MyTwizzy.cpp">
       <Filter>Contents\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="MyCamera.cpp">
+      <Filter>Engine\Camera</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

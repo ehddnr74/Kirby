@@ -4,11 +4,13 @@
 
 namespace My
 {
+	UINT Collider::ColliderNumber = 0;
 	Collider::Collider()
 		: Component(eComponentType::Collider)
-	    , mCenter(Vector2::Zero)
-	    , mPos(Vector2::Zero)
-		, mSize(20.0f,20.0f)
+		, mCenter(Vector2::Zero)
+		, mPos(Vector2::Zero)
+		, mSize(20.0f, 20.0f)
+		, mID(ColliderNumber++)
 
 	{
 
@@ -33,7 +35,7 @@ namespace My
 		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
 
-		Rectangle(hdc,mPos.x, mPos.y+10, mPos.x + mSize.x, mPos.y + mSize.y);
+		Rectangle(hdc,mPos.x, mPos.y, mPos.x + mSize.x, mPos.y + mSize.y);
 
 		(HPEN)SelectObject(hdc, oldPen);
 		(HBRUSH)SelectObject(hdc, oldBrush);
@@ -41,5 +43,17 @@ namespace My
 	}
 	void Collider::Release()
 	{
+	}
+	void Collider::OnCollisionEnter(Collider* other)
+	{
+		GetOwner()->OnCollisionEnter(other);
+	}
+	void Collider::OnCollisionStay(Collider* other)
+	{
+		GetOwner()->OnCollisionStay(other);
+	}
+	void Collider::OnCollisionExit(Collider* other)
+	{
+		GetOwner()->OnCollisionExit(other);
 	}
 }

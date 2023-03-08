@@ -9,7 +9,8 @@
 #include "MyWaddle.h"
 #include "MyCappy.h"
 #include "MyTwizzy.h"
-
+#include "MyCollisionManager.h"
+#include "MyCamera.h"
 
 namespace My
 {
@@ -27,6 +28,8 @@ namespace My
 		mKirby = new Kirby();
 		AddGameObject(mKirby, eLayerType::Player);
 
+		//Camera::SetTarget(mKirby);
+
 		mbg1 = new Stage11bk();
 		AddGameObject(mbg1, eLayerType::BG);
 
@@ -41,6 +44,7 @@ namespace My
 
 		Twizzy* mTwizzy = new Twizzy();
 		AddGameObject(mTwizzy, eLayerType::Monster);
+
 
 		Scene::Initialize();
 	}
@@ -67,6 +71,7 @@ namespace My
 
 	void Stage1Scene::OnEnter()
 	{
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 	}
 
 	void Stage1Scene::OnExit()

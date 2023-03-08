@@ -2,6 +2,7 @@
 #include "MyTitleScene.h"
 #include "Stage1_1.h"
 #include "Stage1_2.h"
+#include "MyCollisionManager.h"
 
 namespace My
 {
@@ -47,7 +48,8 @@ namespace My
 			if (scene == nullptr)
 				continue;
 
-			scene->Release();
+			delete scene;
+			scene = nullptr;
 		}
 	}
 
@@ -56,6 +58,7 @@ namespace My
 		// ÇöÀç¾À
 		mActiveScene->OnExit();
 
+		CollisionManager::Clear();
 		// ´ÙÀ½¾À
 		mActiveScene = mScenes[(UINT)type];
 		mActiveScene->OnEnter();

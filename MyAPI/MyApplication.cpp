@@ -2,6 +2,8 @@
 #include "MySceneManager.h"
 #include "MyTime.h"
 #include "MyInput.h"
+#include "MyCollisionManager.h"
+#include "MyCamera.h"
 
 namespace My
 {
@@ -45,6 +47,7 @@ namespace My
 		Time::Initialize();
 		Input::Initialize();
 		SceneManager::Initialize();
+		Camera::Initialize();
 	}
 
 	void Application::Run()
@@ -57,7 +60,9 @@ namespace My
 	{
 		Time::Update();
 		Input::Update();
+		Camera::Update();
 		SceneManager::Update();
+		CollisionManager::Update();
 	}
 
 	void Application::Render()

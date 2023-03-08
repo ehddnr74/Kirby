@@ -134,6 +134,7 @@
     <ClInclude Include="MyAnimator.h" />
     <ClInclude Include="MyAPI.h" />
     <ClInclude Include="MyApplication.h" />
+    <ClInclude Include="MyCamera.h" />
     <ClInclude Include="MyCappy.h" />
     <ClInclude Include="MyCollider.h" />
     <ClInclude Include="MyCollisionManager.h" />
@@ -166,6 +167,7 @@
     <ClInclude Include="Ttitle.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MyCamera.cpp" />
     <ClCompile Include="MyCappy.cpp" />
     <ClCompile Include="MyCollisionManager.cpp" />
     <ClCompile Include="MyAnimation.cpp" />

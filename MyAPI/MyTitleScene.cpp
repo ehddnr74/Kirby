@@ -4,6 +4,7 @@
 #include "MyApplication.h"
 #include "MyImage.h"
 #include "MyTitleScene.h"
+#include "MyScene.h"
 
 
 namespace My
@@ -40,8 +41,10 @@ namespace My
 	}
 	void TitleScene::OnEnter()
 	{
+
 	}
 	void TitleScene::OnExit()
 	{
+		
 	}
 }

@@ -8,6 +8,7 @@
 #include "MyCollider.h"
 #include "MyScene.h"
 
+
 namespace My
 {
 	Kirby::Kirby()
@@ -24,6 +25,7 @@ namespace My
 		tr->SetPos(Vector2(30.0f, 310.0f));
 		tr->SetScale(Vector2(2.0f, 2.0f));
 		Image* mKirby = Resources::Load<Image>(L"Kirby", L"..\\Resources\\KirbyState.bmp");
+
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimation(L"LeftIdle", mKirby, Vector2(240.0f, 0.0f), 16, 16, 6, Vector2::Zero, 0.3);
 		mAnimator->CreateAnimation(L"LeftWalk", mKirby, Vector2(0.0f, 80.0f), 16, 16, 10, Vector2::Zero, 0.1);
@@ -47,8 +49,8 @@ namespace My
 		//mAnimator->GetCompleteEvent(L"RightIdle") = std::bind(&Kirby::idleCompleteEvent,this);
 
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(10.0f, 0.0f));
-		collider->SetSize(Vector2(60.0f, 65.0f));
+		collider->SetCenter(Vector2(13.0f, 15.0f));
+		collider->SetSize(Vector2(55.0f, 46.0f));
 
 		mState = eKirbyState::RightIdle;
 
@@ -111,6 +113,21 @@ namespace My
 		GameObject::Release();
 	}
 
+	void Kirby::OnCollisionEnter(Collider* other)
+	{
+		
+	}
+
+	void Kirby::OnCollisionStay(Collider* other)
+	{
+		
+	}
+
+	void Kirby::OnCollisionExit(Collider* other)
+	{
+		
+	}
+
 
 	void Kirby::leftmove()
 	{
@@ -154,7 +171,7 @@ namespace My
 	}
 	void Kirby::rightmove()
 	{
-		kirbytime += Time::DeltaTime();
+		//kirbytime += Time::DeltaTime();
 
 		if (Input::GetKeyUp(eKeyCode::Right))
 		{
@@ -169,22 +186,23 @@ namespace My
 		if (Input::GetKey(eKeyCode::Right))
 		{
 			pos.x += 100.0f * Time::DeltaTime();
-		}
-		if (Input::GetKey(eKeyCode::Left))
-		{
-			mState = eKirbyState::LeftMove;
-			mAnimator->Play(L"LeftWalk", true);
-		}
 
-		if (Input::GetKey(eKeyCode::Z))
-		{
-			mState = eKirbyState::RightAbsorb;
-			mAnimator->Play(L"RightAbsorbing", true);
-		}
-		if (Input::GetKey(eKeyCode::Down))
-		{
-			mState = eKirbyState::RightCrouch;
-			mAnimator->Play(L"RightCrouch", true);
+			if (Input::GetKey(eKeyCode::Left))
+			{
+				mState = eKirbyState::LeftMove;
+				mAnimator->Play(L"LeftWalk", true);
+			}
+
+			if (Input::GetKeyDown(eKeyCode::Z))
+			{
+				mState = eKirbyState::RightAbsorb;
+				mAnimator->Play(L"RightAbsorbing", true);
+			}
+			if (Input::GetKey(eKeyCode::Down))
+			{
+				mState = eKirbyState::RightCrouch;
+				mAnimator->Play(L"RightCrouch", true);
+			}
 		}
 
 		//if (kirbytime <= 1.0f)
@@ -230,7 +248,7 @@ namespace My
 			mState = eKirbyState::LeftMove;
 			mAnimator->Play(L"LeftWalk", true);
 		}
-		if (Input::GetKeyDown(eKeyCode::Right))
+		if (Input::GetKey(eKeyCode::Right))
 		{
 			//KeyCheck = true;
 			mState = eKirbyState::RightMove;
