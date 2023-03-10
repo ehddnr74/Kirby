@@ -18,9 +18,9 @@ namespace My
 	}
 	void Cappy::Initialize()
 	{
-		Transform* tr = GetComponent<Transform>();
-		tr->SetPos(Vector2(580,255));
-		tr->SetScale(Vector2(1.8f,2.0f));
+		//Transform* tr = GetComponent<Transform>();
+		//tr->SetPos(Vector2(580,255));
+		//tr->SetScale(Vector2(1.8f,2.0f));
 
 
 		Image* mCappy = Resources::Load<Image>(L"Cappy", L"..\\Resources\\Cappy.bmp");

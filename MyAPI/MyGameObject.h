@@ -8,6 +8,13 @@ namespace My
 	class GameObject : public Entity
 	{
 	public:
+		enum class eState
+		{
+			Active,
+			Pause,
+			Death
+		};
+
 		GameObject();
 		virtual ~GameObject();
 
@@ -43,8 +50,12 @@ namespace My
 
 			}
 
+		eState GetState() { return mState; }
+		void SetState(eState state) { mState = state; }
+
 	private:
 		std::vector<Component*> mComponents;
+		eState mState;
 	};
 }
 

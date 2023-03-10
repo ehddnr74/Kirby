@@ -20,9 +20,9 @@ namespace My
 	}
 	void Twizzy::Initialize()
 	{
-		Transform* tr = GetComponent<Transform>();
-		tr->SetPos(Vector2(900, 310));
-		tr->SetScale(Vector2(2.0f, 2.0f));
+		//Transform* tr = GetComponent<Transform>();
+		//tr->SetPos(Vector2(900, 310));
+		//tr->SetScale(Vector2(2.0f, 2.0f));
 
 
 		Image* mTwizzy = Resources::Load<Image>(L"Twizzy", L"..\\Resources\\Twizzy.bmp");

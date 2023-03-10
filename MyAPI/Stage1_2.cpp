@@ -5,6 +5,8 @@
 #include "Room2.h"
 #include "MyApplication.h"
 #include "MyImage.h"
+#include "MyObject.h"
+#include "Stage1_2bk.h"
 
 
 namespace My
@@ -20,12 +22,18 @@ namespace My
 
 	void Stage2Scene::Initialize()
 	{
-
-		mroom2 = new Room2();
-		AddGameObject(mroom2, eLayerType::Stage);
-
-
 		Scene::Initialize();
+		//mroom2 = new Room2();
+		//AddGameObject(mroom2, eLayerType::Stage);
+
+		object::Instantiate<Stage12bk>(eLayerType::BG);
+
+		object::Instantiate<Kirby>(Vector2(30.0f, 310.0f),Vector2(2.0f,2.0f),eLayerType::Player);
+
+		object::Instantiate<Room2>(eLayerType::Stage);
+		
+
+		
 	}
 
 	void Stage2Scene::Update()

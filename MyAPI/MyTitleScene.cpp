@@ -5,6 +5,7 @@
 #include "MyImage.h"
 #include "MyTitleScene.h"
 #include "MyScene.h"
+#include "MyObject.h"
 
 
 namespace My
@@ -17,10 +18,14 @@ namespace My
 	}
 	void TitleScene::Initialize()
 	{
-		mtitle = new Title();
-		AddGameObject(mtitle, eLayerType::Stage);
-
 		Scene::Initialize();
+
+		//mtitle = new Title();
+		//AddGameObject(mtitle, eLayerType::Stage);
+
+		object::Instantiate<Title>(eLayerType::BG);
+
+		
 	}
 	void TitleScene::Update()
 	{

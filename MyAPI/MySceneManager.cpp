@@ -19,10 +19,6 @@ namespace My
 		mScenes[(UINT)eSceneType::Stage1_1] = new Stage1Scene();
 		mScenes[(UINT)eSceneType::Stage1_2] = new Stage2Scene();
 
-		
-
-		mActiveScene = mScenes[(UINT)eSceneType::Title];
-
 		for (Scene* scene : mScenes)
 		{
 			if (scene == nullptr)
@@ -30,6 +26,8 @@ namespace My
 			
 			scene->Initialize();
 		}
+
+		mActiveScene = mScenes[(UINT)eSceneType::Title];
 	}
 
 	void SceneManager::Update()
@@ -39,7 +37,11 @@ namespace My
 	void SceneManager::Render(HDC hdc)
 	{
 			mActiveScene->Render(hdc);
+	}
 
+	void SceneManager::Destroy()
+	{
+		mActiveScene->Destroy();
 	}
 	void SceneManager::Release()
 	{

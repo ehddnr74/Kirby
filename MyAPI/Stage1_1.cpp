@@ -11,6 +11,7 @@
 #include "MyTwizzy.h"
 #include "MyCollisionManager.h"
 #include "MyCamera.h"
+#include "MyObject.h"
 
 namespace My
 {
@@ -25,28 +26,41 @@ namespace My
 
 	void Stage1Scene::Initialize()
 	{
-		mKirby = new Kirby();
-		AddGameObject(mKirby, eLayerType::Player);
+		Scene::Initialize();
+
+		//mKirby = new Kirby();
+		//AddGameObject(mKirby, eLayerType::Player);
 
 		//Camera::SetTarget(mKirby);
 
-		mbg1 = new Stage11bk();
-		AddGameObject(mbg1, eLayerType::BG);
+	    object::Instantiate< Kirby>(Vector2(30.0f,310.0f),Vector2(2.0f,2.0f),(eLayerType::Player));
 
-		mroom1 = new Room1();
-		AddGameObject(mroom1, eLayerType::Stage);
+		//mbg1 = new Stage11bk();
+		//AddGameObject(mbg1, eLayerType::BG);
 
-		Waddle* mWaddle = new Waddle();
-		AddGameObject(mWaddle, eLayerType::Monster);
+		//mroom1 = new Room1();
+		//AddGameObject(mroom1, eLayerType::Stage);
+
+		object::Instantiate<Stage11bk>(eLayerType::BG);
+
+		object::Instantiate<Room1>(eLayerType::Stage);
+
+		//Waddle* mWaddle = new Waddle();
+		//AddGameObject(mWaddle, eLayerType::Monster);
+
+		object::Instantiate<Waddle>(Vector2(320, 300),Vector2(2.2f,2.2f),(eLayerType::Monster));
+
+		//Cappy* mCappy = new Cappy();
+		//AddGameObject(mCappy, eLayerType::Monster);
+
+		object::Instantiate<Cappy>(Vector2(580, 255),Vector2(1.8f,2.0f),(eLayerType::Monster));
+
+		//Twizzy* mTwizzy = new Twizzy();
+		//AddGameObject(mTwizzy, eLayerType::Monster);
+
+		object::Instantiate<Twizzy>(Vector2(900, 310),Vector2(2.0f,2.0f),(eLayerType::Monster));
+
 		
-		Cappy* mCappy = new Cappy();
-		AddGameObject(mCappy, eLayerType::Monster);
-
-		Twizzy* mTwizzy = new Twizzy();
-		AddGameObject(mTwizzy, eLayerType::Monster);
-
-
-		Scene::Initialize();
 	}
 
 	void Stage1Scene::Update()

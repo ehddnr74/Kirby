@@ -196,6 +196,12 @@
     <ClInclude Include="MyCamera.h">
       <Filter>Engine\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="MyObject.h">
+      <Filter>Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage1_2bk.h">
+      <Filter>Contents\Scene\MyStageScene\Stage1\Room2</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc">
@@ -303,6 +309,9 @@
     </ClCompile>
     <ClCompile Include="MyCamera.cpp">
       <Filter>Engine\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage1_2bk.cpp">
+      <Filter>Contents\Scene\MyStageScene\Stage1\Room2</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

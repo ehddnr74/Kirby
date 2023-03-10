@@ -7,7 +7,7 @@
 #include "MyAnimator.h"
 #include "MyCollider.h"
 #include "MyScene.h"
-
+#include "MyObject.h"
 
 namespace My
 {
@@ -21,9 +21,10 @@ namespace My
 	}
 	void Kirby::Initialize()
 	{
-		Transform* tr = GetComponent<Transform>();
-		tr->SetPos(Vector2(30.0f, 310.0f));
-		tr->SetScale(Vector2(2.0f, 2.0f));
+		//Transform* tr = GetComponent<Transform>();
+		//tr->SetPos(Vector2(30.0f, 310.0f));
+		//tr->SetScale(Vector2(2.0f, 2.0f));
+
 		Image* mKirby = Resources::Load<Image>(L"Kirby", L"..\\Resources\\KirbyState.bmp");
 
 		mAnimator = AddComponent<Animator>();
@@ -125,16 +126,20 @@ namespace My
 
 	void Kirby::OnCollisionExit(Collider* other)
 	{
-		
+
 	}
 
 
 	void Kirby::leftmove()
 	{
+		KeyCheck = true;
+		kirbytime += Time::DeltaTime();
+
 		if (Input::GetKeyUp(eKeyCode::Left))
 		{
 			mState = eKirbyState::LeftIdle;
 			mAnimator->Play(L"LeftIdle", true);
+			kirbytime = 0.0f;
 		}
 
 		Transform* tr = GetComponent<Transform>();
@@ -171,53 +176,57 @@ namespace My
 	}
 	void Kirby::rightmove()
 	{
-		//kirbytime += Time::DeltaTime();
+		
+		KeyCheck = true;
+			kirbytime += Time::DeltaTime();
 
 		if (Input::GetKeyUp(eKeyCode::Right))
 		{
 			mState = eKirbyState::RightIdle;
 			mAnimator->Play(L"RightIdle", true);
+			kirbytime = 0.0f;
 		}
 
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
 
+		//if (KeyCheck)
+		//{
+		//	if(GetKeyState(VK_RIGHT))
+		//	{
+		//		mState = eKirbyState::RightDash;
+		//		mAnimator->Play(L"RightDash", true);
+		//	}
+
+
 		if (Input::GetKey(eKeyCode::Right))
 		{
-			pos.x += 100.0f * Time::DeltaTime();
+				pos.x += 100.0f * Time::DeltaTime();
+				if (Input::GetKey(eKeyCode::Left))
+				{
+					mState = eKirbyState::LeftMove;
+					mAnimator->Play(L"LeftWalk", true);
+				}
 
-			if (Input::GetKey(eKeyCode::Left))
-			{
-				mState = eKirbyState::LeftMove;
-				mAnimator->Play(L"LeftWalk", true);
+				if (Input::GetKeyDown(eKeyCode::Z))
+				{
+					mState = eKirbyState::RightAbsorb;
+					mAnimator->Play(L"RightAbsorbing", true);
+				}
+				if (Input::GetKey(eKeyCode::Down))
+				{
+					mState = eKirbyState::RightCrouch;
+					mAnimator->Play(L"RightCrouch", true);
+				}
 			}
-
-			if (Input::GetKeyDown(eKeyCode::Z))
-			{
-				mState = eKirbyState::RightAbsorb;
-				mAnimator->Play(L"RightAbsorbing", true);
-			}
-			if (Input::GetKey(eKeyCode::Down))
-			{
-				mState = eKirbyState::RightCrouch;
-				mAnimator->Play(L"RightCrouch", true);
-			}
-		}
-
-		//if (kirbytime <= 1.0f)
-		//{
-		//	if (Input::GetKey(eKeyCode::Right))
-		//	KeyCheck = true;
-		//	mState = eKirbyState::RightDash;
-		//}
-
 		tr->SetPos(pos);
 
 	}
 
 	void Kirby::leftidle()
 	{
+		kirbytime += Time::DeltaTime();
 		if (Input::GetKey(eKeyCode::Left))
 		{	
 			mState = eKirbyState::LeftMove;
@@ -240,9 +249,16 @@ namespace My
 			mState = eKirbyState::LeftCrouch;
 			mAnimator->Play(L"LeftCrouch", true);
 		}
+
+		if (kirbytime <= 0.15f && KeyCheck && GetAsyncKeyState(VK_LEFT) & 0x8000)
+		{
+			mState = eKirbyState::LeftDash;
+			mAnimator->Play(L"LeftDash", true);
+		}
 	}
 	void Kirby::rightidle()
 	{
+		kirbytime += Time::DeltaTime();
 		if (Input::GetKey(eKeyCode::Left))
 		{
 			mState = eKirbyState::LeftMove;
@@ -250,7 +266,6 @@ namespace My
 		}
 		if (Input::GetKey(eKeyCode::Right))
 		{
-			//KeyCheck = true;
 			mState = eKirbyState::RightMove;
 			mAnimator->Play(L"RightWalk", true);
 		}
@@ -263,6 +278,12 @@ namespace My
 		{
 			mState = eKirbyState::RightCrouch;
 			mAnimator->Play(L"RightCrouch", true);
+		}
+
+		if (kirbytime<=0.15f && KeyCheck && GetAsyncKeyState(VK_RIGHT) & 0x8000)
+		{
+			mState = eKirbyState::RightDash;
+			mAnimator->Play(L"RightDash", true);
 		}
 
 	}
@@ -296,6 +317,8 @@ namespace My
 		{
 			mState = eKirbyState::LeftIdle;
 			mAnimator->Play(L"LeftIdle", true);
+			KeyCheck = false;
+			kirbytime = 0.0f;
 		}
 
 		Transform* tr = GetComponent<Transform>();
@@ -303,7 +326,7 @@ namespace My
 
 		if (Input::GetKey(eKeyCode::Left))
 		{
-			pos.x -= 200.0f * Time::DeltaTime();
+			pos.x -= 150.0f * Time::DeltaTime();
 		}
 		tr->SetPos(pos);
 	}
@@ -313,12 +336,18 @@ namespace My
 		{
 			mState = eKirbyState::RightIdle;
 			mAnimator->Play(L"RightIdle",true);
+			KeyCheck = false;
+			kirbytime = 0.0f;
 		}
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
 
 		if (Input::GetKey(eKeyCode::Right))
 		{
-			mAnimator->Play(L"RightDash", true);
+			pos.x += 150.0f * Time::DeltaTime();
 		}
+		tr->SetPos(pos);
 		
 	}
 

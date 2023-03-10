@@ -21,6 +21,9 @@ namespace My
 			if (gameObj == nullptr)
 				continue;
 
+			if (gameObj->GetState() != GameObject::eState::Active)
+				continue;
+
 			gameObj->Initialize();
 		}
 	}
@@ -31,6 +34,9 @@ namespace My
 			if (gameObj == nullptr)
 				continue;
 
+			if (gameObj->GetState() != GameObject::eState::Active)
+				continue;
+
 			gameObj->Update();
 		}
 	}
@@ -39,6 +45,9 @@ namespace My
 		for (GameObject* gameObj : mGameObjects)
 		{
 			if (gameObj == nullptr)
+				continue;
+
+			if (gameObj->GetState() != GameObject::eState::Active)
 				continue;
 
 			gameObj->Render(hdc);

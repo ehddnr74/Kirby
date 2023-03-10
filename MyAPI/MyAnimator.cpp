@@ -1,5 +1,5 @@
 #include "MyAnimator.h"
-
+#include "MyResources.h"
 
 namespace My
 {
@@ -33,16 +33,16 @@ namespace My
 		{
 			mActiveAnimation->Update();
 
-			if (mbLoop && mActiveAnimation->IsComplete())
+			if (mActiveAnimation->IsComplete())
 			{
 				Animator::Events* events
 					= FindEvents(mActiveAnimation->GetName());
 
 				if (events != nullptr)
 					events->mCompleteEvent();
-
-				mActiveAnimation->Reset();
 			}
+			if (mbLoop && mActiveAnimation->IsComplete())
+				mActiveAnimation->Reset();
 		}
 	}
 	void Animator::Render(HDC hdc)
@@ -67,7 +67,7 @@ namespace My
 
 		animation = new Animation();
 		animation->Create(sheet, leftTop, coulmn, row, spriteLength, offset, duration);
-		animation->SetName(name);
+		animation->SetAnimationName(name);
 		animation->SetAnimator(this);
 
 		mAnimations.insert(std::make_pair(name, animation));
@@ -122,7 +122,7 @@ namespace My
 		Animation* animation = FindAnimation(name);
 
 		Animator::Events* events
-			= FindEvents(animation->GetName());
+			= FindEvents(animation->GetAnimationName());
 
 		return events->mStartEvent.mEvent;
 	}
@@ -131,7 +131,7 @@ namespace My
 		Animation* animation = FindAnimation(name);
 
 		Animator::Events* events
-			= FindEvents(animation->GetName());
+			= FindEvents(animation->GetAnimationName());
 
 		return events->mCompleteEvent.mEvent;
 	}
@@ -140,7 +140,7 @@ namespace My
 		Animation* animation = FindAnimation(name);
 
 		Animator::Events* events
-			= FindEvents(animation->GetName());
+			= FindEvents(animation->GetAnimationName());
 
 		return events->mEndEvent.mEvent;
 	}

@@ -21,9 +21,9 @@ namespace My
 	}
 	void Waddle::Initialize()
 	{
-		Transform* tr = GetComponent<Transform>();
-		tr->SetPos(Vector2(320, 300));
-		tr->SetScale(Vector2(2.2f, 2.2f));
+		//Transform* tr = GetComponent<Transform>();
+		//tr->SetPos(Vector2(320, 300));
+		//tr->SetScale(Vector2(2.2f, 2.2f));
 
 
 

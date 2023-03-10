@@ -33,7 +33,17 @@ namespace My
 	{
 		GameObject::Render(hdc);
 
-		BitBlt(hdc, 0, 0, mroom2->GetWidth(), mroom2->GetHeight(), mroom2->GetHdc(), 0, 0, SRCCOPY);
+		TransparentBlt(hdc, 0, 0
+			, mroom2->GetWidth()
+			, mroom2->GetHeight()
+			, mroom2->GetHdc()
+			, 0, 0
+			, mroom2->GetWidth()
+			, mroom2->GetHeight()
+			, RGB(72, 104, 112));
+
+
+		//BitBlt(hdc, 0, 0, mroom2->GetWidth(), mroom2->GetHeight(), mroom2->GetHdc(), 0, 0, SRCCOPY);
 	}
 
 	void My::Room2::Release()
