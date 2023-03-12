@@ -83,6 +83,12 @@
     <Filter Include="Engine\Camera">
       <UniqueIdentifier>{a8aca8cb-9c6a-4397-ab86-ed7a64ad3832}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Effect">
+      <UniqueIdentifier>{ae8046ac-1257-41c1-a73e-9d6a027140bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Effect\AbsorbEffect">
+      <UniqueIdentifier>{9ab1eb29-ba68-4b95-bd76-4bc1d03ab986}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -202,6 +208,12 @@
     <ClInclude Include="Stage1_2bk.h">
       <Filter>Contents\Scene\MyStageScene\Stage1\Room2</Filter>
     </ClInclude>
+    <ClInclude Include="AbsorbLeftEffect.h">
+      <Filter>Contents\Effect\AbsorbEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="AbsorbEffect.h">
+      <Filter>Contents\Effect\AbsorbEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc">
@@ -312,6 +324,12 @@
     </ClCompile>
     <ClCompile Include="Stage1_2bk.cpp">
       <Filter>Contents\Scene\MyStageScene\Stage1\Room2</Filter>
+    </ClCompile>
+    <ClCompile Include="AbsorbEffect.cpp">
+      <Filter>Contents\Effect\AbsorbEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="AbsorbLeftEffect.cpp">
+      <Filter>Contents\Effect\AbsorbEffect</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

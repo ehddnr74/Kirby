@@ -12,6 +12,7 @@
 #include "MyCollisionManager.h"
 #include "MyCamera.h"
 #include "MyObject.h"
+#include "AbsorbEffect.h"
 
 namespace My
 {
@@ -59,6 +60,8 @@ namespace My
 		//AddGameObject(mTwizzy, eLayerType::Monster);
 
 		object::Instantiate<Twizzy>(Vector2(900, 310),Vector2(2.0f,2.0f),(eLayerType::Monster));
+
+		
 
 		
 	}

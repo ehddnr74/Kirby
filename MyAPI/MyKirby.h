@@ -23,6 +23,8 @@ namespace My
 			RightDash,
 			LeftCrouch,
 			RightCrouch,
+			LeftJump,
+			RightJump
 		};
 
 		Kirby();
@@ -44,7 +46,6 @@ namespace My
 		void leftidle();
 		void rightidle();
 		void death();
-		void sliding();
 		void leftabsorb();
 		void rightabsorb();
 		void leftdash();
@@ -53,6 +54,8 @@ namespace My
 		void rightcrouch();
 		void leftsliding();
 		void rightsliding();
+		void leftjump();
+		void rightjump();
 
 		void idleCompleteEvent();
 
@@ -61,6 +64,7 @@ namespace My
 		Animator* mAnimator;
 		double kirbytime;
 		bool KeyCheck;
+		int Kirbydir;
 	};
 }
 

@@ -8,12 +8,15 @@
 #include "MyCollider.h"
 #include "MyScene.h"
 #include "MyObject.h"
+#include "AbsorbEffect.h"
+#include "AbsorbLeftEffect.h"
 
 namespace My
 {
 	Kirby::Kirby()
 		:kirbytime(0.0f)
 		, KeyCheck(false)
+		, Kirbydir(0)
 	{
 	}
 	Kirby::~Kirby()
@@ -26,6 +29,8 @@ namespace My
 		//tr->SetScale(Vector2(2.0f, 2.0f));
 
 		Image* mKirby = Resources::Load<Image>(L"Kirby", L"..\\Resources\\KirbyState.bmp");
+		Image* AbsorbEffect = Resources::Load<Image>(L"Cappy", L"..\\Resources\\AbsorbEffect.bmp");
+
 
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimation(L"LeftIdle", mKirby, Vector2(240.0f, 0.0f), 16, 16, 6, Vector2::Zero, 0.3);
@@ -44,6 +49,9 @@ namespace My
 		mAnimator->CreateAnimation(L"RightDash", mKirby, Vector2(320.0f, 160.0f), 16, 16, 8, Vector2::Zero, 0.05);
 		mAnimator->CreateAnimation(L"RightCrouch", mKirby, Vector2(0.0f, 200.0f), 16, 16, 6, Vector2::Zero, 0.3);
 		mAnimator->CreateAnimation(L"RightSliding", mKirby, Vector2(520.0f, 200.0f), 16, 16, 1, Vector2::Zero, 0.1);
+		mAnimator->CreateAnimation(L"RightJumpFirst", mKirby, Vector2(0.0f, 240.0f), 16, 16, 1, Vector2::Zero, 0.1);
+		mAnimator->CreateAnimation(L"RightJump", mKirby, Vector2(0.0f, 240.0f), 16, 16, 8, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"RightEffect", AbsorbEffect, Vector2::Zero, 4, 1, 4, Vector2::Zero, 0.1);
 
 		mAnimator->Play(L"RightIdle", true);
 
@@ -101,6 +109,12 @@ namespace My
 		case My::Kirby::eKirbyState::RightSliding:
 			rightsliding();
 			break;
+		case My::Kirby::eKirbyState::LeftJump:
+			leftjump();
+			break;
+		case My::Kirby::eKirbyState::RightJump:
+			rightjump();
+			break;
 		default:
 			break;
 		}
@@ -156,6 +170,7 @@ namespace My
 			}
 			if (Input::GetKeyDown(eKeyCode::Z))
 			{
+				object::Instantiate<AbsorbLeftEffect>(Vector2(pos.x - 75, pos.y - 10), Vector2(1.0f, 1.0f), eLayerType::Effect);
 				mState = eKirbyState::LeftAbsorb;
 				mAnimator->Play(L"LeftAbsorbing", true);
 			}
@@ -211,6 +226,7 @@ namespace My
 
 				if (Input::GetKeyDown(eKeyCode::Z))
 				{
+					object::Instantiate<AbsorbEffect>(Vector2(pos.x + 60, pos.y - 10), Vector2(1.0f, 1.0f), eLayerType::Effect);
 					mState = eKirbyState::RightAbsorb;
 					mAnimator->Play(L"RightAbsorbing", true);
 				}
@@ -226,6 +242,9 @@ namespace My
 
 	void Kirby::leftidle()
 	{
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
 		kirbytime += Time::DeltaTime();
 		if (Input::GetKey(eKeyCode::Left))
 		{	
@@ -238,8 +257,9 @@ namespace My
 			mAnimator->Play(L"RightWalk", true);
 		}
 
-		if (Input::GetKey(eKeyCode::Z))
+		if (Input::GetKeyDown(eKeyCode::Z))
 		{
+			object::Instantiate<AbsorbLeftEffect>(Vector2(pos.x - 75, pos.y - 10), Vector2(1.0f, 1.0f), eLayerType::Effect);
 			mState = eKirbyState::LeftAbsorb;
 			mAnimator->Play(L"LeftAbsorbing", true);
 		}
@@ -258,6 +278,13 @@ namespace My
 	}
 	void Kirby::rightidle()
 	{
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		//if (Input::GetKeyDown(eKeyCode::A))
+		//{
+		//	mState = eKirbyState::RightJump;
+		//}
 		kirbytime += Time::DeltaTime();
 		if (Input::GetKey(eKeyCode::Left))
 		{
@@ -269,8 +296,10 @@ namespace My
 			mState = eKirbyState::RightMove;
 			mAnimator->Play(L"RightWalk", true);
 		}
-		if (Input::GetKey(eKeyCode::Z))
+		if (Input::GetKeyDown(eKeyCode::Z))
 		{
+		  object::Instantiate<AbsorbEffect>(Vector2(pos.x + 60, pos.y - 10), Vector2(1.0f, 1.0f), eLayerType::Effect);
+			
 			mState = eKirbyState::RightAbsorb;
 			mAnimator->Play(L"RightAbsorbing", true);
 		}
@@ -285,13 +314,10 @@ namespace My
 			mState = eKirbyState::RightDash;
 			mAnimator->Play(L"RightDash", true);
 		}
+		//tr->SetPos(pos);
 
 	}
 	void Kirby::death()
-	{
-
-	}
-	void Kirby::sliding()
 	{
 
 	}
@@ -305,6 +331,10 @@ namespace My
 	}
 	void Kirby::rightabsorb()
 	{
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+
 		if (Input::GetKeyUp(eKeyCode::Z))
 		{
 			mState = eKirbyState::RightIdle;
@@ -459,10 +489,24 @@ namespace My
 
 	}
 
+	void Kirby::leftjump()
+	{
+	}
+
+	void Kirby::rightjump()
+	{
+		
+		//kirbytime += Time::DeltaTime();
+
+		//if (kirbytime < 1.0f)
+		//{
+		//	
+		//}
+	}
+
 	//void Kirby::idleCompleteEvent()
 	//{
 	//		
 	//}
 
 }
-

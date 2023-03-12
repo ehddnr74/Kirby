@@ -128,6 +128,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AbsorbEffect.h" />
+    <ClInclude Include="AbsorbLeftEffect.h" />
     <ClInclude Include="Commoninclude.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MyAnimation.h" />
@@ -169,6 +171,8 @@
     <ClInclude Include="Ttitle.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbsorbEffect.cpp" />
+    <ClCompile Include="AbsorbLeftEffect.cpp" />
     <ClCompile Include="MyCamera.cpp" />
     <ClCompile Include="MyCappy.cpp" />
     <ClCompile Include="MyCollisionManager.cpp" />
