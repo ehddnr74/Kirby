@@ -54,7 +54,7 @@ namespace My
 		//Cappy* mCappy = new Cappy();
 		//AddGameObject(mCappy, eLayerType::Monster);
 
-		object::Instantiate<Cappy>(Vector2(580, 255),Vector2(1.8f,2.0f),(eLayerType::Monster));
+		object::Instantiate<Cappy>(Vector2(580, 255), Vector2(1.8f, 2.0f), (eLayerType::Monster));
 
 		//Twizzy* mTwizzy = new Twizzy();
 		//AddGameObject(mTwizzy, eLayerType::Monster);
@@ -89,6 +89,7 @@ namespace My
 	void Stage1Scene::OnEnter()
 	{
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Effect, true);
 	}
 
 	void Stage1Scene::OnExit()

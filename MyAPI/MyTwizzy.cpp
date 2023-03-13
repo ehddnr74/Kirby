@@ -12,7 +12,7 @@ namespace My
 {
 	Twizzy::Twizzy()
 		:twizzytime(0.f)
-		, twizzydir(1)
+		, twizzydir(0)
 	{
 	}
 	Twizzy::~Twizzy()
@@ -34,6 +34,12 @@ namespace My
 		mAnimator->CreateAnimation(L"RightFly", mTwizzy, Vector2::Zero, 16, 16, 3, Vector2::Zero, 0.3);
 
 		mAnimator->Play(L"LeftIdle", true);
+
+		Collider* collider = AddComponent<Collider>();
+		collider->SetCenter(Vector2(20.0f, 20.0f));
+		collider->SetSize(Vector2(40.0f, 45.0f));
+
+
 		GameObject::Initialize();
 	}
 	void Twizzy::Update()
@@ -117,5 +123,14 @@ namespace My
 		}
 
 		tr->SetPos(tzpos);
+	}
+	void Twizzy::OnCollisionEnter(Collider* other)
+	{
+	}
+	void Twizzy::OnCollisionStay(Collider* other)
+	{
+	}
+	void Twizzy::OnCollisionExit(Collider* other)
+	{
 	}
 }

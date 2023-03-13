@@ -57,4 +57,41 @@ namespace My
 	{
 		GameObject::Release();
 	}
+	void AbsorbLeftEffect::OnCollisionEnter(Collider* other)
+	{
+	}
+	void AbsorbLeftEffect::OnCollisionStay(Collider* other)
+	{
+		Transform* tr = other->GetOwner()->GetComponent<Transform>();
+
+		Vector2 otherPos = tr->GetPos();
+
+		Transform* Effecttr = GetComponent<Transform>();
+
+		Vector2 EffectPos = Effecttr->GetPos();
+
+		mTime += Time::DeltaTime();
+
+		if (mTime <= 0.3f)
+			otherPos.x += 20.0f * Time::DeltaTime();
+
+		if (mTime >= 0.3f)
+		{
+			otherPos.x += 150.0f * Time::DeltaTime();
+		}
+		if (mTime >= 1.0f)
+		{
+			mTime = 0.0f;
+		}
+
+		if (EffectPos.x < otherPos.x)
+			object::Destroy(other->GetOwner());
+
+
+		tr->SetPos(otherPos);
+
+	}
+	void AbsorbLeftEffect::OnCollisionExit(Collider* other)
+	{
+	}
 }

@@ -29,6 +29,10 @@ namespace My
 		void leftfly();
 		void rightfly();
 
+		virtual void OnCollisionEnter(class Collider* other) override;
+		virtual void OnCollisionStay(class Collider* other) override;
+		virtual void OnCollisionExit(class Collider* other) override;
+
 	private:
 		TwizzyState mState;
 		Animator* mAnimator;

@@ -17,6 +17,7 @@ namespace My
 		:kirbytime(0.0f)
 		, KeyCheck(false)
 		, Kirbydir(0)
+		, AbsorbCheck(false)
 	{
 	}
 	Kirby::~Kirby()
@@ -28,8 +29,9 @@ namespace My
 		//tr->SetPos(Vector2(30.0f, 310.0f));
 		//tr->SetScale(Vector2(2.0f, 2.0f));
 
+
 		Image* mKirby = Resources::Load<Image>(L"Kirby", L"..\\Resources\\KirbyState.bmp");
-		Image* AbsorbEffect = Resources::Load<Image>(L"Cappy", L"..\\Resources\\AbsorbEffect.bmp");
+
 
 
 		mAnimator = AddComponent<Animator>();
@@ -51,7 +53,6 @@ namespace My
 		mAnimator->CreateAnimation(L"RightSliding", mKirby, Vector2(520.0f, 200.0f), 16, 16, 1, Vector2::Zero, 0.1);
 		mAnimator->CreateAnimation(L"RightJumpFirst", mKirby, Vector2(0.0f, 240.0f), 16, 16, 1, Vector2::Zero, 0.1);
 		mAnimator->CreateAnimation(L"RightJump", mKirby, Vector2(0.0f, 240.0f), 16, 16, 8, Vector2::Zero, 0.05);
-		mAnimator->CreateAnimation(L"RightEffect", AbsorbEffect, Vector2::Zero, 4, 1, 4, Vector2::Zero, 0.1);
 
 		mAnimator->Play(L"RightIdle", true);
 
@@ -213,7 +214,12 @@ namespace My
 		//		mState = eKirbyState::RightDash;
 		//		mAnimator->Play(L"RightDash", true);
 		//	}
-
+		if (Input::GetKeyDown(eKeyCode::Z))
+		{
+			object::Instantiate<AbsorbEffect>(Vector2(pos.x + 60, pos.y - 10), Vector2(1.0f, 1.0f), eLayerType::Effect);
+			mState = eKirbyState::RightAbsorb;
+			mAnimator->Play(L"RightAbsorbing", true);
+		}
 
 		if (Input::GetKey(eKeyCode::Right))
 		{
@@ -222,13 +228,6 @@ namespace My
 				{
 					mState = eKirbyState::LeftMove;
 					mAnimator->Play(L"LeftWalk", true);
-				}
-
-				if (Input::GetKeyDown(eKeyCode::Z))
-				{
-					object::Instantiate<AbsorbEffect>(Vector2(pos.x + 60, pos.y - 10), Vector2(1.0f, 1.0f), eLayerType::Effect);
-					mState = eKirbyState::RightAbsorb;
-					mAnimator->Play(L"RightAbsorbing", true);
 				}
 				if (Input::GetKey(eKeyCode::Down))
 				{
@@ -334,12 +333,29 @@ namespace My
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
-
 		if (Input::GetKeyUp(eKeyCode::Z))
 		{
 			mState = eKirbyState::RightIdle;
 			mAnimator->Play(L"RightIdle", true);
+			 
+			//AbsorbCheck = true;
 		}
+
+		////if (AbsorbCheck)
+		////{
+			//KeyCheck = false;
+			//kirbytime += Time::DeltaTime();
+
+			//if (kirbytime >= 1.0f)
+			//{
+			//	AbsorbCheck = false;
+			//	mState = eKirbyState::RightIdle;
+			//	mAnimator->Play(L"RightIdle", true);
+			//}
+			//if (AbsorbCheck == false)
+			//{
+			//	kirbytime = 0.0f;
+			//}
 	}
 	void Kirby::leftdash()
 	{

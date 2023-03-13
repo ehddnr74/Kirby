@@ -65,6 +65,7 @@ namespace My
 		double kirbytime;
 		bool KeyCheck;
 		int Kirbydir;
+		bool AbsorbCheck;
 	};
 }
 

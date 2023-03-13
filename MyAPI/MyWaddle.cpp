@@ -8,6 +8,7 @@
 #include "MyCollider.h"
 #include "MyScene.h"
 #include "Mytime.h"
+#include "AbsorbEffect.h"
 
 namespace My
 {
@@ -80,7 +81,7 @@ namespace My
 
 	void Waddle::OnCollisionEnter(Collider* other)
 	{
-
+		
 	}
 
 	void Waddle::OnCollisionStay(Collider* other)
@@ -97,7 +98,7 @@ namespace My
 
 	void Waddle::OnCollisionExit(Collider* other)
 	{
-
+		
 	}
 
 	void Waddle::leftmove()

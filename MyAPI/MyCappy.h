@@ -7,6 +7,12 @@ namespace My
 	class Cappy : public GameObject
 	{
 	public:
+		enum class CappyState
+		{
+			LeftMove
+			,RightMove
+		};
+
 	Cappy();
 	~Cappy();
 
@@ -16,7 +22,18 @@ namespace My
 	virtual void Release() override;
 
 	private:
-	Animator* mAnimator;
+		void leftmove();
+		void rightmove();
+
+		virtual void OnCollisionEnter(class Collider* other) override;
+		virtual void OnCollisionStay(class Collider* other) override;
+		virtual void OnCollisionExit(class Collider* other) override;
+
+	private:
+		Animator* mAnimator;
+		CappyState mState;
+		double cappytime;
+		int cappydir;
 
 	};
 }
