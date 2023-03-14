@@ -74,6 +74,22 @@ namespace My
             , mSpriteSheet[mSpriteIndex].leftTop.x, mSpriteSheet[mSpriteIndex].leftTop.y
             , mSpriteSheet[mSpriteIndex].size.x, mSpriteSheet[mSpriteIndex].size.y,
             RGB(72, 104, 112));
+
+        BLENDFUNCTION func = {};
+        func.BlendOp = AC_SRC_OVER;
+        func.BlendFlags = 0;
+        func.AlphaFormat = 0;
+        func.SourceConstantAlpha = 127;
+        
+        //¾ËÆÄºí·»µù
+        //AlphaBlend(hdc, tr->GetPos().x + mSpriteSheet[mSpriteIndex].offset.x
+        //    , tr->GetPos().y + mSpriteSheet[mSpriteIndex].offset.y
+        //    , mSpriteSheet[mSpriteIndex].size.x * scale.x
+        //    , mSpriteSheet[mSpriteIndex].size.y * scale.y
+        //    , mSheetImage->GetHdc()
+        //    , mSpriteSheet[mSpriteIndex].leftTop.x, mSpriteSheet[mSpriteIndex].leftTop.y
+        //    , mSpriteSheet[mSpriteIndex].size.x, mSpriteSheet[mSpriteIndex].size.y
+        //    , func);
     }
 
     void Animation::Create(Image* sheet, Vector2 leftTop

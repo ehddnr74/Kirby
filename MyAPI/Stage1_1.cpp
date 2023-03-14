@@ -13,6 +13,8 @@
 #include "MyCamera.h"
 #include "MyObject.h"
 #include "AbsorbEffect.h"
+#include "MyfadeIn.h"
+#include "Myfadeout.h"
 
 namespace My
 {
@@ -33,6 +35,8 @@ namespace My
 		//AddGameObject(mKirby, eLayerType::Player);
 
 		//Camera::SetTarget(mKirby);
+		//object::Instantiate<FadeIn>(eLayerType::fade);
+
 
 	    object::Instantiate< Kirby>(Vector2(30.0f,310.0f),Vector2(2.0f,2.0f),(eLayerType::Player));
 
@@ -88,12 +92,15 @@ namespace My
 
 	void Stage1Scene::OnEnter()
 	{
+		object::Instantiate<FadeIn>(eLayerType::fade);
+
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Effect, true);
 	}
 
 	void Stage1Scene::OnExit()
 	{
+		//object::Instantiate<FadeOut>(eLayerType::fade);
 		//mKirby->SetPos(Vector2(0.0f, 0.0f));
 	}
 

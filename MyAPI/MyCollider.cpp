@@ -11,6 +11,7 @@ namespace My
 		, mPos(Vector2::Zero)
 		, mSize(20.0f, 20.0f)
 		, mID(ColliderNumber++)
+		, mCollisionCount(0)
 
 	{
 
@@ -28,9 +29,12 @@ namespace My
 	}
 	void Collider::Render(HDC hdc)
 	{
-
-
-		HPEN pen = CreatePen(BS_SOLID, 2, RGB(0, 255, 0));
+		HPEN pen = NULL;
+		if (mCollisionCount <= 0)
+			pen = CreatePen(BS_SOLID, 2, RGB(0, 255, 0));
+		else
+			pen = CreatePen(BS_SOLID, 2, RGB(255, 0, 0));
+		
 		HPEN oldPen = (HPEN)SelectObject(hdc, pen);
 		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
@@ -46,6 +50,8 @@ namespace My
 	}
 	void Collider::OnCollisionEnter(Collider* other)
 	{
+		mCollisionCount++;
+
 		GetOwner()->OnCollisionEnter(other);
 	}
 	void Collider::OnCollisionStay(Collider* other)
@@ -54,6 +60,8 @@ namespace My
 	}
 	void Collider::OnCollisionExit(Collider* other)
 	{
+		mCollisionCount--;
+
 		GetOwner()->OnCollisionExit(other);
 	}
 }

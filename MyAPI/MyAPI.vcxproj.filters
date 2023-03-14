@@ -89,6 +89,9 @@
     <Filter Include="Contents\Effect\AbsorbEffect">
       <UniqueIdentifier>{9ab1eb29-ba68-4b95-bd76-4bc1d03ab986}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Scene\fade In/Out">
+      <UniqueIdentifier>{7dcc9be6-1ceb-4315-9b9e-a197ba9cfc1d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -214,6 +217,12 @@
     <ClInclude Include="AbsorbEffect.h">
       <Filter>Contents\Effect\AbsorbEffect</Filter>
     </ClInclude>
+    <ClInclude Include="MyfadeOut.h">
+      <Filter>Contents\Scene\fade In/Out</Filter>
+    </ClInclude>
+    <ClInclude Include="MyfadeIn.h">
+      <Filter>Contents\Scene\fade In/Out</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc">
@@ -330,6 +339,12 @@
     </ClCompile>
     <ClCompile Include="AbsorbLeftEffect.cpp">
       <Filter>Contents\Effect\AbsorbEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="MyfadeOut.cpp">
+      <Filter>Contents\Scene\fade In/Out</Filter>
+    </ClCompile>
+    <ClCompile Include="MyfadeIn.cpp">
+      <Filter>Contents\Scene\fade In/Out</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -19,6 +19,7 @@ enum class eLayerType
 	Monster,
 	Effect,
 	UI,
+	fade,
 	End,
 };
 

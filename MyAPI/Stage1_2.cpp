@@ -7,6 +7,7 @@
 #include "MyImage.h"
 #include "MyObject.h"
 #include "Stage1_2bk.h"
+#include "Myfadein.h"
 
 
 namespace My
@@ -58,6 +59,7 @@ namespace My
 
 	void Stage2Scene::OnEnter()
 	{
+		object::Instantiate<FadeIn>(eLayerType::fade);
 	}
 
 	void Stage2Scene::OnExit()

@@ -46,10 +46,8 @@ namespace My
 	}
 	void TitleScene::OnEnter()
 	{
-
 	}
 	void TitleScene::OnExit()
 	{
-		
 	}
 }
