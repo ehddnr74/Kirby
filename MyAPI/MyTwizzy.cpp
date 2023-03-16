@@ -36,8 +36,8 @@ namespace My
 		mAnimator->Play(L"LeftIdle", true);
 
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(20.0f, 20.0f));
-		collider->SetSize(Vector2(40.0f, 45.0f));
+		collider->SetCenter(Vector2(0.0f, -16.0f));
+		collider->SetSize(Vector2(44.0f, 40.0f));
 
 
 		GameObject::Initialize();

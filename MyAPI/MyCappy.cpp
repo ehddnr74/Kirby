@@ -32,8 +32,8 @@ namespace My
 		mAnimator->Play(L"Move", true);
 
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(15.0f, 15.0f));
-		collider->SetSize(Vector2(43.0f, 45.0f));
+		collider->SetCenter(Vector2(-5.0f, -25.0f));
+		collider->SetSize(Vector2(43.0f, 47.0f));
 
 		mState = CappyState::LeftMove;
 

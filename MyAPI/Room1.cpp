@@ -5,6 +5,8 @@
 #include "MyTime.h"
 #include "MyTransform.h"
 #include "MyScene.h"
+#include "MyTransform.h"
+#include "MyCamera.h"
 
 namespace My
 {
@@ -34,9 +36,11 @@ namespace My
 	void My::Room1::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+		pos = Camera::CalculatePos(pos);
 
-
-		TransparentBlt(hdc, 0, 0
+		TransparentBlt(hdc, pos.x, pos.y
 			,mroom1->GetWidth() 
 			,mroom1->GetHeight()
 			, mroom1->GetHdc()

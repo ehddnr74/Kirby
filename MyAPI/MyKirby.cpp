@@ -10,11 +10,12 @@
 #include "MyObject.h"
 #include "AbsorbEffect.h"
 #include "AbsorbLeftEffect.h"
+#include "MyRigidBody.h"
 
 namespace My
 {
 	Kirby::Kirby()
-		:kirbytime(0.0f)
+		: kirbytime(0.0f)
 		, KeyCheck(false)
 		, Kirbydir(0)
 		, AbsorbCheck(false)
@@ -58,9 +59,13 @@ namespace My
 
 		//mAnimator->GetCompleteEvent(L"RightIdle") = std::bind(&Kirby::idleCompleteEvent,this);
 
+
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(13.0f, 15.0f));
-		collider->SetSize(Vector2(55.0f, 46.0f));
+		collider->SetCenter(Vector2(-5.0f, -24.0f));
+		collider->SetSize(Vector2(50.0f, 46.0f));
+
+		//mRigidBody = AddComponent<RigidBody>();
+		//mRigidBody->SetMass(1.0f);
 
 		mState = eKirbyState::RightIdle;
 
@@ -160,6 +165,12 @@ namespace My
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
+		if (Input::GetKeyDown(eKeyCode::Z))
+		{
+			object::Instantiate<AbsorbLeftEffect>(Vector2(pos.x - 35, pos.y + 52), Vector2(1.0f, 1.0f), eLayerType::Effect);
+			mState = eKirbyState::LeftAbsorb;
+			mAnimator->Play(L"LeftAbsorbing", true);
+		}
 
 		if (Input::GetKey(eKeyCode::Left))
 		{
@@ -168,12 +179,6 @@ namespace My
 			{
 				mState = eKirbyState::RightMove;
 				mAnimator->Play(L"RightWalk", true);
-			}
-			if (Input::GetKeyDown(eKeyCode::Z))
-			{
-				object::Instantiate<AbsorbLeftEffect>(Vector2(pos.x - 75, pos.y - 10), Vector2(1.0f, 1.0f), eLayerType::Effect);
-				mState = eKirbyState::LeftAbsorb;
-				mAnimator->Play(L"LeftAbsorbing", true);
 			}
 			if (Input::GetKey(eKeyCode::Down))
 			{
@@ -216,13 +221,14 @@ namespace My
 		//	}
 		if (Input::GetKeyDown(eKeyCode::Z))
 		{
-			object::Instantiate<AbsorbEffect>(Vector2(pos.x + 60, pos.y - 10), Vector2(1.0f, 1.0f), eLayerType::Effect);
+			object::Instantiate<AbsorbEffect>(Vector2(pos.x + 85, pos.y + 50), Vector2(1.0f, 1.0f), eLayerType::Effect);
 			mState = eKirbyState::RightAbsorb;
 			mAnimator->Play(L"RightAbsorbing", true);
 		}
 
 		if (Input::GetKey(eKeyCode::Right))
 		{
+		//mRigidBody->AddForce(Vector2(200.0f, 0.0f));
 				pos.x += 100.0f * Time::DeltaTime();
 				if (Input::GetKey(eKeyCode::Left))
 				{
@@ -258,7 +264,7 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::Z))
 		{
-			object::Instantiate<AbsorbLeftEffect>(Vector2(pos.x - 75, pos.y - 10), Vector2(1.0f, 1.0f), eLayerType::Effect);
+			object::Instantiate<AbsorbLeftEffect>(Vector2(pos.x - 35, pos.y + 52), Vector2(1.0f, 1.0f), eLayerType::Effect);
 			mState = eKirbyState::LeftAbsorb;
 			mAnimator->Play(L"LeftAbsorbing", true);
 		}
@@ -297,7 +303,7 @@ namespace My
 		}
 		if (Input::GetKeyDown(eKeyCode::Z))
 		{
-		  object::Instantiate<AbsorbEffect>(Vector2(pos.x + 60, pos.y - 10), Vector2(1.0f, 1.0f), eLayerType::Effect);
+		  object::Instantiate<AbsorbEffect>(Vector2(pos.x + 85, pos.y + 50), Vector2(1.0f, 1.0f), eLayerType::Effect);
 			
 			mState = eKirbyState::RightAbsorb;
 			mAnimator->Play(L"RightAbsorbing", true);

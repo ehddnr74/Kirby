@@ -9,6 +9,7 @@
 #include "MyScene.h"
 #include "Mytime.h"
 #include "AbsorbEffect.h"
+#include "MyCamera.h"
 
 namespace My
 {
@@ -42,7 +43,7 @@ namespace My
 		mAnimator->Play(L"LeftMove", true);
 
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(20.0f, 22.0f));
+		collider->SetCenter(Vector2(0.0f, -17.0f));
 		collider->SetSize(Vector2(50.0f, 45.0f));
 
 		mState = WaddleState::LeftMove;

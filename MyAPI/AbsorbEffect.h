@@ -4,6 +4,7 @@
 namespace My
 {
 	class Animator;
+	class mWaddle;
 	class AbsorbEffect : public GameObject
 	{
 	public:

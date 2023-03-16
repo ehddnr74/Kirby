@@ -33,12 +33,13 @@ namespace My
 
 		//mKirby = new Kirby();
 		//AddGameObject(mKirby, eLayerType::Player);
-
-		//Camera::SetTarget(mKirby);
+		// 
 		//object::Instantiate<FadeIn>(eLayerType::fade);
 
 
-	    object::Instantiate< Kirby>(Vector2(30.0f,310.0f),Vector2(2.0f,2.0f),(eLayerType::Player));
+		mKirby = object::Instantiate<Kirby>(Vector2(30.0f, 350.0f),Vector2(2.0f,2.0f),(eLayerType::Player));
+	
+		//Camera::SetTarget(mKirby);
 
 		//mbg1 = new Stage11bk();
 		//AddGameObject(mbg1, eLayerType::BG);
@@ -53,12 +54,12 @@ namespace My
 		//Waddle* mWaddle = new Waddle();
 		//AddGameObject(mWaddle, eLayerType::Monster);
 
-		object::Instantiate<Waddle>(Vector2(320, 300),Vector2(2.2f,2.2f),(eLayerType::Monster));
+		mWaddle = object::Instantiate<Waddle>(Vector2(320, 300),Vector2(2.2f,2.2f),(eLayerType::Monster));
 
 		//Cappy* mCappy = new Cappy();
 		//AddGameObject(mCappy, eLayerType::Monster);
 
-		object::Instantiate<Cappy>(Vector2(580, 255), Vector2(1.8f, 2.0f), (eLayerType::Monster));
+		object::Instantiate<Cappy>(Vector2(580, 300), Vector2(1.8f, 2.0f), (eLayerType::Monster));
 
 		//Twizzy* mTwizzy = new Twizzy();
 		//AddGameObject(mTwizzy, eLayerType::Monster);
@@ -92,7 +93,7 @@ namespace My
 
 	void Stage1Scene::OnEnter()
 	{
-		object::Instantiate<FadeIn>(eLayerType::fade);
+		//object::Instantiate<FadeIn>(eLayerType::fade);
 
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Effect, true);

@@ -143,6 +143,7 @@
     <ClInclude Include="MyfadeIn.h" />
     <ClInclude Include="MyfadeOut.h" />
     <ClInclude Include="MyObject.h" />
+    <ClInclude Include="MyRigidBody.h" />
     <ClInclude Include="MyTwizzy.h" />
     <ClInclude Include="MyWaddle.h" />
     <ClInclude Include="Room1.h" />
@@ -185,6 +186,7 @@
     <ClCompile Include="MyCollider.cpp" />
     <ClCompile Include="MyfadeIn.cpp" />
     <ClCompile Include="MyfadeOut.cpp" />
+    <ClCompile Include="MyRigidBody.cpp" />
     <ClCompile Include="MyTwizzy.cpp" />
     <ClCompile Include="MyWaddle.cpp" />
     <ClCompile Include="Room1.cpp" />

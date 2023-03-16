@@ -1,6 +1,7 @@
 #include "MyCollider.h"
 #include "MyTransform.h"
 #include "MyGameObject.h"
+#include "MyCamera.h"
 
 namespace My
 {
@@ -39,29 +40,30 @@ namespace My
 		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);
 
-		Rectangle(hdc,mPos.x, mPos.y, mPos.x + mSize.x, mPos.y + mSize.y);
+		Vector2 pos = Camera::CalculatePos(mPos);
+
+		Rectangle(hdc, pos.x, pos.y, pos.x + mSize.x, pos.y + mSize.y);
 
 		(HPEN)SelectObject(hdc, oldPen);
 		(HBRUSH)SelectObject(hdc, oldBrush);
 		DeleteObject(pen);
+
+		mCollisionCount = 0;
 	}
 	void Collider::Release()
 	{
 	}
 	void Collider::OnCollisionEnter(Collider* other)
 	{
-		mCollisionCount++;
-
 		GetOwner()->OnCollisionEnter(other);
 	}
 	void Collider::OnCollisionStay(Collider* other)
 	{
+		mCollisionCount = 1;
 		GetOwner()->OnCollisionStay(other);
 	}
 	void Collider::OnCollisionExit(Collider* other)
 	{
-		mCollisionCount--;
-
 		GetOwner()->OnCollisionExit(other);
 	}
 }

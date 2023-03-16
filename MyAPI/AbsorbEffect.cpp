@@ -37,8 +37,8 @@ namespace My
 		mAnimator->Play(L"RightEffect", true);
 
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(20.0f, 15.0f));
-		collider->SetSize(Vector2(60.0f, 65.0f));
+		collider->SetCenter(Vector2(-30.0f, -90.0f));
+		collider->SetSize(Vector2(60.0f, 70.0f));
 
 
 		GameObject::Initialize();

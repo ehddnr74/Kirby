@@ -6,6 +6,7 @@ namespace My
 {
 	class Room1;
 	class Kirby;
+	class Waddle;
 	class Stage11bk;
 	class Stage1Scene : public Scene
 	{
@@ -22,6 +23,7 @@ namespace My
 
 	private:
 		Kirby* mKirby;
+		Waddle* mWaddle;
 		Room1* mroom1;
 		Stage11bk* mbg1;
 

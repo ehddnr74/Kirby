@@ -92,6 +92,9 @@
     <Filter Include="Contents\Scene\fade In/Out">
       <UniqueIdentifier>{7dcc9be6-1ceb-4315-9b9e-a197ba9cfc1d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Component\RigidBody">
+      <UniqueIdentifier>{b11e533a-3cca-49a4-9bd7-10068cc183c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -223,6 +226,9 @@
     <ClInclude Include="MyfadeIn.h">
       <Filter>Contents\Scene\fade In/Out</Filter>
     </ClInclude>
+    <ClInclude Include="MyRigidBody.h">
+      <Filter>Engine\Component\RigidBody</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc">
@@ -345,6 +351,9 @@
     </ClCompile>
     <ClCompile Include="MyfadeIn.cpp">
       <Filter>Contents\Scene\fade In/Out</Filter>
+    </ClCompile>
+    <ClCompile Include="MyRigidBody.cpp">
+      <Filter>Engine\Component\RigidBody</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -23,8 +23,8 @@ namespace My
 	{
 		mHwnd = hWnd;
 		mHdc = GetDC(hWnd);
-		mWidth = 1600;
-		mHeight = 900;
+		mWidth = 1600;//534;
+		mHeight = 900;//806;
 
 		//비트맵 해상도를 설정하기 위한 실제 윈도우 크기를 계산해준다.
 		RECT rect = { 0,0,mWidth ,mHeight };
@@ -73,6 +73,7 @@ namespace My
 		Time::Render(mBackHDC);
 		Input::Render(mBackHDC);
 		SceneManager::Render(mBackHDC);
+		Camera::Render(mBackHDC);
 
 		// 백버퍼에 있는 그림을 원본버퍼에 그려줘야한다.
 		BitBlt(mHdc, 0, 0, mWidth, mHeight, mBackHDC, 0, 0, SRCCOPY);

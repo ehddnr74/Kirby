@@ -67,6 +67,15 @@ struct Vector2
 		return temp;
 	}
 
+	Vector2 operator*(const float ratio)
+	{
+		Vector2 temp;
+		temp.x = x * ratio;
+		temp.y = y * ratio;
+
+		return temp;
+	}
+
 	Vector2 operator/(const float ratio)
 	{
 		Vector2 temp;
@@ -78,7 +87,7 @@ struct Vector2
 
 	void operator+=(const Vector2& other)
 	{
-		x -= other.x;
+		x += other.x;
 		y -= other.y;
 	}
 
@@ -86,6 +95,34 @@ struct Vector2
 	{
 		x -= other.x;
 		y -= other.y;
+	}
+
+	void operator*=(const Vector2& other)
+	{
+		x *= other.x;
+		y *= other.y;
+	}
+
+	void operator*=(const float& value)
+	{
+		x *= value;
+		y *= value;
+	}
+
+	bool operator ==(const Vector2& other)
+	{
+		return (x == other.x && y == other.y);
+	}
+
+	Vector2 operator -()
+	{
+		return Vector2(-x, -y);
+	}
+
+	void Clear()
+	{
+		x = 0.0f;
+		y = 0.0f;
 	}
 
 	float Length()
@@ -113,9 +150,19 @@ namespace My::math
 		vector.Normalize();
 
 		float x = vector.x * cosf(radian) - vector.y * sinf(radian);
-		float y = vector.x * cosf(radian) - vector.y * sinf(radian);
+		float y = vector.x * cosf(radian) + vector.y * cosf(radian);
 
 		return Vector2(x, y);
+	}
+
+	inline static float Dot(Vector2& v1, Vector2& v2)
+	{
+		return v1.x * v2.x + v1.y * v2.y;
+	}
+
+	inline static float Cross(Vector2& v1, Vector2& v2)
+	{
+		return v1.x * v2.y - v1.y * v2.x;
 	}
 }
 

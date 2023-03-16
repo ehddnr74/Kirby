@@ -3,7 +3,8 @@
 #include "MyImage.h"
 
 namespace My
-{
+{	
+	class RigidBody;
 	class Animator;
 	class Kirby : public GameObject
 	{
@@ -66,6 +67,7 @@ namespace My
 		bool KeyCheck;
 		int Kirbydir;
 		bool AbsorbCheck;
+		RigidBody* mRigidBody;
 	};
 }
 

@@ -5,6 +5,7 @@
 #include "MyTime.h"
 #include "MyTransform.h"
 #include "MyScene.h"
+#include "MyCamera.h"
 
 namespace My
 {
@@ -23,6 +24,7 @@ namespace My
 		mbg1 = Resources::Load<Image>(L"Stage11bk", L"..\\Resources\\stage1_1bk.bmp");
 
 
+
 		GameObject::Initialize();
 	}
 
@@ -35,6 +37,9 @@ namespace My
 	{
 		GameObject::Render(hdc);
 
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+		pos = Camera::CalculatePos(pos);
 
 		//TransparentBlt(hdc, 0, 0
 		//	, mbg1->GetWidth() 
@@ -44,7 +49,7 @@ namespace My
 		//	, 673,217 
 		//	, RGB(72, 104, 112));
 
-	     BitBlt(hdc, 0, 0, mbg1->GetWidth(), mbg1->GetHeight(), mbg1->GetHdc(), 0, 0, SRCCOPY);
+	     BitBlt(hdc, pos.x, pos.y, mbg1->GetWidth(), mbg1->GetHeight(), mbg1->GetHdc(), 0, 0, SRCCOPY);
 	}
 
 	void My::Stage11bk::Release()
