@@ -15,6 +15,7 @@
 #include "AbsorbEffect.h"
 #include "MyfadeIn.h"
 #include "Myfadeout.h"
+#include "MyGround.h"
 
 namespace My
 {
@@ -36,9 +37,9 @@ namespace My
 		// 
 		//object::Instantiate<FadeIn>(eLayerType::fade);
 
-
-		mKirby = object::Instantiate<Kirby>(Vector2(30.0f, 350.0f),Vector2(2.0f,2.0f),(eLayerType::Player));
+		mKirby = object::Instantiate<Kirby>(Vector2(30.0f, 0.0f), Vector2(2.0f, 2.0f), (eLayerType::Player));
 	
+		object::Instantiate<Ground>(Vector2(-100.0f, 400.0f), Vector2(1.0f, 1.0f), (eLayerType::Ground));
 		//Camera::SetTarget(mKirby);
 
 		//mbg1 = new Stage11bk();
@@ -55,6 +56,7 @@ namespace My
 		//AddGameObject(mWaddle, eLayerType::Monster);
 
 		mWaddle = object::Instantiate<Waddle>(Vector2(320, 300),Vector2(2.2f,2.2f),(eLayerType::Monster));
+
 
 		//Cappy* mCappy = new Cappy();
 		//AddGameObject(mCappy, eLayerType::Monster);
@@ -95,8 +97,9 @@ namespace My
 	{
 		//object::Instantiate<FadeIn>(eLayerType::fade);
 
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		//CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Effect, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 	}
 
 	void Stage1Scene::OnExit()

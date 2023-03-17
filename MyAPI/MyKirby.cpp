@@ -64,8 +64,9 @@ namespace My
 		collider->SetCenter(Vector2(-5.0f, -24.0f));
 		collider->SetSize(Vector2(50.0f, 46.0f));
 
-		//mRigidBody = AddComponent<RigidBody>();
-		//mRigidBody->SetMass(1.0f);
+		mRigidBody = AddComponent<RigidBody>();
+		mRigidBody->SetMass(1.0f);
+		//mRigidBody->SetGround(false);
 
 		mState = eKirbyState::RightIdle;
 

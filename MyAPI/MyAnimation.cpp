@@ -65,8 +65,8 @@ namespace My
         pos.y -= mSpriteSheet[mSpriteIndex].size.y;
 
 
-        TransparentBlt(/*tr->GetPos().x*/hdc, pos.x + mSpriteSheet[mSpriteIndex].offset.x
-            , pos.y/*tr->GetPos().y*/+ mSpriteSheet[mSpriteIndex].offset.y
+        TransparentBlt(hdc, pos.x /*tr->GetPos().x*/ + mSpriteSheet[mSpriteIndex].offset.x
+            , pos.y/*tr->GetPos().y*/ + mSpriteSheet[mSpriteIndex].offset.y
             , mSpriteSheet[mSpriteIndex].size.x * scale.x
             , mSpriteSheet[mSpriteIndex].size.y * scale.y
             , mSheetImage->GetHdc()

@@ -95,6 +95,9 @@
     <Filter Include="Engine\Component\RigidBody">
       <UniqueIdentifier>{b11e533a-3cca-49a4-9bd7-10068cc183c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Object">
+      <UniqueIdentifier>{5567d1f6-f690-439f-97c2-2cd69c9fd85a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -229,6 +232,9 @@
     <ClInclude Include="MyRigidBody.h">
       <Filter>Engine\Component\RigidBody</Filter>
     </ClInclude>
+    <ClInclude Include="MyGround.h">
+      <Filter>Contents\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc">
@@ -354,6 +360,9 @@
     </ClCompile>
     <ClCompile Include="MyRigidBody.cpp">
       <Filter>Engine\Component\RigidBody</Filter>
+    </ClCompile>
+    <ClCompile Include="MyGround.cpp">
+      <Filter>Contents\Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

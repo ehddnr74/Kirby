@@ -34,10 +34,10 @@ namespace My
 	}
 	void Camera::Update()
 	{
-		if(Input::GetKey(eKeyCode::Up))
-		{
-			mLookPosition.y -= 100.0f * Time::DeltaTime();
-		}
+		//if(Input::GetKey(eKeyCode::Up))
+		//{
+		//	mLookPosition.y -= 100.0f * Time::DeltaTime();
+		//}
 
 
 		if (mTarget != nullptr)

@@ -18,6 +18,7 @@ enum class eLayerType
 	Player,
 	Monster,
 	Effect,
+	Ground,
 	UI,
 	fade,
 	End,

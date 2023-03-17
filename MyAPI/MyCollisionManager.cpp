@@ -43,10 +43,8 @@ namespace My
 					continue;
 
 				ColliderCollision(leftCollider, rightCollider, left, right);
-
 			}
 		}
-
 	}
 
 	void CollisionManager::ColliderCollision(Collider* leftCol, Collider* rightCol, eLayerType left, eLayerType right)
@@ -54,7 +52,6 @@ namespace My
 		ColliderID colliderID = {};
 		colliderID.left = (UINT)leftCol->GetID();
 		colliderID.right = (UINT)rightCol->GetID();
-
 
 		//static std::map<UINT64, bool> mCollisionMap;
 		std::map<UINT64, bool>::iterator iter
@@ -81,7 +78,6 @@ namespace My
 				leftCol->OnCollisionStay(rightCol);
 				rightCol->OnCollisionStay(leftCol);
 			}
-
 		}	
 		else
 		{

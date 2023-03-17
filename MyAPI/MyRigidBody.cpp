@@ -15,7 +15,7 @@ namespace My
 		mLimitedVelocity.x = 200.0f;
 		mLimitedVelocity.y = 1000.0f;
 		mbGround = false;
-		mGravity = Vector2(0.0f, 800.0f);
+		mGravity = Vector2(0.0f, -600.0f);
 		mFriction = 100.0f;
 	}
 
@@ -95,8 +95,8 @@ namespace My
 		Vector2 pos = tr->GetPos();
 		pos = pos + mVelocity * Time::DeltaTime();
 
-		if (pos.y > 900.0f)
-			mbGround = true;
+		//if (pos.y > 350.0f)
+		//	mbGround = true;
 
 		tr->SetPos(pos);
 		mForce.Clear();
