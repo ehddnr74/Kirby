@@ -1,5 +1,6 @@
 #pragma once
 #include "MyComponent.h"
+#include "MyTransform.h"
 
 
 namespace My

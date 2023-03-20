@@ -18,8 +18,11 @@ namespace My
 		void SetMass(float mass) { mMass = mass; }
 		void AddForce(Vector2 force);
 		void SetGround(bool ground) { mbGround = ground; }
+		bool GetGround() { return mbGround; }
 		void SetVelocity(Vector2 velocity) { mVelocity = velocity; }
 		Vector2 GetVelocity() { return mVelocity; }
+		void SetGravity(Vector2 gravity) { mGravity = gravity; }
+		Vector2 GetGravity() { return mGravity; }
 		
 
 
@@ -34,10 +37,10 @@ namespace My
 		float mFriction;
 		bool mbGround;
 
-		//float mStaticFriction;
-		//float mKineticFriction;
-		//float mCoefficientFriction;
-		//float mNormalForce;
+		//float mStaticFriction; 정지마찰력
+		//float mKineticFriction; 운동마찰력 
+		//float mCoefficientFriction; 마찰력계수 
+		//float mNormalForce; 
 	};
 }
 

@@ -12,11 +12,11 @@ namespace My
 		, mAccelation(Vector2::Zero)
 		, mVelocity(Vector2::Zero)
 	{
-		mLimitedVelocity.x = 200.0f;
-		mLimitedVelocity.y = 1000.0f;
+		//mLimitedVelocity.x = 200.0f;
+		//mLimitedVelocity.y = 1000.0f;
 		mbGround = false;
-		mGravity = Vector2(0.0f, -600.0f);
-		mFriction = 100.0f;
+		mGravity = Vector2(0.0f, 800.0f);
+		//mFriction = 100.0f;
 	}
 
 	RigidBody::~RigidBody()
@@ -74,7 +74,7 @@ namespace My
 		// 마찰력 조건 ( 적용된 힘이 없고, 속도가 0이 아님)
 		if (!(mVelocity == Vector2::Zero))
 		{
-			//속도에 반대방향으로 마찰력이 적용된다.
+			//속도의 반대방향으로 마찰력이 적용된다.
 			Vector2 friction = -mVelocity;
 			friction = friction.Normalize() * mFriction * mMass * Time::DeltaTime();
 

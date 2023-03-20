@@ -9,7 +9,7 @@
 #include "MyScene.h"
 #include "MyObject.h"
 #include "MyWaddle.h"
-#include "MyKirby.h"
+
 
 namespace My
 {
@@ -78,20 +78,20 @@ namespace My
 	}
 	void AbsorbEffect::OnCollisionEnter(Collider* other)
 	{
+
 	}
 	void AbsorbEffect::OnCollisionStay(Collider* other)
 	{
-		
-		Transform * tr = other->GetOwner()->GetComponent<Transform>();
+		Transform* tr = other->GetOwner()->GetComponent<Transform>();
 
 		Vector2 otherPos = tr->GetPos();
-		
+
 		Transform* Effecttr = GetComponent<Transform>();
 
 		Vector2 EffectPos = Effecttr->GetPos();
 
 		mTime += Time::DeltaTime();
-		if(mTime <=0.3f)
+		if (mTime <= 0.3f)
 			otherPos.x -= 20.0f * Time::DeltaTime();
 
 		if (mTime >= 0.3f)
@@ -103,12 +103,16 @@ namespace My
 			mTime = 0.0f;
 		}
 
-			if (EffectPos.x > otherPos.x)
-				object::Destroy(other->GetOwner());
-			
+		if (EffectPos.x > otherPos.x)
+		{
+			object::Destroy(other->GetOwner());
+			object::Destroy(this);
+		}
+
 
 		tr->SetPos(otherPos);
-		
+
+	
 			
 	}
 	void AbsorbEffect::OnCollisionExit(Collider* other)

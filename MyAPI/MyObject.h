@@ -22,9 +22,9 @@ namespace My::object
 		T* gameObj = new T();
 		Scene* scene = SceneManager::GetActiveScene();
 		scene->AddGameObject(gameObj, type);
-		gameObj->Initialize();
 		gameObj->GameObject::GetComponent<Transform>()->SetPos(pos);
 		gameObj->GameObject::GetComponent<Transform>()->SetScale(scale);
+		gameObj->Initialize();
 
 		return gameObj;
 	}

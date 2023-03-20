@@ -9,6 +9,7 @@
 #include "MyCollider.h"
 #include "MyScene.h"
 #include "MyObject.h"
+#include "MyKirby.h"
 
 namespace My
 {
@@ -85,8 +86,10 @@ namespace My
 		}
 
 		if (EffectPos.x < otherPos.x)
+		{
 			object::Destroy(other->GetOwner());
-
+			object::Destroy(this);
+		}
 
 		tr->SetPos(otherPos);
 

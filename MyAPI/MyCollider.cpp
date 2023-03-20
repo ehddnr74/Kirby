@@ -9,7 +9,7 @@ namespace My
 	Collider::Collider()
 		: Component(eComponentType::Collider)
 		, mCenter(Vector2::Zero)
-		, mPos(Vector2::Zero)
+		//, mPos(Vector2::Zero)
 		, mSize(20.0f, 20.0f)
 		, mID(ColliderNumber++)
 		, mCollisionCount(0)
@@ -57,6 +57,7 @@ namespace My
 	}
 	void Collider::OnCollisionEnter(Collider* other)
 	{
+		
 		GetOwner()->OnCollisionEnter(other);
 	}
 	void Collider::OnCollisionStay(Collider* other)
@@ -66,6 +67,7 @@ namespace My
 	}
 	void Collider::OnCollisionExit(Collider* other)
 	{
+		
 		GetOwner()->OnCollisionExit(other);
 	}
 }

@@ -130,6 +130,8 @@
   <ItemGroup>
     <ClInclude Include="AbsorbEffect.h" />
     <ClInclude Include="AbsorbLeftEffect.h" />
+    <ClInclude Include="Air.h" />
+    <ClInclude Include="AirLeft.h" />
     <ClInclude Include="Commoninclude.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MyAnimation.h" />
@@ -177,6 +179,8 @@
   <ItemGroup>
     <ClCompile Include="AbsorbEffect.cpp" />
     <ClCompile Include="AbsorbLeftEffect.cpp" />
+    <ClCompile Include="Air.cpp" />
+    <ClCompile Include="AirLeft.cpp" />
     <ClCompile Include="MyCamera.cpp" />
     <ClCompile Include="MyCappy.cpp" />
     <ClCompile Include="MyCollisionManager.cpp" />

@@ -25,7 +25,9 @@ namespace My
 			LeftCrouch,
 			RightCrouch,
 			LeftJump,
-			RightJump
+			RightJump,
+			LeftDoubleJump,
+			RightDoubleJump
 		};
 
 		Kirby();
@@ -57,8 +59,10 @@ namespace My
 		void rightsliding();
 		void leftjump();
 		void rightjump();
+		void leftdoublejump();
+		void rightdoublejump();
 
-		void idleCompleteEvent();
+		//void JumpCompleteEvent();
 
 	private:
 		eKirbyState mState;
@@ -68,6 +72,9 @@ namespace My
 		int Kirbydir;
 		bool AbsorbCheck;
 		RigidBody* mRigidBody;
+		double jumptime;
+		bool IsJump;
+		bool DoubleJump;
 	};
 }
 

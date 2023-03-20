@@ -39,7 +39,7 @@ namespace My
 
 		mKirby = object::Instantiate<Kirby>(Vector2(30.0f, 0.0f), Vector2(2.0f, 2.0f), (eLayerType::Player));
 	
-		object::Instantiate<Ground>(Vector2(-100.0f, 400.0f), Vector2(1.0f, 1.0f), (eLayerType::Ground));
+		object::Instantiate<Ground>(Vector2(0.0f, 400.0f), Vector2(1.0f, 1.0f), (eLayerType::Ground));
 		//Camera::SetTarget(mKirby);
 
 		//mbg1 = new Stage11bk();
@@ -55,7 +55,7 @@ namespace My
 		//Waddle* mWaddle = new Waddle();
 		//AddGameObject(mWaddle, eLayerType::Monster);
 
-		mWaddle = object::Instantiate<Waddle>(Vector2(320, 300),Vector2(2.2f,2.2f),(eLayerType::Monster));
+		mWaddle = object::Instantiate<Waddle>(Vector2(320, 380),Vector2(2.2f,2.2f),(eLayerType::Monster));
 
 
 		//Cappy* mCappy = new Cappy();
@@ -95,9 +95,9 @@ namespace My
 
 	void Stage1Scene::OnEnter()
 	{
-		//object::Instantiate<FadeIn>(eLayerType::fade);
+		object::Instantiate<FadeIn>(eLayerType::fade);
 
-		//CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Effect, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 	}

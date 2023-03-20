@@ -44,31 +44,58 @@ namespace My
 		RigidBody* rb = mKirby->GetComponent<RigidBody>();
 		rb->SetGround(true);
 
-		//	Collider* kirbyCol = mKirby->GetComponent<Collider>();
-		//	Vector2 kirbyPos = kirbyCol->GetPos();
+		Collider* kirbycol = mKirby->GetComponent<Collider>();
+		Vector2 kirbypos = kirbycol->GetPos();
 
-		//	Collider* groundCol = this->GetComponent<Collider>();
-		//	Vector2 groundPos = groundCol->GetPos();
+		Collider* groundcol = this->GetComponent<Collider>();
+		Vector2 groundpos = groundcol->GetPos();
 
-		//	float fLen = fabs(kirbyPos.y - groundPos.y);
-		//	float fSize = (kirbyCol->GetSize().y / 2.0f) + (groundCol->GetSize().y / 2.0f);
+		float flen = fabs(kirbypos.y - groundpos.y);
+		float fsize = (kirbycol->GetSize().y / 2.0f) + (groundcol->GetSize().y / 2.0f);
 
-		//	if (fLen < fSize)
-		//	{
-		//		Transform* kirbyTr = mKirby->GetComponent<Transform>();
-		//		Transform* grTr = this->GetComponent<Transform>();
+		if (flen < fsize)
+		{
+			Transform* kirbytr = mKirby->GetComponent<Transform>();
+			Transform* grtr = this->GetComponent<Transform>();
 
-		//		Vector2 kirPos = kirbyTr->GetPos();
-		//		Vector2 grPos = grTr->GetPos();
+			Vector2 kirpos = kirbytr->GetPos();
+			Vector2 grpos = grtr->GetPos();
 
-		//		kirPos -= (fSize - fLen) - 1.0f;
-		//		kirbyTr->SetPos(kirPos);
-		//	}
-		//}
+			kirpos -= (fsize - flen) - 1.0f;
+			kirbytr->SetPos(kirpos);
+		}
 	}
+
 
 	void Ground::OnCollisionStay(Collider* other)
 	{
+		//Kirby* mKirby = dynamic_cast<Kirby*>(other->GetOwner());
+		//if (mKirby == nullptr)
+		//	return;
+
+		//RigidBody* rb = mKirby->GetComponent<RigidBody>();
+		//rb->SetGround(true);
+
+		//Collider* kirbycol = mKirby->GetComponent<Collider>();
+		//Vector2 kirbypos = kirbycol->GetPos();
+
+		//Collider* groundcol = this->GetComponent<Collider>();
+		//Vector2 groundpos = groundcol->GetPos();
+
+		//float flen = fabs(kirbypos.y - groundpos.y);
+		//float fsize = (kirbycol->GetSize().y / 2.0f) + (groundcol->GetSize().y / 2.0f);
+
+		//if (flen < fsize)
+		//{
+		//	Transform* kirbytr = mKirby->GetComponent<Transform>();
+		//	Transform* grtr = this->GetComponent<Transform>();
+
+		//	Vector2 kirpos = kirbytr->GetPos();
+		//	Vector2 grpos = grtr->GetPos();
+
+		//	kirpos -= (fsize - flen) - 1.0f;
+		//	kirbytr->SetPos(kirpos);
+		//}
 
 	}
 
