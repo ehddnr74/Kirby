@@ -14,11 +14,11 @@ enum class eSceneType
 enum class eLayerType
 {
 	BG,
+	Ground,
 	Stage,
 	Player,
 	Monster,
 	Effect,
-	Ground,
 	UI,
 	fade,
 	End,

@@ -53,6 +53,7 @@ namespace My
 	{
 		
 	}
+
 	void GameObject::OnCollisionEnter(Collider* other)
 	{
 	}
@@ -62,4 +63,5 @@ namespace My
 	void GameObject::OnCollisionExit(Collider* other)
 	{
 	}
+
 }

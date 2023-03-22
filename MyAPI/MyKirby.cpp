@@ -13,6 +13,7 @@
 #include "MyRigidBody.h"
 #include "Air.h"
 #include "AirLeft.h"
+#include "Stage1_1.h"
 
 namespace My
 {
@@ -39,7 +40,6 @@ namespace My
 		Image* mKirby = Resources::Load<Image>(L"Kirby", L"..\\Resources\\KirbyState.bmp");
 
 
-
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimation(L"LeftIdle", mKirby, Vector2(240.0f, 0.0f), 16, 16, 6, Vector2::Zero, 0.3);
 		mAnimator->CreateAnimation(L"LeftWalk", mKirby, Vector2(0.0f, 80.0f), 16, 16, 10, Vector2::Zero, 0.1);
@@ -52,6 +52,7 @@ namespace My
 		mAnimator->CreateAnimation(L"LeftJumpRelease", mKirby, Vector2(160.0f, 320.0f), 16, 16, 3, Vector2::Zero, 0.05);
 		mAnimator->CreateAnimation(L"LeftDoubleJump", mKirby, Vector2(0.0f, 320.0f), 16, 16, 7, Vector2::Zero, 0.05);
 		mAnimator->CreateAnimation(L"LeftAir", mKirby, Vector2(0.0f, 440.0f), 16, 16, 12, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"LeftDashRelease", mKirby, Vector2(320.0f, 280.0f), 16, 16, 1, Vector2::Zero, 0.05);
 
 
 		mAnimator->CreateAnimation(L"RightIdle", mKirby, Vector2::Zero, 16, 16, 6, Vector2::Zero, 0.3);
@@ -66,6 +67,8 @@ namespace My
 		mAnimator->CreateAnimation(L"RightJumpRelease", mKirby, Vector2(160.0f, 280.0f), 16, 16, 3, Vector2::Zero, 0.05);
 		mAnimator->CreateAnimation(L"RightDoubleJump", mKirby, Vector2(0.0f, 280.0f), 16, 16, 7, Vector2::Zero, 0.05);
 		mAnimator->CreateAnimation(L"RightAir", mKirby, Vector2(0.0f, 400.0f), 16, 16, 12, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"RightDashRelease", mKirby, Vector2(280.0f, 280.0f), 16, 16, 1, Vector2::Zero, 0.3);
+
 		//mAnimator->CreateAnimation(L"RightAirRelease", mKirby, Vector2(160.0f, 400.0f), 16, 16, 8, Vector2::Zero, 0.05);
 		
 
@@ -113,11 +116,20 @@ namespace My
 		case My::Kirby::eKirbyState::RightAbsorb:
 			rightabsorb();
 			break;
+		case My::Kirby::eKirbyState::RightColAbsorb:
+			rightcolabsorb();
+			break;
 		case My::Kirby::eKirbyState::LeftDash:
 			leftdash();
 			break;
 		case My::Kirby::eKirbyState::RightDash:
 			rightdash();
+			break;
+		case My::Kirby::eKirbyState::LeftDashRelease:
+			leftdashrelease();
+			break;
+		case My::Kirby::eKirbyState::RightDashRelease:
+			rightdashrelease();
 			break;
 		case My::Kirby::eKirbyState::LeftCrouch:
 			leftcrouch();
@@ -168,7 +180,7 @@ namespace My
 
 	void Kirby::OnCollisionExit(Collider* other)
 	{
-
+		//int a = 0;
 	}
 
 
@@ -205,7 +217,7 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::Z))
 		{
-			object::Instantiate<AbsorbLeftEffect>(Vector2(pos.x - 35, pos.y + 52), Vector2(1.0f, 1.0f), eLayerType::Effect);
+			AbsorbLeftEffect * LeftAbEffect = object::Instantiate<AbsorbLeftEffect>(Vector2(pos.x - 35, pos.y + 52), Vector2(1.0f, 1.0f), eLayerType::Effect);
 			mState = eKirbyState::LeftAbsorb;
 			mAnimator->Play(L"LeftAbsorbing", true);
 		}
@@ -276,7 +288,7 @@ namespace My
 		//	}
 		if (Input::GetKeyDown(eKeyCode::Z))
 		{
-			object::Instantiate<AbsorbEffect>(Vector2(pos.x + 85, pos.y + 50), Vector2(1.0f, 1.0f), eLayerType::Effect);
+			Absorb = object::Instantiate<AbsorbEffect>(Vector2(pos.x + 85, pos.y + 50), Vector2(1.0f, 1.0f), eLayerType::Effect);
 			mState = eKirbyState::RightAbsorb;
 			mAnimator->Play(L"RightAbsorbing", true);
 		}
@@ -386,7 +398,7 @@ namespace My
 		}
 		if (Input::GetKeyDown(eKeyCode::Z))
 		{
-			object::Instantiate<AbsorbEffect>(Vector2(pos.x + 85, pos.y + 50), Vector2(1.0f, 1.0f), eLayerType::Effect);
+			Absorb = object::Instantiate<AbsorbEffect>(Vector2(pos.x + 85, pos.y + 50), Vector2(1.0f, 1.0f), eLayerType::Effect);
 
 			mState = eKirbyState::RightAbsorb;
 			mAnimator->Play(L"RightAbsorbing", true);
@@ -416,19 +428,44 @@ namespace My
 			mState = eKirbyState::LeftIdle;
 			mAnimator->Play(L"LeftIdle", true);
 		}
+		
 	}
 	void Kirby::rightabsorb()
 	{
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
-		if (Input::GetKeyUp(eKeyCode::Z))
+		
+
+		if (/*Absorb->GetDt() == false && */Input::GetKeyUp(eKeyCode::Z))
 		{
+			object::Destroy(Absorb);
 			mState = eKirbyState::RightIdle;
 			mAnimator->Play(L"RightIdle", true);
-			 
-			//AbsorbCheck = true;
 		}
+		
+
+		//if (Absorb->GetCollision() == 1)
+		//{
+		//	mState = eKirbyState::RightColAbsorb;
+		//}
+
+
+
+
+		//if (Absorb->GetDt() == true)
+		//{
+		//	mState = eKirbyState::RightCrouch;
+		//	mAnimator->Play(L"RightCrouch", true);
+		//}
+
+		//if (Absorb->GetCollision() == 0)
+		//{
+		//	mState = eKirbyState::RightIdle;
+		//	mAnimator->Play(L"RightIdle", true);
+		//}
+
+
 
 		////if (AbsorbCheck)
 		////{
@@ -446,50 +483,92 @@ namespace My
 			//	kirbytime = 0.0f;
 			//}
 	}
-	void Kirby::leftdash()
+	void Kirby::rightcolabsorb()
 	{
-		if (Input::GetKeyUp(eKeyCode::Left))
-		{
-			mState = eKirbyState::LeftIdle;
-			mAnimator->Play(L"LeftIdle", true);
-			KeyCheck = false;
-			kirbytime = 0.0f;
-		}
-
-		if (Input::GetKeyDown(eKeyCode::A))
-		{
-			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
-			mState = eKirbyState::LeftJump;
-
-			mAnimator->Play(L"LeftJump", false);
-
-			Vector2 velocity = mRigidBody->GetVelocity();
-			velocity.x -= 100.0f;
-			velocity.y -= 400.0f;
-
-
-			mRigidBody->SetVelocity(velocity);
-			mRigidBody->SetGround(false);
-		}
-
-		Transform* tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPos();
-
-		if (Input::GetKey(eKeyCode::Left))
-		{
-			pos.x -= 150.0f * Time::DeltaTime();
-		}
-		tr->SetPos(pos);
-	}
-	void Kirby::rightdash()
-	{
-		if (Input::GetKeyUp(eKeyCode::Right))
+		if (Absorb->GetState() == eState::Death)
 		{
 			mState = eKirbyState::RightIdle;
-			mAnimator->Play(L"RightIdle",true);
-			KeyCheck = false;
-			kirbytime = 0.0f;
+			mAnimator->Play(L"RightIdle", true);
 		}
+		//if (Absorb->GetCollision() == 2)
+		//{
+		//	mState = eKirbyState::RightIdle;
+		//	mAnimator->Play(L"RightIdle", true);
+		//}
+	}
+	void Kirby::leftdash()
+	{
+		if (Input::GetKeyDown(eKeyCode::Right))
+		{
+			kirbytime += Time::DeltaTime();
+
+			if (0.0f <= kirbytime && kirbytime <= 0.3f)
+			{
+				mState = eKirbyState::LeftDashRelease;
+				mAnimator->Play(L"LeftDashRelease", false);
+				kirbytime = 0.0f;
+			}
+		}
+		//if (Input::GetKeyUp(eKeyCode::Left))
+		//{
+		//	mState = eKirbyState::LeftIdle;
+		//	mAnimator->Play(L"LeftIdle", true);
+		//}
+
+
+			if (Input::GetKeyDown(eKeyCode::A))
+			{
+				mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
+				mState = eKirbyState::LeftJump;
+
+				mAnimator->Play(L"LeftJump", false);
+
+				Vector2 velocity = mRigidBody->GetVelocity();
+				velocity.x -= 100.0f;
+				velocity.y -= 400.0f;
+
+
+				mRigidBody->SetVelocity(velocity);
+				mRigidBody->SetGround(false);
+			}
+
+			Transform* tr = GetComponent<Transform>();
+			Vector2 pos = tr->GetPos();
+
+			if (Input::GetKey(eKeyCode::Left))
+			{
+				pos.x -= 150.0f * Time::DeltaTime();
+			}
+			tr->SetPos(pos);
+		}
+	
+	void Kirby::rightdash()
+	{
+		//if (Input::GetKeyUp(eKeyCode::Right))
+		//{
+		//	mState = eKirbyState::RightIdle;
+		//	mAnimator->Play(L"RightIdle",true);
+		//	KeyCheck = false;
+		//	kirbytime = 0.0f;
+		//}
+
+		if (Input::GetKeyDown(eKeyCode::Left))
+		{
+			kirbytime += Time::DeltaTime();
+
+			if (0.0f <= kirbytime && kirbytime <= 0.3f)
+			{
+				mState = eKirbyState::RightDashRelease;
+				mAnimator->Play(L"RightDashRelease", false);
+				kirbytime = 0.0f;
+			}
+		}
+
+		//if (Input::GetKeyUp(eKeyCode::Right))
+		//{
+		//	mState = eKirbyState::RightIdle;
+		//	mAnimator->Play(L"RightIdle", true);
+		//}
 
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
@@ -516,6 +595,45 @@ namespace My
 		}
 		tr->SetPos(pos);
 		
+	}
+
+	void Kirby::leftdashrelease()
+	{
+
+		kirbytime += Time::DeltaTime();
+
+		if (kirbytime >= 0.2f && Input::GetKey(eKeyCode::Right))
+		{
+			mState = eKirbyState::RightIdle;
+			mAnimator->Play(L"RightIdle", true);
+			KeyCheck = false;
+			kirbytime = 0.0f;
+		}
+		if (Input::GetKeyDown(eKeyCode::Left))
+		{
+			mState = eKirbyState::LeftIdle;
+			mAnimator->Play(L"LeftIdle", true);
+		}
+	}
+
+	void Kirby::rightdashrelease()
+	{
+		kirbytime += Time::DeltaTime();
+
+		if (kirbytime>=0.2f &&Input::GetKey(eKeyCode::Left))
+		{
+			mState = eKirbyState::LeftIdle;
+			mAnimator->Play(L"LeftIdle",true);
+			KeyCheck = false;
+			kirbytime = 0.0f;
+		}
+		if (Input::GetKeyDown(eKeyCode::Right))
+		{
+			mState = eKirbyState::RightIdle;
+			mAnimator->Play(L"RightIdle", true);
+		}
+
+
 	}
 
 	void Kirby::leftcrouch()
@@ -756,7 +874,6 @@ namespace My
 			mAnimator->Play(L"LeftAir", false);
 			object::Instantiate<AirLeft>(Vector2(pos.x - 10, pos.y), Vector2(2.0f, 2.0f), eLayerType::Effect);
 		}
-
 		if (Input::GetKey(eKeyCode::Right))
 		{
 			mState = eKirbyState::RightDoubleJump;

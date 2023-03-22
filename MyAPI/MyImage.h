@@ -12,6 +12,9 @@ namespace My
 
 		virtual HRESULT Load(const std::wstring& path) override;
 
+		COLORREF GetPixel(int x, int y);
+		void SetPixel(int x, int y, COLORREF color);
+
 		HDC GetHdc() { return mHdc; }
 		HBITMAP GetBitmap() { return mBitmap; }
 		UINT GetWidth() { return mWidth; }

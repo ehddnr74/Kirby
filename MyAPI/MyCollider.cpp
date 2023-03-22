@@ -66,8 +66,8 @@ namespace My
 		GetOwner()->OnCollisionStay(other);
 	}
 	void Collider::OnCollisionExit(Collider* other)
-	{
-		
+	{		
+		//mCollisionCount = 0;
 		GetOwner()->OnCollisionExit(other);
 	}
 }

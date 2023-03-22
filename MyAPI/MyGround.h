@@ -18,7 +18,11 @@ namespace My
 		virtual void OnCollisionStay(class Collider* other);
 		virtual void OnCollisionExit(class Collider* other);
 
+		void SetPlayer(class Kirby* player) { mKirby = player; }
+
 	private:
 		class Collider* mCollider;
+		class Image* mImage;
+		class Kirby* mKirby;
 	};
 }

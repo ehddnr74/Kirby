@@ -16,7 +16,7 @@ namespace My
 		//mLimitedVelocity.y = 1000.0f;
 		mbGround = false;
 		mGravity = Vector2(0.0f, 800.0f);
-		//mFriction = 100.0f;
+		//mFriction = 0.0f;
 	}
 
 	RigidBody::~RigidBody()

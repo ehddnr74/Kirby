@@ -22,6 +22,7 @@ namespace My
 
 		void SetCenter(Vector2 center) { mCenter = center; };
 		void SetSize(Vector2 size) { mSize = size; };
+		void SetPos(Vector2 mpos) { mPos = mpos; };
 		Vector2 GetPos() { return mPos; }
 		Vector2 GetSize() { return mSize; }
 		UINT GetID() { return mID; }

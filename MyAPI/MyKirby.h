@@ -4,6 +4,7 @@
 
 namespace My
 {	
+	
 	class RigidBody;
 	class Animator;
 	class Kirby : public GameObject
@@ -20,8 +21,11 @@ namespace My
 			Death,
 			LeftAbsorb,
 			RightAbsorb,
+			RightColAbsorb,
 			LeftDash,
 			RightDash,
+			LeftDashRelease,
+			RightDashRelease,
 			LeftCrouch,
 			RightCrouch,
 			LeftJump,
@@ -43,6 +47,10 @@ namespace My
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
+		void SetState(eKirbyState mstate) { mState = mstate; }
+		eKirbyState GetState() { return mState; }
+		
+
 	private:
 		void leftmove();
 		void rightmove();
@@ -51,8 +59,11 @@ namespace My
 		void death();
 		void leftabsorb();
 		void rightabsorb();
+		void rightcolabsorb();
 		void leftdash();
 		void rightdash();
+		void leftdashrelease();
+		void rightdashrelease();
 		void leftcrouch();
 		void rightcrouch();
 		void leftsliding();
@@ -75,6 +86,8 @@ namespace My
 		double jumptime;
 		bool IsJump;
 		bool DoubleJump;
+		class AbsorbEffect* Absorb;
+		class Waddle* mWaddle;
 	};
 }
 

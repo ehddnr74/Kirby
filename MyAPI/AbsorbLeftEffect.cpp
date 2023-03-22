@@ -73,22 +73,17 @@ namespace My
 
 		mTime += Time::DeltaTime();
 
-		if (mTime <= 0.3f)
+		if (mTime <= 0.1f)
 			otherPos.x += 20.0f * Time::DeltaTime();
 
+		if (mTime >= 0.1f)
+			otherPos.x += 100.0f * Time::DeltaTime();
+	
 		if (mTime >= 0.3f)
-		{
-			otherPos.x += 150.0f * Time::DeltaTime();
-		}
-		if (mTime >= 1.0f)
-		{
-			mTime = 0.0f;
-		}
-
-		if (EffectPos.x < otherPos.x)
 		{
 			object::Destroy(other->GetOwner());
 			object::Destroy(this);
+			mTime = 0.0f;
 		}
 
 		tr->SetPos(otherPos);

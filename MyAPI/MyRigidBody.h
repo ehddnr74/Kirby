@@ -23,7 +23,8 @@ namespace My
 		Vector2 GetVelocity() { return mVelocity; }
 		void SetGravity(Vector2 gravity) { mGravity = gravity; }
 		Vector2 GetGravity() { return mGravity; }
-		
+		void SetFriction(float mfriction) { mFriction = mfriction; }
+		float GetFriction() { return mFriction; }
 
 
 	private:

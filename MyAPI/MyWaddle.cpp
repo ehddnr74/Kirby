@@ -82,7 +82,6 @@ namespace My
 
 	void Waddle::OnCollisionEnter(Collider* other)
 	{
-		
 	}
 
 	void Waddle::OnCollisionStay(Collider* other)
@@ -99,7 +98,7 @@ namespace My
 
 	void Waddle::OnCollisionExit(Collider* other)
 	{
-		
+
 	}
 
 	void Waddle::leftmove()

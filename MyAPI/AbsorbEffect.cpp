@@ -9,14 +9,16 @@
 #include "MyScene.h"
 #include "MyObject.h"
 #include "MyWaddle.h"
-
+#include "MyKirby.h"
 
 namespace My
 {
 	AbsorbEffect::AbsorbEffect()
 		: mTime(0.0f)
-		, Check(false)
+		, Collision(0)
+		, Dt(false)
 	{
+		
 	}
 	AbsorbEffect::~AbsorbEffect()
 	{
@@ -28,11 +30,12 @@ namespace My
 		//tr->SetPos(pos);
 		//tr->SetScale(Vector2(1.8f,2.0f));
 
-
 		Image* AbsorbEffect = Resources::Load<Image>(L"AbsorbEffect", L"..\\Resources\\AbsorbEffect.bmp");
 		mAnimator = AddComponent<Animator>();
 		//mAnimator = CreateAnimation(L"Left")
 		mAnimator->CreateAnimation(L"RightEffect",AbsorbEffect, Vector2::Zero, 4, 1, 4, Vector2::Zero, 0.1);
+
+		//SetCollision(false);
 
 		mAnimator->Play(L"RightEffect", true);
 
@@ -41,32 +44,13 @@ namespace My
 		collider->SetSize(Vector2(60.0f, 70.0f));
 
 
+
 		GameObject::Initialize();
 	}
 	void AbsorbEffect::Update()
 	{
-		if (Input::GetKeyUp(eKeyCode::Z))
-		{
-			object::Destroy(this);
-		}
-
-		//	Check = true;
-		//}
-		//if (Check)
-		//{
-		//	mTime += Time::DeltaTime();
-
-		//	if (mTime >= 0.5f)
-		//	{
-		//		object::Destroy(this);
-		//		Check = false;
-		//	}
-		//	if (Check == false)
-		//	{
-		//		mTime = 0.0f;
-		//	}
-
 		GameObject::Update();
+
 	}
 	void AbsorbEffect::Render(HDC hdc)
 	{
@@ -78,44 +62,40 @@ namespace My
 	}
 	void AbsorbEffect::OnCollisionEnter(Collider* other)
 	{
-
+		//Dt = true;
+		//mKirby->SetState(Kirby::eKirbyState::RightColAbsorb);
+		//mKirby = object::Instantiate<Kirby>(Vector2(krpos.x, krpos.y), Vector2(2.0f, 2.0f), (eLayerType::Player));
 	}
+
 	void AbsorbEffect::OnCollisionStay(Collider* other)
 	{
-		Transform* tr = other->GetOwner()->GetComponent<Transform>();
+			Transform* tr = other->GetOwner()->GetComponent<Transform>();
 
-		Vector2 otherPos = tr->GetPos();
+			Vector2 otherPos = tr->GetPos();
 
-		Transform* Effecttr = GetComponent<Transform>();
+			Transform* Effecttr = GetComponent<Transform>();
 
-		Vector2 EffectPos = Effecttr->GetPos();
+			Vector2 EffectPos = Effecttr->GetPos();
 
-		mTime += Time::DeltaTime();
-		if (mTime <= 0.3f)
-			otherPos.x -= 20.0f * Time::DeltaTime();
+			mTime += Time::DeltaTime();
 
-		if (mTime >= 0.3f)
-		{
-			otherPos.x -= 150.0f * Time::DeltaTime();
-		}
-		if (mTime >= 1.0f)
-		{
-			mTime = 0.0f;
-		}
+			otherPos.x -= 80.0f * Time::DeltaTime();
 
-		if (EffectPos.x > otherPos.x)
-		{
-			object::Destroy(other->GetOwner());
-			object::Destroy(this);
-		}
+			tr->SetPos(otherPos);
 
-
-		tr->SetPos(otherPos);
-
-	
-			
+			if (EffectPos.x - 20.0f > otherPos.x && EffectPos.x - 25.0f > otherPos.x)
+			{
+				object::Destroy(other->GetOwner());
+				object::Destroy(this);
+				//if (other->GetOwner()->GetState() == eState::Death)
+				//{
+				//	Dt = false;
+				//}
+			}
 	}
 	void AbsorbEffect::OnCollisionExit(Collider* other)
 	{
+		int a = 0;
 	}
+
 }
