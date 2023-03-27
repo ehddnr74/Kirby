@@ -36,6 +36,7 @@ namespace My
 	void My::Room1::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
+
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 		pos = Camera::CalculatePos(pos);

@@ -3,9 +3,7 @@
 
 namespace My
 {
-	class Kirby;
 	class Animator;
-	class mWaddle;
 	class AbsorbEffect : public GameObject
 	{
 	public:
@@ -25,8 +23,8 @@ namespace My
 	   void SetCollision(int collision) { Collision = collision; }
 	   int GetCollision() { return Collision; }
 
-	   
-	   bool GetDt() { return Dt; }
+
+
 
 	   
 		
@@ -34,7 +32,7 @@ namespace My
 		Animator* mAnimator;
 		double mTime;
 		int Collision;
-		bool Dt;
 		class Kirby* mKirby;
+		class Waddle* mWaddle;
 	};
 }

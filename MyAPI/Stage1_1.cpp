@@ -16,6 +16,7 @@
 #include "MyfadeIn.h"
 #include "Myfadeout.h"
 #include "MyGround.h"
+#include "AbsorbEffect.h"
 
 namespace My
 {
@@ -39,8 +40,10 @@ namespace My
 
 		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(30.0f, 100.0f), Vector2(2.0f, 2.0f), (eLayerType::Player));
 	
-		Ground* ground = object::Instantiate<Ground>(Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), (eLayerType::Ground));
-		ground->SetPlayer(mKirby);
+		object::Instantiate<Ground>(Vector2(0.0f, 370.0f), Vector2(1.0f, 1.0f), (eLayerType::Ground));
+		
+		
+		//ground->SetPlayer(mKirby);
 		//Camera::SetTarget(mKirby);
 
 		//mbg1 = new Stage11bk();
@@ -67,8 +70,7 @@ namespace My
 		//Twizzy* mTwizzy = new Twizzy();
 		//AddGameObject(mTwizzy, eLayerType::Monster);
 
-		object::Instantiate<Twizzy>(Vector2(900, 310),Vector2(2.0f,2.0f),(eLayerType::Monster));
-
+		object::Instantiate<Twizzy>(Vector2(900, 380),Vector2(2.0f,2.0f),(eLayerType::Monster)); //¿ø·¡ y 310 
 		
 
 		

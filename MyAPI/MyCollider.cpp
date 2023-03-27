@@ -57,7 +57,6 @@ namespace My
 	}
 	void Collider::OnCollisionEnter(Collider* other)
 	{
-		
 		GetOwner()->OnCollisionEnter(other);
 	}
 	void Collider::OnCollisionStay(Collider* other)

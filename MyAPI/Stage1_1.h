@@ -27,6 +27,7 @@ namespace My
 		Room1* mroom1;
 		Stage11bk* mbg1;
 
+
 	};
 }
 

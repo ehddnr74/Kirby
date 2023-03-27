@@ -15,6 +15,8 @@ namespace My
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
+		void SetCollision(int collision) { Collision = collision; }
+		int GetCollision() { return Collision; }
 
 		virtual void OnCollisionEnter(class Collider* other) override;
 		virtual void OnCollisionStay(class Collider* other) override;
@@ -23,5 +25,8 @@ namespace My
 	private:
 		Animator* mAnimator;
 		float mTime;
+		int Collision;
+		class Kirby* mKirby;
+		class Waddle* mWaddle;
 	};
 }

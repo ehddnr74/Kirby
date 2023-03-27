@@ -10,6 +10,7 @@
 #include "MyScene.h"
 #include "MyObject.h"
 #include "MyKirby.h"
+#include "MyWaddle.h"
 
 namespace My
 {
@@ -31,23 +32,19 @@ namespace My
 		Image* AbsorbLeftEffect = Resources::Load<Image>(L"AbsorbLeftEffect", L"..\\Resources\\AbsorbLeftEffect.bmp");
 		mAnimator = AddComponent<Animator>();
 		//mAnimator = CreateAnimation(L"Left")
-		mAnimator->CreateAnimation(L"LeftEffect", AbsorbLeftEffect, Vector2::Zero, 4, 1, 4, Vector2::Zero, 0.1);
+		mAnimator->CreateAnimation(L"LeftEffect", AbsorbLeftEffect, Vector2::Zero, 2, 1, 2, Vector2::Zero, 0.3);
 
 		mAnimator->Play(L"LeftEffect", true);
 
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(-33.0f, -90.0f));
-		collider->SetSize(Vector2(55.0f, 70.0f));
+		collider->SetCenter(Vector2(-21.0f, -40.0f));
+		collider->SetSize(Vector2(100.0f, 45.0f));
 
 
 		GameObject::Initialize();
 	}
 	void AbsorbLeftEffect::Update()
 	{
-
-		if (Input::GetKeyUp(eKeyCode::Z))
-			object::Destroy(this);
-
 		GameObject::Update();
 	}
 	void AbsorbLeftEffect::Render(HDC hdc)
@@ -60,6 +57,16 @@ namespace My
 	}
 	void AbsorbLeftEffect::OnCollisionEnter(Collider* other)
 	{
+		Waddle* mWaddle = dynamic_cast<Waddle*>(other->GetOwner());
+
+		if (other->GetOwner() == mWaddle)
+		{
+			Collision = 2;
+		}
+		else
+		{
+			Collision = 1;
+		}
 	}
 	void AbsorbLeftEffect::OnCollisionStay(Collider* other)
 	{
@@ -67,26 +74,21 @@ namespace My
 
 		Vector2 otherPos = tr->GetPos();
 
-		Transform* Effecttr = GetComponent<Transform>();
+		Transform* Effecttr = this->GetComponent<Transform>();
 
 		Vector2 EffectPos = Effecttr->GetPos();
 
 		mTime += Time::DeltaTime();
 
-		if (mTime <= 0.1f)
-			otherPos.x += 20.0f * Time::DeltaTime();
+		otherPos.x += 250.0f * Time::DeltaTime();
 
-		if (mTime >= 0.1f)
-			otherPos.x += 100.0f * Time::DeltaTime();
-	
-		if (mTime >= 0.3f)
+		tr->SetPos(otherPos);
+
+		if (EffectPos.x + 20.0f < otherPos.x )
 		{
 			object::Destroy(other->GetOwner());
 			object::Destroy(this);
-			mTime = 0.0f;
 		}
-
-		tr->SetPos(otherPos);
 
 	}
 	void AbsorbLeftEffect::OnCollisionExit(Collider* other)

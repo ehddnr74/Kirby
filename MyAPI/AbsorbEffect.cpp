@@ -10,15 +10,15 @@
 #include "MyObject.h"
 #include "MyWaddle.h"
 #include "MyKirby.h"
+#include "Stage1_1.h"
+#include "MyCamera.h"
 
 namespace My
 {
 	AbsorbEffect::AbsorbEffect()
 		: mTime(0.0f)
 		, Collision(0)
-		, Dt(false)
 	{
-		
 	}
 	AbsorbEffect::~AbsorbEffect()
 	{
@@ -30,18 +30,20 @@ namespace My
 		//tr->SetPos(pos);
 		//tr->SetScale(Vector2(1.8f,2.0f));
 
-		Image* AbsorbEffect = Resources::Load<Image>(L"AbsorbEffect", L"..\\Resources\\AbsorbEffect.bmp");
+		Image * AbsorbEffect = Resources::Load<Image>(L"AbsorbEffect", L"..\\Resources\\AbsorbEffect.bmp");
 		mAnimator = AddComponent<Animator>();
 		//mAnimator = CreateAnimation(L"Left")
-		mAnimator->CreateAnimation(L"RightEffect",AbsorbEffect, Vector2::Zero, 4, 1, 4, Vector2::Zero, 0.1);
+		mAnimator->CreateAnimation(L"RightEffect", AbsorbEffect, Vector2::Zero, 2, 1, 2, Vector2::Zero, 0.3);
 
 		//SetCollision(false);
 
 		mAnimator->Play(L"RightEffect", true);
 
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(-30.0f, -90.0f));
-		collider->SetSize(Vector2(60.0f, 70.0f));
+		collider->SetCenter(Vector2(-20.0f, -35.0f));
+		collider->SetSize(Vector2(100.0f, 45.0f));
+
+		
 
 
 
@@ -50,7 +52,6 @@ namespace My
 	void AbsorbEffect::Update()
 	{
 		GameObject::Update();
-
 	}
 	void AbsorbEffect::Render(HDC hdc)
 	{
@@ -62,6 +63,16 @@ namespace My
 	}
 	void AbsorbEffect::OnCollisionEnter(Collider* other)
 	{
+		Waddle* mWaddle = dynamic_cast<Waddle*>(other->GetOwner());
+
+		if (other->GetOwner() == mWaddle)
+		{
+			Collision = 2;
+		}
+		else
+		{
+			Collision = 1;
+		}
 		//Dt = true;
 		//mKirby->SetState(Kirby::eKirbyState::RightColAbsorb);
 		//mKirby = object::Instantiate<Kirby>(Vector2(krpos.x, krpos.y), Vector2(2.0f, 2.0f), (eLayerType::Player));
@@ -79,7 +90,7 @@ namespace My
 
 			mTime += Time::DeltaTime();
 
-			otherPos.x -= 80.0f * Time::DeltaTime();
+			otherPos.x -= 180.0f * Time::DeltaTime();
 
 			tr->SetPos(otherPos);
 
@@ -87,15 +98,15 @@ namespace My
 			{
 				object::Destroy(other->GetOwner());
 				object::Destroy(this);
-				//if (other->GetOwner()->GetState() == eState::Death)
-				//{
-				//	Dt = false;
-				//}
 			}
+			//if (other->GetOwner()->GetState() == eState::Death)
+			//{
+			//	//mKirby->SetState(Kirby::eKirbyState::RightAbsorb);
+			//}
 	}
 	void AbsorbEffect::OnCollisionExit(Collider* other)
 	{
-		int a = 0;
+		
 	}
 
 }

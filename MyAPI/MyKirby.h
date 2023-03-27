@@ -4,7 +4,7 @@
 
 namespace My
 {	
-	
+	class Waddle;
 	class RigidBody;
 	class Animator;
 	class Kirby : public GameObject
@@ -21,7 +21,20 @@ namespace My
 			Death,
 			LeftAbsorb,
 			RightAbsorb,
+			LeftColAbsorb,
 			RightColAbsorb,
+			LeftAbsorbPig,
+			RightAbsorbPig,
+			LeftPigIdle,
+			RightPigIdle,
+			LeftPigWalk,
+			RightPigWalk,
+			LeftPigJump,
+			RightPigJump,
+			LeftPigDash,
+			RightPigDash,
+			LeftPigClear,
+			RightPigClear,
 			LeftDash,
 			RightDash,
 			LeftDashRelease,
@@ -31,7 +44,11 @@ namespace My
 			LeftJump,
 			RightJump,
 			LeftDoubleJump,
-			RightDoubleJump
+			RightDoubleJump,
+			LeftBeamTransform,
+			BeamTransform,
+			LeftBeamIdle,
+			RightBeamIdle
 		};
 
 		Kirby();
@@ -59,7 +76,20 @@ namespace My
 		void death();
 		void leftabsorb();
 		void rightabsorb();
+		void leftcolabsorb();
 		void rightcolabsorb();
+		void leftabsorbpig();
+		void rightabsorbpig();
+		void leftpigidle();
+		void rightpigidle();
+		void leftpigclear();
+		void rightpigclear();
+		void leftpigwalk();
+		void rightpigwalk();
+		void leftpigjump();
+		void rightpigjump();
+		void leftpigdash();
+		void rightpigdash();
 		void leftdash();
 		void rightdash();
 		void leftdashrelease();
@@ -72,6 +102,12 @@ namespace My
 		void rightjump();
 		void leftdoublejump();
 		void rightdoublejump();
+		
+		void leftbeamtransform();
+		void beamtransform();
+		void leftbeamidle();
+		void rightbeamidle();
+		
 
 		//void JumpCompleteEvent();
 
@@ -80,6 +116,7 @@ namespace My
 		Animator* mAnimator;
 		double kirbytime;
 		bool KeyCheck;
+		bool PigKeyCheck;
 		int Kirbydir;
 		bool AbsorbCheck;
 		RigidBody* mRigidBody;
@@ -88,6 +125,8 @@ namespace My
 		bool DoubleJump;
 		class AbsorbEffect* Absorb;
 		class Waddle* mWaddle;
+		class AbsorbLeftEffect* LeftAbsorb;
+		bool yamyam;
 	};
 }
 

@@ -82,6 +82,7 @@ namespace My
 
 	void Waddle::OnCollisionEnter(Collider* other)
 	{
+		
 	}
 
 	void Waddle::OnCollisionStay(Collider* other)
