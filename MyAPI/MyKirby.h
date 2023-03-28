@@ -33,6 +33,9 @@ namespace My
 			RightPigJump,
 			LeftPigDash,
 			RightPigDash,
+			LeftPigDashRelease,
+			RightPigDashRelease,
+
 			LeftPigClear,
 			RightPigClear,
 			LeftDash,
@@ -45,10 +48,26 @@ namespace My
 			RightJump,
 			LeftDoubleJump,
 			RightDoubleJump,
+
+
 			LeftBeamTransform,
 			BeamTransform,
 			LeftBeamIdle,
-			RightBeamIdle
+			RightBeamIdle,
+			LeftBeamWalk,
+			RightBeamWalk,
+			LeftBeamCrouch,
+			RightBeamCrouch,
+			LeftBeamSliding,
+			RightBeamSliding,
+			LeftBeamJump,
+			RightBeamJump,
+			LeftBeamDoubleJump,
+			RightBeamDoubleJump,
+			LeftBeamDash,
+			RightBeamDash,
+			LeftBeamDashRelease,
+			RightBeamDashRelease
 		};
 
 		Kirby();
@@ -78,6 +97,9 @@ namespace My
 		void rightabsorb();
 		void leftcolabsorb();
 		void rightcolabsorb();
+
+
+
 		void leftabsorbpig();
 		void rightabsorbpig();
 		void leftpigidle();
@@ -90,6 +112,10 @@ namespace My
 		void rightpigjump();
 		void leftpigdash();
 		void rightpigdash();
+		void leftpigdashrelease();
+		void rightpigdashrelease();
+
+
 		void leftdash();
 		void rightdash();
 		void leftdashrelease();
@@ -103,10 +129,25 @@ namespace My
 		void leftdoublejump();
 		void rightdoublejump();
 		
+
 		void leftbeamtransform();
 		void beamtransform();
 		void leftbeamidle();
 		void rightbeamidle();
+		void leftbeamwalk();
+		void rightbeamwalk();
+		void leftbeamcrouch();
+		void rightbeamcrouch();
+		void leftbeamsliding();
+		void rightbeamsliding();
+		void leftbeamjump();
+		void rightbeamjump();
+		void leftbeamdoublejump();
+		void rightbeamdoublejump();
+		void leftbeamdash();
+		void rightbeamdash();
+		void leftbeamdashrelease();
+		void rightbeamdashrelease();
 		
 
 		//void JumpCompleteEvent();
@@ -127,6 +168,12 @@ namespace My
 		class Waddle* mWaddle;
 		class AbsorbLeftEffect* LeftAbsorb;
 		bool yamyam;
+		double beamkirbytime;
+		bool BeamIsJump;
+		bool BeamDoubleJump;
+		bool AirShot;
+		bool BeamAirShot;
+		bool BeamKeyCheck;
 	};
 }
 
