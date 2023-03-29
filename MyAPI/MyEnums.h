@@ -17,6 +17,7 @@ enum class eLayerType
 	BG,
 	Stage,
 	Player,
+	Rectangle,
 	Monster,
 	Effect,
 	UI,

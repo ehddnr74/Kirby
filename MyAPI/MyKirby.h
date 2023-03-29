@@ -87,6 +87,8 @@ namespace My
 		eKirbyState GetState() { return mState; }
 		
 
+		
+
 	private:
 		void leftmove();
 		void rightmove();

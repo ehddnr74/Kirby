@@ -247,6 +247,7 @@
     <ClInclude Include="MyGround.h">
       <Filter>Contents\Object\Ground</Filter>
     </ClInclude>
+    <ClInclude Include="MyRectangle.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc">
@@ -382,5 +383,6 @@
     <ClCompile Include="MyGround.cpp">
       <Filter>Contents\Object\Ground</Filter>
     </ClCompile>
+    <ClCompile Include="MyRectangle.cpp" />
   </ItemGroup>
 </Project>

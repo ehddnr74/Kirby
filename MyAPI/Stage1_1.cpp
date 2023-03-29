@@ -17,6 +17,7 @@
 #include "Myfadeout.h"
 #include "MyGround.h"
 #include "AbsorbEffect.h"
+#include "MyRectangle.h"
 
 namespace My
 {
@@ -41,9 +42,13 @@ namespace My
 		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(30.0f, 100.0f), Vector2(2.0f, 2.0f), (eLayerType::Player));
 	
 		Ground* ground = object::Instantiate<Ground>(eLayerType::Ground);
+
+
+		Rectangle1* rectangle = object::Instantiate<Rectangle1>(eLayerType::Rectangle);
 	
 		
 		ground->SetPlayer(mKirby);
+		rectangle->SetPlayer(mKirby);
 		//Camera::SetTarget(mKirby);
 
 		//mbg1 = new Stage11bk();

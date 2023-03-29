@@ -147,6 +147,7 @@
     <ClInclude Include="MyfadeOut.h" />
     <ClInclude Include="MyGround.h" />
     <ClInclude Include="MyObject.h" />
+    <ClInclude Include="MyRectangle.h" />
     <ClInclude Include="MyRigidBody.h" />
     <ClInclude Include="MyTwizzy.h" />
     <ClInclude Include="MyWaddle.h" />
@@ -193,6 +194,7 @@
     <ClCompile Include="MyfadeIn.cpp" />
     <ClCompile Include="MyfadeOut.cpp" />
     <ClCompile Include="MyGround.cpp" />
+    <ClCompile Include="MyRectangle.cpp" />
     <ClCompile Include="MyRigidBody.cpp" />
     <ClCompile Include="MyTwizzy.cpp" />
     <ClCompile Include="MyWaddle.cpp" />
