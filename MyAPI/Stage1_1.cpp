@@ -40,10 +40,10 @@ namespace My
 
 		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(30.0f, 100.0f), Vector2(2.0f, 2.0f), (eLayerType::Player));
 	
-		object::Instantiate<Ground>(Vector2(0.0f, 370.0f), Vector2(1.0f, 1.0f), (eLayerType::Ground));
+		Ground* ground = object::Instantiate<Ground>(eLayerType::Ground);
+	
 		
-		
-		//ground->SetPlayer(mKirby);
+		ground->SetPlayer(mKirby);
 		//Camera::SetTarget(mKirby);
 
 		//mbg1 = new Stage11bk();

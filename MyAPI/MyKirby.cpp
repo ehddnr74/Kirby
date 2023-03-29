@@ -1395,6 +1395,7 @@ namespace My
 
 		if (IsJump && Input::GetKeyDown(eKeyCode::A))//GetAsyncKeyState(0x41) & 0x8000)
 		{	
+
 			mState = eKirbyState::RightDoubleJump;
 			mAnimator->Play(L"RightDoubleJump", false);
 

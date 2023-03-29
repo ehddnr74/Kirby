@@ -13,8 +13,8 @@ enum class eSceneType
 
 enum class eLayerType
 {
-	BG,
 	Ground,
+	BG,
 	Stage,
 	Player,
 	Monster,

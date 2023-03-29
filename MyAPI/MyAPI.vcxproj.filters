@@ -101,6 +101,9 @@
     <Filter Include="Contents\Effect\Air">
       <UniqueIdentifier>{eb5ab93c-6f97-4530-8e6d-25855b111482}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Object\Ground">
+      <UniqueIdentifier>{b691a87c-11f3-47fb-8fb2-65e55b4480f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -235,14 +238,14 @@
     <ClInclude Include="MyRigidBody.h">
       <Filter>Engine\Component\RigidBody</Filter>
     </ClInclude>
-    <ClInclude Include="MyGround.h">
-      <Filter>Contents\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Air.h">
       <Filter>Contents\Effect\Air</Filter>
     </ClInclude>
     <ClInclude Include="AirLeft.h">
       <Filter>Contents\Effect\Air</Filter>
+    </ClInclude>
+    <ClInclude Include="MyGround.h">
+      <Filter>Contents\Object\Ground</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -370,14 +373,14 @@
     <ClCompile Include="MyRigidBody.cpp">
       <Filter>Engine\Component\RigidBody</Filter>
     </ClCompile>
-    <ClCompile Include="MyGround.cpp">
-      <Filter>Contents\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Air.cpp">
       <Filter>Contents\Effect\Air</Filter>
     </ClCompile>
     <ClCompile Include="AirLeft.cpp">
       <Filter>Contents\Effect\Air</Filter>
+    </ClCompile>
+    <ClCompile Include="MyGround.cpp">
+      <Filter>Contents\Object\Ground</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
