@@ -21,13 +21,15 @@ namespace My
 		virtual void OnEnter() override;
 		virtual void OnExit() override;
 
+		void SetPlayer(class Kirby* player) { mKirby = player; }
+
 	private:
 		Kirby* mKirby;
 		Waddle* mWaddle;
 		Room1* mroom1;
 		Stage11bk* mbg1;
 
-
+		
 	};
 }
 

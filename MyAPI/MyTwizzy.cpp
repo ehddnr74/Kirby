@@ -13,6 +13,7 @@ namespace My
 	Twizzy::Twizzy()
 		:twizzytime(0.f)
 		, twizzydir(0)
+		, twizzyHP(100)
 	{
 	}
 	Twizzy::~Twizzy()

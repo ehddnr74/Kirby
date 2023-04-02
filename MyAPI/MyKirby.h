@@ -67,7 +67,18 @@ namespace My
 			LeftBeamDash,
 			RightBeamDash,
 			LeftBeamDashRelease,
-			RightBeamDashRelease
+			RightBeamDashRelease,
+
+			LeftHit,
+			RightHit,
+
+			LeftJumpHitRelease,
+			LeftJumpHit,
+			RightJumpHitRelease,
+			RightJumpHit,
+			LeftSlidingHit,
+			RightSlidingHit
+
 		};
 
 		Kirby();
@@ -83,9 +94,25 @@ namespace My
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
+
+		void SetGround(class Ground* ground) { mGround = ground; }
+
 		void SetState(eKirbyState mstate) { mState = mstate; }
 		eKirbyState GetState() { return mState; }
-		
+
+		bool GetJump() { return JumpCheck; }
+
+		void setSliding(bool slid) { sliding = slid; }
+		bool GetSliding() { return sliding; }
+		void setLeftSliding(bool sli) { Leftsliding = sli; }
+		bool GetLeftSliding() { return Leftsliding; }
+
+		void SetStar(bool Star) { star = Star; }
+		bool GetStar() { return star; }
+		void SetLeftStar(bool leftStar) { Leftstar = leftStar; }
+		bool GetLeftStar() { return Leftstar; }
+
+		bool GetStarCol() { return StarCol; }
 
 	private:
 		void leftmove();
@@ -148,9 +175,20 @@ namespace My
 		void rightbeamdash();
 		void leftbeamdashrelease();
 		void rightbeamdashrelease();
-		
 
-		//void JumpCompleteEvent();
+
+		// Hit Animation
+		void lefthit();
+		void righthit();
+
+		void leftjumphitrelease();
+		void leftjumphit();
+		void rightjumphitrelease();
+		void rightjumphit();
+		void leftslidinghit();
+		void rightslidinghit();
+
+		
 
 	private:
 		eKirbyState mState;
@@ -163,10 +201,12 @@ namespace My
 		RigidBody* mRigidBody;
 		double jumptime;
 		bool IsJump;
+		bool JumpCheck;
 		bool DoubleJump;
 		class AbsorbEffect* Absorb;
 		class Waddle* mWaddle;
 		class AbsorbLeftEffect* LeftAbsorb;
+		class Star* mStar;
 		bool yamyam;
 		double beamkirbytime;
 		bool BeamIsJump;
@@ -174,6 +214,32 @@ namespace My
 		bool AirShot;
 		bool BeamAirShot;
 		bool BeamKeyCheck;
+		double beamjumptime;
+		double pigjumptime;
+		class Ground* mGround;
+		bool Leftsliding;
+		bool sliding;
+		bool Leftstar;
+		bool star;
+		double cleartime;
+		bool GetMonster;
+		bool starshot;
+		double leftslidingtime;
+		double slidingtime;
+		class StarMap* mStarMap;
+
+
+		double lefthittime;
+		double righthittime;
+
+		double jumphitreleasetime;
+		double jumphittime;
+
+
+
+
+
+		bool StarCol; // 별충돌->맵전환
 	};
 }
 

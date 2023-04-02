@@ -23,7 +23,8 @@ namespace My
 		//mtitle = new Title();
 		//AddGameObject(mtitle, eLayerType::Stage);
 
-		object::Instantiate<Title>(eLayerType::BG);
+		Title* mtitle = object::Instantiate<Title>(eLayerType::BG);
+		SetTitle(mtitle);
 
 		
 	}
@@ -49,5 +50,6 @@ namespace My
 	}
 	void TitleScene::OnExit()
 	{
+		
 	}
 }

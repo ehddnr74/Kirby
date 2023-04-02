@@ -21,6 +21,7 @@ namespace My
 
 	private:
 		Room2* mroom2;
+		class Kirby* mKirby;
 
 	};
 }

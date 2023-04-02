@@ -13,6 +13,7 @@ namespace My
 	Cappy::Cappy()
 		:cappytime(0.0f)
 		, cappydir(0)
+		, CappyHP(0)
 	{
 	}
 	Cappy::~Cappy()

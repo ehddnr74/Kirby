@@ -9,6 +9,7 @@
 #include "MyScene.h"
 #include "MyObject.h"
 #include "MyKirby.h"
+#include "MyCollider.h"
 
 
 namespace My
@@ -34,6 +35,10 @@ namespace My
 		mAnimator->CreateAnimation(L"AirL", AirLeft, Vector2::Zero, 1, 1, 1, Vector2::Zero, 0.1);
 
 		mAnimator->Play(L"AirL", true);
+
+		Collider* collider = AddComponent<Collider>();
+		collider->SetCenter(Vector2(-17.0f, -55.0f));
+		collider->SetSize(Vector2(32.0f, 30.0f));
 
 		GameObject::Initialize();
 	}

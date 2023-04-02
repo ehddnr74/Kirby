@@ -22,5 +22,6 @@ namespace My
 	private:
 		Animator* mAnimator;
 		double mtime;
+		Collider* mCollider;
 	};
 }

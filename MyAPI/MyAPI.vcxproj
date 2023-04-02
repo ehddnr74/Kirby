@@ -145,11 +145,13 @@
     <ClInclude Include="MyCollisionManager.h" />
     <ClInclude Include="MyfadeIn.h" />
     <ClInclude Include="MyfadeOut.h" />
-    <ClInclude Include="MyGround.h" />
+    <ClInclude Include="R1Ground.h" />
     <ClInclude Include="MyObject.h" />
+    <ClInclude Include="MyRectangle1.h" />
     <ClInclude Include="MyRigidBody.h" />
     <ClInclude Include="MyTwizzy.h" />
     <ClInclude Include="MyWaddle.h" />
+    <ClInclude Include="R2Ground.h" />
     <ClInclude Include="Room1.h" />
     <ClInclude Include="MyComponent.h" />
     <ClInclude Include="MyEngine.h" />
@@ -174,6 +176,8 @@
     <ClInclude Include="Stage1_1bk.h" />
     <ClInclude Include="Stage1_2.h" />
     <ClInclude Include="Stage1_2bk.h" />
+    <ClInclude Include="Star.h" />
+    <ClInclude Include="StarMap.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Ttitle.h" />
   </ItemGroup>
@@ -192,10 +196,12 @@
     <ClCompile Include="MyCollider.cpp" />
     <ClCompile Include="MyfadeIn.cpp" />
     <ClCompile Include="MyfadeOut.cpp" />
-    <ClCompile Include="MyGround.cpp" />
+    <ClCompile Include="R1Ground.cpp" />
+    <ClCompile Include="MyRectangle1.cpp" />
     <ClCompile Include="MyRigidBody.cpp" />
     <ClCompile Include="MyTwizzy.cpp" />
     <ClCompile Include="MyWaddle.cpp" />
+    <ClCompile Include="R2Ground.cpp" />
     <ClCompile Include="Room1.cpp" />
     <ClCompile Include="MyComponent.cpp" />
     <ClCompile Include="MyEntity.cpp" />
@@ -217,6 +223,8 @@
     <ClCompile Include="Stage1_1bk.cpp" />
     <ClCompile Include="Stage1_2.cpp" />
     <ClCompile Include="Stage1_2bk.cpp" />
+    <ClCompile Include="Star.cpp" />
+    <ClCompile Include="StarMap.cpp" />
     <ClCompile Include="Ttitle.cpp" />
   </ItemGroup>
   <ItemGroup>

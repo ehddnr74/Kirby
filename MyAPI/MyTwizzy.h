@@ -33,10 +33,13 @@ namespace My
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
+		void SetDamage(int damage) { twizzyHP -= damage; }
+
 	private:
 		TwizzyState mState;
 		Animator* mAnimator;
 		double twizzytime;
 		int twizzydir;
+		int twizzyHP;
 	};
 }

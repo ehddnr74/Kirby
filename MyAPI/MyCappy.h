@@ -29,11 +29,15 @@ namespace My
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
+		void SetDamage(int damage) { CappyHP -= damage; }
+
 	private:
+
 		Animator* mAnimator;
 		CappyState mState;
 		double cappytime;
 		int cappydir;
+		int CappyHP;
 
 	};
 }

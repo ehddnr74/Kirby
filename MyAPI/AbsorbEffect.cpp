@@ -40,7 +40,7 @@ namespace My
 		mAnimator->Play(L"RightEffect", true);
 
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(-20.0f, -35.0f));
+		collider->SetCenter(Vector2(-40.0f, -50.0f));
 		collider->SetSize(Vector2(100.0f, 45.0f));
 
 		

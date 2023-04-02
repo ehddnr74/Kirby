@@ -19,6 +19,8 @@ namespace My
 		virtual void OnExit() override;
 
 
+		void SetTitle(class Title* title) { mtitle = title; }
+
 	private:
 		Title* mtitle;
 

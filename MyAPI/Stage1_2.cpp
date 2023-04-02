@@ -8,6 +8,7 @@
 #include "MyObject.h"
 #include "Stage1_2bk.h"
 #include "Myfadein.h"
+#include "R2Ground.h"
 
 
 namespace My
@@ -29,7 +30,11 @@ namespace My
 
 		object::Instantiate<Stage12bk>(eLayerType::BG);
 
-		object::Instantiate<Kirby>(Vector2(30.0f, 310.0f),Vector2(2.0f,2.0f),eLayerType::Player);
+		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(129.0f, 394.0f), Vector2(2.0f, 2.0f),eLayerType::Player);
+
+		R2Ground* ground = object::Instantiate<R2Ground>(eLayerType::Ground);
+
+		ground->SetPlayer(mKirby);
 
 		object::Instantiate<Room2>(eLayerType::Stage);
 		
