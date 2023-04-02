@@ -17,7 +17,10 @@ enum class eLayerType
 	BG,
 	Stage,
 	Player,
+<<<<<<< HEAD
 	MapStar,
+=======
+>>>>>>> 794934d37ca2edf575818af029f6a6424b07de41
 	Rectangle,
 	Monster,
 	Effect,

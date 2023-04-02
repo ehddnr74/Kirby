@@ -114,6 +114,8 @@ namespace My
 
 		bool GetStarCol() { return StarCol; }
 
+		
+
 	private:
 		void leftmove();
 		void rightmove();
