@@ -7,7 +7,6 @@ namespace My
 	class Rectangle1 : public GameObject
 	{
 		public:
-
 			Rectangle1();
 			~Rectangle1();
 

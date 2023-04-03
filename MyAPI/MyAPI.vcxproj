@@ -147,11 +147,7 @@
     <ClInclude Include="MyfadeOut.h" />
     <ClInclude Include="R1Ground.h" />
     <ClInclude Include="MyObject.h" />
-<<<<<<< HEAD
-    <ClInclude Include="MyRectangle1.h" />
-=======
     <ClInclude Include="MyRectangle.h" />
->>>>>>> 794934d37ca2edf575818af029f6a6424b07de41
     <ClInclude Include="MyRigidBody.h" />
     <ClInclude Include="MyTwizzy.h" />
     <ClInclude Include="MyWaddle.h" />
@@ -200,13 +196,8 @@
     <ClCompile Include="MyCollider.cpp" />
     <ClCompile Include="MyfadeIn.cpp" />
     <ClCompile Include="MyfadeOut.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="R1Ground.cpp" />
-    <ClCompile Include="MyRectangle1.cpp" />
-=======
-    <ClCompile Include="MyGround.cpp" />
     <ClCompile Include="MyRectangle.cpp" />
->>>>>>> 794934d37ca2edf575818af029f6a6424b07de41
     <ClCompile Include="MyRigidBody.cpp" />
     <ClCompile Include="MyTwizzy.cpp" />
     <ClCompile Include="MyWaddle.cpp" />

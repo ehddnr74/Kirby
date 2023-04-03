@@ -17,14 +17,11 @@
 #include "Myfadeout.h"
 #include "R1Ground.h"
 #include "AbsorbEffect.h"
-<<<<<<< HEAD
-#include "MyRectangle1.h"
+#include "MyRectangle.h"
 #include "AirLeft.h"
 #include "Star.h"
 #include "StarMap.h"
-=======
 #include "MyRectangle.h"
->>>>>>> 794934d37ca2edf575818af029f6a6424b07de41
 
 namespace My
 {
@@ -51,23 +48,19 @@ namespace My
 
 		SetPlayer(mKirby);
 
-		Ground* ground = object::Instantiate<Ground>(eLayerType::Ground);
+		Ground* ground1 = object::Instantiate<Ground>(eLayerType::Ground);
 
 
 		Rectangle1* rectangle = object::Instantiate<Rectangle1>(eLayerType::Rectangle);
 	
-		Rectangle1* rectangle = object::Instantiate<Rectangle1>(eLayerType::Rectangle);
 
 		mWaddle = object::Instantiate<Waddle>(Vector2(320, 380), Vector2(2.2f, 2.2f), (eLayerType::Monster));
 		
-		ground->SetPlayer(mKirby);
+		ground1->SetPlayer(mKirby);
 		rectangle->SetPlayer(mKirby);
-<<<<<<< HEAD
-		mKirby->SetGround(ground);
+		mKirby->SetGround(ground1);
 		mWaddle->SetPlayer(mKirby);
 		
-=======
->>>>>>> 794934d37ca2edf575818af029f6a6424b07de41
 		//Camera::SetTarget(mKirby);
 
 		//mbg1 = new Stage11bk();
