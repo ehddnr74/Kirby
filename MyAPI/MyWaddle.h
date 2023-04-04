@@ -17,10 +17,14 @@ namespace My
 			HitAir,
 			HitLeftAir,
 			WaddleDeath,
+			HitKirbyBase, // Idle, Move, Dash에 맞았을때 !
+			LeftHitKirbyBase,
 			HitSliding,
 			HitSlidingLeft,
 			HitStar
 		};
+
+		
 
 		Waddle();
 		~Waddle();
@@ -40,6 +44,7 @@ namespace My
 		void SetDamage(int damage) { WaddleHP -= damage; }
 		void SetPlayer(class Kirby* player) { mkirby = player; }
 
+
 	private:
 			void leftmove();
 			void rightmove();
@@ -48,6 +53,8 @@ namespace My
 			void hitair();
 			void hitleftair();
 			void waddleDeath();
+			void hitkirbybase();
+			void lefthitkirbybase();
 			void hitsliding();
 			void hitslidingleft();
 			void hitstar();
@@ -55,17 +62,26 @@ namespace My
 	private:
 		WaddleState mState;
 		Animator* mAnimator;
+
+		double rightwaddletime;
 		double waddletime;
+		double hitairtime;
+		double hitslidingtime;
+		double hitstartime;
+		double hitkirbybasetime;
+
+
+
 		int waddledir;
 		int Damage;
 		int WaddleHP;
+
+
 		class Air* mAir;
-		double hitairtime;
 		class AirLeft* mAirLeft;
 		class Kirby* mkirby;
 		class Star* mStar;
-		double hitslidingtime;
-		double hitstartime;
+
 	};
 }
 

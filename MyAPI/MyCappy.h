@@ -39,5 +39,6 @@ namespace My
 		int cappydir;
 		int CappyHP;
 
+
 	};
 }

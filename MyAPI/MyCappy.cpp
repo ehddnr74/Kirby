@@ -7,6 +7,7 @@
 #include "MyAnimator.h"
 #include "MyCollider.h"
 #include "MyScene.h"
+#include "MyRigidBody.h"
 
 namespace My
 {
@@ -33,8 +34,8 @@ namespace My
 		mAnimator->Play(L"Move", true);
 
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(-5.0f, -25.0f));
-		collider->SetSize(Vector2(43.0f, 47.0f));
+		collider->SetCenter(Vector2(-20.0f, -65.0f));
+		collider->SetSize(Vector2(43.0f, 47.0f));;
 
 		mState = CappyState::LeftMove;
 

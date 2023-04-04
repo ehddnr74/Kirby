@@ -28,9 +28,11 @@ namespace My
 		//mroom2 = new Room2();
 		//AddGameObject(mroom2, eLayerType::Stage);
 
+		//Camera::SetTarget(mKirby);
+
 		object::Instantiate<Stage12bk>(eLayerType::BG);
 
-		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(129.0f, 394.0f), Vector2(2.0f, 2.0f),eLayerType::Player);
+		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(129.0f, 384.0f), Vector2(2.0f, 2.0f),eLayerType::Player);
 
 		R2Ground* ground = object::Instantiate<R2Ground>(eLayerType::Ground);
 

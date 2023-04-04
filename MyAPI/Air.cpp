@@ -9,7 +9,7 @@
 #include "MyScene.h"
 #include "MyObject.h"
 #include "MyKirby.h"
-#include "MyCollider.h"
+
 
 
 namespace My

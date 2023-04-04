@@ -4,6 +4,12 @@
 
 namespace My
 {	
+	class LeftEnergyBeam;
+	class EnergyBeam;
+	class KirbyBeam;
+	class LeftKirbyBeam;
+	class Twizzy;
+	class Cappy;
 	class Waddle;
 	class RigidBody;
 	class Animator;
@@ -68,6 +74,8 @@ namespace My
 			RightBeamDash,
 			LeftBeamDashRelease,
 			RightBeamDashRelease,
+			LeftBeam,
+			RightBeam,
 
 			LeftHit,
 			RightHit,
@@ -77,7 +85,27 @@ namespace My
 			RightJumpHitRelease,
 			RightJumpHit,
 			LeftSlidingHit,
-			RightSlidingHit
+			RightSlidingHit,
+
+
+			LeftAbsorbPigHit,
+			RightAbsorbPigHit,
+			LeftPigBaseHit,
+			RightPigBaseHit,
+			LeftPigJumpHitRelease,
+			RightPigJumpHitRelease,
+			LeftPigJumpHit,
+			RightPigJumpHit,
+
+
+			LeftBeamBaseHit,
+			RightBeamBaseHit,
+			LeftBeamJumpHitRelease,
+			RightBeamJumpHitRelease,
+			LeftBeamJumpHit,
+			RightBeamJumpHit,
+			LeftBeamPigHit,
+			RightBeamPigHit,
 
 		};
 
@@ -177,12 +205,13 @@ namespace My
 		void rightbeamdash();
 		void leftbeamdashrelease();
 		void rightbeamdashrelease();
+		void leftbeam();
+		void rightbeam();
 
 
 		// Hit Animation
 		void lefthit();
 		void righthit();
-
 		void leftjumphitrelease();
 		void leftjumphit();
 		void rightjumphitrelease();
@@ -190,58 +219,107 @@ namespace My
 		void leftslidinghit();
 		void rightslidinghit();
 
+		void leftpigbasehit();
+		void rightpigbasehit();
+		void leftpigjumphit();
+		void rightpigjumphit();
+		void leftpigjumphitrelease();
+		void rightpigjumphitrelease();
+		void leftabsorbpighit();
+		void rightabsorbpighit();
+
+
+		void leftbeambasehit();
+		void rightbeambasehit();
+		void leftbeamjumphitrelease();
+		void rightbeamjumphitrelease();
+		void leftbeamjumphit();
+		void rightbeamjumphit();
+		void leftbeampighit();
+		void rightbeampighit();
 		
 
 	private:
 		eKirbyState mState;
 		Animator* mAnimator;
-		double kirbytime;
+		RigidBody* mRigidBody;
+
+
+
 		bool KeyCheck;
 		bool PigKeyCheck;
-		int Kirbydir;
 		bool AbsorbCheck;
-		RigidBody* mRigidBody;
-		double jumptime;
 		bool IsJump;
 		bool JumpCheck;
 		bool DoubleJump;
-		class AbsorbEffect* Absorb;
-		class Waddle* mWaddle;
-		class AbsorbLeftEffect* LeftAbsorb;
-		class Star* mStar;
 		bool yamyam;
-		double beamkirbytime;
 		bool BeamIsJump;
 		bool BeamDoubleJump;
 		bool AirShot;
 		bool BeamAirShot;
 		bool BeamKeyCheck;
-		double beamjumptime;
-		double pigjumptime;
-		class Ground* mGround;
+		bool leftbase; // Idle, Move, Dash 검사 
+		bool base;
 		bool Leftsliding;
 		bool sliding;
 		bool Leftstar;
 		bool star;
-		double cleartime;
 		bool GetMonster;
 		bool starshot;
+		bool StarCol; // 별충돌->맵전환
+		bool jumpabsolb; // 점프한 상태에서 몬스터를 먹었을때 true가 됨
+
+		int Kirbydir;
+
+		class AbsorbEffect* Absorb;
+		class Waddle* mWaddle;
+		class AbsorbLeftEffect* LeftAbsorb;
+		class Star* mStar;
+		class Ground* mGround;
+		class StarMap* mStarMap;
+		class Cappy* mCappy;
+		class Twizzy* mTwizzy;
+		class KirbyBeam* mKirbyBeam;
+		class LeftKirbyBeam* mLeftKirbyBeam;
+		class EnergyBeam* mEnergyBeam;
+		class LeftEnergyBeam* mLeftEnergyBeam;
+
+		double kirbytime;
+		double beamkirbytime;
+		double jumptime;
+		double beamjumptime;
+		double pigjumptime;
+		double cleartime;
 		double leftslidingtime;
 		double slidingtime;
-		class StarMap* mStarMap;
-
-
 		double lefthittime;
 		double righthittime;
-
 		double jumphitreleasetime;
 		double jumphittime;
+		double leftdoublejumphittime;
+		double rightdoublejumphittime;
+		double lefthitpigbasetime;
+		double righthitpigbasetime;
+		double leftpigjumphitreleasetime;
+		double rightpigjumphitreleasetime;
+
+		double beamtime;
+		double chargingtime;
+
+
+		double beamjumphitreleasetime;
+		double beamdoublejumphittime;
+		
 
 
 
 
 
-		bool StarCol; // 별충돌->맵전환
+
+
+
+
+
 	};
 }
 

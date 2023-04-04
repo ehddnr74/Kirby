@@ -15,10 +15,16 @@
 #include "AirLeft.h"
 #include "Stage1_1.h"
 #include "MyWaddle.h"
+#include "MyCappy.h"
+#include "MyTwizzy.h"
 #include "R1Ground.h"
 #include "R2Ground.h"
 #include "Star.h"
 #include "StarMap.h"
+#include "KirbyBeam.h"
+#include "LeftKirbyBeam.h"
+#include "EnergyBeam.h"
+#include "LeftEnergyBeam.h"
 
 namespace My
 {
@@ -55,6 +61,19 @@ namespace My
 		, jumphitreleasetime(0.f)
 		, jumphittime(0.f)
 		, StarCol(false)
+		, rightdoublejumphittime(0.f)
+		, leftdoublejumphittime(0.f)
+		, base(false)
+		, leftbase(false)
+		, righthitpigbasetime(0.f)
+		, lefthitpigbasetime(0.f)
+		, leftpigjumphitreleasetime(0.f)
+		, rightpigjumphitreleasetime(0.f)
+		, beamjumphitreleasetime(0.f)
+		, beamdoublejumphittime(0.f)
+		, jumpabsolb(false)
+		, beamtime(0.f)
+		, chargingtime(0.f)
 
 	{
 	}
@@ -145,10 +164,34 @@ namespace My
 		mAnimator->CreateAnimation(L"LeftHit", mKirby, Vector2(0.0f, 1360.0f), 16, 100, 6, Vector2::Zero, 0.05);
 		mAnimator->CreateAnimation(L"LeftJumpHitRelease", mKirby, Vector2(240.0f, 1360.0f), 16, 100, 1, Vector2::Zero, 0.05);
 		mAnimator->CreateAnimation(L"LeftJumpHit", mKirby, Vector2(0.0f, 1360.0f), 16, 100, 6, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"LeftAbsorbPigHit", mKirby, Vector2(120.0f, 1400.0f), 16, 100, 3, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"LeftPigJumpHit", mKirby, Vector2(0.0f, 1440.0f), 16, 100, 4, Vector2::Zero, 0.05);
+
 
 		mAnimator->CreateAnimation(L"RightHit", mKirby, Vector2(0.0f, 1320.0f), 16, 100, 6, Vector2::Zero, 0.05);
 		mAnimator->CreateAnimation(L"RightJumpHitRelease", mKirby, Vector2(240.0f, 1320.0f), 16, 100, 1, Vector2::Zero, 0.05);
 		mAnimator->CreateAnimation(L"RightJumpHit", mKirby, Vector2(0.0f, 1320.0f), 16, 100, 6, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"RightAbsorbPigHit", mKirby, Vector2(0.0f, 1400.0f), 16, 100, 3, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"RightPigJumpHit", mKirby, Vector2(160.0f, 1440.0f), 16, 100, 4, Vector2::Zero, 0.05);
+
+
+
+		// BeamKirby HitAnimation
+
+		mAnimator->CreateAnimation(L"LeftBeamKirbyHit", mKirby, Vector2(0.0f, 1520.0f), 16, 100, 6, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"LeftBeamJumpHitRelease", mKirby, Vector2(40.0f, 1560.0f), 16, 100, 1, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"LeftBeamJumpHit", mKirby, Vector2(0.0f, 1520.0f), 16, 100, 6, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"LeftBeamDoubleJumpHit", mKirby, Vector2(200.0f, 1560.0f), 16, 100, 3, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"LeftBeam", mKirby, Vector2(40.0f, 1600.0f), 16, 100, 1, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"LeftEnergyBeam", mKirby, Vector2(120.0f, 1600.0f), 16, 100, 1, Vector2::Zero, 0.05);
+
+		mAnimator->CreateAnimation(L"RightBeamKirbyHit", mKirby, Vector2(0.0f, 1480.0f), 16, 100, 6, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"RightBeamJumpHitRelease", mKirby, Vector2(0.0f, 1560.0f), 16, 100, 1, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"RightBeamJumpHit", mKirby, Vector2(0.0f, 1480.0f), 16, 100, 6, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"RightBeamDoubleJumpHit", mKirby, Vector2(80.0f, 1560.0f), 16, 100, 3, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"RightBeam", mKirby, Vector2(0.0f, 1600.0f), 16, 100, 1, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"RightEnergyBeam", mKirby, Vector2(80.0f, 1600.0f), 16, 100, 1, Vector2::Zero, 0.05);
+
 
 
 
@@ -337,6 +380,12 @@ namespace My
 		case My::Kirby::eKirbyState::RightBeamDashRelease:
 			rightbeamdashrelease();
 			break;
+		case My::Kirby::eKirbyState::LeftBeam:
+			leftbeam();
+			break;
+		case My::Kirby::eKirbyState::RightBeam:
+			rightbeam();
+			break;
 
 
 		case My::Kirby::eKirbyState::LeftHit:
@@ -363,6 +412,54 @@ namespace My
 		case My::Kirby::eKirbyState::RightSlidingHit:
 			rightslidinghit();
 			break;
+		case My::Kirby::eKirbyState::LeftAbsorbPigHit:
+			leftabsorbpighit();
+			break;
+		case My::Kirby::eKirbyState::RightAbsorbPigHit:
+			rightabsorbpighit();
+			break;
+		case My::Kirby::eKirbyState::LeftPigBaseHit:
+			leftpigbasehit();
+			break;
+		case My::Kirby::eKirbyState::RightPigBaseHit:
+			rightpigbasehit();
+			break;
+		case My::Kirby::eKirbyState::LeftPigJumpHit:
+			leftpigjumphit();
+			break;
+		case My::Kirby::eKirbyState::RightPigJumpHit:
+			rightpigjumphit();
+			break;
+		case My::Kirby::eKirbyState::LeftPigJumpHitRelease:
+			leftpigjumphitrelease();
+			break;
+		case My::Kirby::eKirbyState::RightPigJumpHitRelease:
+			rightpigjumphitrelease();
+			break;
+		case My::Kirby::eKirbyState::LeftBeamBaseHit:
+			leftbeambasehit();
+			break;
+		case My::Kirby::eKirbyState::RightBeamBaseHit:
+			rightbeambasehit();
+			break;
+		case My::Kirby::eKirbyState::LeftBeamJumpHitRelease:
+			leftbeamjumphitrelease();
+			break;
+		case My::Kirby::eKirbyState::RightBeamJumpHitRelease:
+			rightbeamjumphitrelease();
+			break;
+		case My::Kirby::eKirbyState::LeftBeamJumpHit:
+			leftbeamjumphit();
+			break;
+		case My::Kirby::eKirbyState::RightBeamJumpHit:
+			rightbeamjumphit();
+			break;
+		case My::Kirby::eKirbyState::LeftBeamPigHit:
+			leftbeampighit();
+			break;
+		case My::Kirby::eKirbyState::RightBeamPigHit:
+			rightbeampighit();
+			break;
 		default:
 			break;
 		}
@@ -378,25 +475,265 @@ namespace My
 
 	void Kirby::OnCollisionEnter(Collider* other)
 	{
-		if (mWaddle = dynamic_cast<Waddle*>(other->GetOwner()))
+		if (mTwizzy = dynamic_cast<Twizzy*>(other->GetOwner()))
 		{
+			if (GetState() == eKirbyState::LeftBeamIdle || GetState() == eKirbyState::LeftBeamWalk || GetState() == eKirbyState::LeftBeamDash)
+			{
+				mState = eKirbyState::LeftBeamBaseHit;
+				mAnimator->Play(L"LeftBeamKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::RightBeamIdle || GetState() == eKirbyState::RightBeamWalk || GetState() == eKirbyState::RightBeamDash)
+			{
+				mState = eKirbyState::RightBeamBaseHit;
+				mAnimator->Play(L"RightBeamKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::RightBeamJump)
+			{
+				mState = eKirbyState::RightBeamJumpHitRelease;
+				mAnimator->Play(L"RightBeamJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftBeamJump)
+			{
+				mState = eKirbyState::LeftBeamJumpHitRelease;
+				mAnimator->Play(L"LeftBeamJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::RightBeamDoubleJump)
+			{
+				mState = eKirbyState::RightBeamPigHit;
+				mAnimator->Play(L"RightBeamDoubleJumpHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBeamDoubleJump)
+			{
+				mState = eKirbyState::LeftBeamPigHit;
+				mAnimator->Play(L"LeftBeamDoubleJumpHit", false);
+			}
+			if (GetState() == eKirbyState::RightPigJump)
+			{
+				mState = eKirbyState::RightPigJumpHitRelease;
+				mAnimator->Play(L"RightAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::LeftPigJump)
+			{
+				mState = eKirbyState::LeftPigJumpHitRelease;
+				mAnimator->Play(L"LeftAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::RightPigIdle || GetState() == eKirbyState::RightPigWalk || GetState() == eKirbyState::RightPigDash)
+			{
+				mState = eKirbyState::RightPigBaseHit;
+				mAnimator->Play(L"RightAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::LeftPigIdle || GetState() == eKirbyState::LeftPigWalk || GetState() == eKirbyState::LeftPigDash)
+			{
+				mState = eKirbyState::LeftPigBaseHit;
+				mAnimator->Play(L"LeftAbsorbPigHit", false);
+			}
+
+			if (GetState() == eKirbyState::RightDoubleJump)
+			{
+				//mWaddle->SetDamage(50);
+				mState = eKirbyState::RightAbsorbPigHit;
+				mAnimator->Play(L"RightAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::LeftDoubleJump)
+			{
+				//mWaddle->SetDamage(50);
+				mState = eKirbyState::LeftAbsorbPigHit;
+				mAnimator->Play(L"LeftAbsorbPigHit", false);
+			}
 			if (GetState() == eKirbyState::RightMove || GetState() == eKirbyState::RightIdle || GetState() == eKirbyState::RightDash)
 			{
+				//mWaddle->SetDamage(40);
 				mState = eKirbyState::RightHit;
 				mAnimator->Play(L"RightHit", false);
 			}
 			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::LeftDash)
 			{
+				//mWaddle->SetDamage(40);
 				mState = eKirbyState::LeftHit;
 				mAnimator->Play(L"LeftHit", false);
 			}
 			if (GetState() == eKirbyState::RightJump)
 			{
+				//mWaddle->SetDamage(50);
 				mState = eKirbyState::RightJumpHitRelease;
 				mAnimator->Play(L"RightJumpHitRelease", false);
 			}
 			if (GetState() == eKirbyState::LeftJump)
 			{
+				//mWaddle->SetDamage(50);
+				mState = eKirbyState::LeftJumpHitRelease;
+				mAnimator->Play(L"LeftJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftSliding)
+			{
+				mState = eKirbyState::LeftSlidingHit;
+				mAnimator->Play(L"LeftHit", false);
+			}
+			if (GetState() == eKirbyState::RightSliding)
+			{
+				mState = eKirbyState::RightSlidingHit;
+				mAnimator->Play(L"RightHit", false);
+			}
+		}
+		if (mCappy = dynamic_cast<Cappy*>(other->GetOwner()))
+		{
+			if (GetState() == eKirbyState::LeftBeamIdle || GetState() == eKirbyState::LeftBeamWalk || GetState() == eKirbyState::LeftBeamDash)
+			{
+				mState = eKirbyState::LeftBeamBaseHit;
+				mAnimator->Play(L"LeftBeamKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::RightBeamIdle || GetState() == eKirbyState::RightBeamWalk || GetState() == eKirbyState::RightBeamDash)
+			{
+				mState = eKirbyState::RightBeamBaseHit;
+				mAnimator->Play(L"RightBeamKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::RightBeamJump)
+			{
+				mState = eKirbyState::RightBeamJumpHitRelease;
+				mAnimator->Play(L"RightBeamJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftBeamJump)
+			{
+				mState = eKirbyState::LeftBeamJumpHitRelease;
+				mAnimator->Play(L"LeftBeamJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::RightBeamDoubleJump)
+			{
+				mState = eKirbyState::RightBeamPigHit;
+				mAnimator->Play(L"RightBeamDoubleJumpHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBeamDoubleJump)
+			{
+				mState = eKirbyState::LeftBeamPigHit;
+				mAnimator->Play(L"LeftBeamDoubleJumpHit", false);
+			}
+			if (GetState() == eKirbyState::RightPigJump)
+			{
+				mState = eKirbyState::RightPigJumpHitRelease;
+				mAnimator->Play(L"RightAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::LeftPigJump)
+			{
+				mState = eKirbyState::LeftPigJumpHitRelease;
+				mAnimator->Play(L"LeftAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::RightPigIdle || GetState() == eKirbyState::RightPigWalk || GetState() == eKirbyState::RightPigDash)
+			{
+				mState = eKirbyState::RightPigBaseHit;
+				mAnimator->Play(L"RightAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::LeftPigIdle || GetState() == eKirbyState::LeftPigWalk || GetState() == eKirbyState::LeftPigDash)
+			{
+				mState = eKirbyState::LeftPigBaseHit;
+				mAnimator->Play(L"LeftAbsorbPigHit", false);
+			}
+
+			if (GetState() == eKirbyState::RightDoubleJump)
+			{
+				//mWaddle->SetDamage(50);
+				mState = eKirbyState::RightAbsorbPigHit;
+				mAnimator->Play(L"RightAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::LeftDoubleJump)
+			{
+				//mWaddle->SetDamage(50);
+				mState = eKirbyState::LeftAbsorbPigHit;
+				mAnimator->Play(L"LeftAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::RightMove || GetState() == eKirbyState::RightIdle || GetState() == eKirbyState::RightDash)
+			{
+				//mWaddle->SetDamage(40);
+				mState = eKirbyState::RightHit;
+				mAnimator->Play(L"RightHit", false);
+			}
+			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::LeftDash)
+			{
+				//mWaddle->SetDamage(40);
+				mState = eKirbyState::LeftHit;
+				mAnimator->Play(L"LeftHit", false);
+			}
+			if (GetState() == eKirbyState::RightJump)
+			{
+				//mWaddle->SetDamage(50);
+				mState = eKirbyState::RightJumpHitRelease;
+				mAnimator->Play(L"RightJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftJump)
+			{
+				//mWaddle->SetDamage(50);
+				mState = eKirbyState::LeftJumpHitRelease;
+				mAnimator->Play(L"LeftJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftSliding)
+			{
+				mState = eKirbyState::LeftSlidingHit;
+				mAnimator->Play(L"LeftHit", false);
+			}
+			if (GetState() == eKirbyState::RightSliding)
+			{
+				mState = eKirbyState::RightSlidingHit;
+				mAnimator->Play(L"RightHit", false);
+			}
+				
+		}
+
+		if (mWaddle = dynamic_cast<Waddle*>(other->GetOwner()))
+		{
+
+			if (GetState() == eKirbyState::RightPigJump)
+			{
+				mState = eKirbyState::RightPigJumpHitRelease;
+				mAnimator->Play(L"RightAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::LeftPigJump)
+			{
+				mState = eKirbyState::LeftPigJumpHitRelease;
+				mAnimator->Play(L"LeftAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::RightPigIdle || GetState() == eKirbyState::RightPigWalk || GetState() == eKirbyState::RightPigDash)
+			{
+				mState = eKirbyState::RightPigBaseHit;
+				mAnimator->Play(L"RightAbsorbPigHit",false);
+			}
+			if (GetState() == eKirbyState::LeftPigIdle || GetState() == eKirbyState::LeftPigWalk || GetState() == eKirbyState::LeftPigDash)
+			{
+				mState = eKirbyState::LeftPigBaseHit;
+				mAnimator->Play(L"LeftAbsorbPigHit", false);
+			}
+
+			if (GetState() == eKirbyState::RightDoubleJump)
+			{
+				//mWaddle->SetDamage(50);
+				mState = eKirbyState::RightAbsorbPigHit;
+				mAnimator->Play(L"RightAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::LeftDoubleJump)
+			{
+				//mWaddle->SetDamage(50);
+				mState = eKirbyState::LeftAbsorbPigHit;
+				mAnimator->Play(L"LeftAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::RightMove || GetState() == eKirbyState::RightIdle || GetState() == eKirbyState::RightDash)
+			{
+				//mWaddle->SetDamage(40);
+				mState = eKirbyState::RightHit;
+				mAnimator->Play(L"RightHit", false);
+			}
+			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::LeftDash)
+			{
+				//mWaddle->SetDamage(40);
+				mState = eKirbyState::LeftHit;
+				mAnimator->Play(L"LeftHit", false);
+			}
+			if (GetState() == eKirbyState::RightJump)
+			{
+				//mWaddle->SetDamage(50);
+				mState = eKirbyState::RightJumpHitRelease;
+				mAnimator->Play(L"RightJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftJump)
+			{
+				//mWaddle->SetDamage(50);
 				mState = eKirbyState::LeftJumpHitRelease;
 				mAnimator->Play(L"LeftJumpHitRelease", false);
 			}
@@ -562,6 +899,7 @@ namespace My
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
+		
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
 			JumpCheck = true;
@@ -695,6 +1033,36 @@ namespace My
 			mState = eKirbyState::LeftColAbsorb;
 		}
 
+		if (IsJump)
+		{
+			if (Input::GetKeyUp(eKeyCode::Z))
+			{
+				object::Destroy(LeftAbsorb);
+				mState = eKirbyState::LeftIdle;
+				mAnimator->Play(L"LeftIdle", true);
+			}
+			if (LeftAbsorb->GetCollision() == 1) //일반 몬스터 먹었을 때
+			{
+				mRigidBody->SetVelocity(Vector2::Zero);
+
+				jumpabsolb = true;
+				starshot = true;
+				GetMonster = true;
+				mState = eKirbyState::LeftColAbsorb;
+			}
+			if (LeftAbsorb->GetCollision() == 2) // 와들을 먹었을 때
+			{
+				mRigidBody->SetVelocity(Vector2::Zero);
+
+				jumpabsolb = true;
+				starshot = true;
+				GetMonster = true;
+				// 아무 몬스터를 머금었을때 true
+				yamyam = true; // 와들을 먹었을 때 true
+				mState = eKirbyState::LeftColAbsorb;
+			}
+		}
+
 
 	}
 	void Kirby::rightabsorb()
@@ -724,6 +1092,38 @@ namespace My
 			mState = eKirbyState::RightColAbsorb;
 		}
 
+		if (IsJump)
+		{
+			if (Input::GetKeyUp(eKeyCode::Z))
+			{
+				object::Destroy(Absorb);
+				mState = eKirbyState::RightIdle;
+				mAnimator->Play(L"RightIdle", true);
+			}
+			if (Absorb->GetCollision() == 1) //일반 몬스터 먹었을 때
+			{
+				mRigidBody->SetVelocity(Vector2::Zero);
+
+				jumpabsolb = true;
+				starshot = true;
+				GetMonster = true;
+				mState = eKirbyState::RightColAbsorb;
+			}
+			if (Absorb->GetCollision() == 2) // 와들을 먹었을 때
+			{
+				mRigidBody->SetVelocity(Vector2::Zero);
+
+				jumpabsolb = true;
+				starshot = true;
+				GetMonster = true;
+				// 아무 몬스터를 머금었을때 true
+				yamyam = true; // 와들을 먹었을 때 true
+				mState = eKirbyState::RightColAbsorb;
+			}
+		}
+
+		
+
 	}
 	void Kirby::leftcolabsorb()
 	{
@@ -750,6 +1150,7 @@ namespace My
 
 		if (yamyam == true && Input::GetKeyDown(eKeyCode::Down))
 		{
+			yamyam = false;
 			kirbytime = 0.0f;
 			mState = eKirbyState::LeftBeamTransform;
 			mAnimator->Play(L"LeftBeamTransform", false);
@@ -780,6 +1181,7 @@ namespace My
 
 		if (yamyam == true && Input::GetKeyDown(eKeyCode::Down))
 		{
+			yamyam = false;
 			kirbytime = 0.0f;
 			mState = eKirbyState::BeamTransform;
 			mAnimator->Play(L"RightBeamTransform", false);
@@ -796,12 +1198,14 @@ namespace My
 			mState = eKirbyState::LeftPigIdle;
 			mAnimator->Play(L"LeftPigIdle", true);
 		}
+
 		if (kirbytime >= 0.5f)
 		{
 			kirbytime = 0.0f;
 		}
 		if (yamyam == true && Input::GetKeyDown(eKeyCode::Down))
 		{
+			yamyam = false;
 			kirbytime = 0.0f;
 			mState = eKirbyState::LeftBeamTransform;
 			mAnimator->Play(L"LeftBeamTransform", false);
@@ -824,6 +1228,7 @@ namespace My
 
 		if (yamyam == true && Input::GetKeyDown(eKeyCode::Down))
 		{
+			yamyam = false;
 			kirbytime = 0.0f;
 			mState = eKirbyState::BeamTransform;
 			mAnimator->Play(L"RightBeamTransform", false);
@@ -836,6 +1241,7 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::Z))
 		{
+			yamyam = false;
 			Leftstar = true;
 			Star* mLeftstar = object::Instantiate<Star>(Vector2(pos.x - 50, pos.y - 20), Vector2(0.3f, 0.3f), (eLayerType::Star));
 			mLeftstar->SetPlayer(this);
@@ -900,6 +1306,7 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::Z))
 		{
+			yamyam = false;
 			star = true;
 			Star* mstar = object::Instantiate<Star>(Vector2(pos.x+50, pos.y-20), Vector2(0.3f, 0.3f), (eLayerType::Star));
 			mstar->SetPlayer(this);
@@ -913,7 +1320,7 @@ namespace My
 			mState = eKirbyState::BeamTransform;
 			mAnimator->Play(L"RightBeamTransform", false);
 		}
-
+	
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
 			JumpCheck = true;
@@ -1003,6 +1410,7 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::Z))
 		{
+			yamyam = false;
 			Leftstar = true;
 			Star* mLeftstar = object::Instantiate<Star>(Vector2(pos.x - 50, pos.y - 20), Vector2(0.3f, 0.3f), (eLayerType::Star));
 			mLeftstar->SetPlayer(this);
@@ -1065,6 +1473,7 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::Z))
 		{
+			yamyam = false;
 			star = true;
 			Star* mstar = object::Instantiate<Star>(Vector2(pos.x + 50, pos.y - 20), Vector2(0.3f, 0.3f), (eLayerType::Star));
 			mstar->SetPlayer(this);
@@ -1138,6 +1547,7 @@ namespace My
 
 		if (starshot == true && Input::GetKeyDown(eKeyCode::Z))
 		{
+			yamyam = false;
 			starshot = false;
 			GetMonster = false;
 			Transform* tr = GetComponent<Transform>();
@@ -1180,6 +1590,7 @@ namespace My
 
 		if (starshot == true &&Input::GetKeyDown(eKeyCode::Z))
 		{
+			yamyam = false;
 			starshot = false;
 			GetMonster = false;
 			Transform* tr = GetComponent<Transform>();
@@ -1206,6 +1617,7 @@ namespace My
 
 		if (yamyam == true && Input::GetKeyDown(eKeyCode::Z))
 		{
+			yamyam = false;
 			Leftstar = true;
 			Star* mLeftstar = object::Instantiate<Star>(Vector2(pos.x - 50, pos.y - 20), Vector2(0.3f, 0.3f), (eLayerType::Star));
 			mLeftstar->SetPlayer(this);
@@ -1250,6 +1662,7 @@ namespace My
 
 		if (yamyam == true && Input::GetKeyDown(eKeyCode::Z))
 		{
+			yamyam = false;
 			star = true;
 			Star* mstar = object::Instantiate<Star>(Vector2(pos.x + 50, pos.y - 20), Vector2(0.3f, 0.3f), (eLayerType::Star));
 			mstar->SetPlayer(this);
@@ -1628,6 +2041,13 @@ namespace My
 			mRigidBody->SetVelocity(velocity);
 		}
 
+		if (Input::GetKeyDown(eKeyCode::Z))
+		{
+			LeftAbsorb = object::Instantiate<AbsorbLeftEffect>(Vector2(pos.x - 70, pos.y - 10), Vector2(2.5f, 1.3f), eLayerType::Effect);
+			mState = eKirbyState::LeftAbsorb;
+			mAnimator->Play(L"LeftAbsorbing", true);
+		}
+
 		tr->SetPos(pos);
 
 
@@ -1659,6 +2079,17 @@ namespace My
 		IsJump = true;
 		AirShot = true;
 
+
+		if (Input::GetKeyDown(eKeyCode::Z))
+		{
+			Transform* tr = GetComponent<Transform>();
+			Vector2 pos = tr->GetPos();
+
+			Absorb = object::Instantiate<AbsorbEffect>(Vector2(pos.x + 70, pos.y - 15), Vector2(2.5f, 1.3f), eLayerType::Effect);
+
+			mState = eKirbyState::RightAbsorb;
+			mAnimator->Play(L"RightAbsorbing", true);
+		}
 
 		if (Input::GetKey(eKeyCode::Right))
 		{
@@ -1861,6 +2292,40 @@ namespace My
 
 		beamkirbytime += Time::DeltaTime();
 
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			yamyam = false;
+			mState = eKirbyState::LeftPigClear;
+			mAnimator->Play(L"LeftPigClear", false);
+		}
+
+		if (Input::GetKey(eKeyCode::Z))
+		{
+			chargingtime += Time::DeltaTime();
+			mAnimator->Play(L"LeftEnergyBeam", false);
+		}
+
+		if (Input::GetKeyUp(eKeyCode::Z) && chargingtime <= 0.5f)
+		{
+			chargingtime = 0.0f;
+			mLeftKirbyBeam = object::Instantiate<LeftKirbyBeam>(Vector2(pos.x - 100, pos.y + 35), Vector2(1.5f, 1.5f), eLayerType::Skill);
+
+			mState = eKirbyState::LeftBeam;
+			mAnimator->Play(L"LeftBeam", false);
+		}
+
+		if (Input::GetKeyUp(eKeyCode::Z) && chargingtime >= 0.5f)
+		{
+			chargingtime = 0.0f;
+			mLeftEnergyBeam = object::Instantiate<LeftEnergyBeam>(Vector2(pos.x - 100, pos.y + 35), Vector2(1.5f, 1.5f), eLayerType::Skill);
+
+			mState = eKirbyState::LeftBeam;
+			mAnimator->Play(L"LeftBeam", false);
+		}
+
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
 			JumpCheck = true;
@@ -1902,6 +2367,40 @@ namespace My
 	void Kirby::rightbeamidle()
 	{
 		beamkirbytime += Time::DeltaTime();
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			yamyam = false;
+			mState = eKirbyState::RightPigClear;
+			mAnimator->Play(L"RightPigClear", false);
+		}
+
+		if (Input::GetKey(eKeyCode::Z))
+		{
+			chargingtime += Time::DeltaTime();
+			mAnimator->Play(L"RightEnergyBeam", false);
+		}
+
+		if (Input::GetKeyUp(eKeyCode::Z) && chargingtime <=0.5f)
+		{
+			chargingtime = 0.0f;
+			mKirbyBeam = object::Instantiate<KirbyBeam>(Vector2(pos.x + 100, pos.y + 35), Vector2(1.5f, 1.5f), eLayerType::Skill);
+
+			mState = eKirbyState::RightBeam;
+			mAnimator->Play(L"RightBeam", false);
+		}
+
+		if (Input::GetKeyUp(eKeyCode::Z) && chargingtime >= 0.5f)
+		{
+			chargingtime = 0.0f;
+			mEnergyBeam = object::Instantiate<EnergyBeam>(Vector2(pos.x + 100, pos.y + 35), Vector2(1.5f, 1.5f), eLayerType::Skill);
+
+			mState = eKirbyState::RightBeam;
+			mAnimator->Play(L"RightBeam", false);
+		}
 
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
@@ -1951,6 +2450,21 @@ namespace My
 
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
+
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			yamyam = false;
+			mState = eKirbyState::LeftPigClear;
+			mAnimator->Play(L"LeftPigClear", false);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Z))
+		{
+			mLeftKirbyBeam = object::Instantiate<LeftKirbyBeam>(Vector2(pos.x - 100, pos.y + 35), Vector2(1.5f, 1.5f), eLayerType::Skill);
+
+			mState = eKirbyState::LeftBeam;
+			mAnimator->Play(L"LeftBeam", false);
+		}
 
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
@@ -2012,6 +2526,21 @@ namespace My
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			yamyam = false;
+			mState = eKirbyState::RightPigClear;
+			mAnimator->Play(L"RightPigClear", false);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Z))
+		{
+			mKirbyBeam = object::Instantiate<KirbyBeam>(Vector2(pos.x + 100, pos.y + 35), Vector2(1.5f, 1.5f), eLayerType::Skill);
+
+			mState = eKirbyState::RightBeam;
+			mAnimator->Play(L"RightBeam", false);
+		}
+
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
 			JumpCheck = true;
@@ -2064,6 +2593,14 @@ namespace My
 	}
 	void Kirby::leftbeamcrouch()
 	{
+
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			yamyam = false;
+			mState = eKirbyState::LeftPigClear;
+			mAnimator->Play(L"LeftPigClear", false);
+		}
+
 		if (Input::GetKeyUp(eKeyCode::Down))
 		{
 			mState = eKirbyState::LeftBeamIdle;
@@ -2089,6 +2626,13 @@ namespace My
 			mState = eKirbyState::RightBeamIdle;
 			mAnimator->Play(L"RightBeamIdle", true);
 		}
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			yamyam = false;
+			mState = eKirbyState::RightPigClear;
+			mAnimator->Play(L"RightPigClear", false);
+		}
+
 		if (BeamDoubleJump)
 		{
 			mState = eKirbyState::RightBeamIdle;
@@ -2226,6 +2770,18 @@ namespace My
 			mRigidBody->SetVelocity(Vector2::Zero);
 			mRigidBody->SetGround(true);
 		}
+
+		//if (Input::GetKeyDown(eKeyCode::Z))
+		//{
+		//    mRigidBody->SetVelocity(Vector2::Zero);
+		//	
+		//	mKirbyBeam = object::Instantiate<KirbyBeam>(Vector2(pos.x + 100, pos.y + 35), Vector2(1.5f, 1.5f), eLayerType::Skill);
+
+		//	mState = eKirbyState::RightBeam;
+		//	mAnimator->Play(L"RightBeam", false);
+		//}
+
+
 		if (Input::GetKey(eKeyCode::Right))
 		{
 			pos.x += 50.0f * Time::DeltaTime();
@@ -2302,7 +2858,7 @@ namespace My
 
 		if (Input::GetKey(eKeyCode::Left))
 		{
-			pos.x -= 50.0f * Time::DeltaTime();
+			pos.x -= 100.0f * Time::DeltaTime();
 		}
 
 		if (mRigidBody->GetGround() == true)
@@ -2361,7 +2917,7 @@ namespace My
 
 		if (Input::GetKey(eKeyCode::Right))
 		{
-			pos.x += 50.0f * Time::DeltaTime();
+			pos.x += 100.0f * Time::DeltaTime();
 		}
 
 		if (mRigidBody->GetGround() == true)
@@ -2384,6 +2940,12 @@ namespace My
 			mAnimator->Play(L"LeftBeamDashRelease", false);
 		}
 
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			yamyam = false;
+			mState = eKirbyState::LeftPigClear;
+			mAnimator->Play(L"LeftPigClear", false);
+		}
 
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
@@ -2417,6 +2979,12 @@ namespace My
 		{
 			mState = eKirbyState::RightBeamDashRelease;
 			mAnimator->Play(L"RightBeamDashRelease", false);
+		}
+		if (Input::GetKeyDown(eKeyCode::S))
+		{
+			yamyam = false;
+			mState = eKirbyState::RightPigClear;
+			mAnimator->Play(L"RightPigClear", false);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::A))
@@ -2491,6 +3059,30 @@ namespace My
 		}
 		if (Input::GetKeyDown(eKeyCode::Right))
 		{
+			mState = eKirbyState::RightBeamIdle;
+			mAnimator->Play(L"RightBeamIdle", true);
+		}
+	}
+
+	void Kirby::leftbeam()
+	{
+		beamtime += Time::DeltaTime();
+
+		if (beamtime >= 0.35f)
+		{
+			beamtime = 0.0f;
+			mState = eKirbyState::LeftBeamIdle;
+			mAnimator->Play(L"LeftBeamIdle", true);
+		}
+	}
+
+	void Kirby::rightbeam()
+	{
+		beamtime += Time::DeltaTime();
+
+		if (beamtime >= 0.35f)
+		{
+			beamtime = 0.0f;
 			mState = eKirbyState::RightBeamIdle;
 			mAnimator->Play(L"RightBeamIdle", true);
 		}
@@ -2686,5 +3278,390 @@ namespace My
 		}
 
 		tr->SetPos(pos);
+	}
+	void Kirby::leftpigbasehit()
+	{
+		lefthitpigbasetime += Time::DeltaTime();
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		pos.x += 150.0f * Time::DeltaTime();
+
+		if (lefthitpigbasetime >= 0.3f)
+		{
+			lefthitpigbasetime = 0.0f;
+			mState = eKirbyState::LeftPigIdle;
+			mAnimator->Play(L"LeftPigIdle", true);
+		}
+
+		tr->SetPos(pos);
+	}
+	void Kirby::rightpigbasehit()
+	{
+		righthitpigbasetime += Time::DeltaTime();
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		pos.x -= 150.0f * Time::DeltaTime();
+
+		if (righthitpigbasetime >= 0.3f)
+		{
+			righthitpigbasetime = 0.0f;
+			mState = eKirbyState::RightPigIdle;
+			mAnimator->Play(L"RightPigIdle", true);
+		}
+
+		tr->SetPos(pos);
+	}
+	void Kirby::leftpigjumphit()
+	{
+		if (mRigidBody->GetGround() == true)
+		{
+			mState = eKirbyState::LeftPigIdle;
+			mAnimator->Play(L"LeftPigIdle", true);
+		}
+	}
+
+	void Kirby::rightpigjumphit()
+	{
+		if (mRigidBody->GetGround() == true)
+		{
+			mState = eKirbyState::RightPigIdle;
+			mAnimator->Play(L"RightPigIdle", true);
+		}
+	}
+
+	void Kirby::leftpigjumphitrelease()
+	{
+		leftpigjumphitreleasetime += Time::DeltaTime();
+
+		Vector2 velocity = mRigidBody->GetVelocity();
+
+		mRigidBody->SetVelocity(Vector2::Zero);
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		pos.y -= 200.0f * Time::DeltaTime();
+		pos.x += 250.0f * Time::DeltaTime();
+
+		tr->SetPos(pos);
+
+		if (leftpigjumphitreleasetime >= 0.3f)
+		{
+			leftpigjumphitreleasetime = 0.0f;
+			mState = eKirbyState::LeftPigJumpHit;
+			mAnimator->Play(L"LeftPigJumpHit", false);
+		}
+
+
+	}
+
+	void Kirby::rightpigjumphitrelease()
+	{
+		rightpigjumphitreleasetime += Time::DeltaTime();
+
+		Vector2 velocity = mRigidBody->GetVelocity();
+
+		mRigidBody->SetVelocity(Vector2::Zero);
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		pos.y -= 200.0f * Time::DeltaTime();
+		pos.x -= 250.0f * Time::DeltaTime();
+
+		tr->SetPos(pos);
+
+		if (rightpigjumphitreleasetime >= 0.3f)
+		{
+			rightpigjumphitreleasetime = 0.0f;
+			mState = eKirbyState::RightPigJumpHit;
+			mAnimator->Play(L"RightPigJumpHit", false);
+		}
+
+	}
+
+	void Kirby::leftabsorbpighit()
+	{
+		leftdoublejumphittime += Time::DeltaTime();
+
+		Vector2 velocity = mRigidBody->GetVelocity();
+
+		mRigidBody->SetVelocity(Vector2::Zero);
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		pos.y -= 50.0f * Time::DeltaTime();
+		pos.x += 100.0f * Time::DeltaTime();
+
+		tr->SetPos(pos);
+
+		if (leftdoublejumphittime >= 0.4f)
+		{
+			JumpCheck = true;
+			leftdoublejumphittime = 0.0f;
+			mState = eKirbyState::LeftDoubleJump;
+			mAnimator->Play(L"LeftDoubleJump", false);
+
+			Vector2 velocity = mRigidBody->GetVelocity();
+			mRigidBody->SetGravity(Vector2(0.0f, 200.0f));
+			velocity.x = 0.0f;
+			velocity.y = -120.0f;
+
+			mRigidBody->SetVelocity(velocity);
+		}
+	}
+	void Kirby::rightabsorbpighit()
+	{
+		rightdoublejumphittime += Time::DeltaTime();
+
+		Vector2 velocity = mRigidBody->GetVelocity();
+
+		mRigidBody->SetVelocity(Vector2::Zero);
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		pos.y -= 50.0f * Time::DeltaTime();
+		pos.x -= 100.0f * Time::DeltaTime();
+
+		tr->SetPos(pos);
+
+		if (rightdoublejumphittime >= 0.4f)
+		{
+			JumpCheck = true;
+			rightdoublejumphittime = 0.0f;
+			mState = eKirbyState::RightDoubleJump;
+			mAnimator->Play(L"RightDoubleJump", false);
+
+				Vector2 velocity = mRigidBody->GetVelocity();
+				mRigidBody->SetGravity(Vector2(0.0f, 200.0f));
+				velocity.x = 0.0f;
+				velocity.y = -120.0f;
+
+				mRigidBody->SetVelocity(velocity);
+			}
+		}
+	void Kirby::leftbeambasehit()
+	{
+		lefthittime += Time::DeltaTime();
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		pos.x += 150.0f * Time::DeltaTime();
+
+		if (lefthittime >= 0.3f)
+		{
+			lefthittime = 0.0f;
+			mState = eKirbyState::LeftBeamIdle;
+			mAnimator->Play(L"LeftBeamIdle", true);
+		}
+		tr->SetPos(pos);
+	}
+	void Kirby::rightbeambasehit()
+	{
+		righthittime += Time::DeltaTime();
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		pos.x -= 150.0f * Time::DeltaTime();
+
+		if (righthittime >= 0.3f)
+		{
+			righthittime = 0.0f;
+			mState = eKirbyState::RightBeamIdle;
+			mAnimator->Play(L"RightBeamIdle", true);
+		}
+
+		tr->SetPos(pos);
+	}
+	void Kirby::leftbeamjumphitrelease()
+	{
+		beamjumphitreleasetime += Time::DeltaTime();
+
+		Vector2 velocity = mRigidBody->GetVelocity();
+
+		mRigidBody->SetVelocity(Vector2::Zero);
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		pos.y -= 200.0f * Time::DeltaTime();
+		pos.x += 250.0f * Time::DeltaTime();
+
+		tr->SetPos(pos);
+
+		if (beamjumphitreleasetime >= 0.3f)
+		{
+			beamjumphitreleasetime = 0.0f;
+			mState = eKirbyState::LeftBeamJumpHit;
+			mAnimator->Play(L"LeftBeamJumpHit", false);
+		}
+
+		if (BeamIsJump && Input::GetKeyDown(eKeyCode::A))
+		{
+			JumpCheck = true;
+			mState = eKirbyState::LeftBeamDoubleJump;
+			mAnimator->Play(L"LeftBeamDoubleJump", false);
+
+			Vector2 velocity = mRigidBody->GetVelocity();
+			mRigidBody->SetGravity(Vector2(0.0f, 200.0f));
+			velocity.x = 0.0f;
+			velocity.y = -120.0f;
+
+			mRigidBody->SetVelocity(velocity);
+		}
+	}
+	void Kirby::rightbeamjumphitrelease()
+	{
+		beamjumphitreleasetime += Time::DeltaTime();
+
+		Vector2 velocity = mRigidBody->GetVelocity();
+
+		mRigidBody->SetVelocity(Vector2::Zero);
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		pos.y -= 200.0f * Time::DeltaTime();
+		pos.x -= 250.0f * Time::DeltaTime();
+
+		tr->SetPos(pos);
+
+		if (beamjumphitreleasetime >= 0.3f)
+		{
+			beamjumphitreleasetime = 0.0f;
+			mState = eKirbyState::RightBeamJumpHit;
+			mAnimator->Play(L"RightBeamJumpHit", false);
+		}
+
+		if (BeamIsJump && Input::GetKeyDown(eKeyCode::A))//GetAsyncKeyState(0x41) & 0x8000)
+		{
+			JumpCheck = true;
+			mState = eKirbyState::RightBeamDoubleJump;
+			mAnimator->Play(L"RightBeamDoubleJump", false);
+
+			Vector2 velocity = mRigidBody->GetVelocity();
+			mRigidBody->SetGravity(Vector2(0.0f, 200.0f));
+			velocity.x = 0.0f;
+			velocity.y = -120.0f;
+
+			mRigidBody->SetVelocity(velocity);
+		}
+
+	}
+	void Kirby::leftbeamjumphit()
+	{
+		if (mRigidBody->GetGround() == true)
+		{
+			mState = eKirbyState::LeftBeamIdle;
+			mAnimator->Play(L"LeftBeamIdle", true);
+		}
+		if (BeamIsJump && Input::GetKeyDown(eKeyCode::A))
+		{
+			JumpCheck = true;
+			mState = eKirbyState::LeftBeamDoubleJump;
+			mAnimator->Play(L"LeftBeamDoubleJump", false);
+
+			Vector2 velocity = mRigidBody->GetVelocity();
+			mRigidBody->SetGravity(Vector2(0.0f, 200.0f));
+			velocity.x = 0.0f;
+			velocity.y = -120.0f;
+
+			mRigidBody->SetVelocity(velocity);
+		}
+
+	}
+	void Kirby::rightbeamjumphit()
+	{
+		if (mRigidBody->GetGround() == true)
+		{
+			mState = eKirbyState::RightBeamIdle;
+			mAnimator->Play(L"RightBeamIdle", true);
+		}
+
+		if (BeamIsJump && Input::GetKeyDown(eKeyCode::A))//GetAsyncKeyState(0x41) & 0x8000)
+		{
+			JumpCheck = true;
+			mState = eKirbyState::RightBeamDoubleJump;
+			mAnimator->Play(L"RightBeamDoubleJump", false);
+
+			Vector2 velocity = mRigidBody->GetVelocity();
+			mRigidBody->SetGravity(Vector2(0.0f, 200.0f));
+			velocity.x = 0.0f;
+			velocity.y = -120.0f;
+
+			mRigidBody->SetVelocity(velocity);
+		}
+	}
+	void Kirby::leftbeampighit()
+	{
+		beamdoublejumphittime += Time::DeltaTime();
+
+		Vector2 velocity = mRigidBody->GetVelocity();
+
+		mRigidBody->SetVelocity(Vector2::Zero);
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		pos.y -= 50.0f * Time::DeltaTime();
+		pos.x += 100.0f * Time::DeltaTime();
+
+		tr->SetPos(pos);
+
+		if (beamdoublejumphittime >= 0.4f)
+		{
+			JumpCheck = true;
+			beamdoublejumphittime = 0.0f;
+			mState = eKirbyState::LeftBeamDoubleJump;
+			mAnimator->Play(L"LeftBeamDoubleJump", false);
+
+			Vector2 velocity = mRigidBody->GetVelocity();
+			mRigidBody->SetGravity(Vector2(0.0f, 200.0f));
+			velocity.x = 0.0f;
+			velocity.y = -120.0f;
+
+			mRigidBody->SetVelocity(velocity);
+		}
+
+
+	}
+	void Kirby::rightbeampighit()
+	{
+		beamdoublejumphittime += Time::DeltaTime();
+
+		Vector2 velocity = mRigidBody->GetVelocity();
+
+		mRigidBody->SetVelocity(Vector2::Zero);
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		pos.y -= 50.0f * Time::DeltaTime();
+		pos.x -= 100.0f * Time::DeltaTime();
+
+		tr->SetPos(pos);
+
+		if (beamdoublejumphittime >= 0.4f)
+		{
+			JumpCheck = true;
+			beamdoublejumphittime = 0.0f;
+			mState = eKirbyState::RightBeamDoubleJump;
+			mAnimator->Play(L"RightBeamDoubleJump", false);
+
+			Vector2 velocity = mRigidBody->GetVelocity();
+			mRigidBody->SetGravity(Vector2(0.0f, 200.0f));
+			velocity.x = 0.0f;
+			velocity.y = -120.0f;
+
+			mRigidBody->SetVelocity(velocity);
+		}
 	}
 	}

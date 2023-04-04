@@ -110,6 +110,12 @@
     <Filter Include="Contents\Object\Star">
       <UniqueIdentifier>{d832ab79-5119-44ff-b304-544bba5e1000}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Skill">
+      <UniqueIdentifier>{b0108517-4abd-476f-9127-b4e58fb23681}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Skill\BeamKirbySkill">
+      <UniqueIdentifier>{de9f915c-6fa9-446e-8fc0-13204614fdb6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -253,7 +259,6 @@
     <ClInclude Include="R1Ground.h">
       <Filter>Contents\Object\Ground</Filter>
     </ClInclude>
-    <ClInclude Include="MyRectangle1.h" />
     <ClInclude Include="Star.h">
       <Filter>Contents\Effect\StarShot</Filter>
     </ClInclude>
@@ -264,6 +269,18 @@
       <Filter>Contents\Object\Ground</Filter>
     </ClInclude>
     <ClInclude Include="MyRectangle.h" />
+    <ClInclude Include="EnergyBeam.h">
+      <Filter>Contents\Skill\BeamKirbySkill</Filter>
+    </ClInclude>
+    <ClInclude Include="KirbyBeam.h">
+      <Filter>Contents\Skill\BeamKirbySkill</Filter>
+    </ClInclude>
+    <ClInclude Include="LeftKirbyBeam.h">
+      <Filter>Contents\Skill\BeamKirbySkill</Filter>
+    </ClInclude>
+    <ClInclude Include="LeftEnergyBeam.h">
+      <Filter>Contents\Skill\BeamKirbySkill</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc">
@@ -399,7 +416,6 @@
     <ClCompile Include="R1Ground.cpp">
       <Filter>Contents\Object\Ground</Filter>
     </ClCompile>
-    <ClCompile Include="MyRectangle1.cpp" />
     <ClCompile Include="Star.cpp">
       <Filter>Contents\Effect\StarShot</Filter>
     </ClCompile>
@@ -410,5 +426,17 @@
       <Filter>Contents\Object\Ground</Filter>
     </ClCompile>
     <ClCompile Include="MyRectangle.cpp" />
+    <ClCompile Include="EnergyBeam.cpp">
+      <Filter>Contents\Skill\BeamKirbySkill</Filter>
+    </ClCompile>
+    <ClCompile Include="KirbyBeam.cpp">
+      <Filter>Contents\Skill\BeamKirbySkill</Filter>
+    </ClCompile>
+    <ClCompile Include="LeftKirbyBeam.cpp">
+      <Filter>Contents\Skill\BeamKirbySkill</Filter>
+    </ClCompile>
+    <ClCompile Include="LeftEnergyBeam.cpp">
+      <Filter>Contents\Skill\BeamKirbySkill</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -45,7 +45,7 @@ namespace My
 			mLookPosition
 				= mTarget->GetComponent<Transform>()->GetPos();
 
-			//mDistance = mLookPosition - mCenterPos;
+		   // mDistance = mLookPosition - mCenterPos;
 		}
 
 			if (mAlphaTime < mEndTime)

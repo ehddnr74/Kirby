@@ -19,6 +19,8 @@ namespace My
 		virtual void OnCollisionExit(class Collider* other);
 
 		void SetPlayer(class Kirby* player) { mKirby = player; }
+		void SetWaddle(class Waddle* waddle) { mWaddle = waddle; }
+		void SetCappy(class Cappy* cappy) { mCappy = cappy; }
 
 
 
@@ -26,6 +28,8 @@ namespace My
 		class Collider* mCollider;
 		class Image* mImage;
 		class Kirby* mKirby;
+		class Cappy* mCappy;
+		class Waddle* mWaddle;
 
 	};
 }

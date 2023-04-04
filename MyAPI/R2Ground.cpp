@@ -20,7 +20,7 @@ namespace My
 
 	void R2Ground::Initialize()
 	{
-		mImage = Resources::Load<Image>(L"stage1_2GR", L"..\\Resources\\stage12grrr.bmp");
+		mImage = Resources::Load<Image>(L"stage1_2GR", L"..\\Resources\\stagr12grrr.bmp");
 
 		GameObject::Initialize();
 	}
@@ -44,13 +44,36 @@ namespace My
 
 
 		RigidBody* rb = mKirby->GetComponent<RigidBody>();
+		if (color3 != RGB(255, 0, 255) && basecolor != RGB(255, 0, 255) && color == RGB(255, 0, 255))
+		{
+			rb->SetGround(true);
+
+			Vector2 pos = playerTr->GetPos();
+			pos.y -= 1;
+			playerTr->SetPos(pos);
+
+
+			if (mKirby->GetJump())
+			{
+				rb->SetGround(false);
+			}
+			if (mKirby->GetJump() == false)
+			{
+				rb->SetGround(true);
+			}
+		}
+		else
+		{
+			rb->SetGround(false);
+		}
+
 
 		if (color3 == RGB(255, 0, 255) && basecolor != RGB(255, 0, 255) && color != RGB(255, 0, 255))
 		{
 			rb->SetGround(true);
 
 			Vector2 pos = playerTr->GetPos();
-			pos.y -= 2;
+			pos.y -= 1;
 			playerTr->SetPos(pos);
 
 

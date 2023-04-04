@@ -9,11 +9,20 @@ namespace My
 	public:
 		enum class TwizzyState
 		{
-			LeftIdle,
-			RightIdle,
+			//LeftIdle,
+			//RightIdle,
 			LeftFly,
-			RightFly
+			RightFly,
+			HitAir,
+			LeftHitAir,
+			HitStar,
+			TwizzyDeath,
+			HitKirbyBase,
+			LeftHitKirbyBase,
+			HitSliding,
+			HitSlidingLeft
 		};
+
 
 		Twizzy();
 		~Twizzy();
@@ -23,23 +32,54 @@ namespace My
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
-	private:
-		void leftidle();
-		void rightidle();
-		void leftfly();
-		void rightfly();
-
 		virtual void OnCollisionEnter(class Collider* other) override;
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
 		void SetDamage(int damage) { twizzyHP -= damage; }
 
+
+
+	private:
+		//void leftidle();
+		//void rightidle();
+		void leftfly();
+		void rightfly();
+		void hitair();
+		void hitleftair();
+		void hitstar();
+		void twizzydeath();
+		void hitkirbybase();
+		void lefthitkirbybase();
+		void hitsliding();
+		void hitslidingleft();
+
+
 	private:
 		TwizzyState mState;
 		Animator* mAnimator;
+
+
+
 		double twizzytime;
+		double righttiwzzytime;
+		double hitairtime;
+		double hitstartime;
+
+		double hitkirbybasetime;
+		double hitslidingtime;
+
+
+
+
 		int twizzydir;
 		int twizzyHP;
+		
+
+
+		class Air* mAir;
+		class AirLeft* mAirLeft;
+		class Kirby* mkirby;
+		class Star* mStar;
 	};
 }

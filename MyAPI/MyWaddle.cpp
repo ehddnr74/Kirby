@@ -25,6 +25,8 @@ namespace My
 		, hitairtime(0.f)
 		, hitslidingtime(0.f)
 		, hitstartime(0.f)
+		, hitkirbybasetime(0.f)
+		, rightwaddletime(0.f)
 	{
 	}
 	Waddle::~Waddle()
@@ -86,6 +88,12 @@ namespace My
 		case My::Waddle::WaddleState::HitLeftAir:
 			hitleftair();
 			break;
+		case My::Waddle::WaddleState::HitKirbyBase: 
+			hitkirbybase();
+			break;
+		case My::Waddle::WaddleState::LeftHitKirbyBase:
+			lefthitkirbybase();
+			break;
 		case My::Waddle::WaddleState::HitSliding:
 			hitsliding();
 			break;
@@ -110,8 +118,49 @@ namespace My
 
 	void Waddle::OnCollisionEnter(Collider* other)
 	{
-		if (dynamic_cast<Kirby*>(other->GetOwner()))
+		if (mkirby = dynamic_cast<Kirby*>(other->GetOwner()))
 		{
+			if (mkirby->GetState() == Kirby::eKirbyState::LeftPigJumpHitRelease)
+			{
+				SetDamage(50);
+				mState = WaddleState::LeftHitKirbyBase;
+			}
+			if (mkirby->GetState() == Kirby::eKirbyState::RightPigJumpHitRelease)
+			{
+				SetDamage(50);
+				mState = WaddleState::HitKirbyBase;
+			}
+			if (mkirby->GetState() == Kirby::eKirbyState::LeftPigBaseHit)
+			{
+				SetDamage(50);
+				mState = WaddleState::LeftHitKirbyBase;
+			}
+			if (mkirby->GetState() == Kirby::eKirbyState::RightPigBaseHit)
+			{
+				SetDamage(50);
+				mState = WaddleState::HitKirbyBase;
+			}
+			if (mkirby->GetState() == Kirby::eKirbyState::LeftJumpHitRelease || mkirby->GetState() == Kirby::eKirbyState::LeftAbsorbPigHit)
+			{
+				SetDamage(50); 
+				mState = WaddleState::LeftHitKirbyBase;
+			}
+			if (mkirby->GetState() == Kirby::eKirbyState::RightJumpHitRelease || mkirby->GetState() == Kirby::eKirbyState::RightAbsorbPigHit)
+			{
+				SetDamage(50);
+				mState = WaddleState::HitKirbyBase;
+			}
+			if (mkirby->GetState() == Kirby::eKirbyState::LeftHit)
+			{
+				SetDamage(40);
+				mState = WaddleState::LeftHitKirbyBase;
+			}
+			if (mkirby->GetState() == Kirby::eKirbyState::RightHit)
+			{
+				SetDamage(40);
+				mState = WaddleState::HitKirbyBase;
+			}
+
 			if (mkirby->GetSliding())
 			{
 				SetDamage(100);
@@ -126,13 +175,13 @@ namespace My
 
 		if (mAir = dynamic_cast<Air*>(other->GetOwner()))
 		{
-			SetDamage(35);
-			mState = WaddleState::HitAir;
+			SetDamage(50);
+			mState = WaddleState::HitKirbyBase;
 		}
 		if (mAirLeft = dynamic_cast<AirLeft*>(other->GetOwner()))
 		{
-			SetDamage(35);
-			mState = WaddleState::HitLeftAir;
+			SetDamage(50);
+			mState = WaddleState::LeftHitKirbyBase;
 		}
 		if (mStar = dynamic_cast<Star*>(other->GetOwner()))
 		{
@@ -175,14 +224,6 @@ namespace My
 			waddletime = 0.0f;
 			mState = WaddleState::LeftBoomb;
 			mAnimator->Play(L"LeftBoomb", false);
-			//	mAnimator->Play(L"RightMove", true);
-			//	//mAnimator->Play(L"LeftBoomb", true);
-			//}
-			//if (waddletime >= 4.0f)
-			//{
-			//	waddletime = 0.0f;
-			//	mState = WaddleState::RightMove;
-			//	mAnimator->Play(L"RightMove", true);
 		}
 
 		tr->SetPos(WdPos);
@@ -196,41 +237,46 @@ namespace My
 
 		Transform* tr = GetComponent<Transform>();
 
-		waddletime += Time::DeltaTime();
+		rightwaddletime += Time::DeltaTime();
 
 		Vector2 WdPos = tr->GetPos();
 
 		WdPos.x += 20.f * Time::DeltaTime();
 
-		//if (waddletime >= 2.0f)
-		//{
-		//	waddletime = 0.0f;
-		//	mState = WaddleState::LeftMove;
-		//	mAnimator->Play(L"LeftMove", true);
-		//}
-
-
-
-
-
+		if (rightwaddletime >= 2.5f)
+		{
+			rightwaddletime = 0.0f;
+			mState = WaddleState::RightBoomb;
+			mAnimator->Play(L"RightBoomb", false);
+		}
 
 		tr->SetPos(WdPos);
 	}
 
 	void Waddle::leftboomb()
 	{
+		waddledir = 0;
 		waddletime += Time::DeltaTime();
 
 		if (waddletime >= 2.0f)
 		{
 			waddletime = 0.0f;
-			mState = WaddleState::LeftMove;
-			mAnimator->Play(L"LeftMove", true);
+			mState = WaddleState::RightMove;
+			mAnimator->Play(L"RightMove", true);
 		}
 	}
 
 	void Waddle::rightboomb()
 	{
+		waddledir = 1;
+		rightwaddletime += Time::DeltaTime();
+
+		if (rightwaddletime >= 2.0f)
+		{
+			rightwaddletime = 0.0f;
+			mState = WaddleState::LeftMove;
+			mAnimator->Play(L"LeftMove", true);
+		}
 
 	}
 	void Waddle::hitair()
@@ -359,6 +405,93 @@ namespace My
 			object::Destroy(this);
 		}
 	}
+
+	void Waddle::hitkirbybase()
+	{
+		hitkirbybasetime += Time::DeltaTime();
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 WaddlePos = tr->GetPos();
+
+
+		WaddlePos.x += 100.0f * Time::DeltaTime();
+		
+		
+
+		if (hitkirbybasetime >= 0.2f && waddledir == 0)
+		{
+			hitkirbybasetime = 0.0f;
+			mState = WaddleState::LeftMove;
+			mAnimator->Play(L"LeftMove", true);
+		}
+		if (hitkirbybasetime >= 0.2f && waddledir == 1)
+		{
+			hitkirbybasetime = 0.0f;
+			mState = WaddleState::RightMove;
+			mAnimator->Play(L"RightMove", true);
+		}
+
+		if (WaddleHP <= 0 && waddledir == 0)
+		{
+			
+			WaddlePos.x += 2000.0f * Time::DeltaTime();
+
+				mState = WaddleState::WaddleDeath;
+		}
+
+		if (WaddleHP <= 0 && waddledir == 1)
+		{
+
+			WaddlePos.x -= 2000.0f * Time::DeltaTime();
+
+			mState = WaddleState::WaddleDeath;
+		}
+	
+		tr->SetPos(WaddlePos);
+
+
+	}
+
+	void Waddle::lefthitkirbybase()
+	{
+		hitkirbybasetime += Time::DeltaTime();
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 WaddlePos = tr->GetPos();
+
+
+		WaddlePos.x -= 100.0f * Time::DeltaTime();
+
+
+
+		if (hitkirbybasetime >= 0.2f && waddledir == 0)
+		{
+			hitkirbybasetime = 0.0f;
+			mState = WaddleState::LeftMove;
+			mAnimator->Play(L"LeftMove", true);
+		}
+		if (hitkirbybasetime >= 0.2f && waddledir == 1)
+		{
+			hitkirbybasetime = 0.0f;
+			mState = WaddleState::RightMove;
+			mAnimator->Play(L"RightMove", true);
+		}
+
+		if (WaddleHP <= 0 && waddledir == 0)
+		{
+			WaddlePos.x -= 2000.0f * Time::DeltaTime();
+
+			mState = WaddleState::WaddleDeath;
+		}
+
+		tr->SetPos(WaddlePos);
+
+
+
+
+	}
+
+
 	void Waddle::hitsliding()
 	{
 		hitslidingtime += Time::DeltaTime();

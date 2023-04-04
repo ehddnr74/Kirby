@@ -22,6 +22,10 @@
 #include "Star.h"
 #include "StarMap.h"
 #include "MyRectangle.h"
+#include "KirbyBeam.h"
+#include "LeftKirbyBeam.h"
+#include "EnergyBeam.h"
+#include "LeftEnergyBeam.h"
 
 namespace My
 {
@@ -54,9 +58,15 @@ namespace My
 		Rectangle1* rectangle = object::Instantiate<Rectangle1>(eLayerType::Rectangle);
 	
 
-		mWaddle = object::Instantiate<Waddle>(Vector2(320, 380), Vector2(2.2f, 2.2f), (eLayerType::Monster));
-		
+		mWaddle = object::Instantiate<Waddle>(Vector2(250, 390), Vector2(2.2f, 2.2f), (eLayerType::Monster)); //370 , 342
+		mCappy =object::Instantiate<Cappy>(Vector2(370, 342), Vector2(1.8f, 2.0f), (eLayerType::Monster)); //610 , 338
+		object::Instantiate<Twizzy>(Vector2(700, 335), Vector2(2.0f, 2.0f), (eLayerType::Monster)); //900,310 
+
+		//object::Instantiate<LeftEnergyBeam>(Vector2(700, 700), Vector2(1.5f, 1.5f), (eLayerType::Skill)); 
+
+		ground1->SetWaddle(mWaddle);
 		ground1->SetPlayer(mKirby);
+		ground1->SetCappy(mCappy);
 		rectangle->SetPlayer(mKirby);
 		mKirby->SetGround(ground1);
 		mWaddle->SetPlayer(mKirby);
@@ -84,12 +94,12 @@ namespace My
 		//Cappy* mCappy = new Cappy();
 		//AddGameObject(mCappy, eLayerType::Monster);
 
-		object::Instantiate<Cappy>(Vector2(580, 300), Vector2(1.8f, 2.0f), (eLayerType::Monster));
+		
 
 		//Twizzy* mTwizzy = new Twizzy();
 		//AddGameObject(mTwizzy, eLayerType::Monster);
 
-		object::Instantiate<Twizzy>(Vector2(900, 380),Vector2(2.0f,2.0f),(eLayerType::Monster)); //¿ø·¡ y 310 
+	
 		
 
 		
@@ -97,7 +107,7 @@ namespace My
 
 	void Stage1Scene::Update()
 	{
-		if (Input::GetKeyState(eKeyCode::W) == eKeyState::Down)
+		if (Input::GetKeyState(eKeyCode::Enter) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(eSceneType::Stage1_2);
 		}

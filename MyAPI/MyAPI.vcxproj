@@ -134,7 +134,11 @@
     <ClInclude Include="Air.h" />
     <ClInclude Include="AirLeft.h" />
     <ClInclude Include="Commoninclude.h" />
+    <ClInclude Include="EnergyBeam.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="KirbyBeam.h" />
+    <ClInclude Include="LeftEnergyBeam.h" />
+    <ClInclude Include="LeftKirbyBeam.h" />
     <ClInclude Include="MyAnimation.h" />
     <ClInclude Include="MyAnimator.h" />
     <ClInclude Include="MyAPI.h" />
@@ -186,6 +190,10 @@
     <ClCompile Include="AbsorbLeftEffect.cpp" />
     <ClCompile Include="Air.cpp" />
     <ClCompile Include="AirLeft.cpp" />
+    <ClCompile Include="EnergyBeam.cpp" />
+    <ClCompile Include="KirbyBeam.cpp" />
+    <ClCompile Include="LeftEnergyBeam.cpp" />
+    <ClCompile Include="LeftKirbyBeam.cpp" />
     <ClCompile Include="MyCamera.cpp" />
     <ClCompile Include="MyCappy.cpp" />
     <ClCompile Include="MyCollisionManager.cpp" />
