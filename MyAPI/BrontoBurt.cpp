@@ -12,6 +12,7 @@
 #include "AirLeft.h"
 #include "Star.h"
 #include "MyKirby.h"
+#include "MyObject.h"
 
 
 namespace My
@@ -21,6 +22,8 @@ namespace My
 		, chargindtime(0.f)
 		, brontoburtdir(0)
 		, brontoburtHP(100)
+		, deathtime(0.f)
+		, hitkirbybasetime(0.f)
 	{
 
 	}
@@ -34,6 +37,8 @@ namespace My
 		mAnimator = AddComponent<Animator>();
 		mAnimator->CreateAnimation(L"LeftFly", mBrontoBurt, Vector2(0.0f,0.0f), 16, 16, 1, Vector2::Zero, 0.05);
 		mAnimator->CreateAnimation(L"Charging", mBrontoBurt, Vector2(40.0f, 0.0f), 16, 16, 1, Vector2::Zero, 0.1);
+		mAnimator->CreateAnimation(L"Hit", mBrontoBurt, Vector2(0.0f, 80.0f), 16, 16, 1, Vector2::Zero, 0.1);
+		mAnimator->CreateAnimation(L"Death", mBrontoBurt, Vector2(40.0f, 80.0f), 16, 16, 1, Vector2::Zero, 0.1);
 
 		mState = BrontoBurtState::LeftFly;
 		mAnimator->Play(L"LeftFly", true);
@@ -184,7 +189,7 @@ namespace My
 	}
 	void BrontoBurt::OnCollisionStay(Collider* other)
 	{
-		// mAnimator->Play(L"Hit", false);
+		 mAnimator->Play(L"Hit", false);
 	}
 	void BrontoBurt::OnCollisionExit(Collider* other)
 	{
@@ -229,11 +234,40 @@ namespace My
 	}
 	void BrontoBurt::brontoburtdeath()
 	{
+		//deathtime += Time::DeltaTime();
+
+		//if (deathtime >= 0.5f)
+		//{
+		//	deathtime = 0.0f;
+		//	object::Destroy(this);
+		//}
 	}
 	void BrontoBurt::hitkirbybase()
 	{
+		//hitkirbybasetime += Time::DeltaTime();
+
+		//Transform* tr = GetComponent<Transform>();
+		//Vector2 bbPos = tr->GetPos();
+
+		//mRigidBody->SetGround(true);
+
+		//bbPos.x += 100.0f * Time::DeltaTime();
+
+		//if (hitkirbybasetime >= 0.4f)
+		//{
+		//	mState = BrontoBurtState::LeftFly;
+		//	mAnimator->Play(L"LeftFly", true);
+		//}
+
+		//if (brontoburtHP <= 0)
+		//{
+		//	mState = BrontoBurtState::BrontoBurtDeath;
+		//}
+
+		//tr->SetPos(bbPos);
 	}
 	void BrontoBurt::lefthitkirbybase()
 	{
+
 	}
 }

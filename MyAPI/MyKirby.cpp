@@ -2144,12 +2144,12 @@ namespace My
 			mRigidBody->SetVelocity(velocity);
 		}
 
-		if (Input::GetKeyDown(eKeyCode::Z))
-		{
-			LeftAbsorb = object::Instantiate<AbsorbLeftEffect>(Vector2(pos.x - 70, pos.y - 10), Vector2(2.5f, 1.3f), eLayerType::Effect);
-			mState = eKirbyState::LeftAbsorb;
-			mAnimator->Play(L"LeftAbsorbing", true);
-		}
+		//if (Input::GetKeyDown(eKeyCode::Z))
+		//{
+		//	LeftAbsorb = object::Instantiate<AbsorbLeftEffect>(Vector2(pos.x - 70, pos.y - 10), Vector2(2.5f, 1.3f), eLayerType::Effect);
+		//	mState = eKirbyState::LeftAbsorb;
+		//	mAnimator->Play(L"LeftAbsorbing", true);
+		//}
 
 		tr->SetPos(pos);
 
@@ -2183,16 +2183,16 @@ namespace My
 		AirShot = true;
 
 
-		if (Input::GetKeyDown(eKeyCode::Z))
-		{
-			Transform* tr = GetComponent<Transform>();
-			Vector2 pos = tr->GetPos();
+		//if (Input::GetKeyDown(eKeyCode::Z))
+		//{
+		//	Transform* tr = GetComponent<Transform>();
+		//	Vector2 pos = tr->GetPos();
 
-			Absorb = object::Instantiate<AbsorbEffect>(Vector2(pos.x + 70, pos.y - 15), Vector2(2.5f, 1.3f), eLayerType::Effect);
+		//	Absorb = object::Instantiate<AbsorbEffect>(Vector2(pos.x + 70, pos.y - 15), Vector2(2.5f, 1.3f), eLayerType::Effect);
 
-			mState = eKirbyState::RightAbsorb;
-			mAnimator->Play(L"RightAbsorbing", true);
-		}
+		//	mState = eKirbyState::RightAbsorb;
+		//	mAnimator->Play(L"RightAbsorbing", true);
+		//}
 
 		if (Input::GetKey(eKeyCode::Right))
 		{

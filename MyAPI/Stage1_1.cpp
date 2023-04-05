@@ -144,6 +144,7 @@ namespace My
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Air, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Star, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MapStar, true);
+		CollisionManager::SetLayer(eLayerType::Skill, eLayerType::Monster, true);
 	}
 
 	void Stage1Scene::OnExit()

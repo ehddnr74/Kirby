@@ -53,6 +53,10 @@ namespace My
 
 		double brontoburttime;
 		double chargindtime;
+		double deathtime;
+		double hitkirbybasetime;
+	
+
 		int brontoburtdir;
 		int brontoburtHP;
 
