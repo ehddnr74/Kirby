@@ -269,6 +269,8 @@ namespace My
 		bool starshot;
 		bool StarCol; // 별충돌->맵전환
 		bool jumpabsolb; // 점프한 상태에서 몬스터를 먹었을때 true가 됨
+		bool beamuse;
+		bool beamcharging;
 
 		int Kirbydir;
 

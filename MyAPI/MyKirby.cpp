@@ -75,6 +75,8 @@ namespace My
 		, jumpabsolb(false)
 		, beamtime(0.f)
 		, chargingtime(0.f)
+		,  beamuse(true)
+	    , beamcharging(false)
 
 	{
 	}
@@ -2469,6 +2471,7 @@ namespace My
 	}
 	void Kirby::rightbeamidle()
 	{
+		beamuse = false;
 		beamkirbytime += Time::DeltaTime();
 
 		Transform* tr = GetComponent<Transform>();
@@ -2547,6 +2550,8 @@ namespace My
 	}
 	void Kirby::leftbeamwalk()
 	{
+		beamuse = true;
+		
 		BeamKeyCheck = true;
 
 		beamkirbytime += Time::DeltaTime();
@@ -2554,47 +2559,58 @@ namespace My
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
-		if (Input::GetKeyDown(eKeyCode::S))
+
+		if (beamuse == true && Input::GetKey(eKeyCode::Z))
 		{
-			yamyam = false;
-			mState = eKirbyState::LeftPigClear;
-			mAnimator->Play(L"LeftPigClear", false);
+			beamcharging = true;
+			chargingtime += Time::DeltaTime();
+			mAnimator->Play(L"LeftEnergyBeam", false);
 		}
 
-		if (Input::GetKeyDown(eKeyCode::Z))
+		if (Input::GetKeyUp(eKeyCode::Z) && chargingtime <= 0.5f)
 		{
+			beamcharging = false;
+			chargingtime = 0.0f;
 			mLeftKirbyBeam = object::Instantiate<LeftKirbyBeam>(Vector2(pos.x - 100, pos.y + 35), Vector2(1.5f, 1.5f), eLayerType::Skill);
 
 			mState = eKirbyState::LeftBeam;
 			mAnimator->Play(L"LeftBeam", false);
 		}
 
-		if (Input::GetKeyDown(eKeyCode::A))
+		if (Input::GetKeyUp(eKeyCode::Z) && chargingtime >= 0.5f)
 		{
-			JumpCheck = true;
-			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
-			mState = eKirbyState::LeftBeamJump;
+			beamcharging = false;
+			chargingtime = 0.0f;
+			mLeftEnergyBeam = object::Instantiate<LeftEnergyBeam>(Vector2(pos.x - 100, pos.y + 35), Vector2(1.5f, 1.5f), eLayerType::Skill);
 
-			mAnimator->Play(L"LeftBeamJump", false);
-
-			Vector2 velocity = mRigidBody->GetVelocity();
-			velocity.x -= 100.0f;
-			velocity.y -= 400.0f;
-
-
-			mRigidBody->SetVelocity(velocity);
-			mRigidBody->SetGround(false);
+			mState = eKirbyState::LeftBeam;
+			mAnimator->Play(L"LeftBeam", false);
 		}
 
-		if (Input::GetKey(eKeyCode::Right))
+		if (beamcharging == false)
 		{
-			mState = eKirbyState::RightBeamWalk;
-			mAnimator->Play(L"RightBeamWalk", true);
-		}
+			if (Input::GetKeyDown(eKeyCode::S))
+			{
+				yamyam = false;
+				mState = eKirbyState::LeftPigClear;
+				mAnimator->Play(L"LeftPigClear", false);
+			}
+			if (Input::GetKeyDown(eKeyCode::A))
+			{
+				JumpCheck = true;
+				mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
+				mState = eKirbyState::LeftBeamJump;
 
-		if (Input::GetKey(eKeyCode::Left))
-		{
-			pos.x -= 120.0f * Time::DeltaTime();
+				mAnimator->Play(L"LeftBeamJump", false);
+
+				Vector2 velocity = mRigidBody->GetVelocity();
+				velocity.x -= 100.0f;
+				velocity.y -= 400.0f;
+
+
+				mRigidBody->SetVelocity(velocity);
+				mRigidBody->SetGround(false);
+			}
 
 			if (Input::GetKey(eKeyCode::Right))
 			{
@@ -2602,19 +2618,30 @@ namespace My
 				mAnimator->Play(L"RightBeamWalk", true);
 			}
 
-			if (Input::GetKey(eKeyCode::Down))
+			if (Input::GetKey(eKeyCode::Left))
 			{
-				mState = eKirbyState::LeftBeamCrouch;
-				mAnimator->Play(L"LeftBeamCrouch", true);
+				pos.x -= 120.0f * Time::DeltaTime();
+
+				if (Input::GetKey(eKeyCode::Right))
+				{
+					mState = eKirbyState::RightBeamWalk;
+					mAnimator->Play(L"RightBeamWalk", true);
+				}
+
+				if (Input::GetKey(eKeyCode::Down))
+				{
+					mState = eKirbyState::LeftBeamCrouch;
+					mAnimator->Play(L"LeftBeamCrouch", true);
+				}
+
 			}
 
-		}
-
-		if (Input::GetKeyUp(eKeyCode::Left))
-		{
-			mState = eKirbyState::LeftBeamIdle;
-			mAnimator->Play(L"LeftBeamIdle", true);
-			beamkirbytime = 0.0f;
+			if (Input::GetKeyUp(eKeyCode::Left))
+			{
+				mState = eKirbyState::LeftBeamIdle;
+				mAnimator->Play(L"LeftBeamIdle", true);
+				beamkirbytime = 0.0f;
+			}
 		}
 
 		tr->SetPos(pos);
@@ -2622,54 +2649,66 @@ namespace My
 	}
 	void Kirby::rightbeamwalk()
 	{
-		
+		beamuse = true;
 		BeamKeyCheck = true;
 		beamkirbytime += Time::DeltaTime();
 
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
-		if (Input::GetKeyDown(eKeyCode::S))
+		if (beamuse = true && Input::GetKey(eKeyCode::Z))
 		{
-			yamyam = false;
-			mState = eKirbyState::RightPigClear;
-			mAnimator->Play(L"RightPigClear", false);
+			beamcharging = true;
+			chargingtime += Time::DeltaTime();
+			mAnimator->Play(L"RightEnergyBeam", false);
 		}
 
-		if (Input::GetKeyDown(eKeyCode::Z))
+		if (Input::GetKeyUp(eKeyCode::Z) && chargingtime <= 0.5f)
 		{
+			beamcharging = false;
+			chargingtime = 0.0f;
 			mKirbyBeam = object::Instantiate<KirbyBeam>(Vector2(pos.x + 100, pos.y + 35), Vector2(1.5f, 1.5f), eLayerType::Skill);
 
 			mState = eKirbyState::RightBeam;
 			mAnimator->Play(L"RightBeam", false);
 		}
 
-		if (Input::GetKeyDown(eKeyCode::A))
+		if (Input::GetKeyUp(eKeyCode::Z) && chargingtime >= 0.5f)
 		{
-			JumpCheck = true;
-			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
-			mState = eKirbyState::RightBeamJump;
+			beamcharging = false;
+			chargingtime = 0.0f;
+			mEnergyBeam = object::Instantiate<EnergyBeam>(Vector2(pos.x + 100, pos.y + 35), Vector2(1.5f, 1.5f), eLayerType::Skill);
 
-			mAnimator->Play(L"RightBeamJump", false);
-
-			Vector2 velocity = mRigidBody->GetVelocity();
-			velocity.x += 100.0f;
-			velocity.y -= 400.0f;
-
-
-			mRigidBody->SetVelocity(velocity);
-			mRigidBody->SetGround(false);
+			mState = eKirbyState::RightBeam;
+			mAnimator->Play(L"RightBeam", false);
 		}
 
-		if (Input::GetKey(eKeyCode::Left))
-		{
-			mState = eKirbyState::LeftBeamWalk;
-			mAnimator->Play(L"LeftBeamWalk", true);
-		}
 
-		if (Input::GetKey(eKeyCode::Right))
+
+		if (beamcharging == false)
 		{
-			pos.x += 120.0f * Time::DeltaTime();
+			if (Input::GetKeyDown(eKeyCode::S))
+			{
+				yamyam = false;
+				mState = eKirbyState::RightPigClear;
+				mAnimator->Play(L"RightPigClear", false);
+			}
+			if (Input::GetKeyDown(eKeyCode::A))
+			{
+				JumpCheck = true;
+				mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
+				mState = eKirbyState::RightBeamJump;
+
+				mAnimator->Play(L"RightBeamJump", false);
+
+				Vector2 velocity = mRigidBody->GetVelocity();
+				velocity.x += 100.0f;
+				velocity.y -= 400.0f;
+
+
+				mRigidBody->SetVelocity(velocity);
+				mRigidBody->SetGround(false);
+			}
 
 			if (Input::GetKey(eKeyCode::Left))
 			{
@@ -2677,19 +2716,30 @@ namespace My
 				mAnimator->Play(L"LeftBeamWalk", true);
 			}
 
-			if (Input::GetKey(eKeyCode::Down))
+			if (Input::GetKey(eKeyCode::Right))
 			{
-				mState = eKirbyState::RightBeamCrouch;
-				mAnimator->Play(L"RightBeamCrouch", true);
+				pos.x += 120.0f * Time::DeltaTime();
+
+				if (Input::GetKey(eKeyCode::Left))
+				{
+					mState = eKirbyState::LeftBeamWalk;
+					mAnimator->Play(L"LeftBeamWalk", true);
+				}
+
+				if (Input::GetKey(eKeyCode::Down))
+				{
+					mState = eKirbyState::RightBeamCrouch;
+					mAnimator->Play(L"RightBeamCrouch", true);
+				}
+
 			}
 
-		}
-
-		if (Input::GetKeyUp(eKeyCode::Right))
-		{
-			mState = eKirbyState::RightBeamIdle;
-			mAnimator->Play(L"RightBeamIdle", true);
-			beamkirbytime = 0.0f;
+			if (Input::GetKeyUp(eKeyCode::Right))
+			{
+				mState = eKirbyState::RightBeamIdle;
+				mAnimator->Play(L"RightBeamIdle", true);
+				beamkirbytime = 0.0f;
+			}
 		}
 
 		tr->SetPos(pos);
