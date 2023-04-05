@@ -21,6 +21,7 @@ namespace My
 		void SetPlayer(class Kirby* player) { mKirby = player; }
 		void SetWaddle(class Waddle* waddle) { mWaddle = waddle; }
 		void SetCappy(class Cappy* cappy) { mCappy = cappy; }
+		void SetTwizzy(class Twizzy* twizzy) { mTwizzy = twizzy; }
 
 
 
@@ -30,6 +31,7 @@ namespace My
 		class Kirby* mKirby;
 		class Cappy* mCappy;
 		class Waddle* mWaddle;
+		class Twizzy* mTwizzy;
 
 	};
 }

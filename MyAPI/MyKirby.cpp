@@ -25,6 +25,7 @@
 #include "LeftKirbyBeam.h"
 #include "EnergyBeam.h"
 #include "LeftEnergyBeam.h"
+#include "BrontoBurt.h"
 
 namespace My
 {
@@ -475,6 +476,108 @@ namespace My
 
 	void Kirby::OnCollisionEnter(Collider* other)
 	{
+
+		if (mBrontoBurt = dynamic_cast<BrontoBurt*>(other->GetOwner()))
+		{
+			if (GetState() == eKirbyState::LeftBeamIdle || GetState() == eKirbyState::LeftBeamWalk || GetState() == eKirbyState::LeftBeamDash)
+			{
+				mState = eKirbyState::LeftBeamBaseHit;
+				mAnimator->Play(L"LeftBeamKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::RightBeamIdle || GetState() == eKirbyState::RightBeamWalk || GetState() == eKirbyState::RightBeamDash)
+			{
+				mState = eKirbyState::RightBeamBaseHit;
+				mAnimator->Play(L"RightBeamKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::RightBeamJump)
+			{
+				mState = eKirbyState::RightBeamJumpHitRelease;
+				mAnimator->Play(L"RightBeamJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftBeamJump)
+			{
+				mState = eKirbyState::LeftBeamJumpHitRelease;
+				mAnimator->Play(L"LeftBeamJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::RightBeamDoubleJump)
+			{
+				mState = eKirbyState::RightBeamPigHit;
+				mAnimator->Play(L"RightBeamDoubleJumpHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBeamDoubleJump)
+			{
+				mState = eKirbyState::LeftBeamPigHit;
+				mAnimator->Play(L"LeftBeamDoubleJumpHit", false);
+			}
+			if (GetState() == eKirbyState::RightPigJump)
+			{
+				mState = eKirbyState::RightPigJumpHitRelease;
+				mAnimator->Play(L"RightAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::LeftPigJump)
+			{
+				mState = eKirbyState::LeftPigJumpHitRelease;
+				mAnimator->Play(L"LeftAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::RightPigIdle || GetState() == eKirbyState::RightPigWalk || GetState() == eKirbyState::RightPigDash)
+			{
+				mState = eKirbyState::RightPigBaseHit;
+				mAnimator->Play(L"RightAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::LeftPigIdle || GetState() == eKirbyState::LeftPigWalk || GetState() == eKirbyState::LeftPigDash)
+			{
+				mState = eKirbyState::LeftPigBaseHit;
+				mAnimator->Play(L"LeftAbsorbPigHit", false);
+			}
+
+			if (GetState() == eKirbyState::RightDoubleJump)
+			{
+				//mWaddle->SetDamage(50);
+				mState = eKirbyState::RightAbsorbPigHit;
+				mAnimator->Play(L"RightAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::LeftDoubleJump)
+			{
+				//mWaddle->SetDamage(50);
+				mState = eKirbyState::LeftAbsorbPigHit;
+				mAnimator->Play(L"LeftAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::RightMove || GetState() == eKirbyState::RightIdle || GetState() == eKirbyState::RightDash)
+			{
+				//mWaddle->SetDamage(40);
+				mState = eKirbyState::RightHit;
+				mAnimator->Play(L"RightHit", false);
+			}
+			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::LeftDash)
+			{
+				//mWaddle->SetDamage(40);
+				mState = eKirbyState::LeftHit;
+				mAnimator->Play(L"LeftHit", false);
+			}
+			if (GetState() == eKirbyState::RightJump)
+			{
+				//mWaddle->SetDamage(50);
+				mState = eKirbyState::RightJumpHitRelease;
+				mAnimator->Play(L"RightJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftJump)
+			{
+				//mWaddle->SetDamage(50);
+				mState = eKirbyState::LeftJumpHitRelease;
+				mAnimator->Play(L"LeftJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftSliding)
+			{
+				mState = eKirbyState::LeftSlidingHit;
+				mAnimator->Play(L"LeftHit", false);
+			}
+			if (GetState() == eKirbyState::RightSliding)
+			{
+				mState = eKirbyState::RightSlidingHit;
+				mAnimator->Play(L"RightHit", false);
+			}
+		}
+		
 		if (mTwizzy = dynamic_cast<Twizzy*>(other->GetOwner()))
 		{
 			if (GetState() == eKirbyState::LeftBeamIdle || GetState() == eKirbyState::LeftBeamWalk || GetState() == eKirbyState::LeftBeamDash)

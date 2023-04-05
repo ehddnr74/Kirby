@@ -11,6 +11,7 @@ namespace My
 	class Twizzy;
 	class Cappy;
 	class Waddle;
+	class BrontoBurt;
 	class RigidBody;
 	class Animator;
 	class Kirby : public GameObject
@@ -279,6 +280,7 @@ namespace My
 		class StarMap* mStarMap;
 		class Cappy* mCappy;
 		class Twizzy* mTwizzy;
+		class BrontoBurt* mBrontoBurt;
 		class KirbyBeam* mKirbyBeam;
 		class LeftKirbyBeam* mLeftKirbyBeam;
 		class EnergyBeam* mEnergyBeam;

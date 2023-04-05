@@ -10,7 +10,11 @@ namespace My
 		enum class BrontoBurtState
 		{
 			LeftFly,
-			Charging
+			Charging,
+			BrontoBurtDeath,
+			HitKirbyBase,
+			LeftHitKirbyBase
+
 		};
 
 		BrontoBurt();
@@ -32,17 +36,33 @@ namespace My
 	private:
 		void leftfly();
 		void charging();
+		void brontoburtdeath();
+		void hitkirbybase();
+		void lefthitkirbybase();
+
+		
 
 
 
 	private:
-
 		Animator* mAnimator;
 		BrontoBurtState mState;
+
+
+
+
 		double brontoburttime;
+		double chargindtime;
 		int brontoburtdir;
 		int brontoburtHP;
 
+
+
+		class RigidBody* mRigidBody;
+		class Air* mAir;
+		class AirLeft* mAirLeft;
+		class Star* mStar;
+		class Kirby* mkirby;
 
 	};
 }

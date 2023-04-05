@@ -10,8 +10,9 @@
 #include "Air.h"
 #include "AirLeft.h"
 #include "Star.h"
-#include "Myobject.h"
 #include "MyKirby.h"
+#include "Myobject.h"
+#include "MyRigidBody.h"
 
 namespace My
 {
@@ -53,6 +54,9 @@ namespace My
 		Collider* collider = AddComponent<Collider>();
 		collider->SetCenter(Vector2(-22.0f, -55.0f));
 		collider->SetSize(Vector2(46.0f, 40.0f));
+
+		//mRigidBody = AddComponent<RigidBody>();
+		//mRigidBody->SetMass(1.0f);
 
 
 		GameObject::Initialize();
@@ -157,7 +161,7 @@ namespace My
 
 		twizzytime += Time::DeltaTime();
 
-		if (twizzytime >= 1.5f)
+		if (twizzytime >= 0.5f)
 		{
 			twizzytime = 0.0f;
 			mState = TwizzyState::RightFly;
@@ -176,7 +180,7 @@ namespace My
 
 		tzPos.x += 40.0f * Time::DeltaTime();
 
-		if (righttiwzzytime >= 1.5f)
+		if (righttiwzzytime >= 0.5f)
 		{
 			righttiwzzytime = 0.0f;
 			mState = TwizzyState::LeftFly;

@@ -27,6 +27,7 @@
 #include "EnergyBeam.h"
 #include "LeftEnergyBeam.h"
 #include "BrontoBurt.h"
+#include "MyTwizzy.h"
 
 namespace My
 {
@@ -58,11 +59,11 @@ namespace My
 
 		Rectangle1* rectangle = object::Instantiate<Rectangle1>(eLayerType::Rectangle);
 	
-		BrontoBurt* mBrontoBurt = object::Instantiate<BrontoBurt>(Vector2(900.0f, 100.0f), Vector2(2.0f, 2.0f), (eLayerType::Monster));
+		BrontoBurt* mBrontoBurt = object::Instantiate<BrontoBurt>(Vector2(900.0f, 80.0f), Vector2(2.0f, 2.0f), (eLayerType::Monster));
 
 		mWaddle = object::Instantiate<Waddle>(Vector2(370, 342), Vector2(2.2f, 2.2f), (eLayerType::Monster)); //370 , 342 // 250 , 390 = 具概
 		mCappy =object::Instantiate<Cappy>(Vector2(610, 338), Vector2(1.8f, 2.0f), (eLayerType::Monster)); //610 , 338 // 370, 342 = 具概
-		object::Instantiate<Twizzy>(Vector2(900, 310), Vector2(2.0f, 2.0f), (eLayerType::Monster)); //900,310 // 700,335 = 具概
+		mTwizzy = object::Instantiate<Twizzy>(Vector2(900, 310), Vector2(2.0f, 2.0f), (eLayerType::Monster)); //900,310 // 700,335 = 具概
 
 		//object::Instantiate<LeftEnergyBeam>(Vector2(700, 700), Vector2(1.5f, 1.5f), (eLayerType::Skill)); 
 
@@ -72,6 +73,8 @@ namespace My
 		rectangle->SetPlayer(mKirby);
 		mKirby->SetGround(ground1);
 		mWaddle->SetPlayer(mKirby);
+		ground1->SetTwizzy(mTwizzy);
+		
 		
 		//Camera::SetTarget(mKirby);
 

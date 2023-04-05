@@ -37,6 +37,7 @@ namespace My
 		virtual void OnCollisionExit(class Collider* other) override;
 
 		void SetDamage(int damage) { twizzyHP -= damage; }
+		TwizzyState GetState() { return mState; }
 
 
 
@@ -76,10 +77,10 @@ namespace My
 		int twizzyHP;
 		
 
-
+		class RigidBody* mRigidBody;
 		class Air* mAir;
 		class AirLeft* mAirLeft;
-		class Kirby* mkirby;
 		class Star* mStar;
+		class Kirby* mkirby;
 	};
 }

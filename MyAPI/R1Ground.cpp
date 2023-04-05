@@ -9,6 +9,7 @@
 #include "MyInput.h"
 #include "MyWaddle.h"
 #include "MyCamera.h"
+#include "MyTwizzy.h"
 namespace My
 {
 	Ground::Ground()
@@ -31,7 +32,13 @@ namespace My
 		Transform* playerTr = mKirby->GetComponent<Transform>();
 		//Transform* waddleTr = mWaddle->GetComponent<Transform>();
 
-		Collider* kirbycol = mKirby->GetComponent<Collider>();
+		//Transform* twizzyTr = mTwizzy->GetComponent<Transform>();
+
+
+		//Collider* kirbycol = mKirby->GetComponent<Collider>();
+
+		//float twizzyx = twizzyTr->GetPos().x;
+		//float twizzyy = twizzyTr->GetPos().y;
 
 		float x = playerTr->GetPos().x;
 		float y = playerTr->GetPos().y;
@@ -46,7 +53,11 @@ namespace My
 		COLORREF color2 = mImage->GetPixel(x - 23, y - 40); // ¿ÞÂÊ °¡¿îµ¥ 
 		COLORREF color5 = mImage->GetPixel(x, y); // 
 
+		//COLORREF twizzy = mImage->GetPixel(twizzyx + 27, twizzyy - 40);
+
 		//COLORREF waddle = mImage->GetPixel(waddlex + 27, waddley - 40);
+
+		//RigidBody* tb = mTwizzy->GetComponent<RigidBody>();
 
 		RigidBody* rb = mKirby->GetComponent<RigidBody>();
 
@@ -57,6 +68,28 @@ namespace My
 		//	waddlePos.x -= 5;
 		//	playerTr->SetPos(waddlePos);
 		//}
+
+		//if (mTwizzy->GetState() != Twizzy::TwizzyState::TwizzyDeath)
+		//{
+		//	Transform* twizzyTr = mTwizzy->GetComponent<Transform>();
+		//	RigidBody* tb = mTwizzy->GetComponent<RigidBody>();
+
+		//	float twizzyx = twizzyTr->GetPos().x;
+  //          float twizzyy = twizzyTr->GetPos().y;
+
+		//	COLORREF twizzy = mImage->GetPixel(twizzyx + 27, twizzyy - 40);
+
+		//	if (twizzy == RGB(255, 0, 255))
+		//	{
+		//		tb->SetGround(true);
+		//	}
+
+		//}
+		//if (mTwizzy->GetState() == Twizzy::TwizzyState::TwizzyDeath)
+		//{
+		//	int a = 0;
+		//}
+
 
 		if (color1 == RGB(200, 0, 200))
 		{
