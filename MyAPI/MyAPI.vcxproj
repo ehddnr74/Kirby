@@ -120,6 +120,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -133,6 +134,7 @@
     <ClInclude Include="AbsorbLeftEffect.h" />
     <ClInclude Include="Air.h" />
     <ClInclude Include="AirLeft.h" />
+    <ClInclude Include="BrontoBurt.h" />
     <ClInclude Include="Commoninclude.h" />
     <ClInclude Include="EnergyBeam.h" />
     <ClInclude Include="framework.h" />
@@ -190,6 +192,7 @@
     <ClCompile Include="AbsorbLeftEffect.cpp" />
     <ClCompile Include="Air.cpp" />
     <ClCompile Include="AirLeft.cpp" />
+    <ClCompile Include="BrontoBurt.cpp" />
     <ClCompile Include="EnergyBeam.cpp" />
     <ClCompile Include="KirbyBeam.cpp" />
     <ClCompile Include="LeftEnergyBeam.cpp" />

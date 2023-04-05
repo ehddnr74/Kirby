@@ -7,6 +7,7 @@
 #include "MyImage.h"
 #include "MyObject.h"
 #include "MyInput.h"
+#include "MyCamera.h"
 namespace My
 {
 	R2Ground::R2Ground()
@@ -121,14 +122,20 @@ namespace My
 	void R2Ground::Render(HDC hdc)
 	{
 
-		Transform* tr = GetComponent<Transform>();
+		//Transform* tr = GetComponent<Transform>();
 
-		TransparentBlt(hdc, tr->GetPos().x, tr->GetPos().y
-			, mImage->GetWidth(), mImage->GetHeight()
-			, mImage->GetHdc()
-			, 0, 0
-			, mImage->GetWidth(), mImage->GetHeight()
-			, RGB(255, 255, 255));
+		//TransparentBlt(hdc, tr->GetPos().x, tr->GetPos().y
+		//	, mImage->GetWidth(), mImage->GetHeight()
+		//	, mImage->GetHdc()
+		//	, 0, 0
+		//	, mImage->GetWidth(), mImage->GetHeight()
+		//	, RGB(255, 255, 255));
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+		pos = Camera::CalculatePos(pos);
+
+		BitBlt(hdc, pos.x, pos.y, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);
 
 		GameObject::Render(hdc);
 	}

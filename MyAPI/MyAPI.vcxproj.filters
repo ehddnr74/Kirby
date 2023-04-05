@@ -281,6 +281,9 @@
     <ClInclude Include="LeftEnergyBeam.h">
       <Filter>Contents\Skill\BeamKirbySkill</Filter>
     </ClInclude>
+    <ClInclude Include="BrontoBurt.h">
+      <Filter>Contents\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc">
@@ -437,6 +440,9 @@
     </ClCompile>
     <ClCompile Include="LeftEnergyBeam.cpp">
       <Filter>Contents\Skill\BeamKirbySkill</Filter>
+    </ClCompile>
+    <ClCompile Include="BrontoBurt.cpp">
+      <Filter>Contents\Monster</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

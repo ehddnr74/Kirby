@@ -30,7 +30,7 @@ namespace My
 
 		//Camera::SetTarget(mKirby);
 
-		object::Instantiate<Stage12bk>(eLayerType::BG);
+		//object::Instantiate<Stage12bk>(eLayerType::BG);
 
 		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(129.0f, 384.0f), Vector2(2.0f, 2.0f),eLayerType::Player);
 
@@ -38,7 +38,7 @@ namespace My
 
 		ground->SetPlayer(mKirby);
 
-		object::Instantiate<Room2>(eLayerType::Stage);
+		//object::Instantiate<Room2>(eLayerType::Stage);
 		
 
 		

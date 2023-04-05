@@ -26,6 +26,7 @@
 #include "LeftKirbyBeam.h"
 #include "EnergyBeam.h"
 #include "LeftEnergyBeam.h"
+#include "BrontoBurt.h"
 
 namespace My
 {
@@ -57,10 +58,11 @@ namespace My
 
 		Rectangle1* rectangle = object::Instantiate<Rectangle1>(eLayerType::Rectangle);
 	
+		BrontoBurt* mBrontoBurt = object::Instantiate<BrontoBurt>(Vector2(900.0f, 100.0f), Vector2(2.0f, 2.0f), (eLayerType::Monster));
 
-		mWaddle = object::Instantiate<Waddle>(Vector2(250, 390), Vector2(2.2f, 2.2f), (eLayerType::Monster)); //370 , 342
-		mCappy =object::Instantiate<Cappy>(Vector2(370, 342), Vector2(1.8f, 2.0f), (eLayerType::Monster)); //610 , 338
-		object::Instantiate<Twizzy>(Vector2(700, 335), Vector2(2.0f, 2.0f), (eLayerType::Monster)); //900,310 
+		mWaddle = object::Instantiate<Waddle>(Vector2(370, 342), Vector2(2.2f, 2.2f), (eLayerType::Monster)); //370 , 342 // 250 , 390 = 야매
+		mCappy =object::Instantiate<Cappy>(Vector2(610, 338), Vector2(1.8f, 2.0f), (eLayerType::Monster)); //610 , 338 // 370, 342 = 야매
+		object::Instantiate<Twizzy>(Vector2(900, 310), Vector2(2.0f, 2.0f), (eLayerType::Monster)); //900,310 // 700,335 = 야매
 
 		//object::Instantiate<LeftEnergyBeam>(Vector2(700, 700), Vector2(1.5f, 1.5f), (eLayerType::Skill)); 
 

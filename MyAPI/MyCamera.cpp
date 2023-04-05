@@ -27,7 +27,7 @@ namespace My
 		mResolution.x = application.GetWidth();
 		mResolution.y = application.GetHeight();
 		mLookPosition = (mResolution / 2.0f);
-		mCenterPos = { 30.0f,350.f };
+		mCenterPos = { -139.0f, 130.0f };
 
 		mType = eCameraEffectType::None;
 		mCutton = Image::Create(L"Cutton", mResolution.x, mResolution.y, RGB(0, 0, 0));
@@ -43,9 +43,16 @@ namespace My
 		if (mTarget != nullptr)
 		{
 			mLookPosition
-				= mTarget->GetComponent<Transform>()->GetPos();
+				= mTarget->GetComponent<Transform>()->GetPos() - mCenterPos;
 
-		   // mDistance = mLookPosition - mCenterPos;
+	/*		if (mLookPosition.x <= 267.0f)
+			{
+				mLookPosition.x += 100;
+			}*/
+
+			mDistance = mLookPosition; // -mCenterPos;
+
+			//CalculatePos(mDistance);
 		}
 
 			if (mAlphaTime < mEndTime)

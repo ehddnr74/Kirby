@@ -4,6 +4,7 @@
 
 namespace My
 {
+	class BrontoBurt;
 	class Cappy;
 	class Room1;
 	class Kirby;
@@ -30,6 +31,7 @@ namespace My
 		Room1* mroom1;
 		Stage11bk* mbg1;
 		Cappy* mCappy;
+		BrontoBurt* mBrontoBurt;
 
 		
 	};
