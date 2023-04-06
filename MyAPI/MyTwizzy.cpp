@@ -13,6 +13,10 @@
 #include "MyKirby.h"
 #include "Myobject.h"
 #include "MyRigidBody.h"
+#include "KirbyBeam.h"
+#include "LeftKirbyBeam.h"
+#include "EnergyBeam.h"
+#include "LeftEnergyBeam.h"
 
 namespace My
 {
@@ -64,6 +68,8 @@ namespace My
 	void Twizzy::Update()
 	{
 		GameObject::Update();
+
+		
 
 		switch (mState)
 		{
@@ -537,6 +543,29 @@ namespace My
 			SetDamage(100);
 			mState = TwizzyState::HitStar;
 		}
+
+		if (mKirbyBeam = dynamic_cast<KirbyBeam*>(other->GetOwner()))
+		{
+			SetDamage(100);
+			mState = TwizzyState::TwizzyDeath;
+		}
+		if (mLeftKirbyBeam = dynamic_cast<LeftKirbyBeam*>(other->GetOwner()))
+		{
+			SetDamage(100);
+			mState = TwizzyState::TwizzyDeath;
+		}
+		if (mEnergyBeam = dynamic_cast<EnergyBeam*>(other->GetOwner()))
+		{
+			SetDamage(100);
+			mState = TwizzyState::TwizzyDeath;
+		}
+		if (mLeftEnergyBeam = dynamic_cast<LeftEnergyBeam*>(other->GetOwner()))
+		{
+			SetDamage(100);
+			mState = TwizzyState::TwizzyDeath;
+		}
+
+
 	}
 	void Twizzy::OnCollisionStay(Collider* other)
 	{

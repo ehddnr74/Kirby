@@ -9,6 +9,7 @@ namespace My
 	public:
 		enum class BrontoBurtState
 		{
+			None,
 			LeftFly,
 			Charging,
 			BrontoBurtDeath,
@@ -33,7 +34,10 @@ namespace My
 		void SetDamage(int damage) { brontoburtHP -= damage; }
 
 
+		void SetPlayer(class Kirby* Player) { mkirby = Player; }
+
 	private:
+		void none();
 		void leftfly();
 		void charging();
 		void brontoburtdeath();
@@ -55,6 +59,8 @@ namespace My
 		double chargindtime;
 		double deathtime;
 		double hitkirbybasetime;
+
+		bool Check;
 	
 
 		int brontoburtdir;
@@ -67,6 +73,10 @@ namespace My
 		class AirLeft* mAirLeft;
 		class Star* mStar;
 		class Kirby* mkirby;
+		class KirbyBeam* mKirbyBeam;
+		class LeftKirbyBeam* mLeftKirbyBeam;
+		class EnergyBeam* mEnergyBeam;
+		class LeftEnergyBeam* mLeftEnergyBeam;
 
 	};
 }

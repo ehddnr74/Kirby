@@ -9,8 +9,16 @@ namespace My
 	public:
 		enum class CappyState
 		{
-			LeftMove
-			,RightMove
+			LeftMove,
+			RightMove,
+			HitAir,
+			LeftHitAir,
+			HitStar,
+			CappyDeath,
+			HitKirbyBase,
+			LeftHitKirbyBase,
+			HitSliding,
+			HitSlidingLeft
 		};
 
 	Cappy();
@@ -28,6 +36,14 @@ namespace My
 	private:
 		void leftmove();
 		void rightmove();
+		void hitair();
+		void hitleftair();
+		void hitstar();
+		void cappydeath();
+		void hitkirbybase();
+		void lefthitkirbybase();
+		void hitsliding();
+		void hitslidingleft();
 
 
 		void SetDamage(int damage) { CappyHP -= damage; }
@@ -39,6 +55,16 @@ namespace My
 		double cappytime;
 		int cappydir;
 		int CappyHP;
+
+
+		class Air* mAir;
+		class AirLeft* mAirLeft;
+		class Star* mStar;
+		class Kirby* mkirby;
+		class KirbyBeam* mKirbyBeam;
+		class LeftKirbyBeam* mLeftKirbyBeam;
+		class EnergyBeam* mEnergyBeam;
+		class LeftEnergyBeam* mLeftEnergyBeam;
 
 
 	};

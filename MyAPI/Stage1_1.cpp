@@ -68,15 +68,20 @@ namespace My
 		//object::Instantiate<LeftEnergyBeam>(Vector2(700, 700), Vector2(1.5f, 1.5f), (eLayerType::Skill)); 
 
 		ground1->SetWaddle(mWaddle);
+		if(mKirby->GetState() != Kirby::eKirbyState::Death)
+		{
 		ground1->SetPlayer(mKirby);
+		 }
 		ground1->SetCappy(mCappy);
 		rectangle->SetPlayer(mKirby);
 		mKirby->SetGround(ground1);
 		mWaddle->SetPlayer(mKirby);
 		ground1->SetTwizzy(mTwizzy);
+
+		mBrontoBurt->SetPlayer(mKirby);
 		
 		
-		//Camera::SetTarget(mKirby);
+		Camera::SetTarget(mKirby);
 
 		//mbg1 = new Stage11bk();
 		//AddGameObject(mbg1, eLayerType::BG);

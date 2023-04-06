@@ -40,6 +40,8 @@ namespace My
 		TwizzyState GetState() { return mState; }
 
 
+		
+
 
 	private:
 		//void leftidle();
@@ -70,6 +72,8 @@ namespace My
 		double hitkirbybasetime;
 		double hitslidingtime;
 
+	
+
 
 
 
@@ -82,5 +86,9 @@ namespace My
 		class AirLeft* mAirLeft;
 		class Star* mStar;
 		class Kirby* mkirby;
+		class KirbyBeam* mKirbyBeam;
+		class LeftKirbyBeam* mLeftKirbyBeam;
+		class EnergyBeam* mEnergyBeam;
+		class LeftEnergyBeam* mLeftEnergyBeam;
 	};
 }

@@ -45,10 +45,22 @@ namespace My
 			mLookPosition
 				= mTarget->GetComponent<Transform>()->GetPos() - mCenterPos;
 
-	/*		if (mLookPosition.x <= 267.0f)
+			if (mLookPosition.x <= 267.0f)
 			{
-				mLookPosition.x += 100;
-			}*/
+				mLookPosition.x = 267.0f;
+			}
+			if (mLookPosition.y <= 260.0f /*|| mLookPosition.y <=0.0f*/)
+			{
+				mLookPosition.y = 260.0f;
+			}
+			if (mLookPosition.x >= 1330.f)
+			{
+				mLookPosition.x = 1330.f;
+			}
+			if (mLookPosition.y >= 263.0f)
+			{
+				mLookPosition.y = 263.0f;
+			}
 
 			mDistance = mLookPosition; // -mCenterPos;
 

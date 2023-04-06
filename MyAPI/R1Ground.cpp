@@ -157,7 +157,7 @@ namespace My
 				rb->SetGround(false);
 			}
 		}
-
+	
 
 	void Ground::Render(HDC hdc)
 	{

@@ -78,6 +78,9 @@ namespace My
 		,  beamuse(true)
 	    , beamcharging(false)
 
+
+		, deathtime(0.f) //юс╫ц
+
 	{
 	}
 	Kirby::~Kirby()
@@ -1112,6 +1115,11 @@ namespace My
 
 	void Kirby::death()
 	{
+		deathtime += Time::DeltaTime();
+		if (deathtime >= 0.5f)
+		{
+		object::Destroy(this);
+		}
 
 	}
 	void Kirby::leftabsorb()

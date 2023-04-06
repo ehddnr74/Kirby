@@ -315,7 +315,7 @@ namespace My
 		double beamdoublejumphittime;
 		
 
-
+		double deathtime; //юс╫ц
 
 
 

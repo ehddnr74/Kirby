@@ -13,6 +13,10 @@
 #include "Star.h"
 #include "MyKirby.h"
 #include "MyObject.h"
+#include "KirbyBeam.h"
+#include "LeftKirbyBeam.h"
+#include "EnergyBeam.h"
+#include "LeftEnergyBeam.h"
 
 
 namespace My
@@ -24,6 +28,7 @@ namespace My
 		, brontoburtHP(100)
 		, deathtime(0.f)
 		, hitkirbybasetime(0.f)
+		, Check(true)
 	{
 
 	}
@@ -35,13 +40,14 @@ namespace My
 	{
 		Image* mBrontoBurt = Resources::Load<Image>(L"BrontoBurt", L"..\\Resources\\BrontoBurt.bmp");
 		mAnimator = AddComponent<Animator>();
+		mAnimator->CreateAnimation(L"None", mBrontoBurt, Vector2(0.0f, 0.0f), 16, 16, 1, Vector2::Zero, 0.05);
 		mAnimator->CreateAnimation(L"LeftFly", mBrontoBurt, Vector2(0.0f,0.0f), 16, 16, 1, Vector2::Zero, 0.05);
 		mAnimator->CreateAnimation(L"Charging", mBrontoBurt, Vector2(40.0f, 0.0f), 16, 16, 1, Vector2::Zero, 0.1);
 		mAnimator->CreateAnimation(L"Hit", mBrontoBurt, Vector2(0.0f, 80.0f), 16, 16, 1, Vector2::Zero, 0.1);
 		mAnimator->CreateAnimation(L"Death", mBrontoBurt, Vector2(40.0f, 80.0f), 16, 16, 1, Vector2::Zero, 0.1);
 
-		mState = BrontoBurtState::LeftFly;
-		mAnimator->Play(L"LeftFly", true);
+		mState = BrontoBurtState::None;
+		mAnimator->Play(L"None", false);
 
 		Collider* collider = AddComponent<Collider>();
 		collider->SetCenter(Vector2(-25.0f, -65.0f));
@@ -49,6 +55,7 @@ namespace My
 
 		mRigidBody = AddComponent<RigidBody>();
 		mRigidBody->SetMass(1.0f);
+		mRigidBody->SetGravity(Vector2::Zero);
 
 		
 
@@ -60,8 +67,28 @@ namespace My
 	{
 		GameObject::Update();
 
+
+			Transform* kirbytr = mkirby->GetComponent<Transform>();
+			Transform* burttr = this->GetComponent<Transform>();
+
+			float distance;
+
+			distance = burttr->GetPos().x - kirbytr->GetPos().x;
+			if (Check == true)
+			{
+				if (distance <= 400.0f)
+		   	{
+					Check = false;
+				mState = BrontoBurtState::LeftFly;
+				mAnimator->Play(L"LeftFly", false);
+			}
+		}
+
 		switch (mState)
 		{
+		case BrontoBurt::BrontoBurtState::None:
+			none();
+			break;
 		case BrontoBurt::BrontoBurtState::LeftFly:
 			leftfly();
 			break;
@@ -185,6 +212,26 @@ namespace My
 			//SetDamage(100);
 			//mState = BrontoBurtState::HitStar;
 		}
+		if (mKirbyBeam = dynamic_cast<KirbyBeam*>(other->GetOwner()))
+		{
+			//SetDamage(100);
+			//mState = BrontoBurtState::BrontoBurtDeath;
+		}
+		if (mLeftKirbyBeam = dynamic_cast<LeftKirbyBeam*>(other->GetOwner()))
+		{
+			//SetDamage(100);
+			//mState = BrontoBurtState::BrontoBurtDeath;
+		}
+		if (mEnergyBeam = dynamic_cast<EnergyBeam*>(other->GetOwner()))
+		{
+			//SetDamage(100);
+			//mState = BrontoBurtState::BrontoBurtDeath;
+		}
+		if (mLeftEnergyBeam = dynamic_cast<LeftEnergyBeam*>(other->GetOwner()))
+		{
+			//SetDamage(100);
+			//mState = BrontoBurtState::BrontoBurtDeath;
+		}
 
 	}
 	void BrontoBurt::OnCollisionStay(Collider* other)
@@ -194,6 +241,9 @@ namespace My
 	void BrontoBurt::OnCollisionExit(Collider* other)
 	{
 
+	}
+	void BrontoBurt::none()
+	{
 	}
 	void BrontoBurt::leftfly()
 	{
