@@ -14,6 +14,8 @@ namespace My
 			RightMove,
 			LeftBoomb,
 			RightBoomb,
+			LeftBeam,
+			RightBeam,
 			HitAir,
 			HitLeftAir,
 			WaddleDeath,
@@ -50,6 +52,8 @@ namespace My
 			void rightmove();
 			void leftboomb();
 			void rightboomb();
+			void leftbeam();
+			void rightbeam();
 			void hitair();
 			void hitleftair();
 			void waddleDeath();
@@ -70,17 +74,23 @@ namespace My
 		double hitstartime;
 		double hitkirbybasetime;
 
+		double boombtime;
+		double beamtime;
+
 
 
 		int waddledir;
 		int Damage;
 		int WaddleHP;
 
+		bool beamuse;
 
 		class Air* mAir;
 		class AirLeft* mAirLeft;
 		class Kirby* mkirby;
 		class Star* mStar;
+		class Beam* mBeam;
+		class LeftBeam* mLeftBeam;
 
 	};
 }

@@ -32,11 +32,14 @@ namespace My
 		static Vector2 mCenterPos;
 		static class GameObject* mTarget;
 
+		
+
 		static eCameraEffectType mType;
 		static class Image* mCutton;
 		static float mCuttonAlpha;
 		static float mAlphaTime;
 		static float mEndTime;
+
 	};
 }
 

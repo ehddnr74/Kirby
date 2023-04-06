@@ -28,10 +28,12 @@
 #include "LeftEnergyBeam.h"
 #include "BrontoBurt.h"
 #include "MyTwizzy.h"
+#include "HP.h"
 
 namespace My
 {
 	Stage1Scene::Stage1Scene()
+		:fadingtime(0.f)
 	{
 
 	}
@@ -61,27 +63,46 @@ namespace My
 	
 		BrontoBurt* mBrontoBurt = object::Instantiate<BrontoBurt>(Vector2(900.0f, 80.0f), Vector2(2.0f, 2.0f), (eLayerType::Monster));
 
-		mWaddle = object::Instantiate<Waddle>(Vector2(370, 342), Vector2(2.2f, 2.2f), (eLayerType::Monster)); //370 , 342 // 250 , 390 = 야매
-		mCappy =object::Instantiate<Cappy>(Vector2(610, 338), Vector2(1.8f, 2.0f), (eLayerType::Monster)); //610 , 338 // 370, 342 = 야매
-		mTwizzy = object::Instantiate<Twizzy>(Vector2(900, 310), Vector2(2.0f, 2.0f), (eLayerType::Monster)); //900,310 // 700,335 = 야매
+		mWaddle = object::Instantiate<Waddle>(Vector2(370, 342), Vector2(2.2f, 2.2f), (eLayerType::Monster)); 
+		mCappy =object::Instantiate<Cappy>(Vector2(610, 338), Vector2(1.8f, 2.0f), (eLayerType::Monster)); 
+		mTwizzy = object::Instantiate<Twizzy>(Vector2(1100, 280), Vector2(2.0f, 2.0f), (eLayerType::Monster)); 
 
-		//object::Instantiate<LeftEnergyBeam>(Vector2(700, 700), Vector2(1.5f, 1.5f), (eLayerType::Skill)); 
+		object::Instantiate<Stage11bk>(eLayerType::BG);
+
+		object::Instantiate<Room1>(eLayerType::Stage);
+		object::Instantiate<HP>(eLayerType::UI);
+
+		object::Instantiate<StarMap>(Vector2(1320, 240), Vector2(0.3f, 0.3f), (eLayerType::MapStar));
+
+		//object::Instantiate<LeftKirbyBeam>(Vector2(300, 300), Vector2(1.2f, 1.2f), (eLayerType::Skill)); 
 
 		ground1->SetWaddle(mWaddle);
-		if(mKirby->GetState() != Kirby::eKirbyState::Death)
-		{
-		ground1->SetPlayer(mKirby);
-		 }
-		ground1->SetCappy(mCappy);
-		rectangle->SetPlayer(mKirby);
-		mKirby->SetGround(ground1);
-		mWaddle->SetPlayer(mKirby);
-		ground1->SetTwizzy(mTwizzy);
 
-		mBrontoBurt->SetPlayer(mKirby);
+		//if(mKirby->GetState() != Kirby::eKirbyState::Death)
+
+
+		if (mKirby != nullptr)
+		{
+			ground1->SetPlayer(mKirby);
+			rectangle->SetPlayer(mKirby);
+			mWaddle->SetPlayer(mKirby);
+			Camera::SetTarget(mKirby);
+			mBrontoBurt->SetPlayer(mKirby);
+			mKirby->SetGround(ground1);
+		}
+
+		if (mKirby->GetState() == Kirby::eKirbyState::Death)
+		{
+			Camera::SetTarget(nullptr);
+		}
+
+		ground1->SetCappy(mCappy);
+		ground1->SetTwizzy(mTwizzy);
 		
 		
-		Camera::SetTarget(mKirby);
+
+		
+		
 
 		//mbg1 = new Stage11bk();
 		//AddGameObject(mbg1, eLayerType::BG);
@@ -89,11 +110,6 @@ namespace My
 		//mroom1 = new Room1();
 		//AddGameObject(mroom1, eLayerType::Stage);
 
-		object::Instantiate<Stage11bk>(eLayerType::BG);
-
-		object::Instantiate<Room1>(eLayerType::Stage);
-
-		object::Instantiate<StarMap>(Vector2(1320, 240), Vector2(0.3f, 0.3f), (eLayerType::MapStar));
 
 		//Waddle* mWaddle = new Waddle();
 		//AddGameObject(mWaddle, eLayerType::Monster);
@@ -123,7 +139,13 @@ namespace My
 		}
 		if (mKirby->GetStarCol() == true)
 		{
-			SceneManager::LoadScene(eSceneType::Stage1_2);
+			fadingtime += Time::DeltaTime();
+			object::Instantiate<FadeOut>(eLayerType::fade);
+
+			if (fadingtime >= 2.0f)
+			{
+				SceneManager::LoadScene(eSceneType::Stage1_2);
+			}
 		}
 
 		Scene::Update();
@@ -150,11 +172,12 @@ namespace My
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Star, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MapStar, true);
 		CollisionManager::SetLayer(eLayerType::Skill, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterSkill, true);
 	}
 
 	void Stage1Scene::OnExit()
 	{
-		//object::Instantiate<FadeOut>(eLayerType::fade);
+		object::Instantiate<FadeOut>(eLayerType::fade);
 		//mKirby->SetPos(Vector2(0.0f, 0.0f));
 	}
 

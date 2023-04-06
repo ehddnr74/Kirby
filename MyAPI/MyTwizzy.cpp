@@ -167,7 +167,7 @@ namespace My
 
 		twizzytime += Time::DeltaTime();
 
-		if (twizzytime >= 0.5f)
+		if (twizzytime >= 1.2f)
 		{
 			twizzytime = 0.0f;
 			mState = TwizzyState::RightFly;
@@ -186,7 +186,7 @@ namespace My
 
 		tzPos.x += 40.0f * Time::DeltaTime();
 
-		if (righttiwzzytime >= 0.5f)
+		if (righttiwzzytime >= 1.2f)
 		{
 			righttiwzzytime = 0.0f;
 			mState = TwizzyState::LeftFly;

@@ -8,6 +8,7 @@
 #include "MyObject.h"
 #include "Stage1_2bk.h"
 #include "Myfadein.h"
+#include "MyfadeOut.h"
 #include "R2Ground.h"
 
 

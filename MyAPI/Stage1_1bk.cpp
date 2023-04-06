@@ -41,9 +41,9 @@ namespace My
 		Vector2 pos = tr->GetPos();
 		pos = Camera::CalculatePos(pos);
 
-		//TransparentBlt(hdc, 0, 0
+		//TransparentBlt(hdc, pos.x, pos.y
 		//	, mbg1->GetWidth() 
-		//	, mbg1->GetHeight() 
+		//	, mbg1->GetHeight()
 		//	, mbg1->GetHdc()
 		//	, 0, 0
 		//	, 673,217 

@@ -5,6 +5,7 @@
 #include "MyInput.h"
 #include "MyTime.h"
 #include "MyImage.h"
+#include "MyKirby.h"
 
 extern My::Application application;
 
@@ -27,69 +28,62 @@ namespace My
 		mResolution.x = application.GetWidth();
 		mResolution.y = application.GetHeight();
 		mLookPosition = (mResolution / 2.0f);
-		mCenterPos = { -139.0f, 130.0f };
+		mCenterPos = {-137.0f, -10.0f };
 
 		mType = eCameraEffectType::None;
 		mCutton = Image::Create(L"Cutton", mResolution.x, mResolution.y, RGB(0, 0, 0));
 	}
+
 	void Camera::Update()
 	{
-		//if(Input::GetKey(eKeyCode::Up))
-		//{
-		//	mLookPosition.y -= 100.0f * Time::DeltaTime();
-		//}
-
 
 		if (mTarget != nullptr)
 		{
 			mLookPosition
 				= mTarget->GetComponent<Transform>()->GetPos() - mCenterPos;
 
-			if (mLookPosition.x <= 267.0f)
+			if (mLookPosition.x <= 266.0f)
 			{
-				mLookPosition.x = 267.0f;
+				mLookPosition.x = 266.0f;
 			}
-			if (mLookPosition.y <= 260.0f /*|| mLookPosition.y <=0.0f*/)
+			if (mLookPosition.y <= 404.0f)
 			{
-				mLookPosition.y = 260.0f;
+				mLookPosition.y = 404.0f;
 			}
-			if (mLookPosition.x >= 1330.f)
+			if (mLookPosition.x >= 1334.f)
 			{
 				mLookPosition.x = 1330.f;
 			}
-			if (mLookPosition.y >= 263.0f)
+			if (mLookPosition.y >= 480.0f)
 			{
-				mLookPosition.y = 263.0f;
+				mLookPosition.y = 480.0f;
 			}
+		}
+		//CalculatePos(mDistance);
 
-			mDistance = mLookPosition; // -mCenterPos;
+		//if (mAlphaTime < mEndTime)
+		//{
+		//	//255 - > 1
+		//	mAlphaTime += Time::DeltaTime();
+		//	float ratio = (mAlphaTime / mEndTime);
 
-			//CalculatePos(mDistance);
+		//	if (mType == eCameraEffectType::FadeIn)
+		//	{
+		//		mCuttonAlpha = 1.0f - ratio;
+		//	}
+		//	else if (mType == eCameraEffectType::FadeOut)
+		//	{
+		//		mCuttonAlpha = ratio;
+		//	}
+		//	else
+		//	{
+
+		//	}
+		   // mLookPosition = (mResolution / 2.0f);
+		      mDistance = mLookPosition - (mResolution / 2.0f);
 		}
 
-			if (mAlphaTime < mEndTime)
-			{
-				//255 - > 1
-				mAlphaTime += Time::DeltaTime();
-				float ratio = (mAlphaTime / mEndTime);
 
-				if (mType == eCameraEffectType::FadeIn)
-				{
-					mCuttonAlpha = 1.0f - ratio;
-				}
-				else if (mType == eCameraEffectType::FadeOut)
-				{
-					mCuttonAlpha = ratio;
-				}
-				else
-				{
-
-				}
-			}
-
-			mDistance = mLookPosition - (mResolution / 2.0f);
-
-		}
 
 		//mDistance = mLookPosition - ((mResolution / 2.0f));
 		//mDistance.x = mLookPosition.x - (mResolution.x / 2.0f);

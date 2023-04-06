@@ -134,11 +134,14 @@
     <ClInclude Include="AbsorbLeftEffect.h" />
     <ClInclude Include="Air.h" />
     <ClInclude Include="AirLeft.h" />
+    <ClInclude Include="Beam.h" />
     <ClInclude Include="BrontoBurt.h" />
     <ClInclude Include="Commoninclude.h" />
     <ClInclude Include="EnergyBeam.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="HP.h" />
     <ClInclude Include="KirbyBeam.h" />
+    <ClInclude Include="LeftBeam.h" />
     <ClInclude Include="LeftEnergyBeam.h" />
     <ClInclude Include="LeftKirbyBeam.h" />
     <ClInclude Include="MyAnimation.h" />
@@ -192,9 +195,12 @@
     <ClCompile Include="AbsorbLeftEffect.cpp" />
     <ClCompile Include="Air.cpp" />
     <ClCompile Include="AirLeft.cpp" />
+    <ClCompile Include="Beam.cpp" />
     <ClCompile Include="BrontoBurt.cpp" />
     <ClCompile Include="EnergyBeam.cpp" />
+    <ClCompile Include="HP.cpp" />
     <ClCompile Include="KirbyBeam.cpp" />
+    <ClCompile Include="LeftBeam.cpp" />
     <ClCompile Include="LeftEnergyBeam.cpp" />
     <ClCompile Include="LeftKirbyBeam.cpp" />
     <ClCompile Include="MyCamera.cpp" />

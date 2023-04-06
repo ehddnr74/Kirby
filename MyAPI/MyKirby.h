@@ -4,6 +4,8 @@
 
 namespace My
 {	
+	class Beam;
+	class LeftBeam;
 	class LeftEnergyBeam;
 	class EnergyBeam;
 	class KirbyBeam;
@@ -108,6 +110,9 @@ namespace My
 			LeftBeamPigHit,
 			RightBeamPigHit,
 
+			LeftBeamHit, //와들빔
+			RightBeamHit //맞았을 때
+
 		};
 
 		Kirby();
@@ -123,6 +128,8 @@ namespace My
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
+
+		bool GetJumpingBeam() { return beamjumping; }
 
 		void SetGround(class Ground* ground) { mGround = ground; }
 
@@ -238,6 +245,9 @@ namespace My
 		void rightbeamjumphit();
 		void leftbeampighit();
 		void rightbeampighit();
+
+		void leftbeamhit(); // 와들빔
+		void rightbeamhit(); // 맞았을 때
 		
 
 	private:
@@ -287,6 +297,8 @@ namespace My
 		class LeftKirbyBeam* mLeftKirbyBeam;
 		class EnergyBeam* mEnergyBeam;
 		class LeftEnergyBeam* mLeftEnergyBeam;
+		class Beam* mBeam;
+		class LeftBeam* mLeftBeam;
 
 		double kirbytime;
 		double beamkirbytime;
@@ -308,6 +320,7 @@ namespace My
 		double rightpigjumphitreleasetime;
 
 		double beamtime;
+		double leftbeamtime;
 		double chargingtime;
 
 
@@ -316,10 +329,12 @@ namespace My
 		
 
 		double deathtime; //임시
+		
+		double wbeamhittime; //와들빔
+		double lwbeamhittime; // 맞았을 때
 
 
-
-
+		bool beamjumping; //임시
 
 
 

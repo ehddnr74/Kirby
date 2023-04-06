@@ -12,9 +12,9 @@ namespace My
 			None,
 			LeftFly,
 			Charging,
-			BrontoBurtDeath,
 			HitKirbyBase,
-			LeftHitKirbyBase
+			LeftHitKirbyBase,
+			Death
 
 		};
 
@@ -40,9 +40,9 @@ namespace My
 		void none();
 		void leftfly();
 		void charging();
-		void brontoburtdeath();
 		void hitkirbybase();
 		void lefthitkirbybase();
+		void death();
 
 		
 
@@ -59,6 +59,7 @@ namespace My
 		double chargindtime;
 		double deathtime;
 		double hitkirbybasetime;
+
 
 		bool Check;
 	

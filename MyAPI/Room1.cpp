@@ -43,14 +43,15 @@ namespace My
 
 		TransparentBlt(hdc, pos.x, pos.y
 			,mroom1->GetWidth() 
-			,mroom1->GetHeight()
+			,mroom1->GetHeight() 
 			, mroom1->GetHdc()
 			, 0 , 0
 			, mroom1->GetWidth()
 			, mroom1->GetHeight() 
 			,RGB(72,104,112));
 
-		//BitBlt(hdc, 0, 0, mroom1->GetWidth(), mroom1->GetHeight(), mroom1->GetHdc(), 0, 0, SRCCOPY);
+		//StretchBlt(hdc, pos.x, pos.y, mroom1->GetWidth() , mroom1->GetHeight()  , mroom1->GetHdc() , 0, 0, mroom1->GetWidth(), mroom1->GetHeight(), SRCCOPY);
+		//BitBlt(hdc, pos.x, pos.y, mroom1->GetWidth(), mroom1->GetHeight(), mroom1->GetHdc(), 0, 0, SRCCOPY);
 	}
 
 	void My::Room1::Release()

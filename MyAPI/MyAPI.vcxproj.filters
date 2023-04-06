@@ -116,6 +116,24 @@
     <Filter Include="Contents\Skill\BeamKirbySkill">
       <UniqueIdentifier>{de9f915c-6fa9-446e-8fc0-13204614fdb6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\UI">
+      <UniqueIdentifier>{81bc1004-2596-4226-8b78-9fad9a697bd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Monster\BrontoBurt">
+      <UniqueIdentifier>{b98001d0-667a-441a-99e5-606caa805af5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Monster\Cappy">
+      <UniqueIdentifier>{b1f919e6-bf5a-4c78-8376-031fd4cebb5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Monster\Twizzy">
+      <UniqueIdentifier>{4d758a84-5cb3-4786-ab51-feac1098453c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Monster\Waddle">
+      <UniqueIdentifier>{06f98ccf-8fe8-4404-8274-a21ea765e2f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Monster\Waddle\WaddleBeam">
+      <UniqueIdentifier>{d7b7f59d-c578-4171-86a1-d535857c2f07}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -217,15 +235,6 @@
     <ClInclude Include="Stage1_1bk.h">
       <Filter>Contents\Scene\MyStageScene\Stage1\Room1</Filter>
     </ClInclude>
-    <ClInclude Include="MyWaddle.h">
-      <Filter>Contents\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="MyCappy.h">
-      <Filter>Contents\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="MyTwizzy.h">
-      <Filter>Contents\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="MyCamera.h">
       <Filter>Engine\Camera</Filter>
     </ClInclude>
@@ -281,8 +290,26 @@
     <ClInclude Include="LeftEnergyBeam.h">
       <Filter>Contents\Skill\BeamKirbySkill</Filter>
     </ClInclude>
+    <ClInclude Include="HP.h">
+      <Filter>Contents\UI</Filter>
+    </ClInclude>
     <ClInclude Include="BrontoBurt.h">
-      <Filter>Contents\Monster</Filter>
+      <Filter>Contents\Monster\BrontoBurt</Filter>
+    </ClInclude>
+    <ClInclude Include="MyCappy.h">
+      <Filter>Contents\Monster\Cappy</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTwizzy.h">
+      <Filter>Contents\Monster\Twizzy</Filter>
+    </ClInclude>
+    <ClInclude Include="MyWaddle.h">
+      <Filter>Contents\Monster\Waddle</Filter>
+    </ClInclude>
+    <ClInclude Include="LeftBeam.h">
+      <Filter>Contents\Monster\Waddle\WaddleBeam</Filter>
+    </ClInclude>
+    <ClInclude Include="Beam.h">
+      <Filter>Contents\Monster\Waddle\WaddleBeam</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -380,15 +407,6 @@
     <ClCompile Include="Stage1_1bk.cpp">
       <Filter>Contents\Scene\MyStageScene\Stage1\Room1</Filter>
     </ClCompile>
-    <ClCompile Include="MyWaddle.cpp">
-      <Filter>Contents\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="MyCappy.cpp">
-      <Filter>Contents\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="MyTwizzy.cpp">
-      <Filter>Contents\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="MyCamera.cpp">
       <Filter>Engine\Camera</Filter>
     </ClCompile>
@@ -441,8 +459,26 @@
     <ClCompile Include="LeftEnergyBeam.cpp">
       <Filter>Contents\Skill\BeamKirbySkill</Filter>
     </ClCompile>
+    <ClCompile Include="HP.cpp">
+      <Filter>Contents\UI</Filter>
+    </ClCompile>
     <ClCompile Include="BrontoBurt.cpp">
-      <Filter>Contents\Monster</Filter>
+      <Filter>Contents\Monster\BrontoBurt</Filter>
+    </ClCompile>
+    <ClCompile Include="MyCappy.cpp">
+      <Filter>Contents\Monster\Cappy</Filter>
+    </ClCompile>
+    <ClCompile Include="MyTwizzy.cpp">
+      <Filter>Contents\Monster\Twizzy</Filter>
+    </ClCompile>
+    <ClCompile Include="MyWaddle.cpp">
+      <Filter>Contents\Monster\Waddle</Filter>
+    </ClCompile>
+    <ClCompile Include="Beam.cpp">
+      <Filter>Contents\Monster\Waddle\WaddleBeam</Filter>
+    </ClCompile>
+    <ClCompile Include="LeftBeam.cpp">
+      <Filter>Contents\Monster\Waddle\WaddleBeam</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

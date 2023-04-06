@@ -21,6 +21,7 @@ enum class eLayerType
 	Rectangle,
 	Monster,
 	Effect,
+	MonsterSkill,
 	Skill,
 	Air,
 	Star,

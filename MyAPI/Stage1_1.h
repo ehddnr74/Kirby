@@ -4,6 +4,7 @@
 
 namespace My
 {
+	class HP;
 	class Twizzy;
 	class BrontoBurt;
 	class Cappy;
@@ -34,7 +35,9 @@ namespace My
 		Cappy* mCappy;
 		Twizzy* mTwizzy;
 		BrontoBurt* mBrontoBurt;
+		HP* hp;
 
+		double fadingtime;
 		
 	};
 }

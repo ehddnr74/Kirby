@@ -15,6 +15,8 @@
 #include "MyObject.h"
 #include "MyKirby.h"
 #include "Star.h"
+#include "Beam.h"
+#include "LeftBeam.h"
 
 namespace My
 {
@@ -27,6 +29,9 @@ namespace My
 		, hitstartime(0.f)
 		, hitkirbybasetime(0.f)
 		, rightwaddletime(0.f)
+		, beamtime(0.f)
+		, boombtime(0.f)
+		, beamuse(false)
 	{
 	}
 	Waddle::~Waddle()
@@ -45,17 +50,20 @@ namespace My
 		mAnimator->CreateAnimation(L"LeftMove", mWaddle, Vector2::Zero, 16, 16, 4, Vector2::Zero, 0.3);
 		mAnimator->CreateAnimation(L"LeftBoomb", mWaddle, Vector2(0.0f, 120.0f), 16, 16, 2, Vector2::Zero, 0.5);
 		mAnimator->CreateAnimation(L"LeftHit", mWaddle, Vector2(0.0f, 160.f), 16, 16, 1, Vector2::Zero, 0.01);
+		mAnimator->CreateAnimation(L"LeftBeam", mWaddle, Vector2(0.0f, 200.f), 16, 16, 1, Vector2::Zero, 0.01);
 
 
 
 		mAnimator->CreateAnimation(L"RightMove", mWaddle, Vector2(0.0f, 40.0f), 16, 16, 4, Vector2::Zero, 0.3);
 		mAnimator->CreateAnimation(L"RightBoomb", mWaddle, Vector2(0.0f, 80.0f), 16, 16, 2, Vector2::Zero, 0.5);
 		mAnimator->CreateAnimation(L"RightHit", mWaddle, Vector2(40.0f, 160.f), 16, 16, 1, Vector2::Zero, 0.01);
+		mAnimator->CreateAnimation(L"RightBeam", mWaddle, Vector2(40.0f, 200.f), 16, 16, 1, Vector2::Zero, 0.01);
+
 		mAnimator->Play(L"LeftMove", true);
 
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(-22.0f, -65.0f));
-		collider->SetSize(Vector2(45.0f, 45.0f));
+		collider->SetCenter(Vector2(-22.0f, -70.0f));
+		collider->SetSize(Vector2(45.0f, 50.0f));
 
 		mState = WaddleState::LeftMove;
 
@@ -73,11 +81,18 @@ namespace My
 			break;
 		case My::Waddle::WaddleState::RightMove:
 			rightmove();
+			break;
 		case My::Waddle::WaddleState::LeftBoomb:
 			leftboomb();
 			break;
 		case My::Waddle::WaddleState::RightBoomb:
 			rightboomb();
+			break;
+		case My::Waddle::WaddleState::LeftBeam:
+			leftbeam();
+			break;
+		case My::Waddle::WaddleState::RightBeam:
+			rightbeam();
 			break;
 		case My::Waddle::WaddleState::HitAir:
 			hitair();
@@ -218,6 +233,14 @@ namespace My
 
 		WdPos.x -= 20.0f * Time::DeltaTime();
 
+		if (WdPos.x >= 442.f)
+		{
+			WdPos.x = 442.f;
+		}
+		if (WdPos.x <= 288.f)
+		{
+			WdPos.x = 288.f;
+		}
 
 		if (waddletime >= 3.0f)
 		{
@@ -243,7 +266,16 @@ namespace My
 
 		WdPos.x += 20.f * Time::DeltaTime();
 
-		if (rightwaddletime >= 2.5f)
+		if (WdPos.x >= 442.f)
+		{
+			WdPos.x = 442.f;
+		}
+		if (WdPos.x <= 288.f)
+		{
+			WdPos.x = 288.f;
+		}
+
+		if (rightwaddletime >= 3.0f)
 		{
 			rightwaddletime = 0.0f;
 			mState = WaddleState::RightBoomb;
@@ -255,25 +287,69 @@ namespace My
 
 	void Waddle::leftboomb()
 	{
+		beamuse = true;
 		waddledir = 0;
-		waddletime += Time::DeltaTime();
+		boombtime += Time::DeltaTime();
 
-		if (waddletime >= 2.0f)
+		if (boombtime >= 1.5f)
 		{
-			waddletime = 0.0f;
-			mState = WaddleState::RightMove;
-			mAnimator->Play(L"RightMove", true);
+			boombtime = 0.0f;
+			mState = WaddleState::LeftBeam;
+			mAnimator->Play(L"LeftBeam", false);
 		}
 	}
 
 	void Waddle::rightboomb()
 	{
+		beamuse = true;
 		waddledir = 1;
-		rightwaddletime += Time::DeltaTime();
+		boombtime += Time::DeltaTime();
 
-		if (rightwaddletime >= 2.0f)
+		if (boombtime >= 1.5f)
 		{
-			rightwaddletime = 0.0f;
+			boombtime = 0.0f;
+			mState = WaddleState::RightBeam;
+			mAnimator->Play(L"RightBeam", true);
+		}
+
+	}
+	void Waddle::leftbeam()
+	{
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+	
+		if (beamuse == true)
+		{
+			beamuse = false;
+			mLeftBeam = object::Instantiate<LeftBeam>(Vector2(pos.x - 90, pos.y + 75), Vector2(1.2f, 1.2f), (eLayerType::MonsterSkill));
+		}
+		    beamtime += Time::DeltaTime();
+
+		if (beamtime >= 1.2f)
+		{
+			beamtime = 0.0f;
+			
+			mState = WaddleState::RightMove;
+			mAnimator->Play(L"RightMove", true);
+		}
+
+	}
+	void Waddle::rightbeam()
+	{
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		if (beamuse == true)
+		{
+			beamuse = false;
+			mBeam = object::Instantiate<Beam>(Vector2(pos.x + 90, pos.y + 70), Vector2(1.2f, 1.2f), (eLayerType::MonsterSkill));
+		}
+		beamtime += Time::DeltaTime();
+
+		if (beamtime >= 1.2f)
+		{
+			beamtime = 0.0f;
+
 			mState = WaddleState::LeftMove;
 			mAnimator->Play(L"LeftMove", true);
 		}

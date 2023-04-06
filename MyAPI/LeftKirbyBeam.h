@@ -19,9 +19,12 @@ namespace My
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
+		void SetKirby(class Kirby* player) { mkirby = player; }
+
 	private:
 		Animator* mAnimator;
 		Collider* mCollider;
+		class Kirby* mkirby;
 
 		double beamtime;
 

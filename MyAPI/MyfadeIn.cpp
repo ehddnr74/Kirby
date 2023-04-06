@@ -6,6 +6,7 @@
 #include "MyTransform.h"
 #include "MyScene.h"
 #include "MyObject.h"
+#include "MyCamera.h"
 
 namespace My
 {
@@ -61,9 +62,13 @@ namespace My
 		func.AlphaFormat = 0;
 		func.SourceConstantAlpha = fadeAmount;
 
-		AlphaBlend(hdc, 0, 0
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+		pos = Camera::CalculatePos(pos);
+
+		AlphaBlend(hdc, pos.x, pos.y
 			, Fadein->GetWidth()
-			, Fadein->GetHeight()
+			, 403.0f
 			, Fadein->GetHdc()
 			, 0, 0
 			, Fadein->GetWidth()

@@ -19,6 +19,7 @@
 #include "LeftEnergyBeam.h"
 
 
+
 namespace My
 {
 	BrontoBurt::BrontoBurt()
@@ -95,14 +96,14 @@ namespace My
 		case BrontoBurt::BrontoBurtState::Charging:
 			charging();
 			break;
-		case BrontoBurt::BrontoBurtState::BrontoBurtDeath:
-			brontoburtdeath();
-			break;
 		case BrontoBurt::BrontoBurtState::HitKirbyBase:
 			hitkirbybase();
 			break;
 		case BrontoBurt::BrontoBurtState::LeftHitKirbyBase:
 			lefthitkirbybase();
+			break;
+		case BrontoBurt::BrontoBurtState::Death:
+			death();
 			break;
 		}
 	}
@@ -204,7 +205,8 @@ namespace My
 		}
 		if (mAirLeft = dynamic_cast<AirLeft*>(other->GetOwner()))
 		{
-			//SetDamage(50);
+			SetDamage(100);
+			mState = BrontoBurtState::Death;
 			//mState = BrontoBurtState::LeftHitAir;
 		}
 		if (mStar = dynamic_cast<Star*>(other->GetOwner()))
@@ -215,22 +217,22 @@ namespace My
 		if (mKirbyBeam = dynamic_cast<KirbyBeam*>(other->GetOwner()))
 		{
 			//SetDamage(100);
-			//mState = BrontoBurtState::BrontoBurtDeath;
+			//mState = BrontoBurtState::Death;
 		}
 		if (mLeftKirbyBeam = dynamic_cast<LeftKirbyBeam*>(other->GetOwner()))
 		{
 			//SetDamage(100);
-			//mState = BrontoBurtState::BrontoBurtDeath;
+			//mState = BrontoBurtState::Death;
 		}
 		if (mEnergyBeam = dynamic_cast<EnergyBeam*>(other->GetOwner()))
 		{
 			//SetDamage(100);
-			//mState = BrontoBurtState::BrontoBurtDeath;
+			//mState = BrontoBurtState::Death;
 		}
 		if (mLeftEnergyBeam = dynamic_cast<LeftEnergyBeam*>(other->GetOwner()))
 		{
 			//SetDamage(100);
-			//mState = BrontoBurtState::BrontoBurtDeath;
+			//mState = BrontoBurtState::Death;
 		}
 
 	}
@@ -282,16 +284,7 @@ namespace My
 		}
 	
 	}
-	void BrontoBurt::brontoburtdeath()
-	{
-		//deathtime += Time::DeltaTime();
 
-		//if (deathtime >= 0.5f)
-		//{
-		//	deathtime = 0.0f;
-		//	object::Destroy(this);
-		//}
-	}
 	void BrontoBurt::hitkirbybase()
 	{
 		//hitkirbybasetime += Time::DeltaTime();
@@ -319,5 +312,14 @@ namespace My
 	void BrontoBurt::lefthitkirbybase()
 	{
 
+	}
+	void BrontoBurt::death()
+	{
+		deathtime += Time::DeltaTime();
+
+		if (deathtime >= 0.5f)
+		{
+			object::Destroy(this);
+		}
 	}
 }

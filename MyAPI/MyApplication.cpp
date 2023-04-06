@@ -23,8 +23,10 @@ namespace My
 	{
 		mHwnd = hWnd;
 		mHdc = GetDC(hWnd);
-		mWidth = 534;//534;
-		mHeight = 485;//806;
+		mWidth = 533;//960 
+		mHeight = 803;//640
+
+
 
 		//비트맵 해상도를 설정하기 위한 실제 윈도우 크기를 계산해준다.
 		RECT rect = { 0,0,mWidth ,mHeight };
@@ -32,7 +34,7 @@ namespace My
 
 		//윈도우 크기 변경 및 출력 설정
 		SetWindowPos(mHwnd
-			, nullptr, 400,70
+			, nullptr, 700,70
 			, rect.right - rect.left
 			, rect.bottom - rect.top
 			, 0);

@@ -26,6 +26,8 @@
 #include "EnergyBeam.h"
 #include "LeftEnergyBeam.h"
 #include "BrontoBurt.h"
+#include "Beam.h"
+#include "LeftBeam.h"
 
 namespace My
 {
@@ -77,6 +79,10 @@ namespace My
 		, chargingtime(0.f)
 		,  beamuse(true)
 	    , beamcharging(false)
+		, leftbeamtime(0.f)
+		, beamjumping(false)
+		, wbeamhittime(0.f)
+		, lwbeamhittime(0.f)
 
 
 		, deathtime(0.f) //임시
@@ -199,6 +205,9 @@ namespace My
 		mAnimator->CreateAnimation(L"RightEnergyBeam", mKirby, Vector2(80.0f, 1600.0f), 16, 100, 1, Vector2::Zero, 0.05);
 
 
+		// 와들 빔 맞았을 때
+		mAnimator->CreateAnimation(L"LeftHitBeam", mKirby, Vector2(0.0f, 1640.0f), 16, 100, 10, Vector2::Zero, 0.15);
+		mAnimator->CreateAnimation(L"RightHitBeam", mKirby, Vector2(0.0f, 1680.0f), 16, 100, 10, Vector2::Zero, 0.15);
 
 
 		//mAnimator->CreateAnimation(L"RightAirRelease", mKirby, Vector2(160.0f, 400.0f), 16, 16, 8, Vector2::Zero, 0.05);
@@ -216,6 +225,8 @@ namespace My
 
 		mRigidBody = AddComponent<RigidBody>();
 		mRigidBody->SetMass(1.0f);
+
+		
 		//mRigidBody->SetGravity(Vector2(0.0f, 70.0f));
 
 		mState = eKirbyState::RightIdle;
@@ -465,6 +476,12 @@ namespace My
 			break;
 		case My::Kirby::eKirbyState::RightBeamPigHit:
 			rightbeampighit();
+			break;
+		case My::Kirby::eKirbyState::LeftBeamHit: // 와들빔
+			leftbeamhit();
+			break;
+		case My::Kirby::eKirbyState::RightBeamHit: // 맞았을 때
+			rightbeamhit();
 			break;
 		default:
 			break;
@@ -861,6 +878,18 @@ namespace My
 		{
 			StarCol = true;
 		}
+
+		if (LeftBeam* mLeftBeam = dynamic_cast<LeftBeam*>(other->GetOwner()))
+		{
+			mState = eKirbyState::LeftBeamHit;
+			mAnimator->Play(L"LeftHitBeam", false);
+		}
+
+		if (Beam* mBeam = dynamic_cast<Beam*>(other->GetOwner()))
+		{
+			mState = eKirbyState::RightBeamHit;
+			mAnimator->Play(L"RightHitBeam", false);
+		}
 	}
 
 	void Kirby::OnCollisionStay(Collider* other)
@@ -1115,11 +1144,11 @@ namespace My
 
 	void Kirby::death()
 	{
-		deathtime += Time::DeltaTime();
-		if (deathtime >= 0.5f)
-		{
-		object::Destroy(this);
-		}
+		//deathtime += Time::DeltaTime();
+		//if (deathtime >= 0.5f)
+		//{
+		//object::Destroy(this);
+		//}
 
 	}
 	void Kirby::leftabsorb()
@@ -2421,10 +2450,12 @@ namespace My
 			mAnimator->Play(L"LeftEnergyBeam", false);
 		}
 
-		if (Input::GetKeyUp(eKeyCode::Z) && chargingtime <= 0.5f)
+		if (beamjumping == false && Input::GetKeyUp(eKeyCode::Z) && chargingtime <= 0.5f)
 		{
 			chargingtime = 0.0f;
-			mLeftKirbyBeam = object::Instantiate<LeftKirbyBeam>(Vector2(pos.x - 100, pos.y + 35), Vector2(1.5f, 1.5f), eLayerType::Skill);
+			mLeftKirbyBeam = object::Instantiate<LeftKirbyBeam>(Vector2(pos.x - 100, pos.y + 80), Vector2(1.2f, 1.2f), eLayerType::Skill);
+
+			mLeftKirbyBeam->SetKirby(this);
 
 			mState = eKirbyState::LeftBeam;
 			mAnimator->Play(L"LeftBeam", false);
@@ -2498,11 +2529,12 @@ namespace My
 			mAnimator->Play(L"RightEnergyBeam", false);
 		}
 
-		if (Input::GetKeyUp(eKeyCode::Z) && chargingtime <=0.5f)
+		if (beamjumping == false && Input::GetKeyUp(eKeyCode::Z) && chargingtime <=0.5f)
 		{
 			chargingtime = 0.0f;
-			mKirbyBeam = object::Instantiate<KirbyBeam>(Vector2(pos.x + 100, pos.y + 35), Vector2(1.5f, 1.5f), eLayerType::Skill);
-
+			mKirbyBeam = object::Instantiate<KirbyBeam>(Vector2(pos.x + 100, pos.y +80), Vector2(1.2f, 1.2f), eLayerType::Skill);
+			mKirbyBeam->SetKirby(this);
+			
 			mState = eKirbyState::RightBeam;
 			mAnimator->Play(L"RightBeam", false);
 		}
@@ -2575,11 +2607,14 @@ namespace My
 			mAnimator->Play(L"LeftEnergyBeam", false);
 		}
 
-		if (Input::GetKeyUp(eKeyCode::Z) && chargingtime <= 0.5f)
+		if (beamjumping == false && Input::GetKeyUp(eKeyCode::Z) && chargingtime <= 0.5f)
 		{
 			beamcharging = false;
 			chargingtime = 0.0f;
-			mLeftKirbyBeam = object::Instantiate<LeftKirbyBeam>(Vector2(pos.x - 100, pos.y + 35), Vector2(1.5f, 1.5f), eLayerType::Skill);
+
+			mLeftKirbyBeam = object::Instantiate<LeftKirbyBeam>(Vector2(pos.x - 100, pos.y + 80), Vector2(1.2f, 1.2f), eLayerType::Skill);
+
+			mLeftKirbyBeam->SetKirby(this);
 
 			mState = eKirbyState::LeftBeam;
 			mAnimator->Play(L"LeftBeam", false);
@@ -2671,11 +2706,12 @@ namespace My
 			mAnimator->Play(L"RightEnergyBeam", false);
 		}
 
-		if (Input::GetKeyUp(eKeyCode::Z) && chargingtime <= 0.5f)
+		if (beamjumping == false && Input::GetKeyUp(eKeyCode::Z) && chargingtime <= 0.5f)
 		{
 			beamcharging = false;
 			chargingtime = 0.0f;
-			mKirbyBeam = object::Instantiate<KirbyBeam>(Vector2(pos.x + 100, pos.y + 35), Vector2(1.5f, 1.5f), eLayerType::Skill);
+			mKirbyBeam = object::Instantiate<KirbyBeam>(Vector2(pos.x + 100, pos.y + 80), Vector2(1.2f, 1.2f), eLayerType::Skill);
+			mKirbyBeam->SetKirby(this);
 
 			mState = eKirbyState::RightBeam;
 			mAnimator->Play(L"RightBeam", false);
@@ -2875,6 +2911,7 @@ namespace My
 
 		if (mRigidBody->GetGround() == true)
 		{
+			beamjumping = false;
 			mState = eKirbyState::LeftBeamIdle;
 			mAnimator->Play(L"LeftBeamIdle", true);
 
@@ -2883,6 +2920,17 @@ namespace My
 			mRigidBody->SetVelocity(Vector2::Zero);
 			mRigidBody->SetGround(true);
 		}
+
+		if (Input::GetKeyDown(eKeyCode::Z))
+		{
+			beamjumping = true;
+			mLeftKirbyBeam = object::Instantiate<LeftKirbyBeam>(Vector2(pos.x - 100, pos.y + 80), Vector2(1.2f, 1.2f), eLayerType::Skill);
+			mLeftKirbyBeam->SetKirby(this);
+
+			mState = eKirbyState::LeftBeam;
+			mAnimator->Play(L"LeftBeam", false);
+		}
+
 		if (Input::GetKey(eKeyCode::Left))
 		{
 			pos.x -= 50.0f * Time::DeltaTime();
@@ -2913,6 +2961,7 @@ namespace My
 
 	void Kirby::rightbeamjump()
 	{
+		
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 
@@ -2923,6 +2972,7 @@ namespace My
 
 		if (mRigidBody->GetGround() == true)
 		{
+			beamjumping = false;
 			mState = eKirbyState::RightBeamIdle;
 			mAnimator->Play(L"RightBeamIdle", true);
 
@@ -2932,15 +2982,19 @@ namespace My
 			mRigidBody->SetGround(true);
 		}
 
-		//if (Input::GetKeyDown(eKeyCode::Z))
-		//{
-		//    mRigidBody->SetVelocity(Vector2::Zero);
-		//	
-		//	mKirbyBeam = object::Instantiate<KirbyBeam>(Vector2(pos.x + 100, pos.y + 35), Vector2(1.5f, 1.5f), eLayerType::Skill);
+		if (Input::GetKeyDown(eKeyCode::Z))
+		{
+			beamjumping = true;
+			//mRigidBody->SetVelocity(Vector2::Zero);
+			
 
-		//	mState = eKirbyState::RightBeam;
-		//	mAnimator->Play(L"RightBeam", false);
-		//}
+			mKirbyBeam = object::Instantiate<KirbyBeam>(Vector2(pos.x + 100, pos.y + 80), Vector2(1.2f, 1.2f), eLayerType::Skill);
+			mKirbyBeam->SetKirby(this);
+
+			
+			mState = eKirbyState::RightBeam;
+			mAnimator->Play(L"RightBeam", false);
+		}
 
 
 		if (Input::GetKey(eKeyCode::Right))
@@ -3227,13 +3281,18 @@ namespace My
 
 	void Kirby::leftbeam()
 	{
-		beamtime += Time::DeltaTime();
+		leftbeamtime += Time::DeltaTime();
 
-		if (beamtime >= 0.35f)
+
+		if (mRigidBody->GetGround() == true)
 		{
-			beamtime = 0.0f;
-			mState = eKirbyState::LeftBeamIdle;
-			mAnimator->Play(L"LeftBeamIdle", true);
+			if (leftbeamtime >= 0.35f)
+			{
+				mRigidBody->SetVelocity(Vector2(0.0f, 0.0f));
+				leftbeamtime = 0.0f;
+				mState = eKirbyState::LeftBeamIdle;
+				mAnimator->Play(L"LeftBeamIdle", true);
+			}
 		}
 	}
 
@@ -3241,11 +3300,16 @@ namespace My
 	{
 		beamtime += Time::DeltaTime();
 
-		if (beamtime >= 0.35f)
+
+		if (mRigidBody->GetGround() == true)
 		{
-			beamtime = 0.0f;
-			mState = eKirbyState::RightBeamIdle;
-			mAnimator->Play(L"RightBeamIdle", true);
+			if (beamtime >= 0.35f)
+			{
+				mRigidBody->SetVelocity(Vector2(0.0f, 0.0f));
+				beamtime = 0.0f;
+				mState = eKirbyState::RightBeamIdle;
+				mAnimator->Play(L"RightBeamIdle", true);
+			}
 		}
 	}
 
@@ -3824,5 +3888,39 @@ namespace My
 
 			mRigidBody->SetVelocity(velocity);
 		}
+	}
+	void Kirby::leftbeamhit()
+	{
+		lwbeamhittime += Time::DeltaTime();
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		pos.x -= 150.0f * Time::DeltaTime();
+
+		if (lwbeamhittime >= 1.0f)
+		{
+			lwbeamhittime = 0.0f;
+			mState = eKirbyState::LeftIdle;
+			mAnimator->Play(L"LeftIdle", true);
+		}
+		tr->SetPos(pos);
+	}
+	void Kirby::rightbeamhit()
+	{
+		wbeamhittime += Time::DeltaTime();
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		pos.x += 150.0f * Time::DeltaTime();
+
+		if (wbeamhittime >= 1.0f)
+		{
+			wbeamhittime = 0.0f;
+			mState = eKirbyState::RightIdle;
+			mAnimator->Play(L"RightIdle", true);
+		}
+		tr->SetPos(pos);
 	}
 	}

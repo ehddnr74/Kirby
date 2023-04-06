@@ -22,14 +22,14 @@ namespace My
 
 	void Ground::Initialize()
 	{
-		mImage = Resources::Load<Image>(L"stage1_1GR", L"..\\Resources\\stage11grrr.bmp");
+		mImage = Resources::Load<Image>(L"stage1_1GR", L"..\\Resources\\stage11 gr.bmp");
 
 		GameObject::Initialize();
 	}
 
 	void Ground::Update()
 	{
-		Transform* playerTr = mKirby->GetComponent<Transform>();
+
 		//Transform* waddleTr = mWaddle->GetComponent<Transform>();
 
 		//Transform* twizzyTr = mTwizzy->GetComponent<Transform>();
@@ -40,96 +40,100 @@ namespace My
 		//float twizzyx = twizzyTr->GetPos().x;
 		//float twizzyy = twizzyTr->GetPos().y;
 
-		float x = playerTr->GetPos().x;
-		float y = playerTr->GetPos().y;
-
-		//float waddlex = waddleTr->GetPos().x;
-		//float waddley = waddleTr->GetPos().y;
-
-		COLORREF basecolor = mImage->GetPixel(x, y - 20);
-		COLORREF color = mImage->GetPixel(x + 27, y - 20); // 오른쪽 아래 
-		COLORREF color3 = mImage->GetPixel(x - 23, y - 20); // 왼쪽 아래 
-		COLORREF color1 = mImage->GetPixel(x + 27, y - 40); //오른쪽 가운데 
-		COLORREF color2 = mImage->GetPixel(x - 23, y - 40); // 왼쪽 가운데 
-		COLORREF color5 = mImage->GetPixel(x, y); // 
-
-		//COLORREF twizzy = mImage->GetPixel(twizzyx + 27, twizzyy - 40);
-
-		//COLORREF waddle = mImage->GetPixel(waddlex + 27, waddley - 40);
-
-		//RigidBody* tb = mTwizzy->GetComponent<RigidBody>();
-
-		RigidBody* rb = mKirby->GetComponent<RigidBody>();
-
-
-		//if (waddle == RGB(200, 0, 200))
+		//if (mKirby->GetState() != Kirby::eKirbyState::Death)
 		//{
-		//	Vector2 waddlePos = waddleTr->GetPos();
-		//	waddlePos.x -= 5;
-		//	playerTr->SetPos(waddlePos);
-		//}
 
-		//if (mTwizzy->GetState() != Twizzy::TwizzyState::TwizzyDeath)
-		//{
-		//	Transform* twizzyTr = mTwizzy->GetComponent<Transform>();
-		//	RigidBody* tb = mTwizzy->GetComponent<RigidBody>();
+			Transform* playerTr = mKirby->GetComponent<Transform>();
+			float x = playerTr->GetPos().x;
+			float y = playerTr->GetPos().y;
 
-		//	float twizzyx = twizzyTr->GetPos().x;
-  //          float twizzyy = twizzyTr->GetPos().y;
+			//float waddlex = waddleTr->GetPos().x;
+			//float waddley = waddleTr->GetPos().y;
 
-		//	COLORREF twizzy = mImage->GetPixel(twizzyx + 27, twizzyy - 40);
+			COLORREF basecolor = mImage->GetPixel(x, y - 20);
+			COLORREF color = mImage->GetPixel(x + 27, y - 20); // 오른쪽 아래 
+			COLORREF color3 = mImage->GetPixel(x - 23, y - 20); // 왼쪽 아래 
+			COLORREF color1 = mImage->GetPixel(x + 27, y - 40); //오른쪽 가운데 
+			COLORREF color2 = mImage->GetPixel(x - 23, y - 40); // 왼쪽 가운데 
+			COLORREF color5 = mImage->GetPixel(x, y); // 
 
-		//	if (twizzy == RGB(255, 0, 255))
-		//	{
-		//		tb->SetGround(true);
-		//	}
+			//COLORREF twizzy = mImage->GetPixel(twizzyx + 27, twizzyy - 40);
 
-		//}
-		//if (mTwizzy->GetState() == Twizzy::TwizzyState::TwizzyDeath)
-		//{
-		//	int a = 0;
-		//}
+			//COLORREF waddle = mImage->GetPixel(waddlex + 27, waddley - 40);
+
+			//RigidBody* tb = mTwizzy->GetComponent<RigidBody>();
+
+			RigidBody* rb = mKirby->GetComponent<RigidBody>();
 
 
-		if (color1 == RGB(200, 0, 200))
-		{
-			Vector2 pos = playerTr->GetPos();
-			pos.x -= 5;
-			playerTr->SetPos(pos);
-		}
+			//if (waddle == RGB(200, 0, 200))
+			//{
+			//	Vector2 waddlePos = waddleTr->GetPos();
+			//	waddlePos.x -= 5;
+			//	playerTr->SetPos(waddlePos);
+			//}
 
-		if (color2 == RGB(100, 0, 100))
-		{
-			Vector2 pos = playerTr->GetPos();
-			pos.x += 5;
-			playerTr->SetPos(pos);
-		}
+			//if (mTwizzy->GetState() != Twizzy::TwizzyState::TwizzyDeath)
+			//{
+			//	Transform* twizzyTr = mTwizzy->GetComponent<Transform>();
+			//	RigidBody* tb = mTwizzy->GetComponent<RigidBody>();
+
+			//	float twizzyx = twizzyTr->GetPos().x;
+	  //          float twizzyy = twizzyTr->GetPos().y;
+
+			//	COLORREF twizzy = mImage->GetPixel(twizzyx + 27, twizzyy - 40);
+
+			//	if (twizzy == RGB(255, 0, 255))
+			//	{
+			//		tb->SetGround(true);
+			//	}
+
+			//}
+			//if (mTwizzy->GetState() == Twizzy::TwizzyState::TwizzyDeath)
+			//{
+			//	int a = 0;
+			//}
+
+
+			if (color1 == RGB(200, 0, 200))
+			{
+				Vector2 pos = playerTr->GetPos();
+				pos.x -= 5;
+				playerTr->SetPos(pos);
+			}
+
+			if (color2 == RGB(100, 0, 100))
+			{
+				Vector2 pos = playerTr->GetPos();
+				pos.x += 5;
+				playerTr->SetPos(pos);
+			}
 
 
 
-		if (color3 == RGB(255, 0, 255) && basecolor != RGB(255, 0, 255) && color != RGB(255, 0, 255))
-		{
-			rb->SetGround(true);
-		
-
-			Vector2 pos = playerTr->GetPos();
-			pos.y -= 1;
-			playerTr->SetPos(pos);
+			if (color3 == RGB(255, 0, 255) && basecolor != RGB(255, 0, 255) && color != RGB(255, 0, 255))
+			{
+				rb->SetGround(true);
 
 
-			if (mKirby->GetJump())
+				Vector2 pos = playerTr->GetPos();
+				pos.y -= 1;
+				playerTr->SetPos(pos);
+
+
+				if (mKirby->GetJump())
+				{
+					rb->SetGround(false);
+				}
+				if (mKirby->GetJump() == false)
+				{
+					rb->SetGround(true);
+				}
+			}
+			else
 			{
 				rb->SetGround(false);
 			}
-			if (mKirby->GetJump() == false)
-			{
-				rb->SetGround(true);
-			}
-		}
-		else
-		{
-			rb->SetGround(false);
-     	}
 
 			if (basecolor == RGB(255, 0, 255) || color3 == RGB(255, 0, 255) || color == RGB(255, 0, 255))
 			{
@@ -157,14 +161,14 @@ namespace My
 				rb->SetGround(false);
 			}
 		}
-	
 
 	void Ground::Render(HDC hdc)
 	{
-
 		//Transform* tr = GetComponent<Transform>();
+		//Vector2 pos = tr->GetPos();
+		//pos = Camera::CalculatePos(pos);
 
-		//TransparentBlt(hdc, tr->GetPos().x, tr->GetPos().y
+		//TransparentBlt(hdc, pos.x, pos.y
 		//	, mImage->GetWidth(), mImage->GetHeight()
 		//	, mImage->GetHdc()
 		//	, 0, 0
