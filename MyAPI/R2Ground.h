@@ -19,12 +19,14 @@ namespace My
 		virtual void OnCollisionExit(class Collider* other);
 
 		void SetPlayer(class Kirby* player) { mKirby = player; }
+		void SetBros(class Bros* bros) { mBros = bros; }
 
 
 	private:
 		class Collider* mCollider;
 		class Image* mImage;
 		class Kirby* mKirby;
+		class Bros* mBros;
 
 	};
 }

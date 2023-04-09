@@ -111,9 +111,17 @@ namespace My
 			RightBeamPigHit,
 
 			LeftBeamHit, //와들빔
-			RightBeamHit //맞았을 때
-
+			RightBeamHit, //맞았을 때
+			LBJHR,
+			RBJHR,
+			LBJH,
+			RBJH,
+			LPBJHR,
+			LPBJH,
+			RPBJHR,
+			RPBJH
 		};
+
 
 		Kirby();
 		~Kirby();
@@ -128,6 +136,13 @@ namespace My
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
+
+
+		void SetDamage(int damage) { KirbyHP -= damage; }
+		int GetHP() { return KirbyHP; }
+
+		bool GetLeftJumpAbsorbing() { return leftjumpabsorbing; }
+		bool GetJumpAbsorbing() { return jumpabsorbing; }
 
 		bool GetJumpingBeam() { return beamjumping; }
 
@@ -248,6 +263,14 @@ namespace My
 
 		void leftbeamhit(); // 와들빔
 		void rightbeamhit(); // 맞았을 때
+		void lbjhr();
+		void lbjh();
+		void rbjhr();
+		void rbjh();
+		void lpbjhr();
+		void lpbjh();
+		void rpbjhr();
+		void rpbjh();
 		
 
 	private:
@@ -281,6 +304,8 @@ namespace My
 		bool jumpabsolb; // 점프한 상태에서 몬스터를 먹었을때 true가 됨
 		bool beamuse;
 		bool beamcharging;
+		bool jumpabsorbing;
+		bool leftjumpabsorbing;
 
 		int Kirbydir;
 
@@ -299,6 +324,7 @@ namespace My
 		class LeftEnergyBeam* mLeftEnergyBeam;
 		class Beam* mBeam;
 		class LeftBeam* mLeftBeam;
+		class Bros* mBros;
 
 		double kirbytime;
 		double beamkirbytime;
@@ -318,6 +344,8 @@ namespace My
 		double righthitpigbasetime;
 		double leftpigjumphitreleasetime;
 		double rightpigjumphitreleasetime;
+		double Ljumptime;
+		double Rjumptime;
 
 		double beamtime;
 		double leftbeamtime;
@@ -335,8 +363,11 @@ namespace My
 
 
 		bool beamjumping; //임시
+		bool LRjumpchange;
+		bool RLjumpchange;
 
-
+		int Damage;
+		int KirbyHP;
 
 
 	};

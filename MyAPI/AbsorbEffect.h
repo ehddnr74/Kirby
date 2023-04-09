@@ -24,8 +24,7 @@ namespace My
 	   int GetCollision() { return Collision; }
 
 
-
-
+	   void SetKirby(class Kirby* player) { mKirby = player; }
 	   
 		
 	private:
@@ -33,6 +32,8 @@ namespace My
 		double mTime;
 		int Collision;
 		class Kirby* mKirby;
+		class Cappy* mCappy;
 		class Waddle* mWaddle;
+		class Bros* mBros;
 	};
 }

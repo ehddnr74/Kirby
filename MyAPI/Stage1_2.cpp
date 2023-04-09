@@ -10,6 +10,11 @@
 #include "Myfadein.h"
 #include "MyfadeOut.h"
 #include "R2Ground.h"
+#include "MyCamera.h"
+#include "HP.h"
+#include "Stage2Pt.h"
+#include "MyCollisionManager.h"
+#include "Bros.h"
 
 
 namespace My
@@ -26,6 +31,14 @@ namespace My
 	void Stage2Scene::Initialize()
 	{
 		Scene::Initialize();
+
+		mStage2Pt = object::Instantiate<Stage2Pt>(Vector2(1380.0f, 250.f), Vector2(1.0f, 1.0f), (eLayerType::Portal));
+		SetPt(mStage2Pt);
+
+		object::Instantiate<HP>(eLayerType::UI);
+
+	
+
 		//mroom2 = new Room2();
 		//AddGameObject(mroom2, eLayerType::Stage);
 
@@ -33,11 +46,8 @@ namespace My
 
 		//object::Instantiate<Stage12bk>(eLayerType::BG);
 
-		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(129.0f, 384.0f), Vector2(2.0f, 2.0f),eLayerType::Player);
 
-		R2Ground* ground = object::Instantiate<R2Ground>(eLayerType::Ground);
 
-		ground->SetPlayer(mKirby);
 
 		//object::Instantiate<Room2>(eLayerType::Stage);
 		
@@ -50,6 +60,19 @@ namespace My
 		if (Input::GetKeyState(eKeyCode::E) == eKeyState::Down)
 		{
 			SceneManager::LoadScene(eSceneType::Title);
+		}
+
+		if (mStage2Pt->GetPortal())
+		{
+			if (Input::GetKeyDown(eKeyCode::Up))
+			{
+				SceneManager::LoadScene(eSceneType::Title);
+			}
+		}
+
+		if (mBros->GetHP() <= 0)
+		{
+			ground->SetBros(nullptr);
 		}
 
 		Scene::Update();
@@ -67,7 +90,39 @@ namespace My
 
 	void Stage2Scene::OnEnter()
 	{
-		object::Instantiate<FadeIn>(eLayerType::fade);
+		Camera::Camera::SetCameraType(Camera::eCameraEffectType::FadeIn);
+
+		R2Ground* ground = object::Instantiate<R2Ground>(eLayerType::Ground);
+
+		SetGround(ground);
+
+		object::Instantiate<Stage12bk>(eLayerType::BG);
+
+		object::Instantiate<Room2>(eLayerType::Stage);
+
+		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(129.0f, 384.0f), Vector2(2.0f, 2.0f), eLayerType::Player);
+
+		SetPlayer(mKirby);
+
+		Bros* mBros = object::Instantiate<Bros>(Vector2(400.0f, 430.0f), Vector2(2.0f, 2.0f), eLayerType::Monster); // 400, 440
+
+		SetBros(mBros);
+
+		ground->SetBros(mBros);
+
+		Camera::SetTarget(mKirby);
+
+		ground->SetPlayer(mKirby);
+
+
+
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterSkill, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Portal, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Air, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Star, true);
+		CollisionManager::SetLayer(eLayerType::Skill, eLayerType::Monster, true);
 	}
 
 	void Stage2Scene::OnExit()

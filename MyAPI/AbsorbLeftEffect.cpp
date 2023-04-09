@@ -11,6 +11,8 @@
 #include "MyObject.h"
 #include "MyKirby.h"
 #include "MyWaddle.h"
+#include "Bros.h"
+#include "MyCappy.h"
 
 namespace My
 {
@@ -33,12 +35,11 @@ namespace My
 		mAnimator = AddComponent<Animator>();
 		//mAnimator = CreateAnimation(L"Left")
 		mAnimator->CreateAnimation(L"LeftEffect", AbsorbLeftEffect, Vector2::Zero, 2, 1, 2, Vector2::Zero, 0.3);
-
 		mAnimator->Play(L"LeftEffect", true);
 
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(-50.0f, -47.0f));
-		collider->SetSize(Vector2(100.0f, 43.0f));
+		collider->SetCenter(Vector2(-50.0f, -60.0f));
+		collider->SetSize(Vector2(100.0f, 70.0f));
 
 
 		GameObject::Initialize();
@@ -46,6 +47,22 @@ namespace My
 	void AbsorbLeftEffect::Update()
 	{
 		GameObject::Update();
+
+		if (mKirby != nullptr)
+		{
+			if (mKirby->GetLeftJumpAbsorbing())
+			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 BeamPos = tr->GetPos();
+				Transform* kr = mKirby->GetComponent<Transform>();
+				Vector2 KirbyPos = kr->GetPos();
+
+				BeamPos.x = KirbyPos.x - 70;
+				BeamPos.y = KirbyPos.y - 10;
+
+				tr->SetPos(BeamPos);
+			}
+		}
 	}
 	void AbsorbLeftEffect::Render(HDC hdc)
 	{
@@ -83,13 +100,28 @@ namespace My
 		otherPos.x += 250.0f * Time::DeltaTime();
 
 		tr->SetPos(otherPos);
-
-		if (EffectPos.x + 20.0f < otherPos.x )
+	
+		if (EffectPos.x + 20.0f < otherPos.x)
 		{
-			object::Destroy(other->GetOwner());
-			object::Destroy(this);
+			if (Cappy* mCappy = dynamic_cast<Cappy*>(other->GetOwner()))
+			{
+				mCappy->SetDamage(100);
+				object::Destroy(other->GetOwner());
+				object::Destroy(this);
+			}
+			else if (Bros* mBros = dynamic_cast<Bros*>(other->GetOwner()))
+			{
+				mBros->SetDamage(100);
+				object::Destroy(other->GetOwner());
+				object::Destroy(this);
+			}
+			else
+			{
+				object::Destroy(other->GetOwner());
+				object::Destroy(this);
+			}
+		
 		}
-
 	}
 	void AbsorbLeftEffect::OnCollisionExit(Collider* other)
 	{

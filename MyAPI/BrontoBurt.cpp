@@ -29,6 +29,8 @@ namespace My
 		, brontoburtHP(100)
 		, deathtime(0.f)
 		, hitkirbybasetime(0.f)
+		, hitairtime(0.f)
+		, hitstartime(0.f)
 		, Check(true)
 	{
 
@@ -68,20 +70,21 @@ namespace My
 	{
 		GameObject::Update();
 
-
+			
+			if (mkirby != nullptr)
+			{ 
 			Transform* kirbytr = mkirby->GetComponent<Transform>();
-			Transform* burttr = this->GetComponent<Transform>();
-
 			float distance;
-
+			Transform* burttr = this->GetComponent<Transform>();
 			distance = burttr->GetPos().x - kirbytr->GetPos().x;
 			if (Check == true)
 			{
-				if (distance <= 400.0f)
-		   	{
+				if (distance <= 480.0f)
+				{
 					Check = false;
-				mState = BrontoBurtState::LeftFly;
-				mAnimator->Play(L"LeftFly", false);
+					mState = BrontoBurtState::LeftFly;
+					mAnimator->Play(L"LeftFly", false);
+				}
 			}
 		}
 
@@ -105,6 +108,15 @@ namespace My
 		case BrontoBurt::BrontoBurtState::Death:
 			death();
 			break;
+		case BrontoBurt::BrontoBurtState::HitAir:
+			hitair();
+			break;
+		case BrontoBurt::BrontoBurtState::LeftHitAir:
+			hitleftair();
+			break;
+		case BrontoBurt::BrontoBurtState::HitStar:
+			hitstar();
+			break;
 		}
 	}
 	void BrontoBurt::Render(HDC hdc)
@@ -121,118 +133,117 @@ namespace My
 	}
 	void BrontoBurt::OnCollisionEnter(Collider* other)
 	{
-		//if (mkirby = dynamic_cast<Kirby*>(other->GetOwner()))
-		//{
-		//	if (mkirby->GetState() == Kirby::eKirbyState::LeftBeamBaseHit)
-		//	{
-		//		SetDamage(50);
-		//		mState = BrontoBurtState::LeftHitKirbyBase;
-		//	}
-		//	if (mkirby->GetState() == Kirby::eKirbyState::RightBeamBaseHit)
-		//	{
-		//		SetDamage(50);
-		//		mState = BrontoBurtState::HitKirbyBase;
-		//	}
-		//	if (mkirby->GetState() == Kirby::eKirbyState::LeftBeamJumpHitRelease)
-		//	{
-		//		SetDamage(50);
-		//		mState = BrontoBurtState::LeftHitKirbyBase;
-		//	}
-		//	if (mkirby->GetState() == Kirby::eKirbyState::RightBeamJumpHitRelease)
-		//	{
-		//		SetDamage(50);
-		//		mState = BrontoBurtState::HitKirbyBase;
-		//	}
-		//	if (mkirby->GetState() == Kirby::eKirbyState::LeftBeamPigHit)
-		//	{
-		//		SetDamage(50);
-		//		mState = BrontoBurtState::LeftHitKirbyBase;
-		//	}
-		//	if (mkirby->GetState() == Kirby::eKirbyState::RightBeamPigHit)
-		//	{
-		//		SetDamage(50);
-		//		mState = BrontoBurtState::HitKirbyBase;
-		//	}
+		if (mkirby = dynamic_cast<Kirby*>(other->GetOwner()))
+		{
+			if (mkirby->GetState() == Kirby::eKirbyState::LeftBeamBaseHit)
+			{
+				SetDamage(50);
+				mState = BrontoBurtState::LeftHitKirbyBase;
+			}
+			if (mkirby->GetState() == Kirby::eKirbyState::RightBeamBaseHit)
+			{
+				SetDamage(50);
+				mState = BrontoBurtState::HitKirbyBase;
+			}
+			if (mkirby->GetState() == Kirby::eKirbyState::LeftBeamJumpHitRelease)
+			{
+				SetDamage(50);
+				mState = BrontoBurtState::LeftHitKirbyBase;
+			}
+			if (mkirby->GetState() == Kirby::eKirbyState::RightBeamJumpHitRelease)
+			{
+				SetDamage(50);
+				mState = BrontoBurtState::HitKirbyBase;
+			}
+			if (mkirby->GetState() == Kirby::eKirbyState::LeftBeamPigHit)
+			{
+				SetDamage(50);
+				mState = BrontoBurtState::LeftHitKirbyBase;
+			}
+			if (mkirby->GetState() == Kirby::eKirbyState::RightBeamPigHit)
+			{
+				SetDamage(50);
+				mState = BrontoBurtState::HitKirbyBase;
+			}
 
-		//	if (mkirby->GetState() == Kirby::eKirbyState::LeftPigJumpHitRelease)
-		//	{
-		//		SetDamage(50);
-		//		mState = BrontoBurtState::LeftHitKirbyBase;
-		//	}
-		//	if (mkirby->GetState() == Kirby::eKirbyState::RightPigJumpHitRelease)
-		//	{
-		//		SetDamage(50);
-		//		mState = BrontoBurtState::HitKirbyBase;
-		//	}
-		//	if (mkirby->GetState() == Kirby::eKirbyState::LeftPigBaseHit)
-		//	{
-		//		SetDamage(50);
-		//		mState = BrontoBurtState::LeftHitKirbyBase;
-		//	}
-		//	if (mkirby->GetState() == Kirby::eKirbyState::RightPigBaseHit)
-		//	{
-		//		SetDamage(50);
-		//		mState = BrontoBurtState::HitKirbyBase;
-		//	}
-		//	if (mkirby->GetState() == Kirby::eKirbyState::LeftJumpHitRelease || mkirby->GetState() == Kirby::eKirbyState::LeftAbsorbPigHit)
-		//	{
-		//		SetDamage(50);
-		//		mState = BrontoBurtState::LeftHitKirbyBase;
-		//	}
-		//	if (mkirby->GetState() == Kirby::eKirbyState::RightJumpHitRelease || mkirby->GetState() == Kirby::eKirbyState::RightAbsorbPigHit)
-		//	{
-		//		SetDamage(50);
-		//		mState = BrontoBurtState::HitKirbyBase;
-		//	}
-		//	if (mkirby->GetState() == Kirby::eKirbyState::LeftHit)
-		//	{
-		//		SetDamage(40);
-		//		mState = BrontoBurtState::LeftHitKirbyBase;
-		//	}
-		//	if (mkirby->GetState() == Kirby::eKirbyState::RightHit)
-		//	{
-		//		SetDamage(40);
-		//		mState = BrontoBurtState::HitKirbyBase;
-		//	}
-		//}
+			if (mkirby->GetState() == Kirby::eKirbyState::LeftPigJumpHitRelease)
+			{
+				SetDamage(50);
+				mState = BrontoBurtState::LeftHitKirbyBase;
+			}
+			if (mkirby->GetState() == Kirby::eKirbyState::RightPigJumpHitRelease)
+			{
+				SetDamage(50);
+				mState = BrontoBurtState::HitKirbyBase;
+			}
+			if (mkirby->GetState() == Kirby::eKirbyState::LeftPigBaseHit)
+			{
+				SetDamage(50);
+				mState = BrontoBurtState::LeftHitKirbyBase;
+			}
+			if (mkirby->GetState() == Kirby::eKirbyState::RightPigBaseHit)
+			{
+				SetDamage(50);
+				mState = BrontoBurtState::HitKirbyBase;
+			}
+			if (mkirby->GetState() == Kirby::eKirbyState::LeftJumpHitRelease || mkirby->GetState() == Kirby::eKirbyState::LeftAbsorbPigHit)
+			{
+				SetDamage(50);
+				mState = BrontoBurtState::LeftHitKirbyBase;
+			}
+			if (mkirby->GetState() == Kirby::eKirbyState::RightJumpHitRelease || mkirby->GetState() == Kirby::eKirbyState::RightAbsorbPigHit)
+			{
+				SetDamage(50);
+				mState = BrontoBurtState::HitKirbyBase;
+			}
+			if (mkirby->GetState() == Kirby::eKirbyState::LeftHit)
+			{
+				SetDamage(40);
+				mState = BrontoBurtState::LeftHitKirbyBase;
+			}
+			if (mkirby->GetState() == Kirby::eKirbyState::RightHit)
+			{
+				SetDamage(40);
+				mState = BrontoBurtState::HitKirbyBase;
+			}
+		}
 
 
 
 		if (mAir = dynamic_cast<Air*>(other->GetOwner()))
 		{
-			//SetDamage(50);
-			//mState = BrontoBurtState::HitAir;
+			SetDamage(50);
+			mState = BrontoBurtState::HitAir;
 		}
 		if (mAirLeft = dynamic_cast<AirLeft*>(other->GetOwner()))
 		{
-			SetDamage(100);
-			mState = BrontoBurtState::Death;
-			//mState = BrontoBurtState::LeftHitAir;
+			SetDamage(50);
+			mState = BrontoBurtState::LeftHitAir;
 		}
 		if (mStar = dynamic_cast<Star*>(other->GetOwner()))
 		{
-			//SetDamage(100);
-			//mState = BrontoBurtState::HitStar;
+			SetDamage(100);
+			mState = BrontoBurtState::HitStar;
 		}
 		if (mKirbyBeam = dynamic_cast<KirbyBeam*>(other->GetOwner()))
 		{
-			//SetDamage(100);
-			//mState = BrontoBurtState::Death;
+			SetDamage(100);
+			mState = BrontoBurtState::Death;
 		}
 		if (mLeftKirbyBeam = dynamic_cast<LeftKirbyBeam*>(other->GetOwner()))
 		{
-			//SetDamage(100);
-			//mState = BrontoBurtState::Death;
+			SetDamage(100);
+			mState = BrontoBurtState::Death;
 		}
 		if (mEnergyBeam = dynamic_cast<EnergyBeam*>(other->GetOwner()))
 		{
-			//SetDamage(100);
-			//mState = BrontoBurtState::Death;
+			SetDamage(100);
+			mState = BrontoBurtState::Death;
 		}
 		if (mLeftEnergyBeam = dynamic_cast<LeftEnergyBeam*>(other->GetOwner()))
 		{
-			//SetDamage(100);
-			//mState = BrontoBurtState::Death;
+			SetDamage(100);
+			mState = BrontoBurtState::Death;
 		}
 
 	}
@@ -285,36 +296,147 @@ namespace My
 	
 	}
 
+	void BrontoBurt::hitair()
+	{
+		hitairtime += Time::DeltaTime();
+
+		if (brontoburtHP > 0)
+		{
+			Transform* tr = GetComponent<Transform>();
+			Vector2 tzPos = tr->GetPos();
+
+			tzPos.x += 200.0f * Time::DeltaTime();
+
+			tr->SetPos(tzPos);
+
+			if (hitairtime >= 0.2f)
+			{
+				hitairtime = 0.0f;
+				mState = BrontoBurtState::LeftFly;
+				mAnimator->Play(L"LeftFly", true);
+			}
+
+		}
+
+		if (brontoburtHP <= 0)
+		{
+			hitairtime += Time::DeltaTime();
+
+			Transform* tr = GetComponent<Transform>();
+			Vector2 tzPos = tr->GetPos();
+
+			tzPos.x += 100.0f * Time::DeltaTime();
+
+			tr->SetPos(tzPos);
+
+			if (hitairtime >= 0.1f)
+			{
+				mState = BrontoBurtState::Death;
+			}
+		}
+	}
+
+	void BrontoBurt::hitleftair()
+	{
+		hitairtime += Time::DeltaTime();
+
+		if (brontoburtHP > 0)
+		{
+			Transform* tr = GetComponent<Transform>();
+			Vector2 tzPos = tr->GetPos();
+
+			tzPos.x -= 200.0f * Time::DeltaTime();
+
+			tr->SetPos(tzPos);
+
+			if (hitairtime >= 0.2f)
+			{
+				hitairtime = 0.0f;
+				mState = BrontoBurtState::LeftFly;
+				mAnimator->Play(L"LeftFly", true);
+			}
+		}
+		if (brontoburtHP <= 0)
+		{
+			hitairtime += Time::DeltaTime();
+
+			Transform* tr = GetComponent<Transform>();
+			Vector2 tzPos = tr->GetPos();
+
+			tzPos.x -= 100.0f * Time::DeltaTime();
+
+			tr->SetPos(tzPos);
+
+			if (hitairtime >= 0.1f)
+			{
+				mState = BrontoBurtState::Death;
+			}
+		}
+	}
+
+	void BrontoBurt::hitstar()
+	{
+	}
+
 	void BrontoBurt::hitkirbybase()
 	{
-		//hitkirbybasetime += Time::DeltaTime();
+		hitkirbybasetime += Time::DeltaTime();
 
-		//Transform* tr = GetComponent<Transform>();
-		//Vector2 bbPos = tr->GetPos();
+		Transform* tr = GetComponent<Transform>();
+		Vector2 tzPos = tr->GetPos();
 
-		//mRigidBody->SetGround(true);
 
-		//bbPos.x += 100.0f * Time::DeltaTime();
+		tzPos.x += 100.0f * Time::DeltaTime();
 
-		//if (hitkirbybasetime >= 0.4f)
-		//{
-		//	mState = BrontoBurtState::LeftFly;
-		//	mAnimator->Play(L"LeftFly", true);
-		//}
 
-		//if (brontoburtHP <= 0)
-		//{
-		//	mState = BrontoBurtState::BrontoBurtDeath;
-		//}
 
-		//tr->SetPos(bbPos);
+		if (hitkirbybasetime >= 0.2f)
+		{
+			hitkirbybasetime = 0.0f;
+			mState = BrontoBurtState::LeftFly;
+			mAnimator->Play(L"LeftFly", true);
+		}
+
+		if (brontoburtHP <= 0)
+		{
+			tzPos.x += 2000.0f * Time::DeltaTime();
+
+			mState = BrontoBurtState::Death;
+		}
+
+		tr->SetPos(tzPos);
 	}
 	void BrontoBurt::lefthitkirbybase()
 	{
+		hitkirbybasetime += Time::DeltaTime();
 
+		Transform* tr = GetComponent<Transform>();
+		Vector2 tzPos = tr->GetPos();
+
+
+		tzPos.x -= 100.0f * Time::DeltaTime();
+
+
+
+		if (hitkirbybasetime >= 0.2f)
+		{
+			hitkirbybasetime = 0.0f;
+			mState = BrontoBurtState::LeftFly;
+			mAnimator->Play(L"LeftFly", true);
+		}
+
+		if (brontoburtHP <= 0)
+		{
+			tzPos.x -= 2000.0f * Time::DeltaTime();
+
+			mState = BrontoBurtState::Death;
+		}
+		tr->SetPos(tzPos);
 	}
 	void BrontoBurt::death()
 	{
+		mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
+
 		deathtime += Time::DeltaTime();
 
 		if (deathtime >= 0.5f)

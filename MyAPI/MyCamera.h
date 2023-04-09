@@ -23,6 +23,7 @@ namespace My
 
 		static void SetTarget(GameObject* target) { mTarget = target; }
 		static Vector2 CalculatePos(Vector2 pos) { return pos - mDistance; }
+		static void SetCameraType(eCameraEffectType mtype) { mType = mtype; }
 
 
 	private:

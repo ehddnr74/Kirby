@@ -21,7 +21,7 @@ namespace My
 	void My::Stage11bk::Initialize()
 	{
 
-		mbg1 = Resources::Load<Image>(L"Stage11bk", L"..\\Resources\\stage1_1bk.bmp");
+		mbg1 = Resources::Load<Image>(L"Stage11bk", L"..\\Resources\\Stage1_1Bk.bmp");
 
 
 

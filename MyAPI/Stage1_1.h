@@ -4,6 +4,8 @@
 
 namespace My
 {
+	class StarMap;
+	class Restrict;
 	class HP;
 	class Twizzy;
 	class BrontoBurt;
@@ -26,6 +28,7 @@ namespace My
 		virtual void OnExit() override;
 
 		void SetPlayer(class Kirby* player) { mKirby = player; }
+		void SetGround(class Ground* ground) { mGround = ground; }
 
 	private:
 		Kirby* mKirby;
@@ -36,9 +39,12 @@ namespace My
 		Twizzy* mTwizzy;
 		BrontoBurt* mBrontoBurt;
 		HP* hp;
+		Restrict* mRestrict;
+		StarMap* mStar;
+		Ground* mGround;
 
 		double fadingtime;
-		
+
 	};
 }
 

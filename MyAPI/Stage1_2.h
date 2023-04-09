@@ -4,7 +4,7 @@
 
 namespace My
 {
-	class Room2;
+	class Stage2Pt;
 	class Kirby;
 	class Stage2Scene : public Scene
 	{
@@ -19,9 +19,20 @@ namespace My
 		virtual void OnEnter() override;
 		virtual void OnExit() override;
 
+
+		void SetPlayer(class Kirby* player) { mKirby = player; }
+		void SetPt(class Stage2Pt* stage2pt) { mStage2Pt = stage2pt; }
+		void SetGround(class R2Ground* Ground) { ground = Ground; }
+
+		void SetBros(class Bros* bros) { mBros = bros; }
+
+		
+
 	private:
-		Room2* mroom2;
 		class Kirby* mKirby;
+		class Stage2Pt* mStage2Pt;
+		class R2Ground* ground;
+		class Bros* mBros;
 
 	};
 }

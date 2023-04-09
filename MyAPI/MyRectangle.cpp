@@ -43,7 +43,7 @@ namespace My
 
 		Vector2 pos = Camera::CalculatePos(Pos);
 
-		Rectangle(hdc, pos.x,pos.y, pos.x+5, pos.y+5);
+		Rectangle(hdc, pos.x,pos.y-65, pos.x+5, pos.y-60);
 
 		(HPEN)SelectObject(hdc, oldPen);
 		(HBRUSH)SelectObject(hdc, oldBrush);

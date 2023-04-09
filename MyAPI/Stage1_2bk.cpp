@@ -5,6 +5,7 @@
 #include "MyTime.h"
 #include "MyTransform.h"
 #include "MyScene.h"
+#include "MyCamera.h"
 
 namespace My
 {
@@ -35,6 +36,9 @@ namespace My
 	{
 		GameObject::Render(hdc);
 
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+		pos = Camera::CalculatePos(pos);
 
 		//TransparentBlt(hdc, 0, 0
 		//	, mbg1->GetWidth() 
@@ -44,7 +48,7 @@ namespace My
 		//	, 673,217 
 		//	, RGB(72, 104, 112));
 
-		BitBlt(hdc, 0, 0, mbg2->GetWidth(), mbg2->GetHeight(), mbg2->GetHdc(), 0, 0, SRCCOPY);
+		BitBlt(hdc, pos.x, pos.y , mbg2->GetWidth(), mbg2->GetHeight(), mbg2->GetHdc(), 0, 0, SRCCOPY);
 	}
 
 	void My::Stage12bk::Release()

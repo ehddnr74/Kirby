@@ -3,11 +3,11 @@
 #include "Stage1_1.h"
 #include "Stage1_2.h"
 #include "MyCollisionManager.h"
+#include "Stage1_3.h"
+#include "TreeScene.h"
 
 namespace My
 {
-
-
 	std::vector<Scene*> SceneManager::mScenes = {};
 	Scene* SceneManager::mActiveScene = nullptr;
 
@@ -18,6 +18,8 @@ namespace My
 		mScenes[(UINT)eSceneType::Title] = new TitleScene();
 		mScenes[(UINT)eSceneType::Stage1_1] = new Stage1Scene();
 		mScenes[(UINT)eSceneType::Stage1_2] = new Stage2Scene();
+		mScenes[(UINT)eSceneType::Stage1_3] = new Stage1_3();
+		mScenes[(UINT)eSceneType::TreeScene] = new TreeScene();
 
 		for (Scene* scene : mScenes)
 		{

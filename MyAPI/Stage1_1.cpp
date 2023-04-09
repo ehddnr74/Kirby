@@ -29,11 +29,13 @@
 #include "BrontoBurt.h"
 #include "MyTwizzy.h"
 #include "HP.h"
+#include "restrict.h"
 
 namespace My
 {
 	Stage1Scene::Stage1Scene()
 		:fadingtime(0.f)
+		
 	{
 
 	}
@@ -46,87 +48,10 @@ namespace My
 	{
 		Scene::Initialize();
 
-		
-		//mKirby = new Kirby();
-		//AddGameObject(mKirby, eLayerType::Player);
-		// 
-		//object::Instantiate<FadeIn>(eLayerType::fade);
+		mStar = object::Instantiate<StarMap>(Vector2(1370, 260), Vector2(0.3f, 0.3f), (eLayerType::MapStar));
 
-		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(129.0f, 394.0f), Vector2(2.0f, 2.0f), (eLayerType::Player));
-
+		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(129.0f, 100.0f), Vector2(2.0f, 2.0f), (eLayerType::Player));
 		SetPlayer(mKirby);
-
-		Ground* ground1 = object::Instantiate<Ground>(eLayerType::Ground);
-
-
-		Rectangle1* rectangle = object::Instantiate<Rectangle1>(eLayerType::Rectangle);
-	
-		BrontoBurt* mBrontoBurt = object::Instantiate<BrontoBurt>(Vector2(900.0f, 80.0f), Vector2(2.0f, 2.0f), (eLayerType::Monster));
-
-		mWaddle = object::Instantiate<Waddle>(Vector2(370, 342), Vector2(2.2f, 2.2f), (eLayerType::Monster)); 
-		mCappy =object::Instantiate<Cappy>(Vector2(610, 338), Vector2(1.8f, 2.0f), (eLayerType::Monster)); 
-		mTwizzy = object::Instantiate<Twizzy>(Vector2(1100, 280), Vector2(2.0f, 2.0f), (eLayerType::Monster)); 
-
-		object::Instantiate<Stage11bk>(eLayerType::BG);
-
-		object::Instantiate<Room1>(eLayerType::Stage);
-		object::Instantiate<HP>(eLayerType::UI);
-
-		object::Instantiate<StarMap>(Vector2(1320, 240), Vector2(0.3f, 0.3f), (eLayerType::MapStar));
-
-		//object::Instantiate<LeftKirbyBeam>(Vector2(300, 300), Vector2(1.2f, 1.2f), (eLayerType::Skill)); 
-
-		ground1->SetWaddle(mWaddle);
-
-		//if(mKirby->GetState() != Kirby::eKirbyState::Death)
-
-
-		if (mKirby != nullptr)
-		{
-			ground1->SetPlayer(mKirby);
-			rectangle->SetPlayer(mKirby);
-			mWaddle->SetPlayer(mKirby);
-			Camera::SetTarget(mKirby);
-			mBrontoBurt->SetPlayer(mKirby);
-			mKirby->SetGround(ground1);
-		}
-
-		if (mKirby->GetState() == Kirby::eKirbyState::Death)
-		{
-			Camera::SetTarget(nullptr);
-		}
-
-		ground1->SetCappy(mCappy);
-		ground1->SetTwizzy(mTwizzy);
-		
-		
-
-		
-		
-
-		//mbg1 = new Stage11bk();
-		//AddGameObject(mbg1, eLayerType::BG);
-
-		//mroom1 = new Room1();
-		//AddGameObject(mroom1, eLayerType::Stage);
-
-
-		//Waddle* mWaddle = new Waddle();
-		//AddGameObject(mWaddle, eLayerType::Monster);
-
-		
-
-
-		//Cappy* mCappy = new Cappy();
-		//AddGameObject(mCappy, eLayerType::Monster);
-
-		
-
-		//Twizzy* mTwizzy = new Twizzy();
-		//AddGameObject(mTwizzy, eLayerType::Monster);
-
-	
-		
 
 		
 	}
@@ -139,13 +64,16 @@ namespace My
 		}
 		if (mKirby->GetStarCol() == true)
 		{
-			fadingtime += Time::DeltaTime();
-			object::Instantiate<FadeOut>(eLayerType::fade);
+			SceneManager::LoadScene(eSceneType::Stage1_2);
+		}		
+		if (mCappy->GetHP() <= 0)
+		{
+			mGround->SetCappy(nullptr);
+		}
 
-			if (fadingtime >= 2.0f)
-			{
-				SceneManager::LoadScene(eSceneType::Stage1_2);
-			}
+		if (mKirby->GetHP() <= 0)
+		{
+			Camera::SetTarget(nullptr);
 		}
 
 		Scene::Update();
@@ -163,21 +91,48 @@ namespace My
 
 	void Stage1Scene::OnEnter()
 	{
-		object::Instantiate<FadeIn>(eLayerType::fade);
+		Camera::SetCameraType(Camera::eCameraEffectType::FadeIn);
+
+		Rectangle1* rectangle = object::Instantiate<Rectangle1>(eLayerType::Rectangle);
+
+		Ground* mGround = object::Instantiate<Ground>(eLayerType::Ground);
+
+		object::Instantiate<Room1>(eLayerType::Stage);
+		object::Instantiate<Stage11bk>(eLayerType::BG);
+		object::Instantiate<HP>(eLayerType::UI);
+		mWaddle = object::Instantiate<Waddle>(Vector2(420, 390), Vector2(2.2f, 2.2f), (eLayerType::Monster));
+		mCappy = object::Instantiate<Cappy>(Vector2(800, 390), Vector2(1.8f, 2.0f), (eLayerType::Monster));
+		mTwizzy = object::Instantiate<Twizzy>(Vector2(1150, 330), Vector2(2.0f, 2.0f), (eLayerType::Monster));
+		BrontoBurt* mBrontoBurt = object::Instantiate<BrontoBurt>(Vector2(900.0f, 150.0f), Vector2(2.0f, 2.0f), (eLayerType::Monster));
+
+		SetGround(mGround);
+		mGround->SetCappy(mCappy);
+
+		if (mKirby != nullptr)
+		{
+			mGround->SetPlayer(mKirby);
+			rectangle->SetPlayer(mKirby);
+			mWaddle->SetPlayer(mKirby);
+			mBrontoBurt->SetPlayer(mKirby);
+			mKirby->SetGround(mGround);
+
+			Camera::SetTarget(mKirby);
+		}
+
 
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
-		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Effect, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterSkill, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MapStar, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Air, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Star, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MapStar, true);
 		CollisionManager::SetLayer(eLayerType::Skill, eLayerType::Monster, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterSkill, true);
 	}
 
 	void Stage1Scene::OnExit()
 	{
-		object::Instantiate<FadeOut>(eLayerType::fade);
+		//Camera::SetCameraType(Camera::eCameraEffectType::None);
+		//object::Instantiate<FadeOut>(eLayerType::fade);
 		//mKirby->SetPos(Vector2(0.0f, 0.0f));
 	}
 

@@ -11,6 +11,8 @@ namespace My
 		{
 			LeftMove,
 			RightMove,
+			LeftJump,
+			RightJump,
 			HitAir,
 			LeftHitAir,
 			HitStar,
@@ -33,9 +35,20 @@ namespace My
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
+
+		void SetDamage(int damage) { CappyHP -= damage; }
+		int GetHP() { return CappyHP; }
+ 
+		void SetDie(bool Die) { die = Die; }
+		bool GetDie() { return die; }
+
+
 	private:
 		void leftmove();
 		void rightmove();
+		void leftjump();
+		void rightjump();
+
 		void hitair();
 		void hitleftair();
 		void hitstar();
@@ -46,15 +59,26 @@ namespace My
 		void hitslidingleft();
 
 
-		void SetDamage(int damage) { CappyHP -= damage; }
+
 
 	private:
 
 		Animator* mAnimator;
 		CappyState mState;
+		class RigidBody* mRigidBody;
 		double cappytime;
+		double cjumptime;
 		int cappydir;
 		int CappyHP;
+
+
+		double hitairtime;
+		double hitstartime;
+
+		double hitkirbybasetime;
+		double hitslidingtime;
+
+		double deathtime;
 
 
 		class Air* mAir;
@@ -65,6 +89,8 @@ namespace My
 		class LeftKirbyBeam* mLeftKirbyBeam;
 		class EnergyBeam* mEnergyBeam;
 		class LeftEnergyBeam* mLeftEnergyBeam;
+
+		bool die;
 
 
 	};

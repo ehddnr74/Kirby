@@ -28,7 +28,7 @@ namespace My
 		mResolution.x = application.GetWidth();
 		mResolution.y = application.GetHeight();
 		mLookPosition = (mResolution / 2.0f);
-		mCenterPos = {-137.0f, -10.0f };
+		mCenterPos = {-188.0f, -70.0f };
 
 		mType = eCameraEffectType::None;
 		mCutton = Image::Create(L"Cutton", mResolution.x, mResolution.y, RGB(0, 0, 0));
@@ -42,52 +42,49 @@ namespace My
 			mLookPosition
 				= mTarget->GetComponent<Transform>()->GetPos() - mCenterPos;
 
-			if (mLookPosition.x <= 266.0f)
+			if (mLookPosition.x <= 317.0f)
 			{
-				mLookPosition.x = 266.0f;
+				mLookPosition.x = 317.0f;
 			}
-			if (mLookPosition.y <= 404.0f)
+			if (mLookPosition.y <= 453.0f)
 			{
-				mLookPosition.y = 404.0f;
+				mLookPosition.y = 453.0f;
 			}
-			if (mLookPosition.x >= 1334.f)
+			if (mLookPosition.x >= 1330.f)
 			{
 				mLookPosition.x = 1330.f;
 			}
-			if (mLookPosition.y >= 480.0f)
+			if (mLookPosition.y >= 485.0f)
 			{
-				mLookPosition.y = 480.0f;
+				mLookPosition.y = 485.0f;
 			}
 		}
-		//CalculatePos(mDistance);
+		mDistance = mLookPosition - (mResolution / 2.0f);
+		CalculatePos(mDistance);
 
-		//if (mAlphaTime < mEndTime)
-		//{
-		//	//255 - > 1
-		//	mAlphaTime += Time::DeltaTime();
-		//	float ratio = (mAlphaTime / mEndTime);
+		if (mAlphaTime < mEndTime)
+		{
+			//255 - > 1
+			mAlphaTime += Time::DeltaTime();
+			float ratio = (mAlphaTime / mEndTime);
 
-		//	if (mType == eCameraEffectType::FadeIn)
-		//	{
-		//		mCuttonAlpha = 1.0f - ratio;
-		//	}
-		//	else if (mType == eCameraEffectType::FadeOut)
-		//	{
-		//		mCuttonAlpha = ratio;
-		//	}
-		//	else
-		//	{
-
-		//	}
-		   // mLookPosition = (mResolution / 2.0f);
-		      mDistance = mLookPosition - (mResolution / 2.0f);
+			if (mType == eCameraEffectType::FadeIn)
+			{
+				mCuttonAlpha = 1.0f - ratio;
+			}
+			else if (mType == eCameraEffectType::FadeOut)
+			{
+				mCuttonAlpha = ratio;
+			}
 		}
+	}
+			//else
+		//{
+
+		//}
 
 
-
-		//mDistance = mLookPosition - ((mResolution / 2.0f));
-		//mDistance.x = mLookPosition.x - (mResolution.x / 2.0f);
-		//mDistance.y = mLookPosition.y  -(mResolution.y / 2.0f);
+	
 
 
 	void Camera::Render(HDC hdc)

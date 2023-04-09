@@ -6,6 +6,8 @@ enum class eSceneType
 	Title,
 	Stage1_1,
 	Stage1_2,
+	Stage1_3,
+	TreeScene,
 	Ending,
 	End,
 };
@@ -27,6 +29,7 @@ enum class eLayerType
 	Star,
 	UI,
 	fade,
+	Portal,
 	End,
 };
 

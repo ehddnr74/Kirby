@@ -22,11 +22,15 @@ namespace My
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
+		void SetKirby(class Kirby* player) { mKirby = player; }
+
 	private:
 		Animator* mAnimator;
 		float mTime;
 		int Collision;
 		class Kirby* mKirby;
 		class Waddle* mWaddle;
+		class Cappy* mCappy;
+		class Bros* mBros;
 	};
 }

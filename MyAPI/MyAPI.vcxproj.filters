@@ -134,6 +134,18 @@
     <Filter Include="Contents\Monster\Waddle\WaddleBeam">
       <UniqueIdentifier>{d7b7f59d-c578-4171-86a1-d535857c2f07}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Object\Portal">
+      <UniqueIdentifier>{3ff4b298-a698-4579-89cb-a34e75fc4a84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Monster\Bros">
+      <UniqueIdentifier>{80f6e9a0-0636-4026-9177-c7ac33e03e26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\MyStageScene\Stage1\Room3">
+      <UniqueIdentifier>{a8a8525f-5e47-412c-85ce-fce46177fa9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\MyStageScene\Stage1\TreeBoss">
+      <UniqueIdentifier>{37856629-ee01-4b1e-966a-019154613aa7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -311,6 +323,30 @@
     <ClInclude Include="Beam.h">
       <Filter>Contents\Monster\Waddle\WaddleBeam</Filter>
     </ClInclude>
+    <ClInclude Include="Stage2Pt.h">
+      <Filter>Contents\Object\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="Bros.h">
+      <Filter>Contents\Monster\Bros</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeStage.h">
+      <Filter>Contents\Scene\MyStageScene\Stage1\TreeBoss</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeBK.h">
+      <Filter>Contents\Scene\MyStageScene\Stage1\TreeBoss</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeScene.h">
+      <Filter>Contents\Scene\MyStageScene\Stage1\TreeBoss</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage1_3bk.h">
+      <Filter>Contents\Scene\MyStageScene\Stage1\Room3</Filter>
+    </ClInclude>
+    <ClInclude Include="Room3.h">
+      <Filter>Contents\Scene\MyStageScene\Stage1\Room3</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage1_3.h">
+      <Filter>Contents\Scene\MyStageScene\Stage1\Room3</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc">
@@ -479,6 +515,30 @@
     </ClCompile>
     <ClCompile Include="LeftBeam.cpp">
       <Filter>Contents\Monster\Waddle\WaddleBeam</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2Pt.cpp">
+      <Filter>Contents\Object\Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="Bros.cpp">
+      <Filter>Contents\Monster\Bros</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeBK.cpp">
+      <Filter>Contents\Scene\MyStageScene\Stage1\TreeBoss</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeScene.cpp">
+      <Filter>Contents\Scene\MyStageScene\Stage1\TreeBoss</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeStage.cpp">
+      <Filter>Contents\Scene\MyStageScene\Stage1\TreeBoss</Filter>
+    </ClCompile>
+    <ClCompile Include="Room3.cpp">
+      <Filter>Contents\Scene\MyStageScene\Stage1\Room3</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage1_3.cpp">
+      <Filter>Contents\Scene\MyStageScene\Stage1\Room3</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage1_3bk.cpp">
+      <Filter>Contents\Scene\MyStageScene\Stage1\Room3</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -32,6 +32,7 @@ namespace My
 		class Cappy* mCappy;
 		class Waddle* mWaddle;
 		class Twizzy* mTwizzy;
+		class Component* mcomp;
 
 	};
 }

@@ -8,6 +8,7 @@
 #include "MyObject.h"
 #include "MyInput.h"
 #include "MyCamera.h"
+#include "Bros.h"
 namespace My
 {
 	R2Ground::R2Ground()
@@ -21,20 +22,18 @@ namespace My
 
 	void R2Ground::Initialize()
 	{
-		mImage = Resources::Load<Image>(L"stage1_2GR", L"..\\Resources\\stagr12grrr.bmp");
+		mImage = Resources::Load<Image>(L"stage1_2GR", L"..\\Resources\\Stage2gr.bmp");
 
 		GameObject::Initialize();
 	}
 
 	void R2Ground::Update()
 	{
+		GameObject::Update();
+
 		Transform* playerTr = mKirby->GetComponent<Transform>();
-
-		Collider* kirbycol = mKirby->GetComponent<Collider>();
-
 		float x = playerTr->GetPos().x;
 		float y = playerTr->GetPos().y;
-
 
 		COLORREF basecolor = mImage->GetPixel(x, y - 20);
 		COLORREF color = mImage->GetPixel(x + 27, y - 20); // 坷弗率 酒贰 
@@ -42,64 +41,63 @@ namespace My
 		COLORREF color1 = mImage->GetPixel(x + 27, y - 40); //坷弗率 啊款单 
 		COLORREF color2 = mImage->GetPixel(x - 23, y - 40); // 哭率 啊款单 
 		COLORREF color5 = mImage->GetPixel(x, y); // 
-
+		COLORREF colorup = mImage->GetPixel(x, y - 70);//困率 啊款单
 
 		RigidBody* rb = mKirby->GetComponent<RigidBody>();
-		if (color3 != RGB(255, 0, 255) && basecolor != RGB(255, 0, 255) && color == RGB(255, 0, 255))
-		{
-			rb->SetGround(true);
 
+		if (mBros != nullptr)
+		{
+			//if (mBros->GetDeath() == false)
+			if (mBros->GetHP() >= 1)
+			{
+				Transform* BrosTr = mBros->GetComponent<Transform>();
+				COLORREF bros = mImage->GetPixel(BrosTr->GetPos().x, BrosTr->GetPos().y - 20);
+				RigidBody* bb = mBros->GetComponent<RigidBody>();
+
+				if (bros == RGB(255, 0, 255))
+				{
+					bb->SetGround(true);
+				}
+				else
+				{
+					bb->SetGround(false);
+				}
+			}
+		}
+	
+
+		if (colorup == RGB(100, 100, 100))
+		{
 			Vector2 pos = playerTr->GetPos();
-			pos.y -= 1;
+			pos.y += 1;
 			playerTr->SetPos(pos);
-
-
-			if (mKirby->GetJump())
-			{
-				rb->SetGround(false);
-			}
-			if (mKirby->GetJump() == false)
-			{
-				rb->SetGround(true);
-			}
-		}
-		else
-		{
-			rb->SetGround(false);
 		}
 
 
-		if (color3 == RGB(255, 0, 255) && basecolor != RGB(255, 0, 255) && color != RGB(255, 0, 255))
+		if (color1 == RGB(200, 0, 200))
 		{
-			rb->SetGround(true);
-
 			Vector2 pos = playerTr->GetPos();
-			pos.y -= 1;
+			pos.x -= 2;
 			playerTr->SetPos(pos);
-
-
-			if (mKirby->GetJump())
-			{
-				rb->SetGround(false);
-			}
-			if (mKirby->GetJump() == false)
-			{
-				rb->SetGround(true);
-			}
 		}
-		else
+
+		if (color2 == RGB(100, 0, 100))
 		{
-			rb->SetGround(false);
+			Vector2 pos = playerTr->GetPos();
+			pos.x += 2;
+			playerTr->SetPos(pos);
 		}
 
 		if (basecolor == RGB(255, 0, 255) || color3 == RGB(255, 0, 255) || color == RGB(255, 0, 255))
 		{
 			rb->SetGround(true);
 
-			Vector2 pos = playerTr->GetPos();
-			pos.y -= 1;
-			playerTr->SetPos(pos);
-
+			if (x >= 1150.f && x <= 1380.f)
+			{
+				Vector2 pos = playerTr->GetPos();
+				pos.y -= 1;
+				playerTr->SetPos(pos);
+			}
 
 			if (mKirby->GetJump())
 			{
@@ -111,16 +109,18 @@ namespace My
 			}
 		}
 
-
 		else
 		{
 			rb->SetGround(false);
 		}
+
 	}
+
 
 
 	void R2Ground::Render(HDC hdc)
 	{
+		GameObject::Render(hdc);
 
 		//Transform* tr = GetComponent<Transform>();
 
@@ -137,7 +137,7 @@ namespace My
 
 		BitBlt(hdc, pos.x, pos.y, mImage->GetWidth(), mImage->GetHeight(), mImage->GetHdc(), 0, 0, SRCCOPY);
 
-		GameObject::Render(hdc);
+		
 	}
 
 	void R2Ground::Release()

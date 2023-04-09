@@ -12,6 +12,8 @@
 #include "MyKirby.h"
 #include "Stage1_1.h"
 #include "MyCamera.h"
+#include "Bros.h"
+#include "MyCappy.h"
 
 namespace My
 {
@@ -40,8 +42,8 @@ namespace My
 		mAnimator->Play(L"RightEffect", true);
 
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(-40.0f, -50.0f));
-		collider->SetSize(Vector2(100.0f, 45.0f));
+		collider->SetCenter(Vector2(-40.0f, -60.0f));
+		collider->SetSize(Vector2(100.0f, 60.0f));
 
 		
 
@@ -52,6 +54,22 @@ namespace My
 	void AbsorbEffect::Update()
 	{
 		GameObject::Update();
+
+		if (mKirby != nullptr)
+		{
+			if (mKirby->GetJumpAbsorbing())
+			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 BeamPos = tr->GetPos();
+				Transform* kr = mKirby->GetComponent<Transform>();
+				Vector2 KirbyPos = kr->GetPos();
+
+				BeamPos.x = KirbyPos.x + 70;
+				BeamPos.y = KirbyPos.y + -15;
+
+				tr->SetPos(BeamPos);
+			}
+		}
 	}
 	void AbsorbEffect::Render(HDC hdc)
 	{
@@ -80,25 +98,47 @@ namespace My
 
 	void AbsorbEffect::OnCollisionStay(Collider* other)
 	{
-			Transform* tr = other->GetOwner()->GetComponent<Transform>();
 
-			Vector2 otherPos = tr->GetPos();
+		Transform* tr = other->GetOwner()->GetComponent<Transform>();
 
-			Transform* Effecttr = GetComponent<Transform>();
+		Vector2 otherPos = tr->GetPos();
 
-			Vector2 EffectPos = Effecttr->GetPos();
+		Transform* Effecttr = GetComponent<Transform>();
 
-			mTime += Time::DeltaTime();
+		Vector2 EffectPos = Effecttr->GetPos();
 
-			otherPos.x -= 180.0f * Time::DeltaTime();
-
+		mTime += Time::DeltaTime();
+		//if (otherPos.x - EffectPos.x >= 50.0f)
+		//{
+		//	otherPos.x -= 1000.0f * Time::DeltaTime();
+		//}
+		//else {
+		//	otherPos.x -= 500.0f * Time::DeltaTime();
+		// 
+		//}
+		otherPos.x -= 400.f * Time::DeltaTime();
 			tr->SetPos(otherPos);
 
-			if (EffectPos.x - 20.0f > otherPos.x && EffectPos.x - 25.0f > otherPos.x)
+			if (EffectPos.x > otherPos.x) //&& EffectPos.x - 25.0f > otherPos.x)
 			{
-				object::Destroy(other->GetOwner());
-				object::Destroy(this);
-			}
+					if (Bros* mBros = dynamic_cast<Bros*>(other->GetOwner()))
+					{
+						mBros->SetDamage(100);
+						object::Destroy(other->GetOwner());
+						object::Destroy(this);
+					}
+					else if (Cappy* mCappy = dynamic_cast<Cappy*>(other->GetOwner()))
+					{
+						mCappy->SetDamage(100);
+						object::Destroy(other->GetOwner());
+						object::Destroy(this);
+					}
+					else
+					{
+						object::Destroy(other->GetOwner());
+						object::Destroy(this);
+					}
+				}
 			//if (other->GetOwner()->GetState() == eState::Death)
 			//{
 			//	//mKirby->SetState(Kirby::eKirbyState::RightAbsorb);

@@ -248,6 +248,7 @@ namespace My
 
 			if (hitairtime >= 0.5f)
 			{
+				
 				mState = TwizzyState::TwizzyDeath;
 			}
 		}
@@ -304,6 +305,7 @@ namespace My
 
 			if (hitairtime >= 0.5f)
 			{
+				
 				mState = TwizzyState::TwizzyDeath;
 			}
 		}
