@@ -5,6 +5,7 @@ enum class eSceneType
 {
 	Title,
 	Stage1_1,
+	SecretRoomScene,
 	Stage1_2,
 	Stage1_3,
 	TreeScene,

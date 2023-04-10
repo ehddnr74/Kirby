@@ -1,4 +1,4 @@
-#include "Room3.h"
+#include "SecretRoom.h"
 #include "MyResources.h"
 #include "MySceneManager.h"
 #include "MyInput.h"
@@ -10,30 +10,30 @@
 
 namespace My
 {
-	Room3::Room3()
+	SecretRoom::SecretRoom()
 	{
 
 	}
-	Room3::~Room3()
+	SecretRoom ::~SecretRoom()
 	{
 
 	}
 
-	void My::Room3::Initialize()
+	void My::SecretRoom::Initialize()
 	{
-		mroom3 = Resources::Load<Image>(L"Stage1_2", L"..\\Resources\\stage1_2.bmp");
-	
+
+		//TreeStage = Resources::Load<Image>(L"Stage1_1", L"..\\Resources\\stage1_1.bmp");
 
 
 		GameObject::Initialize();
 	}
 
-	void My::Room3::Update()
+	void My::SecretRoom::Update()
 	{
 		GameObject::Update();
 	}
 
-	void My::Room3::Render(HDC hdc)
+	void My::SecretRoom::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
 
@@ -51,10 +51,10 @@ namespace My
 		//	, RGB(72, 104, 112));
 
 		//StretchBlt(hdc, pos.x, pos.y, mroom1->GetWidth() , mroom1->GetHeight()  , mroom1->GetHdc() , 0, 0, mroom1->GetWidth(), mroom1->GetHeight(), SRCCOPY);
-		BitBlt(hdc, pos.x, pos.y, mroom3->GetWidth(), mroom3->GetHeight(), mroom3->GetHdc(), 0, 0, SRCCOPY);
+		//BitBlt(hdc, pos.x, pos.y, mroom1->GetWidth(), mroom1->GetHeight(), mroom1->GetHdc(), 0, 0, SRCCOPY);
 	}
 
-	void My::Room3::Release()
+	void My::SecretRoom::Release()
 	{
 		GameObject::Release();
 	}

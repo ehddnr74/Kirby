@@ -5,6 +5,7 @@
 #include "MyCollisionManager.h"
 #include "Stage1_3.h"
 #include "TreeScene.h"
+#include "SecretRoomScene.h"
 
 namespace My
 {
@@ -20,6 +21,7 @@ namespace My
 		mScenes[(UINT)eSceneType::Stage1_2] = new Stage2Scene();
 		mScenes[(UINT)eSceneType::Stage1_3] = new Stage1_3();
 		mScenes[(UINT)eSceneType::TreeScene] = new TreeScene();
+		mScenes[(UINT)eSceneType::SecretRoomScene] = new SecretRoomScene();
 
 		for (Scene* scene : mScenes)
 		{

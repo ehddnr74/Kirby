@@ -57,9 +57,9 @@ namespace My
 
 	void Stage2Scene::Update()
 	{
-		if (Input::GetKeyState(eKeyCode::E) == eKeyState::Down)
+		if (Input::GetKeyState(eKeyCode::Enter) == eKeyState::Down)
 		{
-			SceneManager::LoadScene(eSceneType::Title);
+			SceneManager::LoadScene(eSceneType::Stage1_3);
 		}
 
 		if (mStage2Pt->GetPortal())

@@ -16,6 +16,8 @@
 #include "EnergyBeam.h"
 #include "LeftEnergyBeam.h"
 #include "HP.h"
+#include "Room3.h"
+#include "MyRigidBody.h"
 
 namespace My {
 	Stage1_3::Stage1_3()
@@ -28,10 +30,17 @@ namespace My {
 	}
 	void Stage1_3::Initialize()
 	{
+		
+
 		Scene::Initialize();
 	}
 	void Stage1_3::Update()
 	{
+		if (Input::GetKeyState(eKeyCode::Enter) == eKeyState::Down)
+		{
+			SceneManager::LoadScene(eSceneType::TreeScene);
+		}
+
 		Scene::Update();
 	}
 	void Stage1_3::Render(HDC hdc)
@@ -44,8 +53,19 @@ namespace My {
 	}
 	void Stage1_3::OnEnter()
 	{
+		object::Instantiate<Room3>(eLayerType::Stage);
 
+		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(50.0f, 50.0f), Vector2(2.0f, 2.0f), eLayerType::Player);
+
+		RigidBody* rb = mKirby->GetComponent<RigidBody>();
+
+		rb->SetGravity(Vector2(0.f,10.f));
+
+		Camera::SetTarget(mKirby);
+		Camera::SetScene(this);
+		
 	}
+
 	void Stage1_3::OnExit()
 	{
 

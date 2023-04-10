@@ -146,6 +146,12 @@
     <Filter Include="Contents\Scene\MyStageScene\Stage1\TreeBoss">
       <UniqueIdentifier>{37856629-ee01-4b1e-966a-019154613aa7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Item">
+      <UniqueIdentifier>{a09df25e-9e8b-4122-b25a-0d16758d83f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\MyStageScene\SecretRoom">
+      <UniqueIdentifier>{7f1fe084-d908-4805-ba8a-c30994950a20}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -347,6 +353,21 @@
     <ClInclude Include="Stage1_3.h">
       <Filter>Contents\Scene\MyStageScene\Stage1\Room3</Filter>
     </ClInclude>
+    <ClInclude Include="portion3.h">
+      <Filter>Contents\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Portion1.h">
+      <Filter>Contents\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="portion2.h">
+      <Filter>Contents\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="SecretRoomScene.h">
+      <Filter>Contents\Scene\MyStageScene\SecretRoom</Filter>
+    </ClInclude>
+    <ClInclude Include="SecretRoom.h">
+      <Filter>Contents\Scene\MyStageScene\SecretRoom</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc">
@@ -539,6 +560,21 @@
     </ClCompile>
     <ClCompile Include="Stage1_3bk.cpp">
       <Filter>Contents\Scene\MyStageScene\Stage1\Room3</Filter>
+    </ClCompile>
+    <ClCompile Include="Portion1.cpp">
+      <Filter>Contents\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="portion2.cpp">
+      <Filter>Contents\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="portion3.cpp">
+      <Filter>Contents\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="SecretRoom.cpp">
+      <Filter>Contents\Scene\MyStageScene\SecretRoom</Filter>
+    </ClCompile>
+    <ClCompile Include="SecretRoomScene.cpp">
+      <Filter>Contents\Scene\MyStageScene\SecretRoom</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

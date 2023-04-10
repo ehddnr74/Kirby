@@ -1,4 +1,4 @@
-#include "TreeScene.h"
+#include "SecretRoomScene.h"
 #include "MyKirby.h"
 #include "MyInput.h"
 #include "MySceneManager.h"
@@ -18,35 +18,35 @@
 #include "HP.h"
 
 namespace My {
-	TreeScene::TreeScene()
+	SecretRoomScene::SecretRoomScene()
 	{
 
 	}
-	TreeScene::~TreeScene()
+	SecretRoomScene::~SecretRoomScene()
 	{
 
 	}
-	void TreeScene::Initialize()
+	void SecretRoomScene::Initialize()
 	{
 		Scene::Initialize();
 	}
-	void TreeScene::Update()
+	void SecretRoomScene::Update()
 	{
 		Scene::Update();
 	}
-	void TreeScene::Render(HDC hdc)
+	void SecretRoomScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
 	}
-	void TreeScene::Release()
+	void SecretRoomScene::Release()
 	{
 		Scene::Release();
 	}
-	void TreeScene::OnEnter()
+	void SecretRoomScene::OnEnter()
 	{
 
 	}
-	void TreeScene::OnExit()
+	void SecretRoomScene::OnExit()
 	{
 
 	}

@@ -2,12 +2,11 @@
 #include "MyScene.h"
 #include "MyImage.h"
 namespace My {
-	class RigidBody;
-	class Stage1_3 : public Scene
+	class SecretRoomScene : public Scene
 	{
 	public:
-		Stage1_3();
-		~Stage1_3();
+		SecretRoomScene();
+		~SecretRoomScene();
 
 		virtual void Initialize() override;
 		virtual void Update() override;
@@ -16,12 +15,5 @@ namespace My {
 
 		virtual void OnEnter() override;
 		virtual void OnExit() override;
-
-
-
-	private:
-		class Kirby* mKirby;
-		RigidBody* mRigidBody;
 	};
 }
-

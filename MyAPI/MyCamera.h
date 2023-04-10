@@ -3,6 +3,7 @@
 
 namespace My
 {
+	class Scene;
 	class GameObject;
 	class Camera
 	{
@@ -25,6 +26,9 @@ namespace My
 		static Vector2 CalculatePos(Vector2 pos) { return pos - mDistance; }
 		static void SetCameraType(eCameraEffectType mtype) { mType = mtype; }
 
+		static void SetScene(Scene* scene) { mScene = scene; }
+
+
 
 	private:
 		static Vector2 mResolution;
@@ -32,6 +36,7 @@ namespace My
 		static Vector2 mDistance;
 		static Vector2 mCenterPos;
 		static class GameObject* mTarget;
+		static class Scene* mScene;
 
 		
 

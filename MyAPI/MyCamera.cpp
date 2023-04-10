@@ -6,6 +6,7 @@
 #include "MyTime.h"
 #include "MyImage.h"
 #include "MyKirby.h"
+#include "Stage1_3.h"
 
 extern My::Application application;
 
@@ -16,6 +17,7 @@ namespace My
 	Vector2 Camera::mDistance = Vector2::Zero;
 	Vector2 Camera::mCenterPos = Vector2::Zero;
 
+	Scene* Camera::mScene = nullptr;
 	GameObject* Camera::mTarget = nullptr;
 	Camera::eCameraEffectType Camera::mType = Camera::eCameraEffectType::None;
 	class Image* Camera::mCutton = nullptr;
@@ -37,7 +39,7 @@ namespace My
 	void Camera::Update()
 	{
 
-		if (mTarget != nullptr)
+		if (mTarget != nullptr && mScene == nullptr)
 		{
 			mLookPosition
 				= mTarget->GetComponent<Transform>()->GetPos() - mCenterPos;
@@ -58,6 +60,11 @@ namespace My
 			{
 				mLookPosition.y = 485.0f;
 			}
+		}
+		if (mTarget != nullptr && mScene != nullptr)
+		{
+			mLookPosition
+				= mTarget->GetComponent<Transform>()->GetPos() - mCenterPos;
 		}
 		mDistance = mLookPosition - (mResolution / 2.0f);
 		CalculatePos(mDistance);
