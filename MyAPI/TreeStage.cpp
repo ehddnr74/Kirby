@@ -22,7 +22,7 @@ namespace My
 	void My::TreeStage::Initialize()
 	{
 
-		//TreeStage = Resources::Load<Image>(L"Stage1_1", L"..\\Resources\\stage1_1.bmp");
+		mtreeroom = Resources::Load<Image>(L"TreeStage", L"..\\Resources\\TreeStage.bmp");
 
 
 		GameObject::Initialize();
@@ -41,14 +41,14 @@ namespace My
 		Vector2 pos = tr->GetPos();
 		pos = Camera::CalculatePos(pos);
 
-		//TransparentBlt(hdc, pos.x, pos.y
-		//	, mroom1->GetWidth()
-		//	, mroom1->GetHeight()
-		//	, mroom1->GetHdc()
-		//	, 0, 0
-		//	, mroom1->GetWidth()
-		//	, mroom1->GetHeight()
-		//	, RGB(72, 104, 112));
+		TransparentBlt(hdc, pos.x, pos.y
+			, mtreeroom->GetWidth()
+			, mtreeroom->GetHeight()
+			, mtreeroom->GetHdc()
+			, 0, 0
+			, mtreeroom->GetWidth()
+			, mtreeroom->GetHeight()
+			, RGB(72, 104, 112));
 
 		//StretchBlt(hdc, pos.x, pos.y, mroom1->GetWidth() , mroom1->GetHeight()  , mroom1->GetHdc() , 0, 0, mroom1->GetWidth(), mroom1->GetHeight(), SRCCOPY);
 		//BitBlt(hdc, pos.x, pos.y, mroom1->GetWidth(), mroom1->GetHeight(), mroom1->GetHdc(), 0, 0, SRCCOPY);

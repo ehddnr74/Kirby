@@ -135,11 +135,13 @@
     <ClInclude Include="Air.h" />
     <ClInclude Include="AirLeft.h" />
     <ClInclude Include="Beam.h" />
+    <ClInclude Include="Box.h" />
     <ClInclude Include="BrontoBurt.h" />
     <ClInclude Include="Bros.h" />
     <ClInclude Include="Commoninclude.h" />
     <ClInclude Include="EnergyBeam.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Grizzo.h" />
     <ClInclude Include="HP.h" />
     <ClInclude Include="KirbyBeam.h" />
     <ClInclude Include="LeftBeam.h" />
@@ -165,6 +167,7 @@
     <ClInclude Include="MyTwizzy.h" />
     <ClInclude Include="MyWaddle.h" />
     <ClInclude Include="R2Ground.h" />
+    <ClInclude Include="R3Ground.h" />
     <ClInclude Include="Room1.h" />
     <ClInclude Include="MyComponent.h" />
     <ClInclude Include="MyEngine.h" />
@@ -195,13 +198,17 @@
     <ClInclude Include="Stage1_3.h" />
     <ClInclude Include="Stage1_3bk.h" />
     <ClInclude Include="Stage2Pt.h" />
+    <ClInclude Include="Stage3Pt.h" />
     <ClInclude Include="Star.h" />
     <ClInclude Include="StarMap.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TreeBK.h" />
+    <ClInclude Include="TreeBoss.h" />
+    <ClInclude Include="TreeGround.h" />
     <ClInclude Include="TreeScene.h" />
     <ClInclude Include="TreeStage.h" />
     <ClInclude Include="Ttitle.h" />
+    <ClInclude Include="WaddleDee.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbsorbEffect.cpp" />
@@ -209,9 +216,11 @@
     <ClCompile Include="Air.cpp" />
     <ClCompile Include="AirLeft.cpp" />
     <ClCompile Include="Beam.cpp" />
+    <ClCompile Include="Box.cpp" />
     <ClCompile Include="BrontoBurt.cpp" />
     <ClCompile Include="Bros.cpp" />
     <ClCompile Include="EnergyBeam.cpp" />
+    <ClCompile Include="Grizzo.cpp" />
     <ClCompile Include="HP.cpp" />
     <ClCompile Include="KirbyBeam.cpp" />
     <ClCompile Include="LeftBeam.cpp" />
@@ -236,6 +245,7 @@
     <ClCompile Include="MyTwizzy.cpp" />
     <ClCompile Include="MyWaddle.cpp" />
     <ClCompile Include="R2Ground.cpp" />
+    <ClCompile Include="R3Ground.cpp" />
     <ClCompile Include="Room1.cpp" />
     <ClCompile Include="MyComponent.cpp" />
     <ClCompile Include="MyEntity.cpp" />
@@ -263,12 +273,16 @@
     <ClCompile Include="Stage1_3.cpp" />
     <ClCompile Include="Stage1_3bk.cpp" />
     <ClCompile Include="Stage2Pt.cpp" />
+    <ClCompile Include="Stage3Pt.cpp" />
     <ClCompile Include="Star.cpp" />
     <ClCompile Include="StarMap.cpp" />
     <ClCompile Include="TreeBK.cpp" />
+    <ClCompile Include="TreeBoss.cpp" />
+    <ClCompile Include="TreeGround.cpp" />
     <ClCompile Include="TreeScene.cpp" />
     <ClCompile Include="TreeStage.cpp" />
     <ClCompile Include="Ttitle.cpp" />
+    <ClCompile Include="WaddleDee.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc" />

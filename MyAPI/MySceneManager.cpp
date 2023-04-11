@@ -6,6 +6,7 @@
 #include "Stage1_3.h"
 #include "TreeScene.h"
 #include "SecretRoomScene.h"
+#include "MyObject.h"
 
 namespace My
 {

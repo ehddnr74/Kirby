@@ -233,14 +233,14 @@ namespace My
 
 		WdPos.x -= 20.0f * Time::DeltaTime();
 
-		if (WdPos.x >= 442.f)
-		{
-			WdPos.x = 442.f;
-		}
-		if (WdPos.x <= 288.f)
-		{
-			WdPos.x = 288.f;
-		}
+		//if (WdPos.x >= 442.f)
+		//{
+		//	WdPos.x = 442.f;
+		//}
+		//if (WdPos.x <= 288.f)
+		//{
+		//	WdPos.x = 288.f;
+		//}
 
 		if (waddletime >= 3.0f)
 		{
@@ -266,14 +266,14 @@ namespace My
 
 		WdPos.x += 20.f * Time::DeltaTime();
 
-		if (WdPos.x >= 442.f)
-		{
-			WdPos.x = 442.f;
-		}
-		if (WdPos.x <= 288.f)
-		{
-			WdPos.x = 288.f;
-		}
+		//if (WdPos.x >= 442.f)
+		//{
+		//	WdPos.x = 442.f;
+		//}
+		//if (WdPos.x <= 288.f)
+		//{
+		//	WdPos.x = 288.f;
+		//}
 
 		if (rightwaddletime >= 3.0f)
 		{

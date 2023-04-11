@@ -28,9 +28,10 @@ enum class eLayerType
 	Skill,
 	Air,
 	Star,
-	UI,
-	fade,
+	Box,
 	Portal,
+	fade,
+	UI,
 	End,
 };
 

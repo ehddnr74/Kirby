@@ -4,6 +4,7 @@
 
 namespace My
 {
+	class Stage1Scene;
 	class Stage2Pt;
 	class Kirby;
 	class Stage2Scene : public Scene
@@ -26,6 +27,8 @@ namespace My
 
 		void SetBros(class Bros* bros) { mBros = bros; }
 
+
+
 		
 
 	private:
@@ -33,6 +36,7 @@ namespace My
 		class Stage2Pt* mStage2Pt;
 		class R2Ground* ground;
 		class Bros* mBros;
+		class Stage1Scene* mstage1; 
 
 	};
 }

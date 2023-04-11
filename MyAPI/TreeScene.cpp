@@ -16,6 +16,10 @@
 #include "EnergyBeam.h"
 #include "LeftEnergyBeam.h"
 #include "HP.h"
+#include "TreeStage.h"
+#include "MyRigidBody.h"
+#include "TreeGround.h"
+#include "TreeBK.h"
 
 namespace My {
 	TreeScene::TreeScene()
@@ -44,7 +48,17 @@ namespace My {
 	}
 	void TreeScene::OnEnter()
 	{
+		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(150.0f, 100.0f), Vector2(2.0f, 2.0f), eLayerType::Player);
 
+		TreeGround* treegr = object::Instantiate<TreeGround>(eLayerType::Ground);
+		treegr->SetPlayer(mKirby);
+
+		TreeBk* treebk = object::Instantiate<TreeBk>(eLayerType::BG);
+
+		Camera::SetTarget(mKirby);
+		Camera::SetTreeScene(this);
+		object::Instantiate<TreeStage>(eLayerType::Stage);
+		object::Instantiate<HP>(eLayerType::UI);
 	}
 	void TreeScene::OnExit()
 	{

@@ -33,6 +33,7 @@ namespace My
 
 		mAnimator->Play(L"WaddleBeam", false);
 
+
 		Collider* collider = AddComponent<Collider>();
 		collider->SetCenter(Vector2(-65.0f, -200.0f));
 		collider->SetSize(Vector2(140.0f, 100.0f));
@@ -49,7 +50,6 @@ namespace My
 		{
 			object::Destroy(this);
 		}
-
 
 		GameObject::Update();
 	}

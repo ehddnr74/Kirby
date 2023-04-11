@@ -21,7 +21,7 @@ namespace My
 	void My::Stage1_3bk::Initialize()
 	{
 
-		//mbg1 = Resources::Load<Image>(L"Stage11bk", L"..\\Resources\\Stage1_1Bk.bmp");
+		mbg3 = Resources::Load<Image>(L"Stage13bk", L"..\\Resources\\stage3bk.bmp");
 
 
 
@@ -49,7 +49,7 @@ namespace My
 		//	, 673,217 
 		//	, RGB(72, 104, 112));
 
-		//BitBlt(hdc, pos.x, pos.y, mbg1->GetWidth(), mbg1->GetHeight(), mbg1->GetHdc(), 0, 0, SRCCOPY);
+		BitBlt(hdc, pos.x, pos.y, mbg3->GetWidth(), mbg3->GetHeight(), mbg3->GetHdc(), 0, 0, SRCCOPY);
 	}
 
 	void My::Stage1_3bk::Release()

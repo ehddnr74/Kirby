@@ -152,6 +152,18 @@
     <Filter Include="Contents\Scene\MyStageScene\SecretRoom">
       <UniqueIdentifier>{7f1fe084-d908-4805-ba8a-c30994950a20}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Object\Box">
+      <UniqueIdentifier>{1feafb8e-9a3d-44d6-8434-faba32933870}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Boss">
+      <UniqueIdentifier>{fe8fae11-deca-4c2d-abfc-ae395ecb9f7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Monster\Grizzo">
+      <UniqueIdentifier>{1362d353-3ed1-4cdf-899c-3fa863137c57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Monster\WaddleDee">
+      <UniqueIdentifier>{879ab74c-1f6b-4e8e-9b6e-d585ec5727cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -368,6 +380,27 @@
     <ClInclude Include="SecretRoom.h">
       <Filter>Contents\Scene\MyStageScene\SecretRoom</Filter>
     </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Contents\Object\Box</Filter>
+    </ClInclude>
+    <ClInclude Include="R3Ground.h">
+      <Filter>Contents\Object\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage3Pt.h">
+      <Filter>Contents\Object\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeGround.h">
+      <Filter>Contents\Object\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeBoss.h">
+      <Filter>Contents\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="WaddleDee.h">
+      <Filter>Contents\Monster\WaddleDee</Filter>
+    </ClInclude>
+    <ClInclude Include="Grizzo.h">
+      <Filter>Contents\Monster\Grizzo</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc">
@@ -575,6 +608,27 @@
     </ClCompile>
     <ClCompile Include="SecretRoomScene.cpp">
       <Filter>Contents\Scene\MyStageScene\SecretRoom</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Contents\Object\Box</Filter>
+    </ClCompile>
+    <ClCompile Include="R3Ground.cpp">
+      <Filter>Contents\Object\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage3Pt.cpp">
+      <Filter>Contents\Object\Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeGround.cpp">
+      <Filter>Contents\Object\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeBoss.cpp">
+      <Filter>Contents\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="WaddleDee.cpp">
+      <Filter>Contents\Monster\WaddleDee</Filter>
+    </ClCompile>
+    <ClCompile Include="Grizzo.cpp">
+      <Filter>Contents\Monster\Grizzo</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

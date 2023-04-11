@@ -23,6 +23,7 @@ namespace My
 
 	private:
 		Title* mtitle;
-
+		class Stage1Scene* mstage1;
+		class Stage2Scene* mstage2;
 	};
 }

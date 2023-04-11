@@ -4,6 +4,7 @@
 
 namespace My
 {
+	class Stage2Pt;
 	class StarMap;
 	class Restrict;
 	class HP;
@@ -28,7 +29,10 @@ namespace My
 		virtual void OnExit() override;
 
 		void SetPlayer(class Kirby* player) { mKirby = player; }
+
 		void SetGround(class Ground* ground) { mGround = ground; }
+
+		//void SetStage(class Stage2Pt* stage) { stage2 = stage; }
 
 	private:
 		Kirby* mKirby;
@@ -42,6 +46,8 @@ namespace My
 		Restrict* mRestrict;
 		StarMap* mStar;
 		Ground* mGround;
+
+		class Stage2Scene* s2;
 
 		double fadingtime;
 

@@ -18,6 +18,7 @@ namespace My
 	Vector2 Camera::mCenterPos = Vector2::Zero;
 
 	Scene* Camera::mScene = nullptr;
+	Scene* Camera::treescene = nullptr;
 	GameObject* Camera::mTarget = nullptr;
 	Camera::eCameraEffectType Camera::mType = Camera::eCameraEffectType::None;
 	class Image* Camera::mCutton = nullptr;
@@ -30,7 +31,7 @@ namespace My
 		mResolution.x = application.GetWidth();
 		mResolution.y = application.GetHeight();
 		mLookPosition = (mResolution / 2.0f);
-		mCenterPos = {-188.0f, -70.0f };
+		mCenterPos = {0.0f, 0.0f };
 
 		mType = eCameraEffectType::None;
 		mCutton = Image::Create(L"Cutton", mResolution.x, mResolution.y, RGB(0, 0, 0));
@@ -41,6 +42,7 @@ namespace My
 
 		if (mTarget != nullptr && mScene == nullptr)
 		{
+			mCenterPos = { -188.0f, -70.0f };
 			mLookPosition
 				= mTarget->GetComponent<Transform>()->GetPos() - mCenterPos;
 
@@ -61,11 +63,55 @@ namespace My
 				mLookPosition.y = 485.0f;
 			}
 		}
-		if (mTarget != nullptr && mScene != nullptr)
+		if (mTarget != nullptr && mScene != nullptr && treescene == nullptr)
 		{
+			mCenterPos = { -70.0f, -120.0f };
+
 			mLookPosition
 				= mTarget->GetComponent<Transform>()->GetPos() - mCenterPos;
+
+			if (mLookPosition.x <= 266.0f)
+			{
+				mLookPosition.x = 266.0f;
+			}
+			if (mLookPosition.y <= 405.0f)
+			{
+				mLookPosition.y = 405.0f;
+			}
+			if (mLookPosition.x >= 434.f)
+			{
+				mLookPosition.x = 434.f;
+			}
+			if (mLookPosition.y >= 1146.0f)
+			{
+				mLookPosition.y = 1146.0f;
+			}
 		}
+		if (mTarget != nullptr && treescene != nullptr)
+		{
+			mCenterPos = { -117.0f, -200.0f };
+
+			mLookPosition
+				= mTarget->GetComponent<Transform>()->GetPos() - mCenterPos;
+
+			if (mLookPosition.x <= 267.0f)
+			{
+				mLookPosition.x = 267.0f;
+			}
+			if (mLookPosition.y <= 421.0f)
+			{
+				mLookPosition.y = 421.0f;
+			}
+			if (mLookPosition.x >= 267.f)
+			{
+				mLookPosition.x = 267.f;
+			}
+			if (mLookPosition.y >= 1570.0f)
+			{
+			   mLookPosition.y = 1570.0f;
+			}
+		}
+
 		mDistance = mLookPosition - (mResolution / 2.0f);
 		CalculatePos(mDistance);
 

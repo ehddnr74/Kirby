@@ -105,6 +105,7 @@ namespace My
 			if (mKirby->GetJump())
 			{
 				rb->SetGround(false);
+				
 			}
 			if (mKirby->GetJump() == false)
 			{

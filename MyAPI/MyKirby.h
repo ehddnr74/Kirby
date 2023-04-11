@@ -138,6 +138,7 @@ namespace My
 
 
 
+
 		void SetDamage(int damage) { KirbyHP -= damage; }
 		int GetHP() { return KirbyHP; }
 
@@ -151,6 +152,7 @@ namespace My
 		void SetState(eKirbyState mstate) { mState = mstate; }
 		eKirbyState GetState() { return mState; }
 
+		void SetJump(bool isjump) { IsJump = isjump; }
 		bool GetJump() { return JumpCheck; }
 
 		void setSliding(bool slid) { sliding = slid; }
@@ -165,7 +167,11 @@ namespace My
 
 		bool GetStarCol() { return StarCol; }
 
+		void SetStage2(class Stage2Scene* scene) { mstage2 = scene; }
+
 		
+		
+
 
 	private:
 		void leftmove();
@@ -309,6 +315,7 @@ namespace My
 
 		int Kirbydir;
 
+		class Stage2Scene* mstage2;
 		class AbsorbEffect* Absorb;
 		class Waddle* mWaddle;
 		class AbsorbLeftEffect* LeftAbsorb;
@@ -368,6 +375,8 @@ namespace My
 
 		int Damage;
 		int KirbyHP;
+
+		double jatime; //юс╫ц
 
 
 	};

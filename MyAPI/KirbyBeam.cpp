@@ -67,7 +67,6 @@ namespace My
 					tr->SetPos(BeamPos);
 				}
 
-
 		GameObject::Update();
 	}
 	void KirbyBeam::Render(HDC hdc)

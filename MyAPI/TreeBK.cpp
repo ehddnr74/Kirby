@@ -21,7 +21,7 @@ namespace My
 	void My::TreeBk::Initialize()
 	{
 
-		//mbg1 = Resources::Load<Image>(L"Stage11bk", L"..\\Resources\\Stage1_1Bk.bmp");
+		treebk = Resources::Load<Image>(L"TreeBk", L"..\\Resources\\treebk.bmp");
 
 
 
@@ -49,7 +49,7 @@ namespace My
 		//	, 673,217 
 		//	, RGB(72, 104, 112));
 
-		//BitBlt(hdc, pos.x, pos.y, mbg1->GetWidth(), mbg1->GetHeight(), mbg1->GetHdc(), 0, 0, SRCCOPY);
+		BitBlt(hdc, pos.x, pos.y, treebk->GetWidth(), treebk->GetHeight(), treebk->GetHdc(), 0, 0, SRCCOPY);
 	}
 
 	void My::TreeBk::Release()

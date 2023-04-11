@@ -7,6 +7,9 @@
 #include "MyScene.h"
 #include "MyObject.h"
 
+#include "Stage1_1.h"
+#include "Stage1_2.h"
+
 
 namespace My
 {
@@ -20,13 +23,11 @@ namespace My
 	{
 		Scene::Initialize();
 
+
 		//mtitle = new Title();
 		//AddGameObject(mtitle, eLayerType::Stage);
 
 		Title* mtitle = object::Instantiate<Title>(eLayerType::BG);
-		SetTitle(mtitle);
-
-		
 	}
 	void TitleScene::Update()
 	{

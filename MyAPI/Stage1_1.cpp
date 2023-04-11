@@ -29,13 +29,12 @@
 #include "BrontoBurt.h"
 #include "MyTwizzy.h"
 #include "HP.h"
-#include "restrict.h"
+#include "Stage1_2.h"
 
 namespace My
 {
 	Stage1Scene::Stage1Scene()
 		:fadingtime(0.f)
-		
 	{
 
 	}
@@ -48,10 +47,12 @@ namespace My
 	{
 		Scene::Initialize();
 
-		mStar = object::Instantiate<StarMap>(Vector2(1370, 260), Vector2(0.3f, 0.3f), (eLayerType::MapStar));
-
 		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(129.0f, 100.0f), Vector2(2.0f, 2.0f), (eLayerType::Player));
 		SetPlayer(mKirby);
+		
+		mStar = object::Instantiate<StarMap>(Vector2(1370, 260), Vector2(0.3f, 0.3f), (eLayerType::MapStar));
+
+
 
 		
 	}
@@ -131,6 +132,9 @@ namespace My
 
 	void Stage1Scene::OnExit()
 	{
+		//Stage2Scene* Stage2 = new Stage2Scene;
+		//Stage2->SetPlayer(mKirby);
+
 		//Camera::SetCameraType(Camera::eCameraEffectType::None);
 		//object::Instantiate<FadeOut>(eLayerType::fade);
 		//mKirby->SetPos(Vector2(0.0f, 0.0f));

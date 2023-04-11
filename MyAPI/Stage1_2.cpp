@@ -15,6 +15,7 @@
 #include "Stage2Pt.h"
 #include "MyCollisionManager.h"
 #include "Bros.h"
+#include "Box.h"
 
 
 namespace My
@@ -32,11 +33,21 @@ namespace My
 	{
 		Scene::Initialize();
 
+		//Transform* tr = mKirby->GetComponent<Transform>();
+		//Vector2 pos = tr->GetPos();
+		//tr->SetPos(Vector2(129.0f, 384.0f));
+
+		
 		mStage2Pt = object::Instantiate<Stage2Pt>(Vector2(1380.0f, 250.f), Vector2(1.0f, 1.0f), (eLayerType::Portal));
 		SetPt(mStage2Pt);
 
 		object::Instantiate<HP>(eLayerType::UI);
 
+		//Box* box1 = object::Instantiate<Box>(Vector2(895,325),Vector2(1.0f,1.0f),eLayerType::Box);
+		//Box* box2 = object::Instantiate<Box>(Vector2(980, 326), Vector2(0.9f, 1.0f), eLayerType::Box);
+		//Box* box3 = object::Instantiate<Box>(Vector2(1025, 326), Vector2(0.9f, 1.0f), eLayerType::Box);
+		//Box* box4 = object::Instantiate<Box>(Vector2(1070, 326), Vector2(0.9f, 1.0f), eLayerType::Box);
+		//Box* box5 = object::Instantiate<Box>(Vector2(1155, 380), Vector2(1.0f, 1.0f), eLayerType::Box);
 	
 
 		//mroom2 = new Room2();
@@ -66,7 +77,7 @@ namespace My
 		{
 			if (Input::GetKeyDown(eKeyCode::Up))
 			{
-				SceneManager::LoadScene(eSceneType::Title);
+				SceneManager::LoadScene(eSceneType::Stage1_3);
 			}
 		}
 
@@ -90,6 +101,8 @@ namespace My
 
 	void Stage2Scene::OnEnter()
 	{
+		//mKirby->SetStage2(this);
+
 		Camera::Camera::SetCameraType(Camera::eCameraEffectType::FadeIn);
 
 		R2Ground* ground = object::Instantiate<R2Ground>(eLayerType::Ground);
@@ -102,7 +115,6 @@ namespace My
 
 		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(129.0f, 384.0f), Vector2(2.0f, 2.0f), eLayerType::Player);
 
-		SetPlayer(mKirby);
 
 		Bros* mBros = object::Instantiate<Bros>(Vector2(400.0f, 430.0f), Vector2(2.0f, 2.0f), eLayerType::Monster); // 400, 440
 
@@ -120,6 +132,7 @@ namespace My
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterSkill, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Portal, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Box, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Air, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Star, true);
 		CollisionManager::SetLayer(eLayerType::Skill, eLayerType::Monster, true);

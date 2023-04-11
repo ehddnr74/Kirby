@@ -27,7 +27,7 @@ namespace My
 		static void SetCameraType(eCameraEffectType mtype) { mType = mtype; }
 
 		static void SetScene(Scene* scene) { mScene = scene; }
-
+		static void SetTreeScene(Scene* scene) { treescene = scene; }
 
 
 	private:
@@ -37,6 +37,7 @@ namespace My
 		static Vector2 mCenterPos;
 		static class GameObject* mTarget;
 		static class Scene* mScene;
+		static class Scene* treescene;
 
 		
 

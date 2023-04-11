@@ -31,19 +31,72 @@ namespace My
 	{
 		GameObject::Update();
 
-		Transform* playerTr = mKirby->GetComponent<Transform>();
-		float x = playerTr->GetPos().x;
-		float y = playerTr->GetPos().y;
+		if (mKirby != nullptr)
+		{
+			Transform* playerTr = mKirby->GetComponent<Transform>();
+			float x = playerTr->GetPos().x;
+			float y = playerTr->GetPos().y;
 
-		COLORREF basecolor = mImage->GetPixel(x, y - 20);
-		COLORREF color = mImage->GetPixel(x + 27, y - 20); // 오른쪽 아래 
-		COLORREF color3 = mImage->GetPixel(x - 23, y - 20); // 왼쪽 아래 
-		COLORREF color1 = mImage->GetPixel(x + 27, y - 40); //오른쪽 가운데 
-		COLORREF color2 = mImage->GetPixel(x - 23, y - 40); // 왼쪽 가운데 
-		COLORREF color5 = mImage->GetPixel(x, y); // 
-		COLORREF colorup = mImage->GetPixel(x, y - 70);//위쪽 가운데
+			COLORREF basecolor = mImage->GetPixel(x, y - 20);
+			COLORREF color = mImage->GetPixel(x + 27, y - 20); // 오른쪽 아래 
+			COLORREF color3 = mImage->GetPixel(x - 23, y - 20); // 왼쪽 아래 
+			COLORREF color1 = mImage->GetPixel(x + 27, y - 40); //오른쪽 가운데 
+			COLORREF color2 = mImage->GetPixel(x - 23, y - 40); // 왼쪽 가운데 
+			COLORREF color5 = mImage->GetPixel(x, y); // 
+			COLORREF colorup = mImage->GetPixel(x, y - 70);//위쪽 가운데
 
-		RigidBody* rb = mKirby->GetComponent<RigidBody>();
+			RigidBody* rb = mKirby->GetComponent<RigidBody>();
+
+			if (colorup == RGB(100, 100, 100))
+			{
+				Vector2 pos = playerTr->GetPos();
+				pos.y += 1;
+				playerTr->SetPos(pos);
+			}
+
+			if (color1 == RGB(200, 0, 200))
+			{
+				Vector2 pos = playerTr->GetPos();
+				pos.x -= 2;
+				playerTr->SetPos(pos);
+			}
+
+			if (color2 == RGB(100, 0, 100))
+			{
+				Vector2 pos = playerTr->GetPos();
+				pos.x += 2;
+				playerTr->SetPos(pos);
+			}
+
+			if (basecolor == RGB(255, 0, 255) || color3 == RGB(255, 0, 255) || color == RGB(255, 0, 255))
+			{
+				rb->SetGround(true);
+
+				if (x >= 1150.f && x <= 1380.f)
+				{
+					Vector2 pos = playerTr->GetPos();
+					pos.y -= 1;
+					playerTr->SetPos(pos);
+				}
+
+				if (mKirby->GetJump())
+				{
+					rb->SetGround(false);
+				}
+				if (mKirby->GetJump() == false)
+				{
+					rb->SetGround(true);
+				}
+			}
+
+
+			else
+			{
+				rb->SetGround(false);
+			}
+		}
+
+
 
 		if (mBros != nullptr)
 		{
@@ -64,59 +117,8 @@ namespace My
 				}
 			}
 		}
-	
-
-		if (colorup == RGB(100, 100, 100))
-		{
-			Vector2 pos = playerTr->GetPos();
-			pos.y += 1;
-			playerTr->SetPos(pos);
-		}
-
-
-		if (color1 == RGB(200, 0, 200))
-		{
-			Vector2 pos = playerTr->GetPos();
-			pos.x -= 2;
-			playerTr->SetPos(pos);
-		}
-
-		if (color2 == RGB(100, 0, 100))
-		{
-			Vector2 pos = playerTr->GetPos();
-			pos.x += 2;
-			playerTr->SetPos(pos);
-		}
-
-		if (basecolor == RGB(255, 0, 255) || color3 == RGB(255, 0, 255) || color == RGB(255, 0, 255))
-		{
-			rb->SetGround(true);
-
-			if (x >= 1150.f && x <= 1380.f)
-			{
-				Vector2 pos = playerTr->GetPos();
-				pos.y -= 1;
-				playerTr->SetPos(pos);
-			}
-
-			if (mKirby->GetJump())
-			{
-				rb->SetGround(false);
-			}
-			if (mKirby->GetJump() == false)
-			{
-				rb->SetGround(true);
-			}
-		}
-
-		else
-		{
-			rb->SetGround(false);
-		}
-
 	}
-
-
+		
 
 	void R2Ground::Render(HDC hdc)
 	{
