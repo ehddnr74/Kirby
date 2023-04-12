@@ -22,8 +22,6 @@ namespace My
 		Animator* mAnimator;
 		Collider* mCollider;
 		class Kirby* mkirby;
-
-
 	};
 }
 

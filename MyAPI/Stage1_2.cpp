@@ -18,6 +18,7 @@
 #include "Box.h"
 #include "Stage1_1.h"
 #include "MyTransform.h"
+#include "SaveKirby.h"
 
 
 namespace My
@@ -103,7 +104,7 @@ namespace My
 
 	void Stage2Scene::OnEnter()
 	{
-		MyKirby = Camera::GetKirby();
+		MyKirby = SaveKirby::GetKirby();
 		AddGameObject(MyKirby, eLayerType::Player);
 		Transform* kr = MyKirby->GetComponent<Transform>();
 		kr->SetPos(Vector2(129.0f, 384.0f));
@@ -150,7 +151,7 @@ namespace My
 
 	void Stage2Scene::OnExit()
 	{
-		Camera::SetKirby(MyKirby);
+		SaveKirby::SetKirby(MyKirby);
 		//mKirby->SetPos(Vector2(0.0f, 0.0f));
 	}
 

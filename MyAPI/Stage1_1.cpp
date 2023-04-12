@@ -30,6 +30,7 @@
 #include "MyTwizzy.h"
 #include "HP.h"
 #include "Stage1_2.h"
+#include "SaveKirby.h"
 
 namespace My
 {
@@ -133,7 +134,7 @@ namespace My
 
 	void Stage1Scene::OnExit()
 	{
-		Camera::SetKirby(mKirby);
+		SaveKirby::SetKirby(mKirby);
 
 
 		//Camera::SetCameraType(Camera::eCameraEffectType::None);

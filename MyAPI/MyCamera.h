@@ -30,8 +30,7 @@ namespace My
 		static void SetScene(Scene* scene) { mScene = scene; }
 		static void SetTreeScene(Scene* scene) { treescene = scene; }
 
-		static void SetKirby(Kirby* mkirby) { mKirby = mkirby; }
-		static Kirby* GetKirby() { return mKirby; }
+
 
 
 	private:

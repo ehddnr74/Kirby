@@ -21,6 +21,7 @@ namespace My
 	public:
 		enum class eKirbyState
 		{
+			// ±âº» Ä¿ºñ
 			LeftMove,
 			RightMove,
 			LeftIdle,
@@ -57,8 +58,10 @@ namespace My
 			RightJump,
 			LeftDoubleJump,
 			RightDoubleJump,
+			//±âº» Ä¿ºñ
 
 
+			// ºöÄ¿ºñ
 			LeftBeamTransform,
 			BeamTransform,
 			LeftBeamIdle,
@@ -79,6 +82,7 @@ namespace My
 			RightBeamDashRelease,
 			LeftBeam,
 			RightBeam,
+			//ºöÄ¿ºñ
 
 			LeftHit,
 			RightHit,
@@ -119,7 +123,28 @@ namespace My
 			LPBJHR,
 			LPBJH,
 			RPBJHR,
-			RPBJH
+			RPBJH,
+
+			//ÆøÅº Ä¿ºñ
+			LeftBoombIdle,
+			RightBoombIdle,
+			LeftBoombWalk,
+			RightBoombWalk,
+			LeftBoombTransform,
+			BoombTransform,
+			LeftBoombDash,
+			RightBoombDash,
+			LeftBoombDashRelease,
+			RightBoombDashRelease,
+			LeftBoombCrouch,
+			RightBoombCrouch,
+			LeftBoombSliding,
+			RightBoombSliding,
+			LeftBoombJump,
+			RightBoombJump,
+			LeftBoombDoubleJump,
+			RightBoombDoubleJump,
+
 		};
 
 
@@ -277,6 +302,28 @@ namespace My
 		void lpbjh();
 		void rpbjhr();
 		void rpbjh();
+
+
+		//ºÕ Ä¿ºñ
+		void leftboombidle();
+		void rightboombidle();
+		void leftboombwalk();
+		void rightboombwalk();
+		void boombtransform();
+		void leftboombtransform();
+		void leftboombdash();
+		void rightboombdash();
+		void leftboombdashrelease();
+		void rightboombdashrelease();
+		void leftboombcrouch();
+		void rightboombcrouch();
+		void leftboombsliding();
+		void rightboombsliding();
+		void leftboombjump();
+		void rightboombjump();
+		void leftboombdoublejump();
+		void rightboombdoublejump();
+
 		
 
 	private:
@@ -312,6 +359,8 @@ namespace My
 		bool beamcharging;
 		bool jumpabsorbing;
 		bool leftjumpabsorbing;
+
+		bool boomyamyam;
 
 		int Kirbydir;
 
@@ -377,6 +426,11 @@ namespace My
 		int KirbyHP;
 
 		double jatime; //ÀÓ½Ã
+
+		//ºÕÄ¿ºñ
+
+		double boombkirbytime;
+		bool BoombKeyCheck;
 
 
 	};

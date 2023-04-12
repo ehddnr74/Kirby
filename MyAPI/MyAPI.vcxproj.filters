@@ -164,6 +164,12 @@
     <Filter Include="Contents\Monster\WaddleDee">
       <UniqueIdentifier>{879ab74c-1f6b-4e8e-9b6e-d585ec5727cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\SaveKirby">
+      <UniqueIdentifier>{433d63ba-a472-4957-a910-22ad943c3ee6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Skill\BoombKirbySkill">
+      <UniqueIdentifier>{c687bf76-ab06-49c7-9f73-d656b186045b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -401,6 +407,21 @@
     <ClInclude Include="Grizzo.h">
       <Filter>Contents\Monster\Grizzo</Filter>
     </ClInclude>
+    <ClInclude Include="SaveKirby.h">
+      <Filter>Contents\SaveKirby</Filter>
+    </ClInclude>
+    <ClInclude Include="RightBoomb.h">
+      <Filter>Contents\Skill\BoombKirbySkill</Filter>
+    </ClInclude>
+    <ClInclude Include="LeftBoomb.h">
+      <Filter>Contents\Skill\BoombKirbySkill</Filter>
+    </ClInclude>
+    <ClInclude Include="RightZoom.h">
+      <Filter>Contents\Skill\BoombKirbySkill</Filter>
+    </ClInclude>
+    <ClInclude Include="LeftZoom.h">
+      <Filter>Contents\Skill\BoombKirbySkill</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc">
@@ -629,6 +650,21 @@
     </ClCompile>
     <ClCompile Include="Grizzo.cpp">
       <Filter>Contents\Monster\Grizzo</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveKirby.cpp">
+      <Filter>Contents\SaveKirby</Filter>
+    </ClCompile>
+    <ClCompile Include="RightBoomb.cpp">
+      <Filter>Contents\Skill\BoombKirbySkill</Filter>
+    </ClCompile>
+    <ClCompile Include="LeftBoomb.cpp">
+      <Filter>Contents\Skill\BoombKirbySkill</Filter>
+    </ClCompile>
+    <ClCompile Include="RightZoom.cpp">
+      <Filter>Contents\Skill\BoombKirbySkill</Filter>
+    </ClCompile>
+    <ClCompile Include="LeftZoom.cpp">
+      <Filter>Contents\Skill\BoombKirbySkill</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

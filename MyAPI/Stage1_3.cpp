@@ -23,7 +23,7 @@
 #include "Stage3Pt.h"
 #include "MyCappy.h"
 #include "MyWaddle.h"
-
+#include "SaveKirby.h"
 namespace My {
 	Stage1_3::Stage1_3()
 	{
@@ -73,7 +73,7 @@ namespace My {
 	}
 	void Stage1_3::OnEnter()
 	{
-		mKirby = Camera::GetKirby();
+		mKirby = SaveKirby::GetKirby();
 		AddGameObject(mKirby, eLayerType::Player);
 		Transform* kr = mKirby->GetComponent<Transform>();
 		kr->SetPos(Vector2(200.0f, 1000.0f));

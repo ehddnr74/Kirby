@@ -82,10 +82,15 @@ namespace My
 	void AbsorbEffect::OnCollisionEnter(Collider* other)
 	{
 		Waddle* mWaddle = dynamic_cast<Waddle*>(other->GetOwner());
+		Bros* mBros = dynamic_cast<Bros*>(other->GetOwner());
 
 		if (other->GetOwner() == mWaddle)
 		{
 			Collision = 2;
+		}
+		else if (other->GetOwner() == mBros)
+		{
+			Collision = 3;
 		}
 		else
 		{

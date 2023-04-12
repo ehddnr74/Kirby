@@ -145,8 +145,10 @@
     <ClInclude Include="HP.h" />
     <ClInclude Include="KirbyBeam.h" />
     <ClInclude Include="LeftBeam.h" />
+    <ClInclude Include="LeftBoomb.h" />
     <ClInclude Include="LeftEnergyBeam.h" />
     <ClInclude Include="LeftKirbyBeam.h" />
+    <ClInclude Include="LeftZoom.h" />
     <ClInclude Include="MyAnimation.h" />
     <ClInclude Include="MyAnimator.h" />
     <ClInclude Include="MyAPI.h" />
@@ -168,6 +170,8 @@
     <ClInclude Include="MyWaddle.h" />
     <ClInclude Include="R2Ground.h" />
     <ClInclude Include="R3Ground.h" />
+    <ClInclude Include="RightBoomb.h" />
+    <ClInclude Include="RightZoom.h" />
     <ClInclude Include="Room1.h" />
     <ClInclude Include="MyComponent.h" />
     <ClInclude Include="MyEngine.h" />
@@ -180,6 +184,7 @@
     <ClInclude Include="MyLayer.h" />
     <ClInclude Include="MyMath.h" />
     <ClInclude Include="Room3.h" />
+    <ClInclude Include="SaveKirby.h" />
     <ClInclude Include="SecretRoom.h" />
     <ClInclude Include="SecretRoomScene.h" />
     <ClInclude Include="Stage1_1.h" />
@@ -224,8 +229,10 @@
     <ClCompile Include="HP.cpp" />
     <ClCompile Include="KirbyBeam.cpp" />
     <ClCompile Include="LeftBeam.cpp" />
+    <ClCompile Include="LeftBoomb.cpp" />
     <ClCompile Include="LeftEnergyBeam.cpp" />
     <ClCompile Include="LeftKirbyBeam.cpp" />
+    <ClCompile Include="LeftZoom.cpp" />
     <ClCompile Include="MyCamera.cpp" />
     <ClCompile Include="MyCappy.cpp" />
     <ClCompile Include="MyCollisionManager.cpp" />
@@ -246,6 +253,8 @@
     <ClCompile Include="MyWaddle.cpp" />
     <ClCompile Include="R2Ground.cpp" />
     <ClCompile Include="R3Ground.cpp" />
+    <ClCompile Include="RightBoomb.cpp" />
+    <ClCompile Include="RightZoom.cpp" />
     <ClCompile Include="Room1.cpp" />
     <ClCompile Include="MyComponent.cpp" />
     <ClCompile Include="MyEntity.cpp" />
@@ -256,6 +265,7 @@
     <ClCompile Include="MyLayer.cpp" />
     <ClCompile Include="MyMath.cpp" />
     <ClCompile Include="Room3.cpp" />
+    <ClCompile Include="SaveKirby.cpp" />
     <ClCompile Include="SecretRoom.cpp" />
     <ClCompile Include="SecretRoomScene.cpp" />
     <ClCompile Include="Stage1_1.cpp" />
