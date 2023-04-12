@@ -32,7 +32,11 @@ namespace My
 
 		void SetGround(class Ground* ground) { mGround = ground; }
 
-		//void SetStage(class Stage2Pt* stage) { stage2 = stage; }
+		void SetStage2(class Stage2Scene* stage) { stage2 = stage; }
+
+		
+
+		class Kirby* GetKirby() { return mKirby; }
 
 	private:
 		Kirby* mKirby;
@@ -47,7 +51,7 @@ namespace My
 		StarMap* mStar;
 		Ground* mGround;
 
-		class Stage2Scene* s2;
+		class Stage2Scene* stage2;
 
 		double fadingtime;
 

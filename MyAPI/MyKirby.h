@@ -169,7 +169,7 @@ namespace My
 
 		void SetStage2(class Stage2Scene* scene) { mstage2 = scene; }
 
-		
+		Kirby* GetKirby() { return this; }
 		
 
 

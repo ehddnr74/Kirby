@@ -16,6 +16,8 @@
 #include "MyCollisionManager.h"
 #include "Bros.h"
 #include "Box.h"
+#include "Stage1_1.h"
+#include "MyTransform.h"
 
 
 namespace My
@@ -101,7 +103,17 @@ namespace My
 
 	void Stage2Scene::OnEnter()
 	{
+		MyKirby = Camera::GetKirby();
+		AddGameObject(MyKirby, eLayerType::Player);
+		Transform* kr = MyKirby->GetComponent<Transform>();
+		kr->SetPos(Vector2(129.0f, 384.0f));
+		//Kirby* MyKirby = object::Instantiate<Kirby>(Vector2(129.0f, 384.0f), Vector2(2.0f, 2.0f), eLayerType::Player);
+		SetPlayer(MyKirby);
+		Camera::SetTarget(MyKirby);
 		//mKirby->SetStage2(this);
+		//Stage1Scene* mstage1 = new Stage1Scene;
+		//SetStage1(mstage1);
+		//MyKirby = mstage1->GetKirby();
 
 		Camera::Camera::SetCameraType(Camera::eCameraEffectType::FadeIn);
 
@@ -113,7 +125,7 @@ namespace My
 
 		object::Instantiate<Room2>(eLayerType::Stage);
 
-		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(129.0f, 384.0f), Vector2(2.0f, 2.0f), eLayerType::Player);
+		//Kirby* mKirby = object::Instantiate<Kirby>(Vector2(129.0f, 384.0f), Vector2(2.0f, 2.0f), eLayerType::Player);
 
 
 		Bros* mBros = object::Instantiate<Bros>(Vector2(400.0f, 430.0f), Vector2(2.0f, 2.0f), eLayerType::Monster); // 400, 440
@@ -122,9 +134,7 @@ namespace My
 
 		ground->SetBros(mBros);
 
-		Camera::SetTarget(mKirby);
-
-		ground->SetPlayer(mKirby);
+		ground->SetPlayer(MyKirby);
 
 
 
@@ -140,6 +150,7 @@ namespace My
 
 	void Stage2Scene::OnExit()
 	{
+		Camera::SetKirby(MyKirby);
 		//mKirby->SetPos(Vector2(0.0f, 0.0f));
 	}
 

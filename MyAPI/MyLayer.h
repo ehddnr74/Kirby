@@ -19,6 +19,8 @@ namespace My
 		std::vector<GameObject*>& GetGameObjects() { return mGameObjects; }
 
 
+
+
 	private:
 		std::vector<GameObject*> mGameObjects;
 	};

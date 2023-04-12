@@ -3,6 +3,7 @@
 
 namespace My
 {
+	class Kirby;
 	class Scene;
 	class GameObject;
 	class Camera
@@ -29,6 +30,9 @@ namespace My
 		static void SetScene(Scene* scene) { mScene = scene; }
 		static void SetTreeScene(Scene* scene) { treescene = scene; }
 
+		static void SetKirby(Kirby* mkirby) { mKirby = mkirby; }
+		static Kirby* GetKirby() { return mKirby; }
+
 
 	private:
 		static Vector2 mResolution;
@@ -46,6 +50,8 @@ namespace My
 		static float mCuttonAlpha;
 		static float mAlphaTime;
 		static float mEndTime;
+
+		static class Kirby* mKirby;
 
 	};
 }

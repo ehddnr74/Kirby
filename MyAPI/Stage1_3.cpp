@@ -37,9 +37,6 @@ namespace My {
 	{
 		Scene::Initialize();
 
-		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(200.0f, 1000.0f), Vector2(2.0f, 2.0f), eLayerType::Player);
-		SetPlayer(mKirby);
-
 	}
 	void Stage1_3::Update()
 	{
@@ -76,6 +73,15 @@ namespace My {
 	}
 	void Stage1_3::OnEnter()
 	{
+		mKirby = Camera::GetKirby();
+		AddGameObject(mKirby, eLayerType::Player);
+		Transform* kr = mKirby->GetComponent<Transform>();
+		kr->SetPos(Vector2(200.0f, 1000.0f));
+		//Kirby* MyKirby = object::Instantiate<Kirby>(Vector2(129.0f, 384.0f), Vector2(2.0f, 2.0f), eLayerType::Player);
+		SetPlayer(mKirby);
+		Camera::SetTarget(mKirby);
+		Camera::SetScene(this);
+
 		mStage3Pt = object::Instantiate<Stage3Pt>(Vector2(275.0f, 200.f), Vector2(1.0f, 1.0f), (eLayerType::Portal));
 		
 		mGround = object::Instantiate<R3Ground>(eLayerType::Ground);
@@ -94,8 +100,6 @@ namespace My {
 		object::Instantiate<Room3>(eLayerType::Stage);
 		object::Instantiate<Stage1_3bk>(eLayerType::BG);
 
-		Camera::SetTarget(mKirby);
-		Camera::SetScene(this);
 
 		Waddle* mWaddle = object::Instantiate<Waddle>(Vector2(510.f, 910.f), Vector2(2.2f, 2.2f), (eLayerType::Monster));
 		mCappy = object::Instantiate<Cappy>(Vector2(400, 350), Vector2(1.8f, 2.0f), (eLayerType::Monster));

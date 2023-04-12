@@ -22,6 +22,7 @@ namespace My
 	GameObject* Camera::mTarget = nullptr;
 	Camera::eCameraEffectType Camera::mType = Camera::eCameraEffectType::None;
 	class Image* Camera::mCutton = nullptr;
+	class Kirby* Camera::mKirby = nullptr;
 	float Camera::mCuttonAlpha = 1.0f;
 	float Camera::mAlphaTime = 0.0f;
 	float Camera::mEndTime = 5.0f;

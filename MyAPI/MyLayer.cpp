@@ -1,4 +1,5 @@
 #include "MyLayer.h"
+#include "MyCamera.h"
 
 
 namespace My

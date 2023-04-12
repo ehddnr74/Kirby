@@ -21,18 +21,20 @@ namespace My
 		virtual void OnExit() override;
 
 
-		void SetPlayer(class Kirby* player) { mKirby = player; }
+		void SetPlayer(class Kirby* player) { MyKirby = player; }
 		void SetPt(class Stage2Pt* stage2pt) { mStage2Pt = stage2pt; }
 		void SetGround(class R2Ground* Ground) { ground = Ground; }
 
 		void SetBros(class Bros* bros) { mBros = bros; }
+
+		void SetStage1(class Stage1Scene* stage) { mstage1 = stage; }
 
 
 
 		
 
 	private:
-		class Kirby* mKirby;
+		class Kirby* MyKirby;
 		class Stage2Pt* mStage2Pt;
 		class R2Ground* ground;
 		class Bros* mBros;

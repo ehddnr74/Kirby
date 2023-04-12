@@ -92,6 +92,7 @@ namespace My
 
 	void Stage1Scene::OnEnter()
 	{
+
 		Camera::SetCameraType(Camera::eCameraEffectType::FadeIn);
 
 		Rectangle1* rectangle = object::Instantiate<Rectangle1>(eLayerType::Rectangle);
@@ -132,8 +133,8 @@ namespace My
 
 	void Stage1Scene::OnExit()
 	{
-		//Stage2Scene* Stage2 = new Stage2Scene;
-		//Stage2->SetPlayer(mKirby);
+		Camera::SetKirby(mKirby);
+
 
 		//Camera::SetCameraType(Camera::eCameraEffectType::None);
 		//object::Instantiate<FadeOut>(eLayerType::fade);
