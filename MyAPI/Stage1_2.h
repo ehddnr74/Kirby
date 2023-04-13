@@ -26,6 +26,7 @@ namespace My
 		void SetGround(class R2Ground* Ground) { ground = Ground; }
 
 		void SetBros(class Bros* bros) { mBros = bros; }
+		void SetBox(class Box* box) { mBox = box; }
 
 		void SetStage1(class Stage1Scene* stage) { mstage1 = stage; }
 
@@ -39,6 +40,7 @@ namespace My
 		class R2Ground* ground;
 		class Bros* mBros;
 		class Stage1Scene* mstage1; 
+		class Box* mBox;
 
 	};
 }

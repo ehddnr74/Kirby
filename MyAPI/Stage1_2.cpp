@@ -46,12 +46,7 @@ namespace My
 
 		object::Instantiate<HP>(eLayerType::UI);
 
-		//Box* box1 = object::Instantiate<Box>(Vector2(895,325),Vector2(1.0f,1.0f),eLayerType::Box);
-		//Box* box2 = object::Instantiate<Box>(Vector2(980, 326), Vector2(0.9f, 1.0f), eLayerType::Box);
-		//Box* box3 = object::Instantiate<Box>(Vector2(1025, 326), Vector2(0.9f, 1.0f), eLayerType::Box);
-		//Box* box4 = object::Instantiate<Box>(Vector2(1070, 326), Vector2(0.9f, 1.0f), eLayerType::Box);
-		//Box* box5 = object::Instantiate<Box>(Vector2(1155, 380), Vector2(1.0f, 1.0f), eLayerType::Box);
-	
+
 
 		//mroom2 = new Room2();
 		//AddGameObject(mroom2, eLayerType::Stage);
@@ -89,6 +84,11 @@ namespace My
 			ground->SetBros(nullptr);
 		}
 
+			//if (box1)
+			//{
+			//	ground->SetBox(nullptr);
+			//}
+
 		Scene::Update();
 	}
 
@@ -122,6 +122,33 @@ namespace My
 
 		SetGround(ground);
 
+		Box* box1 = object::Instantiate<Box>(Vector2(895, 325), Vector2(1.0f, 1.0f), eLayerType::Box);
+		Box* box2 = object::Instantiate<Box>(Vector2(980, 326), Vector2(0.9f, 1.0f), eLayerType::Box);
+		Box* box3 = object::Instantiate<Box>(Vector2(1025, 326), Vector2(0.9f, 1.0f), eLayerType::Box);
+		Box* box4 = object::Instantiate<Box>(Vector2(1070, 326), Vector2(0.9f, 1.0f), eLayerType::Box);
+		Box* box5 = object::Instantiate<Box>(Vector2(1155, 380), Vector2(1.0f, 1.0f), eLayerType::Box);
+
+
+		if(box1 != nullptr)
+		{
+		ground->SetBox(box1);
+		}
+		if (box2 != nullptr)
+		{
+			ground->SetBox(box2);
+		}
+		if (box3 != nullptr)
+		{
+			ground->SetBox(box3);
+		}
+		if (box4 != nullptr)
+		{
+			ground->SetBox(box4);
+		}
+		if (box5 != nullptr)
+		{
+			ground->SetBox(box5);
+		}
 		object::Instantiate<Stage12bk>(eLayerType::BG);
 
 		object::Instantiate<Room2>(eLayerType::Stage);

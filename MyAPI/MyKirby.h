@@ -165,6 +165,7 @@ namespace My
 
 
 		void SetDamage(int damage) { KirbyHP -= damage; }
+		void SetHill(int hp) { KirbyHP += hp; }
 		int GetHP() { return KirbyHP; }
 
 		bool GetLeftJumpAbsorbing() { return leftjumpabsorbing; }

@@ -630,17 +630,15 @@ namespace My
 
 	void Kirby::OnCollisionEnter(Collider* other)
 	{
-		//if (Box* mBox = dynamic_cast<Box*>(other->GetOwner()))
+		////if (Box* mBox = dynamic_cast<Box*>(other->GetOwner()))
 		//{
 		//	if (mBox == nullptr)
 		//		return;
 
 		//	RigidBody* rb = this->GetComponent<RigidBody>();
-
-		//	//rb->SetGround(true);
+		//}
 		//	mState = eKirbyState::RightIdle;
 		//	mAnimator->Play(L"RightIdle", true);
-		//	rb->SetGravity(Vector2::Zero);
 		//	rb->SetVelocity(Vector2::Zero);
 
 		//	Collider* kirbycol = this->GetComponent<Collider>();
@@ -2806,7 +2804,6 @@ namespace My
 			mAnimator->Play(L"RightIdle", true);
 
 			mRigidBody->SetVelocity(Vector2::Zero);
-		
 		}
 
 	}
@@ -5224,15 +5221,271 @@ namespace My
 	}
 	void Kirby::leftboombjump()
 	{
+	//	Transform* tr = GetComponent<Transform>();
+	//	Vector2 pos = tr->GetPos();
+
+	//	boombjumptime += Time::DeltaTime();
+	//	Ljumptime += Time::DeltaTime();
+	//	jatime += Time::DeltaTime();
+
+	//	BoombIsJump = true;
+	//	BoombAirShot = true;
+
+	//	if (mRigidBody->GetGround() == true)
+	//	{
+	//		JumpCheck = false;
+	//		LRjumpchange = false;
+	//		RLjumpchange = false;
+	//		Ljumptime = 0.0f;
+	//		Rjumptime = 0.0f;
+	//		boombjumptime = 0.0f;
+	//		boombjumping = false;
+	//		jatime = 0.0f;
+	//		mState = eKirbyState::LeftBoombIdle;
+	//		mAnimator->Play(L"LeftBoombIdle", true);
+
+	//		//IsJump = false;
+	//		mRigidBody->SetVelocity(Vector2::Zero);
+	//		mRigidBody->SetGround(true);
+	//	}
+
+	//	if (RLjumpchange)
+	//	{
+	//		mRigidBody->SetVelocity(Vector2(-100.f, 180.0f));
+	//	}
+
+	//	if (Ljumptime >= 0.5f && Input::GetKey(eKeyCode::Right))
+	//	{
+	//		Ljumptime = 0.0f;
+	//		LRjumpchange = true;
+	//		mState = eKirbyState::RightBoombJump;
+	//		mAnimator->Play(L"BoombLRJumpChange", false);
+	//	}
+
+
+	//	if (Input::GetKey(eKeyCode::Left))
+	//	{
+	//		pos.x -= 50.0f * Time::DeltaTime();
+	//	}
+
+	//	if (boombjumptime >= 0.2f)
+	//	{
+	//		JumpCheck = false;
+	//		boombjumptime = 0.0f;
+	//	}
+
+	//	if (BoombIsJump && Input::GetKeyDown(eKeyCode::A))//GetAsyncKeyState(0x41) & 0x8000)
+	//	{
+	//		boombkirbytime = 0.0f;
+	//		boombjumptime = 0.0f;
+	//		Ljumptime = 0.0f;
+	//		Rjumptime = 0.0f;
+	//		jatime = 0.0f;
+	//		JumpCheck = true;
+	//		mState = eKirbyState::LeftBoombDoubleJump;
+	//		mAnimator->Play(L"LeftBoombDoubleJump", false);
+
+	//		Vector2 velocity = mRigidBody->GetVelocity();
+	//		mRigidBody->SetGravity(Vector2(0.0f, 200.0f));
+	//		velocity.x = 0.0f;
+	//		velocity.y = -120.0f;
+
+	//		mRigidBody->SetVelocity(velocity);
+	//	}
 	}
 	void Kirby::rightboombjump()
 	{
+		//Transform* tr = GetComponent<Transform>();
+		//Vector2 pos = tr->GetPos();
+
+		//boombjumptime += Time::DeltaTime();
+		//Rjumptime += Time::DeltaTime();
+		//jatime += Time::DeltaTime();
+
+		//BoombIsJump = true;
+		//BoombAirShot = true;
+
+		//if (mRigidBody->GetGround() == true)
+		//{
+		//	JumpCheck = false;
+		//	LRjumpchange = false;
+		//	RLjumpchange = false;
+		//	Ljumptime = 0.0f;
+		//	Rjumptime = 0.0f;
+		//	boombjumptime = 0.0f;
+		//	boombjumping = false;
+		//	jatime = 0.0f;
+		//	mState = eKirbyState::RightBoombIdle;
+		//	mAnimator->Play(L"RightBoombIdle", true);
+
+		//	//IsJump = false;
+		//	mRigidBody->SetVelocity(Vector2::Zero);
+		//	mRigidBody->SetGround(true);
+		//}
+
+		//if (LRjumpchange)
+		//{
+		//	mRigidBody->SetVelocity(Vector2(+100.f, 180.0f));
+		//}
+
+		//if (Rjumptime >= 0.5f && Input::GetKey(eKeyCode::Left))
+		//{
+		//	Rjumptime = 0.0f;
+		//	RLjumpchange = true;
+		//	mState = eKirbyState::LeftBoombJump;
+		//	mAnimator->Play(L"BoombRLJumpChange", false);
+		//}
+
+
+		//if (Input::GetKey(eKeyCode::Right))
+		//{
+		//	pos.x += 50.0f * Time::DeltaTime();
+		//}
+
+		//if (boombjumptime >= 0.2f)
+		//{
+		//	JumpCheck = false;
+		//	boombjumptime = 0.0f;
+		//}
+
+		//if (BoombIsJump && Input::GetKeyDown(eKeyCode::A))//GetAsyncKeyState(0x41) & 0x8000)
+		//{
+		//	boombkirbytime = 0.0f;
+		//	boombjumptime = 0.0f;
+		//	Ljumptime = 0.0f;
+		//	Rjumptime = 0.0f;
+		//	jatime = 0.0f;
+		//	JumpCheck = true;
+		//	mState = eKirbyState::RightBoombDoubleJump;
+		//	mAnimator->Play(L"RightBoombDoubleJump", false);
+
+		//	Vector2 velocity = mRigidBody->GetVelocity();
+		//	mRigidBody->SetGravity(Vector2(0.0f, 200.0f));
+		//	velocity.x = 0.0f;
+		//	velocity.y = -120.0f;
+
+		//	mRigidBody->SetVelocity(velocity);
+		//}
+
+		//tr->SetPos(pos);
 	}
 	void Kirby::leftboombdoublejump()
 	{
+		//Transform* tr = GetComponent<Transform>();
+		//Vector2 pos = tr->GetPos();
+
+		//boombjumptime += Time::DeltaTime();
+		//BoombIsJump = false;
+		//BoombDoubleJump = true;
+
+	
+		//if (boombjumptime > 0.2f)
+		//{
+		//	JumpCheck = false;
+		//	boombjumptime = 0.0f;
+		//}
+
+
+		//if (BoombDoubleJump && Input::GetKeyDown(eKeyCode::A))
+		//{
+		//	BoombAirShot = true;
+		//	mAnimator->Play(L"LeftBoombJumpRelease", true);
+		//	Vector2 velocity = mRigidBody->GetVelocity();
+		//	mRigidBody->SetGravity(Vector2(0.0f, 200.0f));
+		//	velocity.x = 0.0f;
+		//	velocity.y = -120.0f;
+
+		//	mRigidBody->SetVelocity(velocity);
+		//}
+		//if (BoombAirShot && Input::GetKeyDown(eKeyCode::Z))
+		//{
+		//	BoombAirShot = false;
+		//	mRigidBody->SetGravity(Vector2(0.0f, 1000.0f));
+		//	mAnimator->Play(L"LeftBoombAir", false);
+		//	object::Instantiate<AirLeft>(Vector2(pos.x - 10, pos.y), Vector2(2.0f, 2.0f), eLayerType::Effect);
+		//}
+		//if (Input::GetKey(eKeyCode::Right))
+		//{
+		//	mState = eKirbyState::RightBoombDoubleJump;
+		//	mAnimator->Play(L"RightBoombJumpRelease", true);
+		//}
+
+		//if (Input::GetKey(eKeyCode::Left))
+		//{
+		//	pos.x -= 100.0f * Time::DeltaTime();
+		//}
+
+		//if (mRigidBody->GetGround() == true)
+		//{
+		//	mAnimator->Play(L"LeftBoombCrouch", true);
+		//	mState = eKirbyState::LeftBoombCrouch;
+
+		//	BoombDoubleJump = true;
+		//	mRigidBody->SetVelocity(Vector2::Zero);
+		//	mRigidBody->SetGround(true);
+		//}
+
+		//tr->SetPos(pos);
 	}
 	void Kirby::rightboombdoublejump()
 	{
+	//	Transform* tr = GetComponent<Transform>();
+	//	Vector2 pos = tr->GetPos();
+
+	//	boombjumptime += Time::DeltaTime();
+
+	//	BoombIsJump = false;
+	//	BoombDoubleJump = true;
+
+	//	if (BoombAirShot && Input::GetKeyDown(eKeyCode::Z))
+	//	{
+	//		BoombAirShot = false;
+	//		mRigidBody->SetGravity(Vector2(0.0f, 1000.0f));
+	//		mAnimator->Play(L"RightBoombAir", false);
+	//		object::Instantiate<Air>(Vector2(pos.x + 10, pos.y), Vector2(2.0f, 2.0f), eLayerType::Effect);
+	//	}
+
+	//	if (boombjumptime > 0.2f)
+	//	{
+	//		JumpCheck = false;
+	//		boombjumptime = 0.0f;
+	//	}
+	//	if (BoombDoubleJump && Input::GetKeyDown(eKeyCode::A))
+	//	{
+	//		BoombAirShot = true;
+	//		mAnimator->Play(L"RightBoombJumpRelease", true);
+	//		Vector2 velocity = mRigidBody->GetVelocity();
+	//		mRigidBody->SetGravity(Vector2(0.0f, 200.0f));
+	//		velocity.x = 0.0f;
+	//		velocity.y = -120.0f;
+
+	//		mRigidBody->SetVelocity(velocity);
+	//	}
+
+	//	if (Input::GetKey(eKeyCode::Left))
+	//	{
+	//		mState = eKirbyState::LeftBoombDoubleJump;
+	//		mAnimator->Play(L"LeftBoombJumpRelease", true);
+	//	}
+
+	//	if (Input::GetKey(eKeyCode::Right))
+	//	{
+	//		pos.x += 100.0f * Time::DeltaTime();
+	//	}
+
+	//	if (mRigidBody->GetGround() == true)
+	//	{
+	//		mAnimator->Play(L"RightBoombCrouch", true);
+	//		mState = eKirbyState::RightBoombCrouch;
+
+	//		BoombDoubleJump = true;
+	//		mRigidBody->SetVelocity(Vector2::Zero);
+	//		mRigidBody->SetGround(true);
+	//	}
+
+	//	tr->SetPos(pos);
+	//}
 	}
 	}
+	
 	

@@ -20,6 +20,10 @@ namespace My
 
 		void SetPlayer(class Kirby* player) { mKirby = player; }
 		void SetBros(class Bros* bros) { mBros = bros; }
+		void SetBox(class Box* box) { mBox = box; }
+
+	
+
 
 
 	private:
@@ -27,6 +31,9 @@ namespace My
 		class Image* mImage;
 		class Kirby* mKirby;
 		class Bros* mBros;
+		class Box* mBox;
+
+		
 
 	};
 }

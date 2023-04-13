@@ -51,7 +51,14 @@ namespace My
 	}
 	void Portion3::OnCollisionEnter(Collider* other)
 	{
-
+		if (mkirby = dynamic_cast<Kirby*>(other->GetOwner()))
+		{
+			if (mkirby->GetHP() <= 100)
+			{
+				mkirby->SetHill(20);
+			}
+			object::Destroy(this);
+		}
 	}
 	void Portion3::OnCollisionStay(Collider* other)
 	{

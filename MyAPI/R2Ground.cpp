@@ -9,10 +9,10 @@
 #include "MyInput.h"
 #include "MyCamera.h"
 #include "Bros.h"
+#include "Box.h"
 namespace My
 {
 	R2Ground::R2Ground()
-
 	{
 	}
 
@@ -44,8 +44,21 @@ namespace My
 			COLORREF color2 = mImage->GetPixel(x - 23, y - 40); // 哭率 啊款单 
 			COLORREF color5 = mImage->GetPixel(x, y); // 
 			COLORREF colorup = mImage->GetPixel(x, y - 70);//困率 啊款单
+			
+
 
 			RigidBody* rb = mKirby->GetComponent<RigidBody>();
+
+			if (mBox != nullptr)
+			{
+				Transform* BoxTr = mBox->GetComponent<Transform>();
+				COLORREF colorbox = mImage->GetPixel(BoxTr->GetPos().x, BoxTr->GetPos().y);
+				
+				if (colorbox == RGB(255, 0, 255));
+				{
+					mBox->SetDestroy(true);
+				}
+			}
 
 			if (colorup == RGB(100, 100, 100))
 			{

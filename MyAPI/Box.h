@@ -19,11 +19,17 @@ namespace My
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
+		void SetDestroy(bool destroy) {Destroy = destroy; }
+		bool GetDestroy() { return Destroy; }
+		void SetBoxCol(bool boxcol) { BoxCol = boxcol; }
+
 	private:
 		Animator* mAnimator;
 		Collider* boxcol;
-		class Kirby* mkirby;
+		class Kirby* mKirby;
 
+		bool Destroy;
+		bool BoxCol;
 
 	};
 }

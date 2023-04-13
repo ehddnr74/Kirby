@@ -16,6 +16,8 @@
 namespace My
 {
 	Box::Box()
+		:Destroy(false)
+		, BoxCol(false)
 	{
 
 	}
@@ -45,6 +47,19 @@ namespace My
 	}
 	void Box::Update()
 	{
+		if (BoxCol == true)
+		{
+			Transform* tr = this->GetComponent<Transform>();
+			Vector2 pos = tr->GetPos();
+
+			pos.y += 1000 * Time::DeltaTime();
+
+			tr->SetPos(pos);
+		}
+		if (GetDestroy() == true)
+		{
+			object::Destroy(this);
+		}
 		GameObject::Update();
 	}
 	void Box::Render(HDC hdc)
@@ -57,7 +72,13 @@ namespace My
 	}
 	void Box::OnCollisionEnter(Collider* other)
 	{
+		if (Kirby* mKirby = dynamic_cast<Kirby*>(other->GetOwner()))
+		{
+			if (mKirby == nullptr)
+				return;
 
+			BoxCol = true;
+		}
 	}
 	void Box::OnCollisionStay(Collider* other)
 	{
