@@ -14,6 +14,7 @@
 #include "MyCamera.h"
 #include "Bros.h"
 #include "MyCappy.h"
+#include "BoomBros.h"
 
 namespace My
 {
@@ -83,12 +84,13 @@ namespace My
 	{
 		Waddle* mWaddle = dynamic_cast<Waddle*>(other->GetOwner());
 		Bros* mBros = dynamic_cast<Bros*>(other->GetOwner());
+		BoomBros* mBoomBros = dynamic_cast<BoomBros*>(other->GetOwner());
 
 		if (other->GetOwner() == mWaddle)
 		{
 			Collision = 2;
 		}
-		else if (other->GetOwner() == mBros)
+		else if (other->GetOwner() == mBros || other->GetOwner() == mBoomBros)
 		{
 			Collision = 3;
 		}

@@ -422,6 +422,9 @@
     <ClInclude Include="LeftZoom.h">
       <Filter>Contents\Skill\BoombKirbySkill</Filter>
     </ClInclude>
+    <ClInclude Include="BoomBros.h">
+      <Filter>Contents\Monster\Bros</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc">
@@ -665,6 +668,9 @@
     </ClCompile>
     <ClCompile Include="LeftZoom.cpp">
       <Filter>Contents\Skill\BoombKirbySkill</Filter>
+    </ClCompile>
+    <ClCompile Include="BoomBros.cpp">
+      <Filter>Contents\Monster\Bros</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

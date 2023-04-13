@@ -23,17 +23,17 @@ namespace My
 	}
 	void Portion1::Initialize()
 	{
-		//Image* StarMap = Resources::Load<Image>(L"StarMap", L"..\\Resources\\StarMap.bmp");
+		Image* mCherry = Resources::Load<Image>(L"Cherry", L"..\\Resources\\Cheery.bmp");
 
 		mAnimator = AddComponent<Animator>();
-		//mAnimator = CreateAnimation(L"Left")
-		//mAnimator->CreateAnimation(L"Star", StarMap, Vector2::Zero, 11, 1, 11, Vector2::Zero, 0.05);
+		
+		mAnimator->CreateAnimation(L"Cherry", mCherry, Vector2::Zero, 1, 1, 1, Vector2::Zero, 0.05);
 
-		//mAnimator->Play(L"Star", true);
+		mAnimator->Play(L"Cherry", true);
 
-		/*Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(-17.0f, -55.0f));
-		collider->SetSize(Vector2(32.0f, 35.0f));*/
+		Collider* collider = AddComponent<Collider>();
+		collider->SetCenter(Vector2(-17.0f, -35.0f));
+		collider->SetSize(Vector2(32.0f, 35.0f));
 
 		GameObject::Initialize();
 	}
@@ -53,9 +53,13 @@ namespace My
 	{
 		if (mkirby = dynamic_cast<Kirby*>(other->GetOwner()))
 		{
-			if (mkirby->GetHP() <= 100)
+			if (mkirby->GetHP() < 80)
 			{
 				mkirby->SetHill(20);
+			}
+			if (mkirby->GetHP() >= 80)
+			{
+				mkirby->SetHP(100);
 			}
 			object::Destroy(this);
 		}

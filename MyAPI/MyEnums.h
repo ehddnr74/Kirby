@@ -29,6 +29,7 @@ enum class eLayerType
 	Air,
 	Star,
 	Box,
+	Item,
 	Portal,
 	fade,
 	UI,

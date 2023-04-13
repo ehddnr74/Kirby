@@ -4,6 +4,9 @@
 
 namespace My
 {
+	class Portion1;
+	class Portion2;
+	class Portion3;
 	class Stage1Scene;
 	class Stage2Pt;
 	class Kirby;
@@ -26,7 +29,9 @@ namespace My
 		void SetGround(class R2Ground* Ground) { ground = Ground; }
 
 		void SetBros(class Bros* bros) { mBros = bros; }
-		void SetBox(class Box* box) { mBox = box; }
+		void SetBoomBros(class BoomBros* boombros) { mBoomBros = boombros; }
+		void SetBox(class Box* box) { box = box; }
+
 
 		void SetStage1(class Stage1Scene* stage) { mstage1 = stage; }
 
@@ -40,7 +45,15 @@ namespace My
 		class R2Ground* ground;
 		class Bros* mBros;
 		class Stage1Scene* mstage1; 
-		class Box* mBox;
+		class Box* box;
+		class Portion1* mCherry;
+		class Portion2* mCookie;
+		class Portion3* mPizza;
+		class BoomBros* mBoomBros;
+
+		class LeftBoomb* mLeftBoomb;
+		class RightBoomb* mRightBoomb;
+
 
 	};
 }

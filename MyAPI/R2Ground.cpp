@@ -9,6 +9,7 @@
 #include "MyInput.h"
 #include "MyCamera.h"
 #include "Bros.h"
+#include "BoomBros.h"
 #include "Box.h"
 namespace My
 {
@@ -44,22 +45,26 @@ namespace My
 			COLORREF color2 = mImage->GetPixel(x - 23, y - 40); // 哭率 啊款单 
 			COLORREF color5 = mImage->GetPixel(x, y); // 
 			COLORREF colorup = mImage->GetPixel(x, y - 70);//困率 啊款单
-			
+
 
 
 			RigidBody* rb = mKirby->GetComponent<RigidBody>();
 
-			if (mBox != nullptr)
+			//if (mBox != nullptr)
+			//{
+			if (mBox->GetDestroy() == false)
 			{
 				Transform* BoxTr = mBox->GetComponent<Transform>();
 				COLORREF colorbox = mImage->GetPixel(BoxTr->GetPos().x, BoxTr->GetPos().y);
-				
-				if (colorbox == RGB(255, 0, 255));
+
+				if (colorbox == RGB(255, 0, 255))
 				{
 					mBox->SetDestroy(true);
+					object::Destroy(mBox);
 				}
 			}
-
+		//}
+		
 			if (colorup == RGB(100, 100, 100))
 			{
 				Vector2 pos = playerTr->GetPos();
@@ -108,7 +113,25 @@ namespace My
 				rb->SetGround(false);
 			}
 		}
+		if (mBoomBros != nullptr)
+		{
+			//if (mBros->GetDeath() == false)
+			if (mBoomBros->GetHP() >= 1)
+			{
+				Transform* BoomBrosTr = mBoomBros->GetComponent<Transform>();
+				COLORREF mboombros = mImage->GetPixel(BoomBrosTr->GetPos().x, BoomBrosTr->GetPos().y - 20);
+				RigidBody* Boomb = mBoomBros->GetComponent<RigidBody>();
 
+				if (mboombros == RGB(255, 0, 255))
+				{
+					Boomb->SetGround(true);
+				}
+				else
+				{
+					Boomb->SetGround(false);
+				}
+			}
+		}
 
 
 		if (mBros != nullptr)

@@ -135,6 +135,7 @@
     <ClInclude Include="Air.h" />
     <ClInclude Include="AirLeft.h" />
     <ClInclude Include="Beam.h" />
+    <ClInclude Include="BoomBros.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="BrontoBurt.h" />
     <ClInclude Include="Bros.h" />
@@ -221,6 +222,7 @@
     <ClCompile Include="Air.cpp" />
     <ClCompile Include="AirLeft.cpp" />
     <ClCompile Include="Beam.cpp" />
+    <ClCompile Include="BoomBros.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="BrontoBurt.cpp" />
     <ClCompile Include="Bros.cpp" />

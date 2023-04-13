@@ -35,5 +35,6 @@ namespace My
 		class Cappy* mCappy;
 		class Waddle* mWaddle;
 		class Bros* mBros;
+		class BoomBros* mBoomBros;
 	};
 }

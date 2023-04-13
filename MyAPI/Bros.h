@@ -85,6 +85,7 @@ namespace My
 		class EnergyBeam* mEnergyBeam;
 		class LeftEnergyBeam* mLeftEnergyBeam;
 
+
 		double brostimetwo;
 
 		double deathtime;

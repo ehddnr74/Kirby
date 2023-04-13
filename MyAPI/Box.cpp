@@ -40,6 +40,7 @@ namespace My
 		collider->SetCenter(Vector2(-25.0f, -75.0f));
 		collider->SetSize(Vector2(50.0f, 70.0f));
 
+		SetGround(ground);
 
 		GameObject::Initialize();
 
@@ -52,12 +53,13 @@ namespace My
 			Transform* tr = this->GetComponent<Transform>();
 			Vector2 pos = tr->GetPos();
 
-			pos.y += 1000 * Time::DeltaTime();
+			pos.y += 700 * Time::DeltaTime();
 
 			tr->SetPos(pos);
 		}
 		if (GetDestroy() == true)
 		{
+			SetGround(nullptr);
 			object::Destroy(this);
 		}
 		GameObject::Update();

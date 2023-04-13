@@ -23,17 +23,17 @@ namespace My
 	}
 	void Portion3::Initialize()
 	{
-		//Image* StarMap = Resources::Load<Image>(L"StarMap", L"..\\Resources\\StarMap.bmp");
+		Image* mPizza = Resources::Load<Image>(L"Pizza", L"..\\Resources\\Pizza.bmp");
 
 		mAnimator = AddComponent<Animator>();
-		//mAnimator = CreateAnimation(L"Left")
-		//mAnimator->CreateAnimation(L"Star", StarMap, Vector2::Zero, 11, 1, 11, Vector2::Zero, 0.05);
 
-		//mAnimator->Play(L"Star", true);
+		mAnimator->CreateAnimation(L"Pizza", mPizza, Vector2::Zero, 1, 1, 1, Vector2::Zero, 0.05);
 
-		/*Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(-17.0f, -55.0f));
-		collider->SetSize(Vector2(32.0f, 35.0f));*/
+		mAnimator->Play(L"Pizza", true);
+
+		Collider* collider = AddComponent<Collider>();
+		collider->SetCenter(Vector2(-17.0f, -35.0f));
+		collider->SetSize(Vector2(32.0f, 35.0f));
 
 		GameObject::Initialize();
 	}
@@ -56,6 +56,10 @@ namespace My
 			if (mkirby->GetHP() <= 100)
 			{
 				mkirby->SetHill(20);
+			}
+			if (mkirby->GetHP() >= 80)
+			{
+				mkirby->SetHP(100);
 			}
 			object::Destroy(this);
 		}

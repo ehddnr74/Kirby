@@ -20,7 +20,9 @@ namespace My
 
 		void SetPlayer(class Kirby* player) { mKirby = player; }
 		void SetBros(class Bros* bros) { mBros = bros; }
+		void SetBoomBros(class BoomBros* boombros) { mBoomBros = boombros; }
 		void SetBox(class Box* box) { mBox = box; }
+
 
 	
 
@@ -31,7 +33,9 @@ namespace My
 		class Image* mImage;
 		class Kirby* mKirby;
 		class Bros* mBros;
+		class BoomBros* mBoomBros;
 		class Box* mBox;
+
 
 		
 

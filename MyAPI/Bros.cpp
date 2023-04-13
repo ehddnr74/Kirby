@@ -17,6 +17,7 @@
 #include "EnergyBeam.h"
 #include "LeftEnergyBeam.h"
 
+
 namespace My
 {
 	Bros::Bros()

@@ -166,6 +166,8 @@ namespace My
 
 		void SetDamage(int damage) { KirbyHP -= damage; }
 		void SetHill(int hp) { KirbyHP += hp; }
+
+		void SetHP(int hp) { KirbyHP = hp; }
 		int GetHP() { return KirbyHP; }
 
 		bool GetLeftJumpAbsorbing() { return leftjumpabsorbing; }
@@ -432,6 +434,11 @@ namespace My
 
 		double boombkirbytime;
 		bool BoombKeyCheck;
+		double boombjumptime;
+		bool BoombIsJump;
+		bool BoombAirShot;
+		bool boombjumping;
+		bool BoombDoubleJump;
 
 
 	};

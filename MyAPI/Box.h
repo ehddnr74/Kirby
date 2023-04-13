@@ -22,6 +22,7 @@ namespace My
 		void SetDestroy(bool destroy) {Destroy = destroy; }
 		bool GetDestroy() { return Destroy; }
 		void SetBoxCol(bool boxcol) { BoxCol = boxcol; }
+		void SetGround(class R2Ground* gr) { ground = gr; }
 
 	private:
 		Animator* mAnimator;
@@ -30,6 +31,7 @@ namespace My
 
 		bool Destroy;
 		bool BoxCol;
+		class R2Ground* ground;
 
 	};
 }

@@ -15,10 +15,16 @@
 #include "Stage2Pt.h"
 #include "MyCollisionManager.h"
 #include "Bros.h"
+#include "BoomBros.h"
 #include "Box.h"
 #include "Stage1_1.h"
 #include "MyTransform.h"
 #include "SaveKirby.h"
+#include "Portion1.h"
+#include "portion2.h"
+#include "portion3.h"
+#include "LeftBoomb.h"
+#include "RightBoomb.h"
 
 
 namespace My
@@ -45,6 +51,10 @@ namespace My
 		SetPt(mStage2Pt);
 
 		object::Instantiate<HP>(eLayerType::UI);
+
+		R2Ground* ground = object::Instantiate<R2Ground>(eLayerType::Ground);
+
+		SetGround(ground);
 
 
 
@@ -84,10 +94,10 @@ namespace My
 			ground->SetBros(nullptr);
 		}
 
-			//if (box1)
-			//{
-			//	ground->SetBox(nullptr);
-			//}
+		if (mBoomBros->GetHP() <= 0)
+		{
+			ground->SetBoomBros(nullptr);
+		}
 
 		Scene::Update();
 	}
@@ -121,12 +131,19 @@ namespace My
 		R2Ground* ground = object::Instantiate<R2Ground>(eLayerType::Ground);
 
 		SetGround(ground);
+		ground->SetPlayer(MyKirby);
 
 		Box* box1 = object::Instantiate<Box>(Vector2(895, 325), Vector2(1.0f, 1.0f), eLayerType::Box);
 		Box* box2 = object::Instantiate<Box>(Vector2(980, 326), Vector2(0.9f, 1.0f), eLayerType::Box);
 		Box* box3 = object::Instantiate<Box>(Vector2(1025, 326), Vector2(0.9f, 1.0f), eLayerType::Box);
 		Box* box4 = object::Instantiate<Box>(Vector2(1070, 326), Vector2(0.9f, 1.0f), eLayerType::Box);
 		Box* box5 = object::Instantiate<Box>(Vector2(1155, 380), Vector2(1.0f, 1.0f), eLayerType::Box);
+		
+		Portion1* mCherry = object::Instantiate<Portion1>(Vector2(980, 430), Vector2(1.0f, 1.0f), eLayerType::Item);
+		Portion2* mCookie = object::Instantiate<Portion2>(Vector2(1025, 430), Vector2(1.0f, 1.0f), eLayerType::Item);
+		Portion3* mPizza = object::Instantiate<Portion3>(Vector2(1070, 430), Vector2(1.0f, 1.0f), eLayerType::Item);
+
+		/*SetBox(box);*/
 
 
 		if(box1 != nullptr)
@@ -149,20 +166,26 @@ namespace My
 		{
 			ground->SetBox(box5);
 		}
+
+
 		object::Instantiate<Stage12bk>(eLayerType::BG);
 
 		object::Instantiate<Room2>(eLayerType::Stage);
+
+		object::Instantiate<RightBoomb>(Vector2(200.f, 430.0f), Vector2(1.5f, 1.5f), eLayerType::Skill);
 
 		//Kirby* mKirby = object::Instantiate<Kirby>(Vector2(129.0f, 384.0f), Vector2(2.0f, 2.0f), eLayerType::Player);
 
 
 		Bros* mBros = object::Instantiate<Bros>(Vector2(400.0f, 430.0f), Vector2(2.0f, 2.0f), eLayerType::Monster); // 400, 440
-
+		BoomBros* mBoomBros = object::Instantiate<BoomBros>(Vector2(1250.0f, 430.0f), Vector2(2.0f, 2.0f), eLayerType::Monster);
+		mBoomBros->SetKirby(MyKirby);
 		SetBros(mBros);
+		SetBoomBros(mBoomBros);
 
 		ground->SetBros(mBros);
+		ground->SetBoomBros(mBoomBros);
 
-		ground->SetPlayer(MyKirby);
 
 
 
@@ -171,6 +194,7 @@ namespace My
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterSkill, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Portal, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Box, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Item, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Air, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Star, true);
 		CollisionManager::SetLayer(eLayerType::Skill, eLayerType::Monster, true);
