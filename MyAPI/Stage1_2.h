@@ -53,6 +53,7 @@ namespace My
 
 		class LeftBoomb* mLeftBoomb;
 		class RightBoomb* mRightBoomb;
+		class Grizzo* mGrizzo;
 
 
 	};

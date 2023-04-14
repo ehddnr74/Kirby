@@ -11,10 +11,12 @@
 #include "MyObject.h"
 #include "MyKirby.h"
 #include "MyRigidBody.h"
+#include "Explosion.h"
 
 namespace My
 {
 	RightBoomb::RightBoomb()
+		:Destroy(false)
 	{
 
 	}
@@ -24,7 +26,6 @@ namespace My
 	}
 	void RightBoomb::Initialize()
 	{
-
 		Image* RightBoom = Resources::Load<Image>(L"RightBoomb", L"..\\Resources\\RightBoom.bmp");
 
 		mAnimator = AddComponent<Animator>();
@@ -39,9 +40,9 @@ namespace My
 		mRigidBody->SetGravity(Vector2::Zero);
 		mRigidBody->SetMass(1.0f);
 
-		//Collider* collider = AddComponent<Collider>();
-		//collider->SetCenter(Vector2(0.0f, 0.0f));
-		//collider->SetSize(Vector2(50.0f, 50.0f));
+		Collider* collider = AddComponent<Collider>();
+		collider->SetCenter(Vector2(-22.0f, -51.0f));
+		collider->SetSize(Vector2(35.0f, 34.0f));
 
 
 
@@ -49,18 +50,15 @@ namespace My
 	}
 	void RightBoomb::Update()
 	{
-		//if (mkirby->GetJumpingBeam())
-		//{
-		//	Transform* tr = GetComponent<Transform>();
-		//	Vector2 BeamPos = tr->GetPos();
-		//	Transform* kr = mkirby->GetComponent<Transform>();
-		//	Vector2 KirbyPos = kr->GetPos();
+		if (GetDestroy() == true)
+		{
+			SetGround(nullptr);
+			Transform* tr = GetComponent<Transform>();
+			class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(tr->GetPos().x, tr->GetPos().y+50), Vector2(1.f, 1.f), eLayerType::Effect);
+			object::Destroy(this);
+		}
 
-		//	BeamPos.x = KirbyPos.x + 100;
-		//	BeamPos.y = KirbyPos.y + 80;
-
-		//	tr->SetPos(BeamPos);
-		//}
+		
 
 		GameObject::Update();
 	}
@@ -74,6 +72,10 @@ namespace My
 	}
 	void RightBoomb::OnCollisionEnter(Collider* other)
 	{
+		if (mkirby = dynamic_cast<Kirby*>(other->GetOwner()));
+		{
+			SetDestroy(true);	
+		}
 	}
 	void RightBoomb::OnCollisionStay(Collider* other)
 	{

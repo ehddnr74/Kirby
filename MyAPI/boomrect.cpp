@@ -1,4 +1,4 @@
-#include "MyRectangle.h"
+#include "boomrect.h"
 #include "MySceneManager.h"
 #include "MyResources.h"
 #include "MyTransform.h"
@@ -12,32 +12,32 @@
 
 namespace My
 {
-	Rectangle1::Rectangle1()
+	boomrect::boomrect()
 	{
 	}
-	Rectangle1::~Rectangle1()
+	boomrect::~boomrect()
 	{
 	}
-	void Rectangle1::Initialize()
+	void boomrect::Initialize()
 	{
 		GameObject::Initialize();
 	}
-	void Rectangle1::Update()
+	void boomrect::Update()
 	{
-		Transform* playerTr = mKirby->GetComponent<Transform>();
+		Transform* playerTr = LeftBoomb->GetComponent<Transform>();
 
 		playerTr->GetPos();
 
 		GameObject::Update();
 	}
-	void Rectangle1::Render(HDC hdc)
+	void boomrect::Render(HDC hdc)
 	{
 
-		Transform* playerTr = mKirby->GetComponent<Transform>();
+		Transform* playerTr = LeftBoomb->GetComponent<Transform>();
 		Vector2 Pos = playerTr->GetPos();
 
 		HPEN pen = NULL;
-			pen = CreatePen(BS_SOLID, 2, RGB(0, 255, 0));
+		pen = CreatePen(BS_SOLID, 2, RGB(0, 255, 0));
 
 
 		HPEN oldPen = (HPEN)SelectObject(hdc, pen);
@@ -46,7 +46,7 @@ namespace My
 
 		Vector2 pos = Camera::CalculatePos(Pos);
 
-		Rectangle(hdc, Pos.x+23, Pos.y-65, Pos.x+28, Pos.y-60);
+		Rectangle(hdc, Pos.x -60, Pos.y-100, Pos.x -50, Pos.y - 90);
 
 		(HPEN)SelectObject(hdc, oldPen);
 		(HBRUSH)SelectObject(hdc, oldBrush);
@@ -54,7 +54,7 @@ namespace My
 
 		GameObject::Render(hdc);
 	}
-	void Rectangle1::Release()
+	void boomrect::Release()
 	{
 		GameObject::Release();
 	}

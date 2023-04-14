@@ -32,6 +32,7 @@
 #include "Stage1_2.h"
 #include "SaveKirby.h"
 
+
 namespace My
 {
 	Stage1Scene::Stage1Scene()

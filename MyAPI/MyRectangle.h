@@ -17,9 +17,13 @@ namespace My
 
 			void SetPlayer(class Kirby* player) { mKirby = player; }
 
+			void SetBoom(class RightBoomb* rb) { RightBoomb = rb; }
+			void SetLeftBoom(class LeftBoomb* lb) { LeftBoomb = lb; }
+
 
 		private:
 			class Kirby* mKirby;
-
+			class RightBoomb* RightBoomb;
+			class LeftBoomb* LeftBoomb;
 		};
 	}

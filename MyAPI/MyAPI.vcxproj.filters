@@ -86,9 +86,6 @@
     <Filter Include="Contents\Effect">
       <UniqueIdentifier>{ae8046ac-1257-41c1-a73e-9d6a027140bb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Effect\AbsorbEffect">
-      <UniqueIdentifier>{9ab1eb29-ba68-4b95-bd76-4bc1d03ab986}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Scene\fade In/Out">
       <UniqueIdentifier>{7dcc9be6-1ceb-4315-9b9e-a197ba9cfc1d}</UniqueIdentifier>
     </Filter>
@@ -98,14 +95,8 @@
     <Filter Include="Contents\Object">
       <UniqueIdentifier>{5567d1f6-f690-439f-97c2-2cd69c9fd85a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Effect\Air">
-      <UniqueIdentifier>{eb5ab93c-6f97-4530-8e6d-25855b111482}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Object\Ground">
       <UniqueIdentifier>{b691a87c-11f3-47fb-8fb2-65e55b4480f4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Effect\StarShot">
-      <UniqueIdentifier>{e8f4b667-8609-4e7f-93ce-2307a3a5b13c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Object\Star">
       <UniqueIdentifier>{d832ab79-5119-44ff-b304-544bba5e1000}</UniqueIdentifier>
@@ -169,6 +160,15 @@
     </Filter>
     <Filter Include="Contents\Skill\BoombKirbySkill">
       <UniqueIdentifier>{c687bf76-ab06-49c7-9f73-d656b186045b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Skill\AbsorbEffect">
+      <UniqueIdentifier>{9ab1eb29-ba68-4b95-bd76-4bc1d03ab986}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Skill\Air">
+      <UniqueIdentifier>{eb5ab93c-6f97-4530-8e6d-25855b111482}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Skill\StarShot">
+      <UniqueIdentifier>{e8f4b667-8609-4e7f-93ce-2307a3a5b13c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -281,10 +281,10 @@
       <Filter>Contents\Scene\MyStageScene\Stage1\Room2</Filter>
     </ClInclude>
     <ClInclude Include="AbsorbLeftEffect.h">
-      <Filter>Contents\Effect\AbsorbEffect</Filter>
+      <Filter>Contents\Skill\AbsorbEffect</Filter>
     </ClInclude>
     <ClInclude Include="AbsorbEffect.h">
-      <Filter>Contents\Effect\AbsorbEffect</Filter>
+      <Filter>Contents\Skill\AbsorbEffect</Filter>
     </ClInclude>
     <ClInclude Include="MyfadeOut.h">
       <Filter>Contents\Scene\fade In/Out</Filter>
@@ -296,16 +296,16 @@
       <Filter>Engine\Component\RigidBody</Filter>
     </ClInclude>
     <ClInclude Include="Air.h">
-      <Filter>Contents\Effect\Air</Filter>
+      <Filter>Contents\Skill\Air</Filter>
     </ClInclude>
     <ClInclude Include="AirLeft.h">
-      <Filter>Contents\Effect\Air</Filter>
+      <Filter>Contents\Skill\Air</Filter>
     </ClInclude>
     <ClInclude Include="R1Ground.h">
       <Filter>Contents\Object\Ground</Filter>
     </ClInclude>
     <ClInclude Include="Star.h">
-      <Filter>Contents\Effect\StarShot</Filter>
+      <Filter>Contents\Skill\StarShot</Filter>
     </ClInclude>
     <ClInclude Include="StarMap.h">
       <Filter>Contents\Object\Star</Filter>
@@ -425,6 +425,10 @@
     <ClInclude Include="BoomBros.h">
       <Filter>Contents\Monster\Bros</Filter>
     </ClInclude>
+    <ClInclude Include="Explosion.h">
+      <Filter>Contents\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="boomrect.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc">
@@ -528,10 +532,10 @@
       <Filter>Contents\Scene\MyStageScene\Stage1\Room2</Filter>
     </ClCompile>
     <ClCompile Include="AbsorbEffect.cpp">
-      <Filter>Contents\Effect\AbsorbEffect</Filter>
+      <Filter>Contents\Skill\AbsorbEffect</Filter>
     </ClCompile>
     <ClCompile Include="AbsorbLeftEffect.cpp">
-      <Filter>Contents\Effect\AbsorbEffect</Filter>
+      <Filter>Contents\Skill\AbsorbEffect</Filter>
     </ClCompile>
     <ClCompile Include="MyfadeOut.cpp">
       <Filter>Contents\Scene\fade In/Out</Filter>
@@ -543,16 +547,16 @@
       <Filter>Engine\Component\RigidBody</Filter>
     </ClCompile>
     <ClCompile Include="Air.cpp">
-      <Filter>Contents\Effect\Air</Filter>
+      <Filter>Contents\Skill\Air</Filter>
     </ClCompile>
     <ClCompile Include="AirLeft.cpp">
-      <Filter>Contents\Effect\Air</Filter>
+      <Filter>Contents\Skill\Air</Filter>
     </ClCompile>
     <ClCompile Include="R1Ground.cpp">
       <Filter>Contents\Object\Ground</Filter>
     </ClCompile>
     <ClCompile Include="Star.cpp">
-      <Filter>Contents\Effect\StarShot</Filter>
+      <Filter>Contents\Skill\StarShot</Filter>
     </ClCompile>
     <ClCompile Include="StarMap.cpp">
       <Filter>Contents\Object\Star</Filter>
@@ -672,5 +676,9 @@
     <ClCompile Include="BoomBros.cpp">
       <Filter>Contents\Monster\Bros</Filter>
     </ClCompile>
+    <ClCompile Include="Explosion.cpp">
+      <Filter>Contents\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="boomrect.cpp" />
   </ItemGroup>
 </Project>

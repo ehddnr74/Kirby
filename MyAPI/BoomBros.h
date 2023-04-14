@@ -21,6 +21,8 @@ namespace My
 			HitSlidingLeft,
 			RightBoomRelease,
 			RightBoomShot,
+			LeftBoomRelease,
+			LeftBoomShot,
 		};
 
 
@@ -45,10 +47,16 @@ namespace My
 		void SetKirby(class Kirby* kirby) { mkirby = kirby; }
 
 		void SetLeftBoomb(class LeftBoomb* lb) { mLeftBoomb = lb; }
+		class LeftBoomb* GetLeftBoomb() { return mLeftBoomb; }
+
 		void SetBoomb(class RightBoomb* rb) { mRightBoomb = rb; }
+		class RightBoomb* GetBoomb() { return mRightBoomb; }
 
+		
 
+		void SetGround(class R2Ground* gr) { mGround = gr; }
 
+		class R2Ground* GetGround() { return mGround; }
 
 
 	private:
@@ -67,6 +75,8 @@ namespace My
 
 		void rightboomrelease();
 		void rightboomshot();
+		void leftboomrelease();
+		void leftboomshot();
 
 
 	private:
@@ -98,6 +108,7 @@ namespace My
 		class LeftEnergyBeam* mLeftEnergyBeam;
 		class RightBoomb* mRightBoomb;
 		class LeftBoomb* mLeftBoomb;
+		class R2Ground* mGround;
 
 
 		double brostimetwo;
@@ -105,8 +116,22 @@ namespace My
 		double deathtime;
 		bool death;
 
+		bool find;
 		bool boomcreate;
-		double boomreleasetime;
 		bool BoomShot;
+
+		double enemyfind;
+
+		double boomreleasetime;
+		double boomshotend;
+		double boomwaiting;
+
+		double leftboomshotend;
+		double leftboomwaiting;
+		double leftboomreleasetime;
+
+		bool leftfind;
+		bool leftBoomShot;
+		bool leftBoomCreate;
 	};
 }

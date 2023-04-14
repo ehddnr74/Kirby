@@ -25,7 +25,10 @@
 #include "portion3.h"
 #include "LeftBoomb.h"
 #include "RightBoomb.h"
-
+#include "Explosion.h"
+#include "MyRigidBody.h"
+#include "boomrect.h"
+#include "Grizzo.h"
 
 namespace My
 {
@@ -89,6 +92,14 @@ namespace My
 			}
 		}
 
+		if (mBoomBros != nullptr)
+		{
+			if (mBoomBros->GetBoomb() != nullptr)
+			{
+				ground->SetBoomb(mBoomBros->GetBoomb());
+			}
+		}
+
 		if (mBros->GetHP() <= 0)
 		{
 			ground->SetBros(nullptr);
@@ -133,11 +144,11 @@ namespace My
 		SetGround(ground);
 		ground->SetPlayer(MyKirby);
 
-		Box* box1 = object::Instantiate<Box>(Vector2(895, 325), Vector2(1.0f, 1.0f), eLayerType::Box);
-		Box* box2 = object::Instantiate<Box>(Vector2(980, 326), Vector2(0.9f, 1.0f), eLayerType::Box);
-		Box* box3 = object::Instantiate<Box>(Vector2(1025, 326), Vector2(0.9f, 1.0f), eLayerType::Box);
-		Box* box4 = object::Instantiate<Box>(Vector2(1070, 326), Vector2(0.9f, 1.0f), eLayerType::Box);
-		Box* box5 = object::Instantiate<Box>(Vector2(1155, 380), Vector2(1.0f, 1.0f), eLayerType::Box);
+		//Box* box1 = object::Instantiate<Box>(Vector2(895, 325), Vector2(1.0f, 1.0f), eLayerType::Box);
+		//Box* box2 = object::Instantiate<Box>(Vector2(980, 326), Vector2(0.9f, 1.0f), eLayerType::Box);
+		//Box* box3 = object::Instantiate<Box>(Vector2(1025, 326), Vector2(0.9f, 1.0f), eLayerType::Box);
+		//Box* box4 = object::Instantiate<Box>(Vector2(1070, 326), Vector2(0.9f, 1.0f), eLayerType::Box);
+		//Box* box5 = object::Instantiate<Box>(Vector2(1155, 380), Vector2(1.0f, 1.0f), eLayerType::Box);
 		
 		Portion1* mCherry = object::Instantiate<Portion1>(Vector2(980, 430), Vector2(1.0f, 1.0f), eLayerType::Item);
 		Portion2* mCookie = object::Instantiate<Portion2>(Vector2(1025, 430), Vector2(1.0f, 1.0f), eLayerType::Item);
@@ -146,33 +157,52 @@ namespace My
 		/*SetBox(box);*/
 
 
-		if(box1 != nullptr)
-		{
-		ground->SetBox(box1);
-		}
-		if (box2 != nullptr)
-		{
-			ground->SetBox(box2);
-		}
-		if (box3 != nullptr)
-		{
-			ground->SetBox(box3);
-		}
-		if (box4 != nullptr)
-		{
-			ground->SetBox(box4);
-		}
-		if (box5 != nullptr)
-		{
-			ground->SetBox(box5);
-		}
+		//if(box1 != nullptr)
+		//{
+		//ground->SetBox(box1);
+		//}
+		//if (box2 != nullptr)
+		//{
+		//	ground->SetBox(box2);
+		//}
+		//if (box3 != nullptr)
+		//{
+		//	ground->SetBox(box3);
+		//}
+		//if (box4 != nullptr)
+		//{
+		//	ground->SetBox(box4);
+		//}
+		//if (box5 != nullptr)
+		//{
+		//	ground->SetBox(box5);
+		//}
 
 
 		object::Instantiate<Stage12bk>(eLayerType::BG);
 
 		object::Instantiate<Room2>(eLayerType::Stage);
 
-		object::Instantiate<RightBoomb>(Vector2(200.f, 430.0f), Vector2(1.5f, 1.5f), eLayerType::Skill);
+
+
+
+
+
+
+		//LeftBoomb* lb = object::Instantiate<LeftBoomb>(Vector2(200.f, 400.0f), Vector2(2.0f, 2.0f), eLayerType::MonsterSkill);
+		
+		
+		//boomrect* rect = object::Instantiate<boomrect>(eLayerType::Rectangle);
+		//rect->SetLeftBoom(lb);
+
+		object::Instantiate<Grizzo>(Vector2(200.f, 400.0f), Vector2(2.0f, 2.0f), eLayerType::Monster);
+	
+
+
+
+
+
+
 
 		//Kirby* mKirby = object::Instantiate<Kirby>(Vector2(129.0f, 384.0f), Vector2(2.0f, 2.0f), eLayerType::Player);
 
@@ -180,13 +210,17 @@ namespace My
 		Bros* mBros = object::Instantiate<Bros>(Vector2(400.0f, 430.0f), Vector2(2.0f, 2.0f), eLayerType::Monster); // 400, 440
 		BoomBros* mBoomBros = object::Instantiate<BoomBros>(Vector2(1250.0f, 430.0f), Vector2(2.0f, 2.0f), eLayerType::Monster);
 		mBoomBros->SetKirby(MyKirby);
-		SetBros(mBros);
 		SetBoomBros(mBoomBros);
-
+		SetBros(mBros);
 		ground->SetBros(mBros);
-		ground->SetBoomBros(mBoomBros);
 
+		if (mBoomBros != nullptr)
+		{
+			ground->SetBoomBros(mBoomBros);
+			mBoomBros->SetGround(ground);
+		}
 
+		//class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(400.f,400.f),Vector2(1.f,1.f),eLayerType::Effect);
 
 
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);

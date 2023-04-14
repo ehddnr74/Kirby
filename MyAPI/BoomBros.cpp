@@ -36,6 +36,16 @@ namespace My
 		, boomcreate(false)
 		, boomreleasetime(0.f)
 		, BoomShot(false)
+		, enemyfind(0.f)
+		, boomshotend(0.f)
+		, boomwaiting(0.f)
+		, find(false)
+		, leftboomshotend(0.f)
+	    , leftboomwaiting(0.f)
+	    , leftboomreleasetime(0.f)
+		, leftfind(false)
+		, leftBoomShot(false)
+		, leftBoomCreate(false)
 	{
 	}
 	BoomBros::~BoomBros()
@@ -53,6 +63,11 @@ namespace My
 		
 		mAnimator->CreateAnimation(L"RightBoomRelease", mBros, Vector2(0.0f, 120.0f), 16, 16, 1, Vector2::Zero, 0.1);
 		mAnimator->CreateAnimation(L"RightBoomShot", mBros, Vector2(0.0f, 160.0f), 16, 16, 1, Vector2::Zero, 0.1);
+
+		mAnimator->CreateAnimation(L"LeftBoomRelease", mBros, Vector2(0.0f, 200.0f), 16, 16, 1, Vector2::Zero, 0.1);
+		mAnimator->CreateAnimation(L"LeftBoomShot", mBros, Vector2(0.0f, 240.0f), 16, 16, 1, Vector2::Zero, 0.1);
+
+
 
 
 		mState = BrosState::LeftIdle;
@@ -109,6 +124,12 @@ namespace My
 			break;
 		case BoomBros::BrosState::RightBoomShot:
 			rightboomshot();
+			break;
+		case BoomBros::BrosState::LeftBoomRelease:
+			leftboomrelease();
+			break;
+		case BoomBros::BrosState::LeftBoomShot:
+			leftboomshot();
 			break;
 		}
 	}
@@ -265,9 +286,10 @@ namespace My
 	{
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
+		brostimetwo += Time::DeltaTime();
+		leftboomwaiting += Time::DeltaTime();
 
 		brosdir = 0;
-		brostimetwo += Time::DeltaTime();
 
 		pos.x -= 30.0f * Time::DeltaTime();
 		pos.y -= 150.0f * Time::DeltaTime();
@@ -275,8 +297,29 @@ namespace My
 		if (brostimetwo >= 2.0f)
 		{
 			brostimetwo = 0.0f;
+			leftboomwaiting = 0.0f;
 			mState = BrosState::RightIdle;
 			mAnimator->Play(L"RightIdle", true);
+		}
+
+		Transform* kirbytr = mkirby->GetComponent<Transform>();
+		Vector2 kirbypos = kirbytr->GetPos();
+
+		Transform* brostr = this->GetComponent<Transform>();
+		Vector2 brospos = brostr->GetPos();
+
+		if (brosdir == 0 && kirbypos.x - brospos.x <= 0 && kirbypos.x - brospos.x >= - 150.0f) //&& fabs(kirbypos.y - brospos.y) <= 10.0f)
+		{
+			leftfind = true;
+		}
+
+		if (leftfind == true && leftboomwaiting >= 1.5f)
+		{
+			leftboomwaiting = 0.0f;
+			leftBoomCreate = true;
+			leftfind = false;
+			mState = BrosState::LeftBoomRelease;
+			mAnimator->Play(L"LeftBoomRelease", false);
 		}
 
 
@@ -287,6 +330,7 @@ namespace My
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
 		brostime += Time::DeltaTime();
+		boomwaiting += Time::DeltaTime();
 
 		brosdir = 1;
 
@@ -295,6 +339,7 @@ namespace My
 
 		if (brostime >= 2.0f)
 		{
+			boomwaiting = 0.0f;
 			brostime = 0.0f;
 			mState = BrosState::LeftIdle;
 			mAnimator->Play(L"LeftIdle", true);
@@ -307,12 +352,19 @@ namespace My
 		Transform* brostr = this->GetComponent<Transform>();
 		Vector2 brospos = brostr->GetPos();
 
-			if (brospos.x - kirbypos.x <= 50.0f)
-			{
-				boomcreate = true;
-				mState = BrosState::RightBoomRelease;
-				mAnimator->Play(L"RightBoomRelease", false);
-			}
+		if (brosdir==1 && kirbypos.x - brospos.x >=0 && kirbypos.x - brospos.x <= 150.0f) //&& fabs(kirbypos.y - brospos.y) <= 10.0f)
+		{
+			find = true;
+		}
+
+		if (find == true && boomwaiting >=1.5f)
+		{
+			boomwaiting = 0.0f;
+			boomcreate = true;
+			find = false;
+			mState = BrosState::RightBoomRelease;
+			mAnimator->Play(L"RightBoomRelease", false);
+		}
 
 
 		tr->SetPos(pos);
@@ -557,18 +609,26 @@ namespace My
 	{
 		BoomShot = true;
 		boomreleasetime += Time::DeltaTime();
+		boomwaiting += Time::DeltaTime();
 
 		Transform* brostr = this->GetComponent<Transform>();
 		Vector2 brospos = brostr->GetPos();
 
-		if (boomcreate == true)
+
+		if (boomcreate == true && boomwaiting >= 0.5f)
 		{
+			boomwaiting = 0.0f;
 			boomcreate = false;
-			RightBoomb* mRightBoomb = object::Instantiate<RightBoomb>(Vector2(brospos.x + 30, brospos.y - 15), Vector2(1.3f, 1.3f), eLayerType::MonsterSkill);
+			RightBoomb* mRightBoomb = object::Instantiate<RightBoomb>(Vector2(brospos.x + 30, brospos.y - 15), Vector2(2.0f, 2.0f), eLayerType::MonsterSkill);
 			SetBoomb(mRightBoomb);
+
+			if (GetGround() != nullptr)
+			{
+				mRightBoomb->SetGround(mGround);
+			}
 		}
 
-		if (boomreleasetime >= 0.5f)
+		if (boomreleasetime >= 0.6f)
 		{
 			boomreleasetime = 0.0f;
 			mState = BrosState::RightBoomShot;
@@ -578,13 +638,97 @@ namespace My
 
 	void BoomBros::rightboomshot()
 	{
+		//boomwaiting += Time::DeltaTime();
 		if (BoomShot == true)
 		{
+			//boomwaiting = 0.0f;
 			BoomShot = false;
-		    RigidBody* bb = mRightBoomb->GetComponent<RigidBody>();
-			bb->SetGravity(Vector2(0.0f, 500.f));
-			bb->SetVelocity(Vector2(100.f, -400.f));
+			if (mRightBoomb->GetDestroy() == false)
+			{
+				RigidBody* bb = mRightBoomb->GetComponent<RigidBody>();
+				bb->SetGravity(Vector2(0.0f, 400.f));
+				bb->SetVelocity(Vector2(150.f, -300.f));
+			}
 		}
+		if (BoomShot == false)
+		{
+			boomshotend += Time::DeltaTime();
+		}
+		if (boomshotend >= 1.1f)
+		{
+			boomshotend = 0.0f;
+			mState = BrosState::RightIdle;
+			mAnimator->Play(L"RightIdle", true);
+		}
+
+		//if (BoomShot ==false && find == false)
+		//{
+		//	mState = BrosState::RightIdle;
+		//	mAnimator->Play(L"RightIdle", true);
+		//}
+	}
+
+	void BoomBros::leftboomrelease()
+	{
+		leftBoomShot = true;
+		leftboomreleasetime += Time::DeltaTime();
+		leftboomwaiting += Time::DeltaTime();
+
+		Transform* brostr = this->GetComponent<Transform>();
+		Vector2 brospos = brostr->GetPos();
+
+
+		if (leftBoomCreate == true && leftboomwaiting >= 0.5f)
+		{
+			leftboomwaiting = 0.0f;
+			leftBoomCreate = false;
+			LeftBoomb* mLeftBoomb = object::Instantiate<LeftBoomb>(Vector2(brospos.x + 30, brospos.y - 15), Vector2(2.0f, 2.0f), eLayerType::MonsterSkill);
+			SetLeftBoomb(mLeftBoomb);
+
+			if (GetGround() != nullptr)
+			{
+				mLeftBoomb->SetGround(mGround);
+			}
+		}
+
+		if (leftboomreleasetime >= 0.6f)
+		{
+			leftboomreleasetime = 0.0f;
+			mState = BrosState::LeftBoomShot;
+			mAnimator->Play(L"LeftBoomShot", false);
+		}
+	}
+
+	void BoomBros::leftboomshot()
+	{
+		//boomwaiting += Time::DeltaTime();
+		if (leftBoomShot == true)
+		{
+			//boomwaiting = 0.0f;
+			leftBoomShot = false;
+			if (mLeftBoomb->GetDestroy() == false)
+			{
+				RigidBody* lbb = mLeftBoomb->GetComponent<RigidBody>();
+				lbb->SetGravity(Vector2(0.0f, 400.f));
+				lbb->SetVelocity(Vector2(-150.f, -300.f));
+			}
+		}
+		if (leftBoomShot == false)
+		{
+			leftboomshotend += Time::DeltaTime();
+		}
+		if (leftboomshotend >= 1.1f)
+		{
+			leftboomshotend = 0.0f;
+			mState = BrosState::LeftIdle;
+			mAnimator->Play(L"LeftIdle", true);
+		}
+
+		//if (BoomShot ==false && find == false)
+		//{
+		//	mState = BrosState::RightIdle;
+		//	mAnimator->Play(L"RightIdle", true);
+		//}
 	}
 	
 }

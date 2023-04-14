@@ -11,6 +11,9 @@
 #include "Bros.h"
 #include "BoomBros.h"
 #include "Box.h"
+#include "RightBoomb.h"
+#include "LeftBoomb.h"
+#include "Explosion.h"
 namespace My
 {
 	R2Ground::R2Ground()
@@ -50,8 +53,50 @@ namespace My
 
 			RigidBody* rb = mKirby->GetComponent<RigidBody>();
 
-			//if (mBox != nullptr)
-			//{
+
+			if (GetBoomb() != nullptr)
+			{
+				if (GetBoomb()->GetDestroy() == false)
+				{
+					Transform* boomTr = GetBoomb()->GetComponent<Transform>();
+					COLORREF colorboom = mImage->GetPixel(boomTr->GetPos().x + 60, boomTr->GetPos().y - 50);
+					COLORREF colorboomr = mImage->GetPixel(boomTr->GetPos().x + 40, boomTr->GetPos().y - 50);
+					COLORREF colorbooml = mImage->GetPixel(boomTr->GetPos().x - 60, boomTr->GetPos().y - 50);
+
+					if (colorboom == RGB(255, 0, 255) || colorbooml == RGB(255, 0, 255) || colorboomr == RGB(255, 0, 255))
+					{
+						class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(boomTr->GetPos().x, boomTr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+						object::Destroy(GetBoomb());
+						GetBoomb()->SetDestroy(true);
+					}
+				}
+			}
+
+
+			if (GetLeftBoomb() != nullptr)
+			{
+				if (GetLeftBoomb()->GetDestroy() == false)
+				{
+					Transform* LboomTr = GetLeftBoomb()->GetComponent<Transform>();
+					COLORREF lcolorboom = mImage->GetPixel(LboomTr->GetPos().x + 60, LboomTr->GetPos().y - 100);
+					COLORREF lcolorboomr = mImage->GetPixel(LboomTr->GetPos().x + 40, LboomTr->GetPos().y - 100);
+					COLORREF lcolorbooml = mImage->GetPixel(LboomTr->GetPos().x - 60, LboomTr->GetPos().y - 100);
+
+					if (lcolorboom == RGB(255, 0, 255) || lcolorbooml == RGB(255, 0, 255) || lcolorboomr == RGB(255, 0, 255))
+					{
+						GetLeftBoomb()->SetDestroy(true);
+						class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(LboomTr->GetPos().x, LboomTr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+						object::Destroy(GetLeftBoomb());
+					}
+				}
+			}
+
+
+
+
+
+			if (mBox != nullptr)
+			{
 			if (mBox->GetDestroy() == false)
 			{
 				Transform* BoxTr = mBox->GetComponent<Transform>();
@@ -63,8 +108,8 @@ namespace My
 					object::Destroy(mBox);
 				}
 			}
-		//}
-		
+			}
+
 			if (colorup == RGB(100, 100, 100))
 			{
 				Vector2 pos = playerTr->GetPos();
@@ -113,6 +158,7 @@ namespace My
 				rb->SetGround(false);
 			}
 		}
+
 		if (mBoomBros != nullptr)
 		{
 			//if (mBros->GetDeath() == false)

@@ -22,7 +22,11 @@ namespace My
 		void SetBros(class Bros* bros) { mBros = bros; }
 		void SetBoomBros(class BoomBros* boombros) { mBoomBros = boombros; }
 		void SetBox(class Box* box) { mBox = box; }
+		void SetBoomb(class RightBoomb* rb) { rboomb = rb; }
+		class RightBoomb* GetBoomb() { return rboomb; }
 
+		void SetLeftBoomb(class LeftBoomb* lb) { lboomb = lb; }
+		class LeftBoomb* GetLeftBoomb() { return lboomb; }
 
 	
 
@@ -35,6 +39,8 @@ namespace My
 		class Bros* mBros;
 		class BoomBros* mBoomBros;
 		class Box* mBox;
+		class RightBoomb* rboomb;
+		class LeftBoomb* lboomb;
 
 
 		
