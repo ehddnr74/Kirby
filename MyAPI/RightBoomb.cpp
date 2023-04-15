@@ -12,6 +12,7 @@
 #include "MyKirby.h"
 #include "MyRigidBody.h"
 #include "Explosion.h"
+#include "R2Ground.h"
 
 namespace My
 {
@@ -50,13 +51,31 @@ namespace My
 	}
 	void RightBoomb::Update()
 	{
-		if (GetDestroy() == true)
+		if (mBoomBros == nullptr)
 		{
-			SetGround(nullptr);
-			Transform* tr = GetComponent<Transform>();
-			class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(tr->GetPos().x, tr->GetPos().y+50), Vector2(1.f, 1.f), eLayerType::Effect);
-			object::Destroy(this);
+			if (GetGround() != nullptr)
+			{
+				mGround = GetGround();
+				mGround->SetBoomb(nullptr);
+			}
 		}
+
+		if (GetGround() != nullptr)
+		{
+			if (GetDestroy() == true)
+			{
+			  class R2Ground* mGround = GetGround();
+			  mGround->SetBoomb(nullptr);
+			}
+		}
+
+		//if (GetDestroy() == true)
+		//{
+		//	Transform* tr = GetComponent<Transform>();
+		//	class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(tr->GetPos().x, tr->GetPos().y+50), Vector2(1.f, 1.f), eLayerType::Effect);
+		//	object::Destroy(this);
+		//	SetGround(nullptr);
+		//}
 
 		
 
@@ -74,7 +93,7 @@ namespace My
 	{
 		if (mkirby = dynamic_cast<Kirby*>(other->GetOwner()));
 		{
-			SetDestroy(true);	
+			//SetDestroy(true);	
 		}
 	}
 	void RightBoomb::OnCollisionStay(Collider* other)

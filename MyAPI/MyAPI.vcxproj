@@ -147,6 +147,8 @@
     <ClInclude Include="Grizzo.h" />
     <ClInclude Include="HP.h" />
     <ClInclude Include="KirbyBeam.h" />
+    <ClInclude Include="KirbyLeftBoom.h" />
+    <ClInclude Include="KirbyRightBoom.h" />
     <ClInclude Include="LeftBeam.h" />
     <ClInclude Include="LeftBoomb.h" />
     <ClInclude Include="LeftEnergyBeam.h" />
@@ -234,6 +236,8 @@
     <ClCompile Include="Grizzo.cpp" />
     <ClCompile Include="HP.cpp" />
     <ClCompile Include="KirbyBeam.cpp" />
+    <ClCompile Include="KirbyLeftBoom.cpp" />
+    <ClCompile Include="KirbyRightBoom.cpp" />
     <ClCompile Include="LeftBeam.cpp" />
     <ClCompile Include="LeftBoomb.cpp" />
     <ClCompile Include="LeftEnergyBeam.cpp" />

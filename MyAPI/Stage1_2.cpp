@@ -98,6 +98,11 @@ namespace My
 			{
 				ground->SetBoomb(mBoomBros->GetBoomb());
 			}
+
+			if (mBoomBros->GetLeftBoomb() != nullptr)
+			{
+				ground->SetLeftBoomb(mBoomBros->GetLeftBoomb());
+			}
 		}
 
 		if (mBros->GetHP() <= 0)
@@ -209,13 +214,14 @@ namespace My
 
 		Bros* mBros = object::Instantiate<Bros>(Vector2(400.0f, 430.0f), Vector2(2.0f, 2.0f), eLayerType::Monster); // 400, 440
 		BoomBros* mBoomBros = object::Instantiate<BoomBros>(Vector2(1250.0f, 430.0f), Vector2(2.0f, 2.0f), eLayerType::Monster);
-		mBoomBros->SetKirby(MyKirby);
-		SetBoomBros(mBoomBros);
+		
 		SetBros(mBros);
 		ground->SetBros(mBros);
 
 		if (mBoomBros != nullptr)
 		{
+			SetBoomBros(mBoomBros);
+			mBoomBros->SetKirby(MyKirby);
 			ground->SetBoomBros(mBoomBros);
 			mBoomBros->SetGround(ground);
 		}

@@ -4,6 +4,8 @@
 
 namespace My
 {	
+	class kirbyRightBoom;
+	class kirbyRightBoom;
 	class Beam;
 	class LeftBeam;
 	class LeftEnergyBeam;
@@ -144,6 +146,12 @@ namespace My
 			RightBoombJump,
 			LeftBoombDoubleJump,
 			RightBoombDoubleJump,
+			
+
+			LeftBoomRelease,
+			RightBoomRelease,
+			LeftBoomShot,
+			RightBoomShot,
 
 		};
 
@@ -199,6 +207,8 @@ namespace My
 
 		Kirby* GetKirby() { return this; }
 		
+
+		void SetRightBoom(class kirbyRightBoom* rb) { mRightBoom = rb;  }
 
 
 	private:
@@ -327,6 +337,11 @@ namespace My
 		void leftboombdoublejump();
 		void rightboombdoublejump();
 
+		void leftboomrelease();
+		void rightboomrelease();
+		void leftboomshot();
+		void rightboomshot();
+
 		
 
 	private:
@@ -384,6 +399,10 @@ namespace My
 		class Beam* mBeam;
 		class LeftBeam* mLeftBeam;
 		class Bros* mBros;
+		class BoomBros* mBoomBros;
+
+		class kirbyRightBoom* mRightBoom;
+		class kirbyRightBoom* mLeftBoom;
 
 		double kirbytime;
 		double beamkirbytime;

@@ -170,6 +170,9 @@
     <Filter Include="Contents\Skill\StarShot">
       <UniqueIdentifier>{e8f4b667-8609-4e7f-93ce-2307a3a5b13c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Skill\KirbyBoom">
+      <UniqueIdentifier>{09fc860e-5550-43f1-a67f-dd7517147274}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -429,6 +432,12 @@
       <Filter>Contents\Effect</Filter>
     </ClInclude>
     <ClInclude Include="boomrect.h" />
+    <ClInclude Include="KirbyRightBoom.h">
+      <Filter>Contents\Skill\KirbyBoom</Filter>
+    </ClInclude>
+    <ClInclude Include="KirbyLeftBoom.h">
+      <Filter>Contents\Skill\KirbyBoom</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc">
@@ -680,5 +689,11 @@
       <Filter>Contents\Effect</Filter>
     </ClCompile>
     <ClCompile Include="boomrect.cpp" />
+    <ClCompile Include="KirbyLeftBoom.cpp">
+      <Filter>Contents\Skill\KirbyBoom</Filter>
+    </ClCompile>
+    <ClCompile Include="KirbyRightBoom.cpp">
+      <Filter>Contents\Skill\KirbyBoom</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

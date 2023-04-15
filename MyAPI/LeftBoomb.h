@@ -21,9 +21,12 @@ namespace My
 
 		void SetKirby(class Kirby* player) { mkirby = player; }
 		void SetGround(class R2Ground* gr) { mGround = gr; }
+		class R2Ground* GetGround() { return mGround; }
 
 		void SetDestroy(bool destroy) { Destroy = destroy; }
 		bool GetDestroy() { return Destroy; }
+
+		void SetBoomBros(class BoomBros* bb) { mBoomBros = bb; }
 		//void SetExplosion(class Explosion* exp) { mExplosion = exp; }
 
 
@@ -34,7 +37,7 @@ namespace My
 		class RigidBody* mRigidBody;
 		class R2Ground* mGround;
 		class Explosion* mExplosion;
-
+		class BoomBros* mBoomBros;;
 		bool Destroy;
 	};
 }

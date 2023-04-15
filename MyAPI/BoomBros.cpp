@@ -231,43 +231,45 @@ namespace My
 				mState = BrosState::HitSlidingLeft;
 			}
 		}
-
-		if (mAir = dynamic_cast<Air*>(other->GetOwner()))
-		{
-			SetDamage(50);
-			mState = BrosState::HitAir;
-		}
-		if (mAirLeft = dynamic_cast<AirLeft*>(other->GetOwner()))
-		{
-			SetDamage(50);
-			mState = BrosState::LeftHitAir;
-		}
-		if (mStar = dynamic_cast<Star*>(other->GetOwner()))
-		{
-			SetDamage(100);
-			mState = BrosState::HitStar;
-		}
-		if (mKirbyBeam = dynamic_cast<KirbyBeam*>(other->GetOwner()))
-		{
-			SetDamage(100);
-			mState = BrosState::BrosDeath;
-		}
-		if (mLeftKirbyBeam = dynamic_cast<LeftKirbyBeam*>(other->GetOwner()))
-		{
-			SetDamage(100);
-			mState = BrosState::BrosDeath;
-		}
-		if (mEnergyBeam = dynamic_cast<EnergyBeam*>(other->GetOwner()))
-		{
-			SetDamage(100);
-			mState = BrosState::BrosDeath;
-		}
-		if (mLeftEnergyBeam = dynamic_cast<LeftEnergyBeam*>(other->GetOwner()))
-		{
-			SetDamage(100);
-			mState = BrosState::BrosDeath;
-		}
 	}
+		
+
+	//	if (mAir = dynamic_cast<Air*>(other->GetOwner()))
+	//	{
+	//		SetDamage(50);
+	//		mState = BrosState::HitAir;
+	//	}
+	//	if (mAirLeft = dynamic_cast<AirLeft*>(other->GetOwner()))
+	//	{
+	//		SetDamage(50);
+	//		mState = BrosState::LeftHitAir;
+	//	}
+	//	if (mStar = dynamic_cast<Star*>(other->GetOwner()))
+	//	{
+	//		SetDamage(100);
+	//		mState = BrosState::HitStar;
+	//	}
+	//	if (mKirbyBeam = dynamic_cast<KirbyBeam*>(other->GetOwner()))
+	//	{
+	//		SetDamage(100);
+	//		mState = BrosState::BrosDeath;
+	//	}
+	//	if (mLeftKirbyBeam = dynamic_cast<LeftKirbyBeam*>(other->GetOwner()))
+	//	{
+	//		SetDamage(100);
+	//		mState = BrosState::BrosDeath;
+	//	}
+	//	if (mEnergyBeam = dynamic_cast<EnergyBeam*>(other->GetOwner()))
+	//	{
+	//		SetDamage(100);
+	//		mState = BrosState::BrosDeath;
+	//	}
+	//	if (mLeftEnergyBeam = dynamic_cast<LeftEnergyBeam*>(other->GetOwner()))
+	//	{
+	//		SetDamage(100);
+	//		mState = BrosState::BrosDeath;
+	//	}
+	//}
 	void BoomBros::OnCollisionStay(Collider* other)
 	{
 		if (brosdir == 0)
@@ -302,24 +304,27 @@ namespace My
 			mAnimator->Play(L"RightIdle", true);
 		}
 
-		Transform* kirbytr = mkirby->GetComponent<Transform>();
-		Vector2 kirbypos = kirbytr->GetPos();
-
-		Transform* brostr = this->GetComponent<Transform>();
-		Vector2 brospos = brostr->GetPos();
-
-		if (brosdir == 0 && kirbypos.x - brospos.x <= 0 && kirbypos.x - brospos.x >= - 150.0f) //&& fabs(kirbypos.y - brospos.y) <= 10.0f)
+		if (mkirby != nullptr)
 		{
-			leftfind = true;
-		}
+			Transform* kirbytr = mkirby->GetComponent<Transform>();
+			Vector2 kirbypos = kirbytr->GetPos();
 
-		if (leftfind == true && leftboomwaiting >= 1.5f)
-		{
-			leftboomwaiting = 0.0f;
-			leftBoomCreate = true;
-			leftfind = false;
-			mState = BrosState::LeftBoomRelease;
-			mAnimator->Play(L"LeftBoomRelease", false);
+			Transform* brostr = this->GetComponent<Transform>();
+			Vector2 brospos = brostr->GetPos();
+
+			if (brosdir == 0 && kirbypos.x - brospos.x <= 0 && kirbypos.x - brospos.x >= -150.0f) //&& fabs(kirbypos.y - brospos.y) <= 10.0f)
+			{
+				leftfind = true;
+			}
+
+			if (leftfind == true && leftboomwaiting >= 1.5f)
+			{
+				leftboomwaiting = 0.0f;
+				leftBoomCreate = true;
+				leftfind = false;
+				mState = BrosState::LeftBoomRelease;
+				mAnimator->Play(L"LeftBoomRelease", false);
+			}
 		}
 
 
@@ -345,27 +350,28 @@ namespace My
 			mAnimator->Play(L"LeftIdle", true);
 		}
 
-
-		Transform* kirbytr = mkirby->GetComponent<Transform>();
-		Vector2 kirbypos = kirbytr->GetPos();
-
-		Transform* brostr = this->GetComponent<Transform>();
-		Vector2 brospos = brostr->GetPos();
-
-		if (brosdir==1 && kirbypos.x - brospos.x >=0 && kirbypos.x - brospos.x <= 150.0f) //&& fabs(kirbypos.y - brospos.y) <= 10.0f)
+		if (mkirby != nullptr)
 		{
-			find = true;
-		}
+			Transform* kirbytr = mkirby->GetComponent<Transform>();
+			Vector2 kirbypos = kirbytr->GetPos();
 
-		if (find == true && boomwaiting >=1.5f)
-		{
-			boomwaiting = 0.0f;
-			boomcreate = true;
-			find = false;
-			mState = BrosState::RightBoomRelease;
-			mAnimator->Play(L"RightBoomRelease", false);
-		}
+			Transform* brostr = this->GetComponent<Transform>();
+			Vector2 brospos = brostr->GetPos();
 
+			if (brosdir == 1 && kirbypos.x - brospos.x >= 0 && kirbypos.x - brospos.x <= 150.0f) //&& fabs(kirbypos.y - brospos.y) <= 10.0f)
+			{
+				find = true;
+			}
+
+			if (find == true && boomwaiting >= 1.5f)
+			{
+				boomwaiting = 0.0f;
+				boomcreate = true;
+				find = false;
+				mState = BrosState::RightBoomRelease;
+				mAnimator->Play(L"RightBoomRelease", false);
+			}
+		}
 
 		tr->SetPos(pos);
 	}
@@ -621,15 +627,18 @@ namespace My
 			boomcreate = false;
 			RightBoomb* mRightBoomb = object::Instantiate<RightBoomb>(Vector2(brospos.x + 30, brospos.y - 15), Vector2(2.0f, 2.0f), eLayerType::MonsterSkill);
 			SetBoomb(mRightBoomb);
+			mRightBoomb->SetBoomBros(this);
 
 			if (GetGround() != nullptr)
 			{
+				mGround = GetGround();
 				mRightBoomb->SetGround(mGround);
 			}
 		}
 
 		if (boomreleasetime >= 0.6f)
 		{
+			boomwaiting = 0.0f;
 			boomreleasetime = 0.0f;
 			mState = BrosState::RightBoomShot;
 			mAnimator->Play(L"RightBoomShot", false);
@@ -684,15 +693,18 @@ namespace My
 			leftBoomCreate = false;
 			LeftBoomb* mLeftBoomb = object::Instantiate<LeftBoomb>(Vector2(brospos.x + 30, brospos.y - 15), Vector2(2.0f, 2.0f), eLayerType::MonsterSkill);
 			SetLeftBoomb(mLeftBoomb);
+			mLeftBoomb->SetBoomBros(this);
 
 			if (GetGround() != nullptr)
 			{
+				mGround = GetGround();
 				mLeftBoomb->SetGround(mGround);
 			}
 		}
 
 		if (leftboomreleasetime >= 0.6f)
 		{
+			leftboomwaiting = 0.0f;
 			leftboomreleasetime = 0.0f;
 			mState = BrosState::LeftBoomShot;
 			mAnimator->Play(L"LeftBoomShot", false);
