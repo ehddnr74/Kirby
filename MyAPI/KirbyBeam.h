@@ -27,5 +27,8 @@ namespace My
 		class Kirby* mkirby;
 
 		double beamtime;
+
+		float startcolpos;
+		float endcolpos;
 	};
 }

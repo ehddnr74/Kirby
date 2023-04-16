@@ -35,6 +35,8 @@
 #include "KirbyLeftBoom.h"
 #include "LeftZoom.h"
 #include "RightZoom.h"
+#include "LeftBoomb.h"
+#include "RightBoomb.h"
 
 namespace My
 {
@@ -1324,6 +1326,48 @@ namespace My
 				mState = eKirbyState::RPBJHR;
 				mAnimator->Play(L"RPBJHR", false);
 			}
+		}
+		if (RightBoomb* mrb = dynamic_cast<RightBoomb*>(other->GetOwner()))
+		{
+			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::RightMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::RightIdle
+				|| GetState() == eKirbyState::LeftDash || GetState() == eKirbyState::RightDash)
+			{
+				mState = eKirbyState::LeftHit;
+				mAnimator->Play(L"LeftHit", false);
+			}
+			if (GetState() == eKirbyState::LeftJump || GetState() == eKirbyState::RightJump)
+			{
+				mState = eKirbyState::LeftJumpHitRelease;
+				mAnimator->Play(L"LeftJumpHitRelease", false);
+
+			}
+			if (GetState() == eKirbyState::LeftDoubleJump || GetState() == eKirbyState::RightDoubleJump)
+			{
+				mState = eKirbyState::LeftAbsorbPigHit;
+				mAnimator->Play(L"LeftAbsorbPigHit", false);
+			}
+		}
+
+		if (LeftBoomb* mlb = dynamic_cast<LeftBoomb*>(other->GetOwner()))
+		{
+			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::RightMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::RightIdle
+				|| GetState() == eKirbyState::LeftDash || GetState() == eKirbyState::RightDash)
+			{
+				mState = eKirbyState::RightHit;
+				mAnimator->Play(L"RightHit", false);
+			}
+			if (GetState() == eKirbyState::LeftJump || GetState() == eKirbyState::RightJump)
+			{
+				mState = eKirbyState::RightJumpHitRelease;
+				mAnimator->Play(L"RightJumpHitRelease", false);
+
+			}
+			if (GetState() == eKirbyState::LeftDoubleJump || GetState() == eKirbyState::RightDoubleJump)
+			{
+				mState = eKirbyState::RightAbsorbPigHit;
+				mAnimator->Play(L"RightAbsorbPigHit", false);
+			}
+
 		}
 	}
 

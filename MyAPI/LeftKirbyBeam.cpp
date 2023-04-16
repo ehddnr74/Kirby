@@ -34,8 +34,8 @@ namespace My
 		mAnimator->Play(L"LeftKirbyBeam", false);
 
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(-50.0f, -130.0f));
-		collider->SetSize(Vector2(140.0f, 100.0f));
+		collider->SetCenter(Vector2(-50.0f, -220.0f));
+		collider->SetSize(Vector2(140.0f, 140.0f));
 
 		GameObject::Initialize();
 	}

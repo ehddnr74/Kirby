@@ -414,6 +414,9 @@ namespace My
 		class LeftZoom* mLeftZoom;
 		class R2Ground* gr2;
 
+		class LeftBoomb* mlb;
+		class RightBoomb* mrb;
+
 
 		double kirbytime;
 		double beamkirbytime;

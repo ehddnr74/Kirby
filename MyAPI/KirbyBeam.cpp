@@ -15,6 +15,8 @@ namespace My
 {
 	KirbyBeam::KirbyBeam()
 		:beamtime(0.f)
+		, startcolpos(0.f)
+		, endcolpos(0.f)
 	{
 
 	}
@@ -38,10 +40,10 @@ namespace My
 		mAnimator->Play(L"RightKirbyBeam", false);
 
 		Collider* collider = AddComponent<Collider>();
-		collider->SetCenter(Vector2(-65.0f, -130.0f));
-		collider->SetSize(Vector2(140.0f, 100.0f));
+		collider->SetCenter(Vector2(-45.0f, -220.0f));
+		collider->SetSize(Vector2(100.0f, 140.0f));
 
-		
+
 
 		GameObject::Initialize();
 	}
@@ -66,6 +68,8 @@ namespace My
 
 					tr->SetPos(BeamPos);
 				}
+
+			
 
 		GameObject::Update();
 	}

@@ -100,7 +100,8 @@ namespace My
 	{
 		if (mkirby = dynamic_cast<Kirby*>(other->GetOwner()));
 		{
-			//SetDestroy(true);	
+			GetGround()->SetLeftBoomb(nullptr);
+			SetDestroy(true);	
 		}
 	}
 	void RightBoomb::OnCollisionStay(Collider* other)

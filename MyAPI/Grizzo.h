@@ -74,6 +74,8 @@ namespace My
 
 		//bool die;
 
+		double grizzotime;
+
 
 	};
 }

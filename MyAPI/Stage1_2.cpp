@@ -194,13 +194,13 @@ namespace My
 
 
 
-		RightBoomb* rb = object::Instantiate<RightBoomb>(Vector2(200.f, 400.0f), Vector2(2.0f, 2.0f), eLayerType::MonsterSkill);
+		//RightBoomb* rb = object::Instantiate<RightBoomb>(Vector2(200.f, 400.0f), Vector2(2.0f, 2.0f), eLayerType::MonsterSkill);
 		
 		
-		boomrect* rect = object::Instantiate<boomrect>(eLayerType::Rectangle);
-		rect->SetBoom(rb);
+		//boomrect* rect = object::Instantiate<boomrect>(eLayerType::Rectangle);
+		//rect->SetBoom(rb);
 
-		object::Instantiate<Grizzo>(Vector2(200.f, 400.0f), Vector2(2.0f, 2.0f), eLayerType::Monster);
+		object::Instantiate<Grizzo>(Vector2(1450.f, 345.0f), Vector2(2.0f, 2.0f), eLayerType::Monster);
 	
 
 
