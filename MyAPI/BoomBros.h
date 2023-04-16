@@ -23,6 +23,10 @@ namespace My
 			RightBoomShot,
 			LeftBoomRelease,
 			LeftBoomShot,
+
+
+			// Hit Ani
+			HitBoom,
 		};
 
 
@@ -79,6 +83,12 @@ namespace My
 		void leftboomshot();
 
 
+
+
+		//Hit Ani
+		void hitboom();
+
+
 	private:
 		BrosState mState;
 		Animator* mAnimator;
@@ -109,6 +119,9 @@ namespace My
 		class RightBoomb* mRightBoomb;
 		class LeftBoomb* mLeftBoomb;
 		class R2Ground* mGround;
+
+		class kirbyRightBoom* mKrb;
+		class kirbyLeftBoom* mKlb;
 
 
 		double brostimetwo;

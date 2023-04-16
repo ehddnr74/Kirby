@@ -10,6 +10,8 @@
 #include "MyObject.h"
 #include "MyKirby.h"
 #include "MyCollider.h"
+#include "MyRigidBody.h"
+#include "Explosion.h"
 
 namespace My
 {
@@ -31,9 +33,13 @@ namespace My
 
 		mAnimator->Play(L"LeftBoom", true);
 
-		//Collider* collider = AddComponent<Collider>();
-		//collider->SetCenter(Vector2(-17.0f, -35.0f));
-		//collider->SetSize(Vector2(32.0f, 35.0f));
+		mRigidBody = AddComponent<RigidBody>();
+		mRigidBody->SetGravity(Vector2::Zero);
+		mRigidBody->SetMass(1.0f);
+
+		Collider* collider = AddComponent<Collider>();
+		collider->SetCenter(Vector2(-16.0f, -37.0f));
+		collider->SetSize(Vector2(35.0f, 35.0f));
 
 		GameObject::Initialize();
 	}
@@ -51,6 +57,9 @@ namespace My
 	}
 	void kirbyLeftBoom::OnCollisionEnter(Collider* other)
 	{
+		Transform* tr = GetComponent<Transform>();
+		object::Destroy(this);
+		class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(tr->GetPos().x, tr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
 	}
 	void kirbyLeftBoom::OnCollisionStay(Collider* other)
 	{

@@ -49,6 +49,8 @@ namespace My
 	{
 		Scene::Initialize();
 
+
+
 		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(129.0f, 100.0f), Vector2(2.0f, 2.0f), (eLayerType::Player));
 		SetPlayer(mKirby);
 		

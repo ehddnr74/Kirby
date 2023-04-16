@@ -18,6 +18,9 @@
 #include "LeftEnergyBeam.h"
 #include "RightBoomb.h"
 #include "LeftBoomb.h"
+#include "KirbyRightBoom.h"
+#include "KirbyLeftBoom.h"
+#include "R2Ground.h"
 
 namespace My
 {
@@ -131,6 +134,9 @@ namespace My
 		case BoomBros::BrosState::LeftBoomShot:
 			leftboomshot();
 			break;
+		case BoomBros::BrosState::HitBoom:
+			hitboom();
+			break;
 		}
 	}
 	
@@ -231,45 +237,56 @@ namespace My
 				mState = BrosState::HitSlidingLeft;
 			}
 		}
-	}
-		
 
-	//	if (mAir = dynamic_cast<Air*>(other->GetOwner()))
-	//	{
-	//		SetDamage(50);
-	//		mState = BrosState::HitAir;
-	//	}
-	//	if (mAirLeft = dynamic_cast<AirLeft*>(other->GetOwner()))
-	//	{
-	//		SetDamage(50);
-	//		mState = BrosState::LeftHitAir;
-	//	}
-	//	if (mStar = dynamic_cast<Star*>(other->GetOwner()))
-	//	{
-	//		SetDamage(100);
-	//		mState = BrosState::HitStar;
-	//	}
-	//	if (mKirbyBeam = dynamic_cast<KirbyBeam*>(other->GetOwner()))
-	//	{
-	//		SetDamage(100);
-	//		mState = BrosState::BrosDeath;
-	//	}
-	//	if (mLeftKirbyBeam = dynamic_cast<LeftKirbyBeam*>(other->GetOwner()))
-	//	{
-	//		SetDamage(100);
-	//		mState = BrosState::BrosDeath;
-	//	}
-	//	if (mEnergyBeam = dynamic_cast<EnergyBeam*>(other->GetOwner()))
-	//	{
-	//		SetDamage(100);
-	//		mState = BrosState::BrosDeath;
-	//	}
-	//	if (mLeftEnergyBeam = dynamic_cast<LeftEnergyBeam*>(other->GetOwner()))
-	//	{
-	//		SetDamage(100);
-	//		mState = BrosState::BrosDeath;
-	//	}
-	//}
+		if (mKrb = dynamic_cast<kirbyRightBoom*>(other->GetOwner()))
+		{
+			GetGround()->SetKirBoomb(nullptr);
+			SetDamage(100);
+			mState = BrosState::HitBoom;
+		}
+		if (mKlb = dynamic_cast<kirbyLeftBoom*>(other->GetOwner()))
+		{
+			GetGround()->SetKirLeftBoomb(nullptr);
+			SetDamage(100);
+			mState = BrosState::HitBoom;
+		}
+			//	if (mAir = dynamic_cast<Air*>(other->GetOwner()))
+			//	{
+			//		SetDamage(50);
+			//		mState = BrosState::HitAir;
+			//	}
+			//	if (mAirLeft = dynamic_cast<AirLeft*>(other->GetOwner()))
+			//	{
+			//		SetDamage(50);
+			//		mState = BrosState::LeftHitAir;
+			//	}
+			//	if (mStar = dynamic_cast<Star*>(other->GetOwner()))
+			//	{
+			//		SetDamage(100);
+			//		mState = BrosState::HitStar;
+			//	}
+			//	if (mKirbyBeam = dynamic_cast<KirbyBeam*>(other->GetOwner()))
+			//	{
+			//		SetDamage(100);
+			//		mState = BrosState::BrosDeath;
+			//	}
+			//	if (mLeftKirbyBeam = dynamic_cast<LeftKirbyBeam*>(other->GetOwner()))
+			//	{
+			//		SetDamage(100);
+			//		mState = BrosState::BrosDeath;
+			//	}
+			//	if (mEnergyBeam = dynamic_cast<EnergyBeam*>(other->GetOwner()))
+			//	{
+			//		SetDamage(100);
+			//		mState = BrosState::BrosDeath;
+			//	}
+			//	if (mLeftEnergyBeam = dynamic_cast<LeftEnergyBeam*>(other->GetOwner()))
+			//	{
+			//		SetDamage(100);
+			//		mState = BrosState::BrosDeath;
+			//	}
+			//}
+	}
 	void BoomBros::OnCollisionStay(Collider* other)
 	{
 		if (brosdir == 0)
@@ -655,8 +672,8 @@ namespace My
 			if (mRightBoomb->GetDestroy() == false)
 			{
 				RigidBody* bb = mRightBoomb->GetComponent<RigidBody>();
-				bb->SetGravity(Vector2(0.0f, 400.f));
-				bb->SetVelocity(Vector2(150.f, -300.f));
+				bb->SetGravity(Vector2(0.0f, 500.f));
+				bb->SetVelocity(Vector2(100.f, -400.f));
 			}
 		}
 		if (BoomShot == false)
@@ -735,12 +752,11 @@ namespace My
 			mState = BrosState::LeftIdle;
 			mAnimator->Play(L"LeftIdle", true);
 		}
+	}
 
-		//if (BoomShot ==false && find == false)
-		//{
-		//	mState = BrosState::RightIdle;
-		//	mAnimator->Play(L"RightIdle", true);
-		//}
+	void BoomBros::hitboom()
+	{
+			object::Destroy(this);
 	}
 	
 }

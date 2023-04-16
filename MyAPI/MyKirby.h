@@ -4,8 +4,10 @@
 
 namespace My
 {	
+	class RightZoom;
+	class LeftZoom;
 	class kirbyRightBoom;
-	class kirbyRightBoom;
+	class kirbyLeftBoom;
 	class Beam;
 	class LeftBeam;
 	class LeftEnergyBeam;
@@ -184,6 +186,7 @@ namespace My
 		bool GetJumpingBeam() { return beamjumping; }
 
 		void SetGround(class Ground* ground) { mGround = ground; }
+		void SetGround2(class R2Ground* ground2) { gr2 = ground2; }
 
 		void SetState(eKirbyState mstate) { mState = mstate; }
 		eKirbyState GetState() { return mState; }
@@ -209,7 +212,10 @@ namespace My
 		
 
 		void SetRightBoom(class kirbyRightBoom* rb) { mRightBoom = rb;  }
+		void SetLeftBoom(class kirbyLeftBoom* lb) { mLeftBoom = lb; }
 
+		void SetRightZoom(class RightZoom* rz) { mRightZoom = rz; }
+		void SetLeftZoom(class LeftZoom* rl) { mLeftZoom = rl; }
 
 	private:
 		void leftmove();
@@ -402,7 +408,12 @@ namespace My
 		class BoomBros* mBoomBros;
 
 		class kirbyRightBoom* mRightBoom;
-		class kirbyRightBoom* mLeftBoom;
+		class kirbyLeftBoom* mLeftBoom;
+
+		class RightZoom* mRightZoom;
+		class LeftZoom* mLeftZoom;
+		class R2Ground* gr2;
+
 
 		double kirbytime;
 		double beamkirbytime;
@@ -459,7 +470,11 @@ namespace My
 		bool boombjumping;
 		bool BoombDoubleJump;
 
+		
+		double boomend;
 
+		float firstpos;
+		float endpos;
 	};
 }
 

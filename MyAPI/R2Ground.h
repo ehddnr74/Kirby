@@ -28,6 +28,11 @@ namespace My
 		void SetLeftBoomb(class LeftBoomb* lb) { lboomb = lb; }
 		class LeftBoomb* GetLeftBoomb() { return lboomb; }
 
+		void SetKirBoomb(class kirbyRightBoom* krb) { mkrb = krb; }
+		void SetKirLeftBoomb(class kirbyLeftBoom* klb) { mklb = klb; }
+
+
+
 	
 
 
@@ -41,6 +46,8 @@ namespace My
 		class Box* mBox;
 		class RightBoomb* rboomb;
 		class LeftBoomb* lboomb;
+		class kirbyRightBoom* mkrb;
+		class kirbyLeftBoom* mklb;
 
 
 		

@@ -14,6 +14,9 @@
 #include "RightBoomb.h"
 #include "LeftBoomb.h"
 #include "Explosion.h"
+#include "KirbyRightBoom.h"
+#include "KirbyLeftBoom.h"
+
 namespace My
 {
 	R2Ground::R2Ground()
@@ -53,6 +56,25 @@ namespace My
 
 			RigidBody* rb = mKirby->GetComponent<RigidBody>();
 
+			if (mBoomBros != nullptr)
+			{
+				//if (mBros->GetDeath() == false)
+				if (mBoomBros->GetHP() >= 1)
+				{
+					Transform* BoomBrosTr = mBoomBros->GetComponent<Transform>();
+					COLORREF mboombros = mImage->GetPixel(BoomBrosTr->GetPos().x, BoomBrosTr->GetPos().y - 20);
+					RigidBody* Boomb = mBoomBros->GetComponent<RigidBody>();
+
+					if (mboombros == RGB(255, 0, 255))
+					{
+						Boomb->SetGround(true);
+					}
+					else
+					{
+						Boomb->SetGround(false);
+					}
+				}
+			}
 
 			if (mBoomBros != nullptr)
 			{
@@ -61,21 +83,77 @@ namespace My
 					if (GetBoomb()->GetDestroy() == false)
 					{
 						Transform* boomTr = GetBoomb()->GetComponent<Transform>();
-						COLORREF colorboom = mImage->GetPixel(boomTr->GetPos().x + 60, boomTr->GetPos().y - 50);
-						COLORREF colorboomr = mImage->GetPixel(boomTr->GetPos().x + 40, boomTr->GetPos().y - 50);
-						COLORREF colorbooml = mImage->GetPixel(boomTr->GetPos().x - 60, boomTr->GetPos().y - 50);
+						COLORREF colorboom = mImage->GetPixel(boomTr->GetPos().x, boomTr->GetPos().y - 20);
+						COLORREF colorboomr = mImage->GetPixel(boomTr->GetPos().x + 15, boomTr->GetPos().y - 20);
+						COLORREF colorbooml = mImage->GetPixel(boomTr->GetPos().x - 10, boomTr->GetPos().y - 20);
 
 						if (colorboom == RGB(255, 0, 255) || colorbooml == RGB(255, 0, 255) || colorboomr == RGB(255, 0, 255))
 						{
 							GetBoomb()->SetDestroy(true);
-							class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(boomTr->GetPos().x, boomTr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
-							object::Destroy(GetBoomb());
-							SetBoomb(nullptr);
+							//class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(boomTr->GetPos().x, boomTr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+							//object::Destroy(GetBoomb());
+							//SetBoomb(nullptr);
 						}
 					}
 				}
 			}
-			
+
+			if (mkrb != nullptr)
+			{
+				Transform* mkrbtr = mkrb->GetComponent<Transform>();
+				COLORREF colorkrboom = mImage->GetPixel(mkrbtr->GetPos().x, mkrbtr->GetPos().y - 20);
+				COLORREF colorkrboomr = mImage->GetPixel(mkrbtr->GetPos().x + 15, mkrbtr->GetPos().y - 20);
+				COLORREF colorkrbooml = mImage->GetPixel(mkrbtr->GetPos().x - 10, mkrbtr->GetPos().y - 20);
+
+				if (colorkrboom == RGB(255, 0, 255) || colorkrbooml == RGB(255, 0, 255) || colorkrboomr == RGB(255, 0, 255))
+				{
+					object::Destroy(mkrb);
+					class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(mkrbtr->GetPos().x, mkrbtr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+					SetKirBoomb(nullptr);
+				}
+				if (colorkrboom == RGB(100, 0, 100) || colorkrbooml == RGB(100, 0, 100) || colorkrboomr == RGB(100, 0, 100))
+				{
+					object::Destroy(mkrb);
+					class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(mkrbtr->GetPos().x, mkrbtr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+					SetKirBoomb(nullptr);
+				}
+				if (colorkrboom == RGB(200, 0, 200) || colorkrbooml == RGB(200, 0, 200) || colorkrboomr == RGB(200, 0, 200))
+				{
+					object::Destroy(mkrb);
+					class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(mkrbtr->GetPos().x, mkrbtr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+					SetKirBoomb(nullptr);
+				}
+
+			}
+			if (mklb != nullptr)
+			{
+
+				Transform* mklbtr = mklb->GetComponent<Transform>();
+				COLORREF klboom = mImage->GetPixel(mklbtr->GetPos().x, mklbtr->GetPos().y - 40);
+				COLORREF krboomr = mImage->GetPixel(mklbtr->GetPos().x + 15, mklbtr->GetPos().y - 40);
+				COLORREF krbooml = mImage->GetPixel(mklbtr->GetPos().x - 10, mklbtr->GetPos().y - 40);
+
+				if (klboom == RGB(255, 0, 255) || krbooml == RGB(255, 0, 255) || krboomr == RGB(255, 0, 255))
+				{
+					object::Destroy(mklb);
+					class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(mklbtr->GetPos().x, mklbtr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+					SetKirLeftBoomb(nullptr);
+				}
+				if (klboom == RGB(100, 0, 100) || krbooml == RGB(100, 0, 100) || krboomr == RGB(100, 0, 100))
+				{
+					object::Destroy(mklb);
+					class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(mklbtr->GetPos().x, mklbtr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+					SetKirLeftBoomb(nullptr);
+				}
+				if (klboom == RGB(200, 0, 200) || krbooml == RGB(200, 0, 200) || krboomr == RGB(200, 0, 200))
+				{
+					object::Destroy(mklb);
+					class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(mklbtr->GetPos().x, mklbtr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+					SetKirLeftBoomb(nullptr);
+				}
+
+			}
+
 
 			if (mBoomBros != nullptr)
 			{
@@ -84,9 +162,9 @@ namespace My
 					if (GetLeftBoomb()->GetDestroy() == false)
 					{
 						Transform* LboomTr = GetLeftBoomb()->GetComponent<Transform>();
-						COLORREF lcolorboom = mImage->GetPixel(LboomTr->GetPos().x + 60, LboomTr->GetPos().y - 50);
-						COLORREF lcolorboomr = mImage->GetPixel(LboomTr->GetPos().x + 40, LboomTr->GetPos().y - 50);
-						COLORREF lcolorbooml = mImage->GetPixel(LboomTr->GetPos().x - 60, LboomTr->GetPos().y - 50);
+						COLORREF lcolorboom = mImage->GetPixel(LboomTr->GetPos().x, LboomTr->GetPos().y - 40);
+						COLORREF lcolorboomr = mImage->GetPixel(LboomTr->GetPos().x + 15, LboomTr->GetPos().y - 40);
+						COLORREF lcolorbooml = mImage->GetPixel(LboomTr->GetPos().x - 10, LboomTr->GetPos().y - 40);
 
 						//if (lcolorboom == RGB(100, 0, 100) && lcolorbooml == RGB(100, 0, 100) && lcolorboomr == RGB(100, 0, 100))
 						//{
@@ -99,9 +177,9 @@ namespace My
 						if (lcolorboom == RGB(255, 0, 255) || lcolorbooml == RGB(255, 0, 255) || lcolorboomr == RGB(255, 0, 255))
 						{
 							GetLeftBoomb()->SetDestroy(true);
-							class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(LboomTr->GetPos().x, LboomTr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
-							object::Destroy(GetLeftBoomb());
-							SetLeftBoomb(nullptr);
+							//class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(LboomTr->GetPos().x, LboomTr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+							//object::Destroy(GetLeftBoomb());
+							//SetLeftBoomb(nullptr);
 						}
 					}
 				}
@@ -113,18 +191,20 @@ namespace My
 
 			if (mBox != nullptr)
 			{
-			if (mBox->GetDestroy() == false)
-			{
-				Transform* BoxTr = mBox->GetComponent<Transform>();
-				COLORREF colorbox = mImage->GetPixel(BoxTr->GetPos().x, BoxTr->GetPos().y);
-
-				if (colorbox == RGB(255, 0, 255))
+				if (mBox->GetDestroy() == false)
 				{
-					mBox->SetDestroy(true);
-					object::Destroy(mBox);
+					Transform* BoxTr = mBox->GetComponent<Transform>();
+					COLORREF colorbox = mImage->GetPixel(BoxTr->GetPos().x, BoxTr->GetPos().y);
+
+					if (colorbox == RGB(255, 0, 255))
+					{
+						mBox->SetDestroy(true);
+						object::Destroy(mBox);
+					}
 				}
 			}
-			}
+
+
 
 			if (colorup == RGB(100, 100, 100))
 			{
@@ -168,54 +248,34 @@ namespace My
 				}
 			}
 
-
 			else
 			{
 				rb->SetGround(false);
 			}
 		}
 
-		if (mBoomBros != nullptr)
-		{
-			//if (mBros->GetDeath() == false)
-			if (mBoomBros->GetHP() >= 1)
+			if (mBros != nullptr)
 			{
-				Transform* BoomBrosTr = mBoomBros->GetComponent<Transform>();
-				COLORREF mboombros = mImage->GetPixel(BoomBrosTr->GetPos().x, BoomBrosTr->GetPos().y - 20);
-				RigidBody* Boomb = mBoomBros->GetComponent<RigidBody>();
+				//if (mBros->GetDeath() == false)
+				if (mBros->GetHP() >= 1)
+				{
+					Transform* BrosTr = mBros->GetComponent<Transform>();
+					COLORREF bros = mImage->GetPixel(BrosTr->GetPos().x, BrosTr->GetPos().y - 20);
+					RigidBody* bb = mBros->GetComponent<RigidBody>();
 
-				if (mboombros == RGB(255, 0, 255))
-				{
-					Boomb->SetGround(true);
-				}
-				else
-				{
-					Boomb->SetGround(false);
+					if (bros == RGB(255, 0, 255))
+					{
+						bb->SetGround(true);
+					}
+					else
+					{
+						bb->SetGround(false);
+					}
 				}
 			}
 		}
 
-
-		if (mBros != nullptr)
-		{
-			//if (mBros->GetDeath() == false)
-			if (mBros->GetHP() >= 1)
-			{
-				Transform* BrosTr = mBros->GetComponent<Transform>();
-				COLORREF bros = mImage->GetPixel(BrosTr->GetPos().x, BrosTr->GetPos().y - 20);
-				RigidBody* bb = mBros->GetComponent<RigidBody>();
-
-				if (bros == RGB(255, 0, 255))
-				{
-					bb->SetGround(true);
-				}
-				else
-				{
-					bb->SetGround(false);
-				}
-			}
-		}
-	}
+	
 		
 
 	void R2Ground::Render(HDC hdc)

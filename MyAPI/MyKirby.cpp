@@ -33,6 +33,8 @@
 #include "BoomBros.h"
 #include "KirbyRightBoom.h"
 #include "KirbyLeftBoom.h"
+#include "LeftZoom.h"
+#include "RightZoom.h"
 
 namespace My
 {
@@ -107,6 +109,9 @@ namespace My
 		, BoombAirShot(false)
 		, boombjumping(false)
 		, BoombDoubleJump(false)
+		, boomend(0.f)
+		, firstpos(0.f)
+		, endpos(0.f)
 	{
 	}
 	Kirby::~Kirby()
@@ -4871,8 +4876,26 @@ namespace My
 		if (Input::GetKeyDown(eKeyCode::Z))
 		{
 			boombkirbytime = 0.0f;
+			kirbyLeftBoom* mLeftBoom = object::Instantiate<kirbyLeftBoom>(Vector2(pos.x + 10, pos.y - 65), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Skill));
+			SetLeftBoom(mLeftBoom);
+			if (gr2 != nullptr)
+			{
+				gr2->SetKirLeftBoomb(mLeftBoom);
+			}
+			LeftZoom* mLeftZoom = object::Instantiate<LeftZoom>(Vector2(pos.x - 35, pos.y - 10), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+			SetLeftZoom(mLeftZoom);
+
+			Transform* rr = mLeftZoom->GetComponent<Transform>();
+			Vector2 zPos = rr->GetPos();
+
+			firstpos = zPos.y;
+
+			endpos = firstpos - 35;
+
 			mState = eKirbyState::LeftBoomRelease;
 			mAnimator->Play(L"LeftBoomRelease", false);
+
+
 		}
 
 		if (Input::GetKeyDown(eKeyCode::A))
@@ -4932,6 +4955,20 @@ namespace My
 			boombkirbytime = 0.0f;
 			kirbyRightBoom* mRightBoom = object::Instantiate<kirbyRightBoom>(Vector2(pos.x - 10, pos.y - 65), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Skill));
 			SetRightBoom(mRightBoom);
+			if (gr2 != nullptr)
+			{
+				gr2->SetKirBoomb(mRightBoom);
+			}
+			RightZoom* mRightZoom = object::Instantiate<RightZoom>(Vector2(pos.x + 35, pos.y - 10), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+			SetRightZoom(mRightZoom);
+
+			Transform* rr = mRightZoom->GetComponent<Transform>();
+			Vector2 zPos = rr->GetPos();
+
+			firstpos = zPos.y;
+
+			endpos = firstpos - 35;
+
 			mState = eKirbyState::RightBoomRelease;
 			mAnimator->Play(L"RightBoomRelease", false);
 		}
@@ -4989,6 +5026,28 @@ namespace My
 			boomyamyam = false;
 			mState = eKirbyState::LeftPigClear;
 			mAnimator->Play(L"LeftPigClear", false);
+		}
+		if (Input::GetKeyDown(eKeyCode::Z))
+		{
+			BoombKeyCheck = false;
+			boombkirbytime = 0.0f;
+			kirbyLeftBoom* mLeftBoom = object::Instantiate<kirbyLeftBoom>(Vector2(pos.x + 10, pos.y - 65), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Skill));
+			SetLeftBoom(mLeftBoom);
+			if (gr2 != nullptr)
+			{
+				gr2->SetKirLeftBoomb(mLeftBoom);
+			}
+			LeftZoom* mLeftZoom = object::Instantiate<LeftZoom>(Vector2(pos.x - 35, pos.y - 10), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+			SetLeftZoom(mLeftZoom);
+
+			Transform* rr = mLeftZoom->GetComponent<Transform>();
+			Vector2 zPos = rr->GetPos();
+
+			firstpos = zPos.y;
+
+			endpos = firstpos - 35;
+			mState = eKirbyState::LeftBoomRelease;
+			mAnimator->Play(L"LeftBoomRelease", false);
 		}
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
@@ -5057,6 +5116,31 @@ namespace My
 				mState = eKirbyState::RightPigClear;
 				mAnimator->Play(L"RightPigClear", false);
 			}
+
+			if (Input::GetKeyDown(eKeyCode::Z))
+			{
+				BoombKeyCheck = false;
+				boombkirbytime = 0.0f;
+				kirbyRightBoom* mRightBoom = object::Instantiate<kirbyRightBoom>(Vector2(pos.x - 10, pos.y - 65), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Skill));
+				SetRightBoom(mRightBoom);
+				if (gr2 != nullptr)
+				{
+					gr2->SetKirBoomb(mRightBoom);
+				}
+				RightZoom* mRightZoom = object::Instantiate<RightZoom>(Vector2(pos.x + 35, pos.y - 10), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+				SetRightZoom(mRightZoom);
+
+				Transform* rr = mRightZoom->GetComponent<Transform>();
+				Vector2 zPos = rr->GetPos();
+
+				firstpos = zPos.y;
+
+				endpos = firstpos - 35;
+
+				mState = eKirbyState::RightBoomRelease;
+				mAnimator->Play(L"RightBoomRelease", false);
+			}
+
 			if (Input::GetKeyDown(eKeyCode::A))
 			{
 				BoombKeyCheck = false;
@@ -5131,6 +5215,9 @@ namespace My
 	}
 	void Kirby::leftboombdash()
 	{
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
 		if (Input::GetKeyUp(eKeyCode::Left))
 		{
 			mState = eKirbyState::LeftBoombDashRelease;
@@ -5143,7 +5230,27 @@ namespace My
 			mState = eKirbyState::LeftPigClear;
 			mAnimator->Play(L"LeftPigClear", false);
 		}
+		if (Input::GetKeyDown(eKeyCode::Z))
+		{
+			boombkirbytime = 0.0f;
+			kirbyLeftBoom* mLeftBoom = object::Instantiate<kirbyLeftBoom>(Vector2(pos.x + 10, pos.y - 65), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Skill));
+			SetLeftBoom(mLeftBoom);
+			if (gr2 != nullptr)
+			{
+				gr2->SetKirLeftBoomb(mLeftBoom);
+			}
+			LeftZoom* mLeftZoom = object::Instantiate<LeftZoom>(Vector2(pos.x - 35, pos.y - 10), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+			SetLeftZoom(mLeftZoom);
 
+			Transform* rr = mLeftZoom->GetComponent<Transform>();
+			Vector2 zPos = rr->GetPos();
+
+			firstpos = zPos.y;
+
+			endpos = firstpos - 35;
+			mState = eKirbyState::LeftBoomRelease;
+			mAnimator->Play(L"LeftBoomRelease", false);
+		}
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
 			JumpCheck = true;
@@ -5161,8 +5268,6 @@ namespace My
 			mRigidBody->SetGround(false);
 		}
 
-		Transform* tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPos();
 
 		if (Input::GetKey(eKeyCode::Left))
 		{
@@ -5172,6 +5277,10 @@ namespace My
 	}
 	void Kirby::rightboombdash()
 	{
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+
 		if (Input::GetKeyUp(eKeyCode::Right))
 		{
 			mState = eKirbyState::RightBoombDashRelease;
@@ -5182,6 +5291,28 @@ namespace My
 			yamyam = false;
 			mState = eKirbyState::RightPigClear;
 			mAnimator->Play(L"RightPigClear", false);
+		}
+
+		if (Input::GetKeyDown(eKeyCode::Z))
+		{
+			boombkirbytime = 0.0f;
+			kirbyRightBoom* mRightBoom = object::Instantiate<kirbyRightBoom>(Vector2(pos.x - 10, pos.y - 65), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Skill));
+			SetRightBoom(mRightBoom);
+			if (gr2 != nullptr)
+			{
+				gr2->SetKirBoomb(mRightBoom);
+			}
+			RightZoom* mRightZoom = object::Instantiate<RightZoom>(Vector2(pos.x + 35, pos.y - 10), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+			SetRightZoom(mRightZoom);
+
+			Transform* rr = mRightZoom->GetComponent<Transform>();
+			Vector2 zPos = rr->GetPos();
+
+			firstpos = zPos.y;
+
+			endpos = firstpos - 35;
+			mState = eKirbyState::RightBoomRelease;
+			mAnimator->Play(L"RightBoomRelease", false);
 		}
 
 		if (Input::GetKeyDown(eKeyCode::A))
@@ -5200,9 +5331,6 @@ namespace My
 			mRigidBody->SetVelocity(velocity);
 			mRigidBody->SetGround(false);
 		}
-
-		Transform* tr = GetComponent<Transform>();
-		Vector2 pos = tr->GetPos();
 
 		if (Input::GetKey(eKeyCode::Right))
 		{
@@ -5634,31 +5762,154 @@ namespace My
 	}
 	void Kirby::leftboomrelease()
 	{
-		if (Input::GetKeyDown(eKeyCode::Z))
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		if (Input::GetKey(eKeyCode::Z))
 		{
-			mState = eKirbyState::LeftBoomShot;
-			mAnimator->Play(L"LeftBoomShot", false);
+			Transform* rr = mLeftZoom->GetComponent<Transform>();
+			Vector2 zPos = rr->GetPos();
+
+			if (zPos.y <= endpos)
+			{
+				object::Destroy(mLeftZoom);
+				RigidBody* mr = mLeftBoom->GetComponent<RigidBody>();
+				mr->SetGravity(Vector2(0.0f, 550.0f));
+				mr->SetVelocity(Vector2(-100.f, -300.0f));
+				mState = eKirbyState::LeftBoomShot;
+				mAnimator->Play(L"LeftBoomShot", false);
+			}
+
+
+			zPos.y -= 0.8;
+
+			rr->SetPos(zPos);
+
 		}
+
+		Transform* rr = mLeftZoom->GetComponent<Transform>();
+		Vector2 zPos = rr->GetPos();
+
+		if (Input::GetKeyUp(eKeyCode::Z))
+		{
+			if (zPos.y >= firstpos - 13 && zPos.y <= firstpos)
+			{
+				object::Destroy(mLeftZoom);
+				RigidBody* mr = mLeftBoom->GetComponent<RigidBody>();
+				mr->SetGravity(Vector2(0.0f, 600.0f));
+				mr->SetVelocity(Vector2(-300.f, -150.0f));
+				mState = eKirbyState::LeftBoomShot;
+				mAnimator->Play(L"LeftBoomShot", false);
+			}
+			if (zPos.y >= firstpos - 23 && zPos.y <= firstpos - 13)
+			{
+				object::Destroy(mLeftZoom);
+				RigidBody* mr = mLeftBoom->GetComponent<RigidBody>();
+				mr->SetGravity(Vector2(0.0f, 600.0f));
+				mr->SetVelocity(Vector2(-200.f, -250.0f));
+				mState = eKirbyState::LeftBoomShot;
+				mAnimator->Play(L"LeftBoomShot", false);
+			}
+
+			if (zPos.y >= endpos && zPos.y <= firstpos - 23)
+			{
+				object::Destroy(mLeftZoom);
+				RigidBody* mr = mLeftBoom->GetComponent<RigidBody>();
+				mr->SetGravity(Vector2(0.0f, 600.0f));
+				mr->SetVelocity(Vector2(-150.f, -350.0f));
+				mState = eKirbyState::LeftBoomShot;
+				mAnimator->Play(L"LeftBoomShot", false);
+			}
+
+		}
+
 	}
 	void Kirby::rightboomrelease()
 	{
+		//Transform* kr = this->GetComponent<Transform>();
+		//Vector2 krpos = kr->GetPos();
+
 		Transform* tr = GetComponent<Transform>();
 		Vector2 pos = tr->GetPos();
-		if (Input::GetKeyDown(eKeyCode::Z))
+
+		if (Input::GetKey(eKeyCode::Z))
 		{
-			RigidBody* mr = mRightBoom->GetComponent<RigidBody>();
-			mr->SetGravity(Vector2(0.0f,500.0f));
-			mr->SetVelocity(Vector2( + 100.f, -400.0f));
-			
-			mState = eKirbyState::RightBoomShot;
-			mAnimator->Play(L"RightBoomShot", false);
+			Transform* rr = mRightZoom->GetComponent<Transform>();
+			Vector2 zPos = rr->GetPos();
+
+			if (zPos.y <= endpos)
+			{
+				object::Destroy(mRightZoom);
+				RigidBody* mr = mRightBoom->GetComponent<RigidBody>();
+				mr->SetGravity(Vector2(0.0f, 550.0f));
+				mr->SetVelocity(Vector2(+100.f, -300.0f));
+				mState = eKirbyState::RightBoomShot;
+				mAnimator->Play(L"RightBoomShot", false);
+			}
+
+
+			zPos.y -= 0.8;
+
+			rr->SetPos(zPos);
+		
 		}
+
+		Transform* rr = mRightZoom->GetComponent<Transform>();
+		Vector2 zPos = rr->GetPos();
+
+		if (Input::GetKeyUp(eKeyCode::Z))
+		{
+           	if (zPos.y >= firstpos - 13 && zPos.y <= firstpos)
+            {
+                object::Destroy(mRightZoom);
+                RigidBody* mr = mRightBoom->GetComponent<RigidBody>();
+                mr->SetGravity(Vector2(0.0f, 600.0f));
+                mr->SetVelocity(Vector2(+300.f, -150.0f));
+                mState = eKirbyState::RightBoomShot;
+                mAnimator->Play(L"RightBoomShot", false);
+            }
+			if (zPos.y >= firstpos - 23 && zPos.y <= firstpos - 13)
+			{
+				object::Destroy(mRightZoom);
+				RigidBody* mr = mRightBoom->GetComponent<RigidBody>();
+				mr->SetGravity(Vector2(0.0f, 600.0f));
+				mr->SetVelocity(Vector2(+200.f, -250.0f));
+				mState = eKirbyState::RightBoomShot;
+				mAnimator->Play(L"RightBoomShot", false);
+			}
+
+			if (zPos.y >= endpos && zPos.y <= firstpos - 23)
+			{
+				object::Destroy(mRightZoom);
+				RigidBody* mr = mRightBoom->GetComponent<RigidBody>();
+				mr->SetGravity(Vector2(0.0f, 600.0f));
+				mr->SetVelocity(Vector2(+150.f, -350.0f));
+				mState = eKirbyState::RightBoomShot;
+				mAnimator->Play(L"RightBoomShot", false);
+			}
+
+		}
+
 	}
 	void Kirby::leftboomshot()
 	{
+		boomend += Time::DeltaTime();
+		if (boomend >= 0.5f)
+		{
+			boomend = 0.0f;
+			mState = eKirbyState::LeftBoombIdle;
+			mAnimator->Play(L"LeftBoombIdle", true);
+		}
 	}
 	void Kirby::rightboomshot()
 	{
+		boomend += Time::DeltaTime();
+		if (boomend >= 0.5f)
+		{
+			boomend = 0.0f;
+			mState = eKirbyState::RightBoombIdle;
+			mAnimator->Play(L"RightBoombIdle", true);
+		}
 	}
 	}
 	

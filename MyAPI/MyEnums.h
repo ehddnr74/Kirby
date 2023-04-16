@@ -21,7 +21,6 @@ enum class eLayerType
 	Stage,
 	Player,
 	MapStar,
-	Rectangle,
 	Monster,
 	MonsterSkill,
 	Effect,
@@ -33,6 +32,7 @@ enum class eLayerType
 	Portal,
 	fade,
 	UI,
+	Rectangle,
 	End,
 };
 

@@ -26,6 +26,8 @@ namespace My
 		class Kirby* mkirby;
 		class RigidBody* mRigidBody;
 
+		class Explosion* mExplosion;
+
 
 	};
 }

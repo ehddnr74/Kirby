@@ -24,7 +24,7 @@ namespace My
 	}
 	void boomrect::Update()
 	{
-		Transform* playerTr = LeftBoomb->GetComponent<Transform>();
+		Transform* playerTr = RightBoomb->GetComponent<Transform>();
 
 		playerTr->GetPos();
 
@@ -33,7 +33,7 @@ namespace My
 	void boomrect::Render(HDC hdc)
 	{
 
-		Transform* playerTr = LeftBoomb->GetComponent<Transform>();
+		Transform* playerTr = RightBoomb->GetComponent<Transform>();
 		Vector2 Pos = playerTr->GetPos();
 
 		HPEN pen = NULL;
@@ -46,7 +46,7 @@ namespace My
 
 		Vector2 pos = Camera::CalculatePos(Pos);
 
-		Rectangle(hdc, Pos.x -60, Pos.y-100, Pos.x -50, Pos.y - 90);
+		Rectangle(hdc, pos.x + 12 , pos.y - 35 , pos.x + 17, pos.y - 40);
 
 		(HPEN)SelectObject(hdc, oldPen);
 		(HBRUSH)SelectObject(hdc, oldBrush);

@@ -1,15 +1,15 @@
 #pragma once
-#include "MyGameObject.h"
+#include "MyEngine.h"
 namespace My
 {
 	class Kirby;
-	class SaveKirby : public GameObject
+	class SaveKirby 
 	{
 	public:
-		static void Initialize();
-		static void Update();
-		static void Render(HDC hdc);
-		static void Release(); 
+		//static void Initialize();
+		//static void Update();
+		//static void Render(HDC hdc);
+		//static void Release(); 
 
 		static void OnCollisionEnter(class Collider* other);
 		static void OnCollisionStay(class Collider* other);
