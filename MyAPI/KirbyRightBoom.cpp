@@ -59,7 +59,7 @@ namespace My
 	{
 		Transform* tr = GetComponent<Transform>();
 		object::Destroy(this);
-		class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(tr->GetPos().x, tr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+		class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(tr->GetPos().x, tr->GetPos().y + 100), Vector2(1.f, 1.f), eLayerType::Effect);
 	}
 	void kirbyRightBoom::OnCollisionStay(Collider* other)
 	{

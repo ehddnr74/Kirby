@@ -45,6 +45,7 @@ namespace My
 
 		Animator* mAnimator;
 		GrizzoState mState;
+		class Collider* mCollider;
 		//class RigidBody* mRigidBody;
 		//double Grizzotime;
 		//double Gjumptime;

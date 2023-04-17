@@ -42,7 +42,9 @@ namespace My
 		//mAnimator->CreateAnimation(L"LeftHit", mGrizzo, Vector2(40.0f, 120.0f), 16, 16, 1, Vector2::Zero, 0.3);
 		//mAnimator->CreateAnimation(L"RightHit", mCappy, Vector2(0.0f, 120.0f), 16, 16, 1, Vector2::Zero, 0.3);
 
-
+		Collider* collider = AddComponent<Collider>();
+		collider->SetCenter(Vector2(-40.0f, -100.0f));
+		collider->SetSize(Vector2(80.0f, 70.0f));
 
 		mState = GrizzoState::LeftMove;
 		mAnimator->Play(L"LeftMove", true);

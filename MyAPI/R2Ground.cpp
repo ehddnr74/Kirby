@@ -76,27 +76,27 @@ namespace My
 				}
 			}
 
-			if (mBoomBros != nullptr)
-			{
+			//if (mBoomBros != nullptr)
+			//{
 				if (GetBoomb() != nullptr)
 				{
-					if (GetBoomb()->GetDestroy() == false)
-					{
+					//if (GetBoomb()->GetDestroy() == false)
+					//{
 						Transform* boomTr = GetBoomb()->GetComponent<Transform>();
-						COLORREF colorboom = mImage->GetPixel(boomTr->GetPos().x, boomTr->GetPos().y - 20);
-						COLORREF colorboomr = mImage->GetPixel(boomTr->GetPos().x + 15, boomTr->GetPos().y - 20);
-						COLORREF colorbooml = mImage->GetPixel(boomTr->GetPos().x - 10, boomTr->GetPos().y - 20);
+						COLORREF colorboom = mImage->GetPixel(boomTr->GetPos().x, boomTr->GetPos().y - 40);
+						COLORREF colorboomr = mImage->GetPixel(boomTr->GetPos().x + 15, boomTr->GetPos().y - 40);
+						COLORREF colorbooml = mImage->GetPixel(boomTr->GetPos().x - 10, boomTr->GetPos().y - 40);
 
 						if (colorboom == RGB(255, 0, 255) || colorbooml == RGB(255, 0, 255) || colorboomr == RGB(255, 0, 255))
 						{
-							GetBoomb()->SetDestroy(true);
-							//class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(boomTr->GetPos().x, boomTr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
-							//object::Destroy(GetBoomb());
-							//SetBoomb(nullptr);
+							//GetBoomb()->SetDestroy(true);
+							object::Destroy(GetBoomb());
+							class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(boomTr->GetPos().x, boomTr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+							SetBoomb(nullptr);
 						}
-					}
+					
 				}
-			}
+			
 
 			if (mkrb != nullptr)
 			{
@@ -155,12 +155,9 @@ namespace My
 			}
 
 
-			if (mBoomBros != nullptr)
-			{
+
 				if (GetLeftBoomb() != nullptr)
 				{
-					if (GetLeftBoomb()->GetDestroy() == false)
-					{
 						Transform* LboomTr = GetLeftBoomb()->GetComponent<Transform>();
 						COLORREF lcolorboom = mImage->GetPixel(LboomTr->GetPos().x, LboomTr->GetPos().y - 40);
 						COLORREF lcolorboomr = mImage->GetPixel(LboomTr->GetPos().x + 15, LboomTr->GetPos().y - 40);
@@ -176,14 +173,12 @@ namespace My
 
 						if (lcolorboom == RGB(255, 0, 255) || lcolorbooml == RGB(255, 0, 255) || lcolorboomr == RGB(255, 0, 255))
 						{
-							GetLeftBoomb()->SetDestroy(true);
-							//class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(LboomTr->GetPos().x, LboomTr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
-							//object::Destroy(GetLeftBoomb());
-							//SetLeftBoomb(nullptr);
+							//GetLeftBoomb()->SetDestroy(true);
+							object::Destroy(GetLeftBoomb());
+							class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(LboomTr->GetPos().x, LboomTr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+							SetLeftBoomb(nullptr);
 						}
-					}
 				}
-			}
 
 
 

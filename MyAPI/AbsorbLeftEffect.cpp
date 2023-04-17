@@ -109,7 +109,13 @@ namespace My
 	
 		if (EffectPos.x + 20.0f < otherPos.x)
 		{
-			if (Cappy* mCappy = dynamic_cast<Cappy*>(other->GetOwner()))
+			if (BoomBros* mBoomBros = dynamic_cast<BoomBros*>(other->GetOwner()))
+			{
+				mBoomBros->SetDamage(100);
+				object::Destroy(other->GetOwner());
+				object::Destroy(this);
+			}
+			else if (Cappy* mCappy = dynamic_cast<Cappy*>(other->GetOwner()))
 			{
 				mCappy->SetDamage(100);
 				object::Destroy(other->GetOwner());

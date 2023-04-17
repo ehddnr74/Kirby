@@ -649,6 +649,7 @@ namespace My
 			if (GetGround() != nullptr)
 			{
 				mGround = GetGround();
+				mGround->SetBoomb(mRightBoomb);
 				mRightBoomb->SetGround(mGround);
 			}
 		}
@@ -715,6 +716,7 @@ namespace My
 			if (GetGround() != nullptr)
 			{
 				mGround = GetGround();
+				mGround->SetLeftBoomb(mLeftBoomb);
 				mLeftBoomb->SetGround(mGround);
 			}
 		}

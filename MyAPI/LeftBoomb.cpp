@@ -69,20 +69,20 @@ namespace My
 		//	}
 		//}
 
-		if (GetDestroy() == true)
-		{
-			Transform* tr = GetComponent<Transform>();
-			class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(tr->GetPos().x, tr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
-			object::Destroy(this);
-			Destroy = true;
+		//if (GetDestroy() == true)
+		//{
+		//	Transform* tr = GetComponent<Transform>();
+		//	class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(tr->GetPos().x, tr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+		//	object::Destroy(this);
+		//	Destroy = true;
 
-			if (GetGround() != nullptr)
-			{
-				GetGround()->SetLeftBoomb(nullptr);
-				SetGround(nullptr);
-				Destroy = true;
-			}
-		}
+		//	if (GetGround() != nullptr)
+		//	{
+		//		GetGround()->SetLeftBoomb(nullptr);
+		//		SetGround(nullptr);
+		//		Destroy = true;
+		//	}
+		//}
 
 
 

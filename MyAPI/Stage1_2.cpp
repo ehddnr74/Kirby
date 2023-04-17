@@ -92,28 +92,32 @@ namespace My
 			}
 		}
 
-		if (mBoomBros != nullptr)
-		{
-			if (mBoomBros->GetBoomb() != nullptr)
-			{
-				ground->SetBoomb(mBoomBros->GetBoomb());
-			}
+		//if (mBoomBros != nullptr)
+		//{
+		//	if (mBoomBros->GetBoomb() != nullptr)
+		//	{
+		//		ground->SetBoomb(mBoomBros->GetBoomb());
+		//	}
 
-			if (mBoomBros->GetLeftBoomb() != nullptr)
-			{
-				ground->SetLeftBoomb(mBoomBros->GetLeftBoomb());
-			}
-		}
+		//	if (mBoomBros->GetLeftBoomb() != nullptr)
+		//	{
+		//		ground->SetLeftBoomb(mBoomBros->GetLeftBoomb());
+		//	}
+		//}
 
 		if (mBros->GetHP() <= 0)
 		{
+			//SetBros(nullptr);
 			ground->SetBros(nullptr);
 		}
 
+
 		if (mBoomBros->GetHP() <= 0)
 		{
+			//SetBoomBros(nullptr);
 			ground->SetBoomBros(nullptr);
 		}
+		
 
 		Scene::Update();
 	}
@@ -200,7 +204,7 @@ namespace My
 		//boomrect* rect = object::Instantiate<boomrect>(eLayerType::Rectangle);
 		//rect->SetBoom(rb);
 
-		object::Instantiate<Grizzo>(Vector2(1450.f, 345.0f), Vector2(2.0f, 2.0f), eLayerType::Monster);
+		object::Instantiate<Grizzo>(Vector2(1500.f, 345.0f), Vector2(2.0f, 2.0f), eLayerType::Monster);
 	
 
 

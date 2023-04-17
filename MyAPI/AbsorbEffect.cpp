@@ -128,7 +128,14 @@ namespace My
 
 			if (EffectPos.x > otherPos.x) //&& EffectPos.x - 25.0f > otherPos.x)
 			{
-					if (Bros* mBros = dynamic_cast<Bros*>(other->GetOwner()))
+
+				    if (BoomBros* mBoomBros = dynamic_cast<BoomBros*>(other->GetOwner()))
+				    {
+				    	mBoomBros->SetDamage(100);
+				    	object::Destroy(other->GetOwner());
+				    	object::Destroy(this);
+				    }
+					else if (Bros* mBros = dynamic_cast<Bros*>(other->GetOwner()))
 					{
 						mBros->SetDamage(100);
 						object::Destroy(other->GetOwner());
