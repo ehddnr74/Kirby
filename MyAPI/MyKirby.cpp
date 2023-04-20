@@ -5038,6 +5038,7 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::Z))
 		{
+			BoombKeyCheck = false;
 			boombkirbytime = 0.0f;
 			kirbyLeftBoom* mLeftBoom = object::Instantiate<kirbyLeftBoom>(Vector2(pos.x + 10, pos.y - 65), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Skill));
 			SetLeftBoom(mLeftBoom);
@@ -5123,6 +5124,7 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::Z))
 		{
+			BoombKeyCheck = false;
 			boombkirbytime = 0.0f;
 			kirbyRightBoom* mRightBoom = object::Instantiate<kirbyRightBoom>(Vector2(pos.x - 10, pos.y - 65), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Skill));
 			SetRightBoom(mRightBoom);

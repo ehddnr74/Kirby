@@ -54,7 +54,7 @@ namespace My
 		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(129.0f, 100.0f), Vector2(2.0f, 2.0f), (eLayerType::Player));
 		SetPlayer(mKirby);
 		
-		mStar = object::Instantiate<StarMap>(Vector2(1370, 260), Vector2(0.3f, 0.3f), (eLayerType::MapStar));
+		mStar = object::Instantiate<StarMap>(Vector2(1370, 260), Vector2(0.3f, 0.3f), (eLayerType::Portal));
 
 
 
@@ -137,7 +137,7 @@ namespace My
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterSkill, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MapStar, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Portal, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Air, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Star, true);
 		CollisionManager::SetLayer(eLayerType::Skill, eLayerType::Monster, true);

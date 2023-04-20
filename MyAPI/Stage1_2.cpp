@@ -135,6 +135,15 @@ namespace My
 
 	void Stage2Scene::OnEnter()
 	{
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterSkill, true);
+		CollisionManager::SetLayer(eLayerType::Portal, eLayerType::Player, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Item, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Air, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Star, true);
+		CollisionManager::SetLayer(eLayerType::Skill, eLayerType::Monster, true);
+
 		hp = SaveUI::GetUI();
 		AddGameObject(hp, eLayerType::UI);
 		MyKirby = SaveKirby::GetKirby();
@@ -165,6 +174,10 @@ namespace My
 		Portion1* mCherry = object::Instantiate<Portion1>(Vector2(980, 430), Vector2(1.0f, 1.0f), eLayerType::Item);
 		Portion2* mCookie = object::Instantiate<Portion2>(Vector2(1025, 430), Vector2(1.0f, 1.0f), eLayerType::Item);
 		Portion3* mPizza = object::Instantiate<Portion3>(Vector2(1070, 430), Vector2(1.0f, 1.0f), eLayerType::Item);
+
+
+
+
 
 		/*SetBox(box);*/
 
@@ -235,16 +248,6 @@ namespace My
 
 		//class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(400.f,400.f),Vector2(1.f,1.f),eLayerType::Effect);
 
-
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterSkill, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Portal, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Box, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Item, true);
-		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Air, true);
-		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Star, true);
-		CollisionManager::SetLayer(eLayerType::Skill, eLayerType::Monster, true);
 	}
 
 	void Stage2Scene::OnExit()

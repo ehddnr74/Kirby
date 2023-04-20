@@ -15,6 +15,8 @@
 #include "Explosion.h"
 #include "AbsorbEffect.h"
 #include "AbsorbLeftEffect.h"
+#include "KirbyRightBoom.h"
+#include "KirbyLeftBoom.h"
 
 
 namespace My
@@ -98,6 +100,16 @@ namespace My
 	}
 	void Apple::OnCollisionEnter(Collider* other)
 	{
+		if (mkrb = dynamic_cast<kirbyRightBoom*>(other->GetOwner()))
+		{
+			mGround->SetKirBoomb(nullptr);
+		}
+		if (mklb = dynamic_cast<kirbyLeftBoom*>(other->GetOwner()))
+		{
+			mGround->SetKirLeftBoomb(nullptr);
+		}
+
+
 		if (num == 0)
 		{
 			if (mAbsorbEffect = dynamic_cast<AbsorbEffect*>(other->GetOwner()))
@@ -137,6 +149,25 @@ namespace My
 			}
 		}
 		if (num == 2)
+		{
+			if (mAbsorbEffect = dynamic_cast<AbsorbEffect*>(other->GetOwner()))
+			{
+				mGround->SetApple2(nullptr);
+			}
+			if (mAbsorbLeftEffect = dynamic_cast<AbsorbLeftEffect*>(other->GetOwner()))
+			{
+				mGround->SetApple2(nullptr);
+			}
+			if (mkirby = dynamic_cast<Kirby*>(other->GetOwner()))
+			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 pos = tr->GetPos();
+				class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(tr->GetPos().x, tr->GetPos().y + 70), Vector2(1.f, 1.f), eLayerType::Effect);
+				mGround->SetApple2(nullptr);
+				object::Destroy(this);
+			}
+		}
+		if (num == 4)
 		{
 			if (mAbsorbEffect = dynamic_cast<AbsorbEffect*>(other->GetOwner()))
 			{

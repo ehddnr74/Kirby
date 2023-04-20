@@ -572,7 +572,7 @@ namespace My
 		{
 			hitkirbybasetime = 0.0f;
 			mState = CappyState::RightMove;
-			mAnimator->Play(L"RightMove", true);
+			mAnimator->Play(L"Move", true);
 		}
 
 		if (CappyHP <= 0 && cappydir == 0)

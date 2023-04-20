@@ -12,6 +12,7 @@ namespace My
 			None,
 			Apple,
 			Breath,
+			Death,
 		};
 
 		TreeBoss();
@@ -41,6 +42,7 @@ namespace My
 		void none();
 		void apple();
 		void breath();
+		void death();
 
 
 

@@ -90,10 +90,7 @@ namespace My
 		TreeBoss* mTree = dynamic_cast<TreeBoss*>(other->GetOwner());
 		//Apple* mApple = dynamic_cast<Apple*>(other->GetOwner());
 
-		//if (other->GetOwner() == mApple)
-		//{
-		//	Collision = 1;
-		//}
+
 		if (other->GetOwner() != mTree)
 		{
 			if (other->GetOwner() == mWaddle)

@@ -28,7 +28,7 @@ namespace My
 {
 	TreeBoss::TreeBoss()
 		: treetime(0.f)
-		, TreeHP(120)
+		, TreeHP(135)
 		, breathtime(0.f)
 		, hit(false)
 		, hittime(0.f)
@@ -56,7 +56,7 @@ namespace My
 		mAnimator->CreateAnimation(L"DoubleBlink", mTree, Vector2::Zero, 10, 10, 9, Vector2::Zero, 0.08);
 		mAnimator->CreateAnimation(L"Hit", mTree, Vector2(0.0f,80.0f),10, 10, 1, Vector2::Zero, 0.1);
 		mAnimator->CreateAnimation(L"Breath", mTree, Vector2(0.0f, 160.0f), 10, 10, 3, Vector2::Zero, 0.1);
-
+		mAnimator->CreateAnimation(L"Death", mTree, Vector2(0.0f, 240.0f), 10, 10, 4, Vector2::Zero, 0.1);
 
 
 		Collider* collider = AddComponent<Collider>();
@@ -71,48 +71,61 @@ namespace My
 	void TreeBoss::Update()
 	{
 		GameObject::Update();
+
+		if (mState != TreeState::Death)
+		{
+			if (TreeHP <= 0)
+			{
+				mState = TreeState::Death;
+				mAnimator->Play(L"Death", false);
+			}
+		}
+
 		Transform* kr = mKirby->GetComponent<Transform>();
 		Vector2 krPos = kr->GetPos();
 
 		Transform* tr = this->GetComponent<Transform>();
 		Vector2 trPos = tr->GetPos();
 
-		if (trPos.y - krPos.y <= 500.0f)
+		if (mState != TreeState::Death)
 		{
-			appletime += Time::DeltaTime();
-
-			if (AppleUse == true && mState != TreeState::Breath && mState != TreeState::Apple)
+			if (trPos.y - krPos.y <= 500.0f)
 			{
-				if (appletime >= 5.0f)
+				appletime += Time::DeltaTime();
+
+				if (AppleUse == true && mState != TreeState::Breath && mState != TreeState::Apple)
 				{
-					AppleUse = false;
-					appletime = 0.0f;
-					mState = TreeState::Apple;
+					if (appletime >= 5.0f)
+					{
+						AppleUse = false;
+						appletime = 0.0f;
+						mState = TreeState::Apple;
+					}
+				}
+
+				if (mState != TreeState::Breath && mState != TreeState::Apple)
+				{
+					airtime += Time::DeltaTime();
+					if (airtime >= 6.f)
+					{
+						airtime = 0.0f;
+						mState = TreeState::Breath;
+					}
 				}
 			}
 
-			if (mState != TreeState::Breath && mState != TreeState::Apple)
+			treetime += Time::DeltaTime();
+
+			if (treetime >= 2.0f && treetime <= 2.1f)
 			{
-				airtime += Time::DeltaTime();
-				if (airtime >= 6.f)
-				{
-					airtime = 0.0f;
-					mState = TreeState::Breath;
-				}
+				mAnimator->Play(L"Blink", false);
 			}
-		}
 
-		treetime += Time::DeltaTime();
-
-		if (treetime >= 2.0f && treetime <= 2.1f)
-		{
-			mAnimator->Play(L"Blink", false);
-		}
-
-		if (treetime >= 4.0f)
-		{
-			treetime = 0.0f;
-			mAnimator->Play(L"DoubleBlink", false);
+			if (treetime >= 4.0f)
+			{
+				treetime = 0.0f;
+				mAnimator->Play(L"DoubleBlink", false);
+			}
 		}
 
 
@@ -126,6 +139,9 @@ namespace My
 			break;
 		case TreeState::Breath:
 			breath();
+			break;
+		case TreeState::Death:
+			death();
 			break;
 		}
 	}
@@ -142,9 +158,9 @@ namespace My
             if (mKrb = dynamic_cast<kirbyRightBoom*>(other->GetOwner()))
         	{
 				hit = true;
-        		SetDamage(15);
 				mAnimator->Play(L"Hit", false);
         		mTreeGround->SetKirBoomb(nullptr);
+        		SetDamage(15);
         		//mState = GrizzoState::HitBoom;
         	}
             if (mKlb = dynamic_cast<kirbyLeftBoom*>(other->GetOwner()))
@@ -268,6 +284,7 @@ namespace My
 			applet = 0.0f;
 			Apple* mApple2 = object::Instantiate<Apple>(Vector2(krPos.x + 200, krPos.y - 250), Vector2(2.f, 2.f), (eLayerType::Apple));
 			mApple2->SetGround(mTreeGround);
+			mApple2->Setnum(4);
 			mTreeGround->SetApple2(mApple2);
 		}
 
@@ -324,5 +341,8 @@ namespace My
 			AppleUse = true;
 			mAnimator->Play(L"Blink", false);
 		}
+	}
+	void TreeBoss::death()
+	{
 	}
 };

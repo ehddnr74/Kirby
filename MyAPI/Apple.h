@@ -49,6 +49,8 @@ namespace My
 		class Explosion* mExplosion;
 		class AbsorbEffect* mAbsorbEffect;
 		class AbsorbLeftEffect* mAbsorbLeftEffect;
+		class kirbyRightBoom* mkrb;
+		class kirbyLeftBoom* mklb;
 
 
 		int num;

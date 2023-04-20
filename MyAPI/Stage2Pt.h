@@ -20,6 +20,8 @@ namespace My
 
 		bool GetPortal() { return Portal; }
 
+		void SetKirby(class Kirby* mkir) { mkirby = mkir; }
+
 	private:
 		Collider* mCollider;
 		class Kirby* mkirby;

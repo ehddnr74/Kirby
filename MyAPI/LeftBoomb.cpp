@@ -100,8 +100,11 @@ namespace My
 	{
 		if (mkirby = dynamic_cast<Kirby*>(other->GetOwner()));
 		{
+			Transform* boomTr = GetComponent<Transform>();
+			class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(boomTr->GetPos().x, boomTr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
 			GetGround()->SetLeftBoomb(nullptr);
-			SetDestroy(true);
+			object::Destroy(this);
+			//SetDestroy(true);
 		}
 	}
 	void LeftBoomb::OnCollisionStay(Collider* other)

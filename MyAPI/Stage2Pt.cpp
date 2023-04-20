@@ -26,6 +26,7 @@ namespace My
 	{
 		GameObject::Initialize();
 
+
 		Collider* collider = AddComponent<Collider>();
 		collider->SetCenter(Vector2(50.0f, -20.0f));
 		collider->SetSize(Vector2(50.0f, 80.0f));
