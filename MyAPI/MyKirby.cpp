@@ -19,6 +19,7 @@
 #include "MyTwizzy.h"
 #include "R1Ground.h"
 #include "R2Ground.h"
+#include "R3Ground.h"
 #include "Star.h"
 #include "StarMap.h"
 #include "KirbyBeam.h"
@@ -37,12 +38,16 @@
 #include "RightZoom.h"
 #include "LeftBoomb.h"
 #include "RightBoomb.h"
+#include "TreeGround.h"
+#include "Apple.h"
+#include "Breath.h"
+
 
 namespace My
 {
 	Kirby::Kirby()
 		: kirbytime(0.0f)
-		, KirbyHP(100)
+		, KirbyHP(110)
 		, KeyCheck(false)
 		, Kirbydir(0)
 		, AbsorbCheck(false)
@@ -707,88 +712,98 @@ namespace My
 		{
 			if (GetState() == eKirbyState::LeftBeamIdle || GetState() == eKirbyState::LeftBeamWalk || GetState() == eKirbyState::LeftBeamDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftBeamBaseHit;
 				mAnimator->Play(L"LeftBeamKirbyHit", false);
 			}
 			if (GetState() == eKirbyState::RightBeamIdle || GetState() == eKirbyState::RightBeamWalk || GetState() == eKirbyState::RightBeamDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightBeamBaseHit;
 				mAnimator->Play(L"RightBeamKirbyHit", false);
 			}
 			if (GetState() == eKirbyState::RightBeamJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightBeamJumpHitRelease;
 				mAnimator->Play(L"RightBeamJumpHitRelease", false);
 			}
 			if (GetState() == eKirbyState::LeftBeamJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftBeamJumpHitRelease;
 				mAnimator->Play(L"LeftBeamJumpHitRelease", false);
 			}
 			if (GetState() == eKirbyState::RightBeamDoubleJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightBeamPigHit;
 				mAnimator->Play(L"RightBeamDoubleJumpHit", false);
 			}
 			if (GetState() == eKirbyState::LeftBeamDoubleJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftBeamPigHit;
 				mAnimator->Play(L"LeftBeamDoubleJumpHit", false);
 			}
 			if (GetState() == eKirbyState::RightPigJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightPigJumpHitRelease;
 				mAnimator->Play(L"RightAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::LeftPigJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftPigJumpHitRelease;
 				mAnimator->Play(L"LeftAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::RightPigIdle || GetState() == eKirbyState::RightPigWalk || GetState() == eKirbyState::RightPigDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightPigBaseHit;
 				mAnimator->Play(L"RightAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::LeftPigIdle || GetState() == eKirbyState::LeftPigWalk || GetState() == eKirbyState::LeftPigDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftPigBaseHit;
 				mAnimator->Play(L"LeftAbsorbPigHit", false);
 			}
 
 			if (GetState() == eKirbyState::RightDoubleJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::RightAbsorbPigHit;
 				mAnimator->Play(L"RightAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::LeftDoubleJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::LeftAbsorbPigHit;
 				mAnimator->Play(L"LeftAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::RightMove || GetState() == eKirbyState::RightIdle || GetState() == eKirbyState::RightDash)
 			{
-				//mWaddle->SetDamage(40);
+				SetDamage(10);
 				mState = eKirbyState::RightHit;
 				mAnimator->Play(L"RightHit", false);
 			}
 			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::LeftDash)
 			{
-				//mWaddle->SetDamage(40);
+				SetDamage(10);
 				mState = eKirbyState::LeftHit;
 				mAnimator->Play(L"LeftHit", false);
 			}
 			if (GetState() == eKirbyState::RightJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::RightJumpHitRelease;
 				mAnimator->Play(L"RightJumpHitRelease", false);
 			}
 			if (GetState() == eKirbyState::LeftJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::LeftJumpHitRelease;
 				mAnimator->Play(L"LeftJumpHitRelease", false);
 			}
@@ -808,88 +823,98 @@ namespace My
 		{
 			if (GetState() == eKirbyState::LeftBeamIdle || GetState() == eKirbyState::LeftBeamWalk || GetState() == eKirbyState::LeftBeamDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftBeamBaseHit;
 				mAnimator->Play(L"LeftBeamKirbyHit", false);
 			}
 			if (GetState() == eKirbyState::RightBeamIdle || GetState() == eKirbyState::RightBeamWalk || GetState() == eKirbyState::RightBeamDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightBeamBaseHit;
 				mAnimator->Play(L"RightBeamKirbyHit", false);
 			}
 			if (GetState() == eKirbyState::RightBeamJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightBeamJumpHitRelease;
 				mAnimator->Play(L"RightBeamJumpHitRelease", false);
 			}
 			if (GetState() == eKirbyState::LeftBeamJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftBeamJumpHitRelease;
 				mAnimator->Play(L"LeftBeamJumpHitRelease", false);
 			}
 			if (GetState() == eKirbyState::RightBeamDoubleJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightBeamPigHit;
 				mAnimator->Play(L"RightBeamDoubleJumpHit", false);
 			}
 			if (GetState() == eKirbyState::LeftBeamDoubleJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftBeamPigHit;
 				mAnimator->Play(L"LeftBeamDoubleJumpHit", false);
 			}
 			if (GetState() == eKirbyState::RightPigJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightPigJumpHitRelease;
 				mAnimator->Play(L"RightAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::LeftPigJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftPigJumpHitRelease;
 				mAnimator->Play(L"LeftAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::RightPigIdle || GetState() == eKirbyState::RightPigWalk || GetState() == eKirbyState::RightPigDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightPigBaseHit;
 				mAnimator->Play(L"RightAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::LeftPigIdle || GetState() == eKirbyState::LeftPigWalk || GetState() == eKirbyState::LeftPigDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftPigBaseHit;
 				mAnimator->Play(L"LeftAbsorbPigHit", false);
 			}
 
 			if (GetState() == eKirbyState::RightDoubleJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::RightAbsorbPigHit;
 				mAnimator->Play(L"RightAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::LeftDoubleJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::LeftAbsorbPigHit;
 				mAnimator->Play(L"LeftAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::RightMove || GetState() == eKirbyState::RightIdle || GetState() == eKirbyState::RightDash)
 			{
-				//mWaddle->SetDamage(40);
+				SetDamage(10);
 				mState = eKirbyState::RightHit;
 				mAnimator->Play(L"RightHit", false);
 			}
 			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::LeftDash)
 			{
-				//mWaddle->SetDamage(40);
+				SetDamage(10);
 				mState = eKirbyState::LeftHit;
 				mAnimator->Play(L"LeftHit", false);
 			}
 			if (GetState() == eKirbyState::RightJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::RightJumpHitRelease;
 				mAnimator->Play(L"RightJumpHitRelease", false);
 			}
 			if (GetState() == eKirbyState::LeftJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::LeftJumpHitRelease;
 				mAnimator->Play(L"LeftJumpHitRelease", false);
 			}
@@ -908,88 +933,98 @@ namespace My
 		{
 			if (GetState() == eKirbyState::LeftBeamIdle || GetState() == eKirbyState::LeftBeamWalk || GetState() == eKirbyState::LeftBeamDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftBeamBaseHit;
 				mAnimator->Play(L"LeftBeamKirbyHit", false);
 			}
 			if (GetState() == eKirbyState::RightBeamIdle || GetState() == eKirbyState::RightBeamWalk || GetState() == eKirbyState::RightBeamDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightBeamBaseHit;
 				mAnimator->Play(L"RightBeamKirbyHit", false);
 			}
 			if (GetState() == eKirbyState::RightBeamJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightBeamJumpHitRelease;
 				mAnimator->Play(L"RightBeamJumpHitRelease", false);
 			}
 			if (GetState() == eKirbyState::LeftBeamJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftBeamJumpHitRelease;
 				mAnimator->Play(L"LeftBeamJumpHitRelease", false);
 			}
 			if (GetState() == eKirbyState::RightBeamDoubleJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightBeamPigHit;
 				mAnimator->Play(L"RightBeamDoubleJumpHit", false);
 			}
 			if (GetState() == eKirbyState::LeftBeamDoubleJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftBeamPigHit;
 				mAnimator->Play(L"LeftBeamDoubleJumpHit", false);
 			}
 			if (GetState() == eKirbyState::RightPigJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightPigJumpHitRelease;
 				mAnimator->Play(L"RightAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::LeftPigJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftPigJumpHitRelease;
 				mAnimator->Play(L"LeftAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::RightPigIdle || GetState() == eKirbyState::RightPigWalk || GetState() == eKirbyState::RightPigDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightPigBaseHit;
 				mAnimator->Play(L"RightAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::LeftPigIdle || GetState() == eKirbyState::LeftPigWalk || GetState() == eKirbyState::LeftPigDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftPigBaseHit;
 				mAnimator->Play(L"LeftAbsorbPigHit", false);
 			}
 
 			if (GetState() == eKirbyState::RightDoubleJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::RightAbsorbPigHit;
 				mAnimator->Play(L"RightAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::LeftDoubleJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::LeftAbsorbPigHit;
 				mAnimator->Play(L"LeftAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::RightMove || GetState() == eKirbyState::RightIdle || GetState() == eKirbyState::RightDash)
 			{
-				//mWaddle->SetDamage(40);
+				SetDamage(10);
 				mState = eKirbyState::RightHit;
 				mAnimator->Play(L"RightHit", false);
 			}
 			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::LeftDash)
 			{
-				//mWaddle->SetDamage(40);
+				SetDamage(10);
 				mState = eKirbyState::LeftHit;
 				mAnimator->Play(L"LeftHit", false);
 			}
 			if (GetState() == eKirbyState::RightJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::RightJumpHitRelease;
 				mAnimator->Play(L"RightJumpHitRelease", false);
 			}
 			if (GetState() == eKirbyState::LeftJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::LeftJumpHitRelease;
 				mAnimator->Play(L"LeftJumpHitRelease", false);
 			}
@@ -1009,88 +1044,98 @@ namespace My
 		{
 			if (GetState() == eKirbyState::LeftBeamIdle || GetState() == eKirbyState::LeftBeamWalk || GetState() == eKirbyState::LeftBeamDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftBeamBaseHit;
 				mAnimator->Play(L"LeftBeamKirbyHit", false);
 			}
 			if (GetState() == eKirbyState::RightBeamIdle || GetState() == eKirbyState::RightBeamWalk || GetState() == eKirbyState::RightBeamDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightBeamBaseHit;
 				mAnimator->Play(L"RightBeamKirbyHit", false);
 			}
 			if (GetState() == eKirbyState::RightBeamJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightBeamJumpHitRelease;
 				mAnimator->Play(L"RightBeamJumpHitRelease", false);
 			}
 			if (GetState() == eKirbyState::LeftBeamJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftBeamJumpHitRelease;
 				mAnimator->Play(L"LeftBeamJumpHitRelease", false);
 			}
 			if (GetState() == eKirbyState::RightBeamDoubleJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightBeamPigHit;
 				mAnimator->Play(L"RightBeamDoubleJumpHit", false);
 			}
 			if (GetState() == eKirbyState::LeftBeamDoubleJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftBeamPigHit;
 				mAnimator->Play(L"LeftBeamDoubleJumpHit", false);
 			}
 			if (GetState() == eKirbyState::RightPigJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightPigJumpHitRelease;
 				mAnimator->Play(L"RightAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::LeftPigJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftPigJumpHitRelease;
 				mAnimator->Play(L"LeftAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::RightPigIdle || GetState() == eKirbyState::RightPigWalk || GetState() == eKirbyState::RightPigDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightPigBaseHit;
 				mAnimator->Play(L"RightAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::LeftPigIdle || GetState() == eKirbyState::LeftPigWalk || GetState() == eKirbyState::LeftPigDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftPigBaseHit;
 				mAnimator->Play(L"LeftAbsorbPigHit", false);
 			}
 
 			if (GetState() == eKirbyState::RightDoubleJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::RightAbsorbPigHit;
 				mAnimator->Play(L"RightAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::LeftDoubleJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::LeftAbsorbPigHit;
 				mAnimator->Play(L"LeftAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::RightMove || GetState() == eKirbyState::RightIdle || GetState() == eKirbyState::RightDash)
 			{
-				//mWaddle->SetDamage(40);
+				SetDamage(10);
 				mState = eKirbyState::RightHit;
 				mAnimator->Play(L"RightHit", false);
 			}
 			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::LeftDash)
 			{
-				//mWaddle->SetDamage(40);
+				SetDamage(10);
 				mState = eKirbyState::LeftHit;
 				mAnimator->Play(L"LeftHit", false);
 			}
 			if (GetState() == eKirbyState::RightJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::RightJumpHitRelease;
 				mAnimator->Play(L"RightJumpHitRelease", false);
 			}
 			if (GetState() == eKirbyState::LeftJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::LeftJumpHitRelease;
 				mAnimator->Play(L"LeftJumpHitRelease", false);
 			}
@@ -1110,88 +1155,98 @@ namespace My
 		{
 			if (GetState() == eKirbyState::LeftBeamIdle || GetState() == eKirbyState::LeftBeamWalk || GetState() == eKirbyState::LeftBeamDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftBeamBaseHit;
 				mAnimator->Play(L"LeftBeamKirbyHit", false);
 			}
 			if (GetState() == eKirbyState::RightBeamIdle || GetState() == eKirbyState::RightBeamWalk || GetState() == eKirbyState::RightBeamDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightBeamBaseHit;
 				mAnimator->Play(L"RightBeamKirbyHit", false);
 			}
 			if (GetState() == eKirbyState::RightBeamJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightBeamJumpHitRelease;
 				mAnimator->Play(L"RightBeamJumpHitRelease", false);
 			}
 			if (GetState() == eKirbyState::LeftBeamJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftBeamJumpHitRelease;
 				mAnimator->Play(L"LeftBeamJumpHitRelease", false);
 			}
 			if (GetState() == eKirbyState::RightBeamDoubleJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightBeamPigHit;
 				mAnimator->Play(L"RightBeamDoubleJumpHit", false);
 			}
 			if (GetState() == eKirbyState::LeftBeamDoubleJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftBeamPigHit;
 				mAnimator->Play(L"LeftBeamDoubleJumpHit", false);
 			}
 			if (GetState() == eKirbyState::RightPigJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightPigJumpHitRelease;
 				mAnimator->Play(L"RightAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::LeftPigJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftPigJumpHitRelease;
 				mAnimator->Play(L"LeftAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::RightPigIdle || GetState() == eKirbyState::RightPigWalk || GetState() == eKirbyState::RightPigDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightPigBaseHit;
 				mAnimator->Play(L"RightAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::LeftPigIdle || GetState() == eKirbyState::LeftPigWalk || GetState() == eKirbyState::LeftPigDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftPigBaseHit;
 				mAnimator->Play(L"LeftAbsorbPigHit", false);
 			}
 
 			if (GetState() == eKirbyState::RightDoubleJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::RightAbsorbPigHit;
 				mAnimator->Play(L"RightAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::LeftDoubleJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::LeftAbsorbPigHit;
 				mAnimator->Play(L"LeftAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::RightMove || GetState() == eKirbyState::RightIdle || GetState() == eKirbyState::RightDash)
 			{
-				//mWaddle->SetDamage(40);
+				SetDamage(10);;
 				mState = eKirbyState::RightHit;
 				mAnimator->Play(L"RightHit", false);
 			}
 			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::LeftDash)
 			{
-				//mWaddle->SetDamage(40);
+				SetDamage(10);
 				mState = eKirbyState::LeftHit;
 				mAnimator->Play(L"LeftHit", false);
 			}
 			if (GetState() == eKirbyState::RightJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::RightJumpHitRelease;
 				mAnimator->Play(L"RightJumpHitRelease", false);
 			}
 			if (GetState() == eKirbyState::LeftJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::LeftJumpHitRelease;
 				mAnimator->Play(L"LeftJumpHitRelease", false);
 			}
@@ -1213,58 +1268,62 @@ namespace My
 
 			if (GetState() == eKirbyState::RightPigJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightPigJumpHitRelease;
 				mAnimator->Play(L"RightAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::LeftPigJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftPigJumpHitRelease;
 				mAnimator->Play(L"LeftAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::RightPigIdle || GetState() == eKirbyState::RightPigWalk || GetState() == eKirbyState::RightPigDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightPigBaseHit;
 				mAnimator->Play(L"RightAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::LeftPigIdle || GetState() == eKirbyState::LeftPigWalk || GetState() == eKirbyState::LeftPigDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftPigBaseHit;
 				mAnimator->Play(L"LeftAbsorbPigHit", false);
 			}
 
 			if (GetState() == eKirbyState::RightDoubleJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::RightAbsorbPigHit;
 				mAnimator->Play(L"RightAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::LeftDoubleJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::LeftAbsorbPigHit;
 				mAnimator->Play(L"LeftAbsorbPigHit", false);
 			}
 			if (GetState() == eKirbyState::RightMove || GetState() == eKirbyState::RightIdle || GetState() == eKirbyState::RightDash)
 			{
-				//mWaddle->SetDamage(40);
+				SetDamage(10);
 				mState = eKirbyState::RightHit;
 				mAnimator->Play(L"RightHit", false);
 			}
 			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::LeftDash)
 			{
-				//mWaddle->SetDamage(40);
+				SetDamage(10);
 				mState = eKirbyState::LeftHit;
 				mAnimator->Play(L"LeftHit", false);
 			}
 			if (GetState() == eKirbyState::RightJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::RightJumpHitRelease;
 				mAnimator->Play(L"RightJumpHitRelease", false);
 			}
 			if (GetState() == eKirbyState::LeftJump)
 			{
-				//mWaddle->SetDamage(50);
+				SetDamage(10);
 				mState = eKirbyState::LeftJumpHitRelease;
 				mAnimator->Play(L"LeftJumpHitRelease", false);
 			}
@@ -1291,16 +1350,19 @@ namespace My
 				if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::RightMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::RightIdle
 					|| GetState() == eKirbyState::LeftDash || GetState() == eKirbyState::RightDash)
 				{
+					SetDamage(10);
 					mState = eKirbyState::LeftBeamHit;
 					mAnimator->Play(L"LeftHitBeam", false);
 				}
 				if (GetState() == eKirbyState::LeftJump || GetState() == eKirbyState::RightJump)
 				{
+					SetDamage(10);
 					mState = eKirbyState::LBJHR;
 					mAnimator->Play(L"LBJHR", false);
 				}
 				if (GetState() == eKirbyState::LeftDoubleJump || GetState() == eKirbyState::RightDoubleJump)
 				{
+					SetDamage(10);
 					mState = eKirbyState::LPBJHR;
 					mAnimator->Play(L"LPBJHR", false);
 				}
@@ -1312,17 +1374,20 @@ namespace My
 			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::RightMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::RightIdle
 				|| GetState() == eKirbyState::LeftDash || GetState() == eKirbyState::RightDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightBeamHit;
 				mAnimator->Play(L"RightHitBeam", false);
 			}
 
 			if (GetState() == eKirbyState::LeftJump || GetState() == eKirbyState::RightJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RBJHR;
 				mAnimator->Play(L"RBJHR", false);
 			}
 			if (GetState() == eKirbyState::LeftDoubleJump || GetState() == eKirbyState::RightDoubleJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RPBJHR;
 				mAnimator->Play(L"RPBJHR", false);
 			}
@@ -1332,17 +1397,20 @@ namespace My
 			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::RightMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::RightIdle
 				|| GetState() == eKirbyState::LeftDash || GetState() == eKirbyState::RightDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftHit;
 				mAnimator->Play(L"LeftHit", false);
 			}
 			if (GetState() == eKirbyState::LeftJump || GetState() == eKirbyState::RightJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftJumpHitRelease;
 				mAnimator->Play(L"LeftJumpHitRelease", false);
 
 			}
 			if (GetState() == eKirbyState::LeftDoubleJump || GetState() == eKirbyState::RightDoubleJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::LeftAbsorbPigHit;
 				mAnimator->Play(L"LeftAbsorbPigHit", false);
 			}
@@ -1353,23 +1421,72 @@ namespace My
 			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::RightMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::RightIdle
 				|| GetState() == eKirbyState::LeftDash || GetState() == eKirbyState::RightDash)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightHit;
 				mAnimator->Play(L"RightHit", false);
 			}
 			if (GetState() == eKirbyState::LeftJump || GetState() == eKirbyState::RightJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightJumpHitRelease;
 				mAnimator->Play(L"RightJumpHitRelease", false);
 
 			}
 			if (GetState() == eKirbyState::LeftDoubleJump || GetState() == eKirbyState::RightDoubleJump)
 			{
+				SetDamage(10);
 				mState = eKirbyState::RightAbsorbPigHit;
 				mAnimator->Play(L"RightAbsorbPigHit", false);
 			}
+		}
+		if (Breath* mBreath = dynamic_cast<Breath*>(other->GetOwner()))
+		{
+			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::RightMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::RightIdle
+				|| GetState() == eKirbyState::LeftDash || GetState() == eKirbyState::RightDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightHit;
+				mAnimator->Play(L"RightHit", false);
+			}
+			if (GetState() == eKirbyState::LeftJump || GetState() == eKirbyState::RightJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightJumpHitRelease;
+				mAnimator->Play(L"RightJumpHitRelease", false);
 
+			}
+			if (GetState() == eKirbyState::LeftDoubleJump || GetState() == eKirbyState::RightDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightAbsorbPigHit;
+				mAnimator->Play(L"RightAbsorbPigHit", false);
+			}
+		}
+		if (Apple* mApple = dynamic_cast<Apple*>(other->GetOwner()))
+		{
+			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::RightMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::RightIdle
+				|| GetState() == eKirbyState::LeftDash || GetState() == eKirbyState::RightDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightHit;
+				mAnimator->Play(L"RightHit", false);
+			}
+			if (GetState() == eKirbyState::LeftJump || GetState() == eKirbyState::RightJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightJumpHitRelease;
+				mAnimator->Play(L"RightJumpHitRelease", false);
+
+			}
+			if (GetState() == eKirbyState::LeftDoubleJump || GetState() == eKirbyState::RightDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightAbsorbPigHit;
+				mAnimator->Play(L"RightAbsorbPigHit", false);
+			}
 		}
 	}
+
 
 
 	void Kirby::OnCollisionStay(Collider* other)
@@ -4079,6 +4196,7 @@ namespace My
 			mRigidBody->SetVelocity(Vector2(0.0f, 0.0f));
 			if (leftbeamtime >= 0.35f)
 			{
+				beamjumping = false;
 				//mRigidBody->SetVelocity(Vector2(0.0f, 0.0f));
 				leftbeamtime = 0.0f;
 				mState = eKirbyState::LeftBeamIdle;
@@ -4097,6 +4215,7 @@ namespace My
 			mRigidBody->SetVelocity(Vector2(0.0f, 0.0f));
 			if (beamtime >= 0.35f)
 			{
+				beamjumping = false;
 				//mRigidBody->SetVelocity(Vector2(0.0f, 0.0f));
 				beamtime = 0.0f;
 				mState = eKirbyState::RightBeamIdle;
@@ -4926,6 +5045,14 @@ namespace My
 			{
 				gr2->SetKirLeftBoomb(mLeftBoom);
 			}
+			if (gr3 != nullptr)
+			{
+				gr3->SetKirLeftBoomb(mLeftBoom);
+			}
+			if (gr4 != nullptr)
+			{
+				gr4->SetKirLeftBoomb(mLeftBoom);
+			}
 			LeftZoom* mLeftZoom = object::Instantiate<LeftZoom>(Vector2(pos.x - 35, pos.y - 10), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
 			SetLeftZoom(mLeftZoom);
 
@@ -5002,6 +5129,14 @@ namespace My
 			if (gr2 != nullptr)
 			{
 				gr2->SetKirBoomb(mRightBoom);
+			}
+			if (gr3 != nullptr)
+			{
+				gr3->SetKirBoomb(mRightBoom);
+			}
+			if (gr4 != nullptr)
+			{
+				gr4->SetKirBoomb(mRightBoom);
 			}
 			RightZoom* mRightZoom = object::Instantiate<RightZoom>(Vector2(pos.x + 35, pos.y - 10), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
 			SetRightZoom(mRightZoom);
@@ -5080,6 +5215,14 @@ namespace My
 			if (gr2 != nullptr)
 			{
 				gr2->SetKirLeftBoomb(mLeftBoom);
+			}
+			if (gr3 != nullptr)
+			{
+				gr3->SetKirLeftBoomb(mLeftBoom);
+			}
+			if (gr4 != nullptr)
+			{
+				gr4->SetKirLeftBoomb(mLeftBoom);
 			}
 			LeftZoom* mLeftZoom = object::Instantiate<LeftZoom>(Vector2(pos.x - 35, pos.y - 10), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
 			SetLeftZoom(mLeftZoom);
@@ -5170,6 +5313,14 @@ namespace My
 				if (gr2 != nullptr)
 				{
 					gr2->SetKirBoomb(mRightBoom);
+				}
+				if (gr3 != nullptr)
+				{
+					gr3->SetKirBoomb(mRightBoom);
+				}
+				if (gr4 != nullptr)
+				{
+					gr4->SetKirBoomb(mRightBoom);
 				}
 				RightZoom* mRightZoom = object::Instantiate<RightZoom>(Vector2(pos.x + 35, pos.y - 10), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
 				SetRightZoom(mRightZoom);
@@ -5283,6 +5434,14 @@ namespace My
 			{
 				gr2->SetKirLeftBoomb(mLeftBoom);
 			}
+			if (gr3 != nullptr)
+			{
+				gr3->SetKirLeftBoomb(mLeftBoom);
+			}
+			if (gr4 != nullptr)
+			{
+				gr4->SetKirLeftBoomb(mLeftBoom);
+			}
 			LeftZoom* mLeftZoom = object::Instantiate<LeftZoom>(Vector2(pos.x - 35, pos.y - 10), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
 			SetLeftZoom(mLeftZoom);
 
@@ -5345,6 +5504,14 @@ namespace My
 			if (gr2 != nullptr)
 			{
 				gr2->SetKirBoomb(mRightBoom);
+			}
+			if (gr3 != nullptr)
+			{
+				gr3->SetKirBoomb(mRightBoom);
+			}
+			if (gr4 != nullptr)
+			{
+				gr4->SetKirBoomb(mRightBoom);
 			}
 			RightZoom* mRightZoom = object::Instantiate<RightZoom>(Vector2(pos.x + 35, pos.y - 10), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
 			SetRightZoom(mRightZoom);
@@ -5448,8 +5615,8 @@ namespace My
 
 		if (BoombDoubleJump)
 		{
-			mState = eKirbyState::RightBoombIdle;
-			mAnimator->Play(L"RightBoombIdle", true);
+			mState = eKirbyState::LeftBoombIdle;
+			mAnimator->Play(L"LeftBoombIdle", true);
 			BoombDoubleJump = false;
 		}
 		if (Input::GetKeyDown(eKeyCode::X))

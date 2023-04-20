@@ -11,6 +11,8 @@ namespace My
 		{
 			LeftMove,
 			RightMove,
+			Death,
+			HitBoom,
 		};
 
 		Grizzo();
@@ -26,9 +28,14 @@ namespace My
 		virtual void OnCollisionExit(class Collider* other) override;
 
 
-		//void SetDamage(int damage) { GrizzoHP -= damage; }
-		//int GetHP() { return GrizzoHP; }
+		void SetDamage(int damage) { GrizzoHP -= damage; }
+		int GetHP() { return GrizzoHP; }
 
+		void SetGround(class R2Ground* gr) { mGround = gr; }
+		class R2Ground* GetGround() { return mGround; }
+
+		void SetGround3(class R3Ground* gg) { gr3 = gg; }
+		class R3Ground* GetGround3() { return gr3; }
 		//void SetDie(bool Die) { die = Die; }
 		//bool GetDie() { return die; }
 
@@ -36,6 +43,8 @@ namespace My
 	private:
 		void leftmove();
 		void rightmove();
+		void death();
+		void hitboom();
 
 
 
@@ -49,8 +58,8 @@ namespace My
 		//class RigidBody* mRigidBody;
 		//double Grizzotime;
 		//double Gjumptime;
-		//int cappydir;
-		//int GrizzoHP;
+		int grizzodir;
+		int GrizzoHP;
 
 
 		//double hitairtime;
@@ -74,8 +83,12 @@ namespace My
 		//class RightBoomb* mRightBoomb;
 
 		//bool die;
-
+		class R2Ground* mGround;
+		class R3Ground* gr3;
+		class kirbyRightBoom* mKrb;
+		class kirbyLeftBoom* mKlb;
 		double grizzotime;
+
 
 
 	};

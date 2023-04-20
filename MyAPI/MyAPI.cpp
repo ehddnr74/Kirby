@@ -7,6 +7,7 @@
 #include "MyApplication.h"
 #include "MySceneManager.h"
 #include "MyResources.h"
+
 #define MAX_LOADSTRING 100
 
 // 전역 변수:

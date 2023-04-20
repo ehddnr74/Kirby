@@ -55,13 +55,13 @@ namespace My
 	{
 		if (mkirby = dynamic_cast<Kirby*>(other->GetOwner()))
 		{
-			if (mkirby->GetHP() <= 100)
+			if (mkirby->GetHP() <= 90)
 			{
 				mkirby->SetHill(20);
 			}
-			if (mkirby->GetHP() >= 80)
+			if (mkirby->GetHP() >= 90)
 			{
-				mkirby->SetHP(100);
+				mkirby->SetHP(110);
 			}
 			object::Destroy(this);
 		}

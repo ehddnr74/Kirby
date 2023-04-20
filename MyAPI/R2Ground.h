@@ -23,10 +23,13 @@ namespace My
 		void SetBoomBros(class BoomBros* boombros) { mBoomBros = boombros; }
 		void SetBox(class Box* box) { mBox = box; }
 		void SetBoomb(class RightBoomb* rb) { rboomb = rb; }
+		void SetGrizzo(class Grizzo* grizzo) { mGrizzo = grizzo; }
 		class RightBoomb* GetBoomb() { return rboomb; }
 
 		void SetLeftBoomb(class LeftBoomb* lb) { lboomb = lb; }
 		class LeftBoomb* GetLeftBoomb() { return lboomb; }
+
+		
 
 		void SetKirBoomb(class kirbyRightBoom* krb) { mkrb = krb; }
 		void SetKirLeftBoomb(class kirbyLeftBoom* klb) { mklb = klb; }
@@ -43,6 +46,7 @@ namespace My
 		class Kirby* mKirby;
 		class Bros* mBros;
 		class BoomBros* mBoomBros;
+		class Grizzo* mGrizzo;
 		class Box* mBox;
 		class RightBoomb* rboomb;
 		class LeftBoomb* lboomb;

@@ -20,11 +20,17 @@
 #include "MyObject.h"
 #include"LeftBoomb.h"
 #include "RightBoomb.h"
+#include "KirbyRightBoom.h"
+#include "KirbyLeftBoom.h"
+#include "R2Ground.h"
+#include "R3Ground.h"
 
 namespace My
 {
 	Grizzo::Grizzo()
 		: grizzotime(0.f)
+		, GrizzoHP(100)
+		, grizzodir(0)
 	{
 	}
 	Grizzo::~Grizzo()
@@ -63,6 +69,12 @@ namespace My
 		case GrizzoState::RightMove:
 			rightmove();
 			break;
+		case GrizzoState::Death:
+			death();
+			break;
+		case GrizzoState::HitBoom:
+			hitboom();
+			break;
 		}
 	}
 	void Grizzo::Render(HDC hdc)
@@ -75,6 +87,38 @@ namespace My
 	}
 	void Grizzo::OnCollisionEnter(Collider* other)
 	{
+		if (GetGround() != nullptr)
+		{
+			if (mKrb = dynamic_cast<kirbyRightBoom*>(other->GetOwner()))
+			{
+				GetGround()->SetKirBoomb(nullptr);
+				SetDamage(100);
+				mState = GrizzoState::HitBoom;
+			}
+			if (mKlb = dynamic_cast<kirbyLeftBoom*>(other->GetOwner()))
+			{
+				GetGround()->SetKirLeftBoomb(nullptr);
+				SetDamage(100);
+				mState = GrizzoState::HitBoom;
+			}
+		}
+
+
+		if (GetGround3() != nullptr)
+		{
+			if (mKrb = dynamic_cast<kirbyRightBoom*>(other->GetOwner()))
+			{
+				GetGround3()->SetKirBoomb(nullptr);
+				SetDamage(100);
+				mState = GrizzoState::HitBoom;
+			}
+			if (mKlb = dynamic_cast<kirbyLeftBoom*>(other->GetOwner()))
+			{
+				GetGround3()->SetKirLeftBoomb(nullptr);
+				SetDamage(100);
+				mState = GrizzoState::HitBoom;
+			}
+		}
 	}
 	void Grizzo::OnCollisionStay(Collider* other)
 	{
@@ -115,5 +159,12 @@ namespace My
 		}
 
 		tr->SetPos(gpos);
+	}
+	void Grizzo::death()
+	{
+	}
+	void Grizzo::hitboom()
+	{
+		object::Destroy(this);
 	}
 };

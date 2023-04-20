@@ -16,6 +16,7 @@
 #include "Explosion.h"
 #include "KirbyRightBoom.h"
 #include "KirbyLeftBoom.h"
+#include "Grizzo.h"
 
 namespace My
 {
@@ -90,8 +91,8 @@ namespace My
 						if (colorboom == RGB(255, 0, 255) || colorbooml == RGB(255, 0, 255) || colorboomr == RGB(255, 0, 255))
 						{
 							//GetBoomb()->SetDestroy(true);
-							object::Destroy(GetBoomb());
 							class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(boomTr->GetPos().x, boomTr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+							object::Destroy(GetBoomb());
 							SetBoomb(nullptr);
 						}
 					
@@ -105,24 +106,26 @@ namespace My
 				COLORREF colorkrboomr = mImage->GetPixel(mkrbtr->GetPos().x + 15, mkrbtr->GetPos().y - 20);
 				COLORREF colorkrbooml = mImage->GetPixel(mkrbtr->GetPos().x - 10, mkrbtr->GetPos().y - 20);
 
-				if (colorkrboom == RGB(255, 0, 255) || colorkrbooml == RGB(255, 0, 255) || colorkrboomr == RGB(255, 0, 255))
+				if (colorkrboom == RGB(255, 0, 255) || colorkrbooml == RGB(255, 0, 255) || colorkrboomr == RGB(255, 0, 255)
+					|| colorkrboom == RGB(100, 0, 100) || colorkrbooml == RGB(100, 0, 100) || colorkrboomr == RGB(100, 0, 100)
+					|| colorkrboom == RGB(200, 0, 200) || colorkrbooml == RGB(200, 0, 200) || colorkrboomr == RGB(200, 0, 200))
 				{
-					object::Destroy(mkrb);
 					class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(mkrbtr->GetPos().x, mkrbtr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+					object::Destroy(mkrb);
 					SetKirBoomb(nullptr);
 				}
-				if (colorkrboom == RGB(100, 0, 100) || colorkrbooml == RGB(100, 0, 100) || colorkrboomr == RGB(100, 0, 100))
-				{
-					object::Destroy(mkrb);
-					class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(mkrbtr->GetPos().x, mkrbtr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
-					SetKirBoomb(nullptr);
-				}
-				if (colorkrboom == RGB(200, 0, 200) || colorkrbooml == RGB(200, 0, 200) || colorkrboomr == RGB(200, 0, 200))
-				{
-					object::Destroy(mkrb);
-					class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(mkrbtr->GetPos().x, mkrbtr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
-					SetKirBoomb(nullptr);
-				}
+				//if (colorkrboom == RGB(100, 0, 100) || colorkrbooml == RGB(100, 0, 100) || colorkrboomr == RGB(100, 0, 100))
+				//{
+				//	class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(mkrbtr->GetPos().x, mkrbtr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+				//	object::Destroy(mkrb);
+				//	SetKirBoomb(nullptr);
+				//}
+				//if (colorkrboom == RGB(200, 0, 200) || colorkrbooml == RGB(200, 0, 200) || colorkrboomr == RGB(200, 0, 200))
+				//{
+				//	class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(mkrbtr->GetPos().x, mkrbtr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+				//	object::Destroy(mkrb);
+				//	SetKirBoomb(nullptr);
+				//}
 
 			}
 			if (mklb != nullptr)
@@ -133,24 +136,26 @@ namespace My
 				COLORREF krboomr = mImage->GetPixel(mklbtr->GetPos().x + 15, mklbtr->GetPos().y - 40);
 				COLORREF krbooml = mImage->GetPixel(mklbtr->GetPos().x - 10, mklbtr->GetPos().y - 40);
 
-				if (klboom == RGB(255, 0, 255) || krbooml == RGB(255, 0, 255) || krboomr == RGB(255, 0, 255))
+				if (klboom == RGB(255, 0, 255) || krbooml == RGB(255, 0, 255) || krboomr == RGB(255, 0, 255)
+					|| klboom == RGB(100, 0, 100) || krbooml == RGB(100, 0, 100) || krboomr == RGB(100, 0, 100)
+					|| klboom == RGB(200, 0, 200) || krbooml == RGB(200, 0, 200) || krboomr == RGB(200, 0, 200))
 				{
-					object::Destroy(mklb);
 					class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(mklbtr->GetPos().x, mklbtr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+					object::Destroy(mklb);
 					SetKirLeftBoomb(nullptr);
 				}
-				if (klboom == RGB(100, 0, 100) || krbooml == RGB(100, 0, 100) || krboomr == RGB(100, 0, 100))
-				{
-					object::Destroy(mklb);
-					class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(mklbtr->GetPos().x, mklbtr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
-					SetKirLeftBoomb(nullptr);
-				}
-				if (klboom == RGB(200, 0, 200) || krbooml == RGB(200, 0, 200) || krboomr == RGB(200, 0, 200))
-				{
-					object::Destroy(mklb);
-					class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(mklbtr->GetPos().x, mklbtr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
-					SetKirLeftBoomb(nullptr);
-				}
+				//if (klboom == RGB(100, 0, 100) || krbooml == RGB(100, 0, 100) || krboomr == RGB(100, 0, 100))
+				//{
+				//	class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(mklbtr->GetPos().x, mklbtr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+				//	object::Destroy(mklb);
+				//	SetKirLeftBoomb(nullptr);
+				//}
+				//if (klboom == RGB(200, 0, 200) || krbooml == RGB(200, 0, 200) || krboomr == RGB(200, 0, 200))
+				//{
+				//	class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(mklbtr->GetPos().x, mklbtr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+				//	object::Destroy(mklb);
+				//	SetKirLeftBoomb(nullptr);
+				//}
 
 			}
 

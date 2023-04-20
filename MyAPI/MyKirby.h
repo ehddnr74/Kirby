@@ -187,7 +187,8 @@ namespace My
 
 		void SetGround(class Ground* ground) { mGround = ground; }
 		void SetGround2(class R2Ground* ground2) { gr2 = ground2; }
-
+		void SetGround3(class R3Ground* ground3) { gr3 = ground3; }
+		void SetGround4(class TreeGround* ground4) { gr4 = ground4; }
 		void SetState(eKirbyState mstate) { mState = mstate; }
 		eKirbyState GetState() { return mState; }
 
@@ -413,6 +414,8 @@ namespace My
 		class RightZoom* mRightZoom;
 		class LeftZoom* mLeftZoom;
 		class R2Ground* gr2;
+		class R3Ground* gr3;
+		class TreeGround* gr4;
 
 		class LeftBoomb* mlb;
 		class RightBoomb* mrb;
@@ -478,6 +481,9 @@ namespace My
 
 		float firstpos;
 		float endpos;
+
+		class Breath* mBreath;
+		class Apple* mApple;
 	};
 }
 

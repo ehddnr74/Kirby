@@ -117,6 +117,7 @@ namespace My
 
     void Animation::Reset()
     {
+
         mSpriteIndex = 0;
         mTime = 0.0f;
         mbComplete = false;

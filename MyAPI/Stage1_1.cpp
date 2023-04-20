@@ -31,7 +31,7 @@
 #include "HP.h"
 #include "Stage1_2.h"
 #include "SaveKirby.h"
-
+#include "SaveUI.h"
 
 namespace My
 {
@@ -76,10 +76,13 @@ namespace My
 			mGround->SetCappy(nullptr);
 		}
 
+
+		
 		if (mKirby->GetHP() <= 0)
 		{
 			Camera::SetTarget(nullptr);
 		}
+
 
 		Scene::Update();
 	}
@@ -105,7 +108,11 @@ namespace My
 
 		object::Instantiate<Room1>(eLayerType::Stage);
 		object::Instantiate<Stage11bk>(eLayerType::BG);
-		object::Instantiate<HP>(eLayerType::UI);
+		HP* hp = object::Instantiate<HP>/*(Vector2(315,865),Vector2(1.f,1.f),*/(eLayerType::UI);
+		SetUI(hp);
+		
+
+		//hp->SetState(HP::UIState::UI5);
 		mWaddle = object::Instantiate<Waddle>(Vector2(420, 390), Vector2(2.2f, 2.2f), (eLayerType::Monster));
 		mCappy = object::Instantiate<Cappy>(Vector2(800, 390), Vector2(1.8f, 2.0f), (eLayerType::Monster));
 		mTwizzy = object::Instantiate<Twizzy>(Vector2(1150, 330), Vector2(2.0f, 2.0f), (eLayerType::Monster));
@@ -121,9 +128,10 @@ namespace My
 			mWaddle->SetPlayer(mKirby);
 			mBrontoBurt->SetPlayer(mKirby);
 			mKirby->SetGround(mGround);
-
 			Camera::SetTarget(mKirby);
+			hp->SetKirby(mKirby); //hp°¡ kirby¸¦ ¾Ï 
 		}
+
 
 
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
@@ -138,6 +146,7 @@ namespace My
 	void Stage1Scene::OnExit()
 	{
 		SaveKirby::SetKirby(mKirby);
+		SaveUI::SetUI(hp);
 
 
 		//Camera::SetCameraType(Camera::eCameraEffectType::None);

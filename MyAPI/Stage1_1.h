@@ -8,6 +8,16 @@ namespace My
 	class StarMap;
 	class Restrict;
 	class HP;
+	class HP2;
+	class HP3;
+	class HP4;
+	class HP5;
+	class HP6;
+	class HP7;
+	class HP8;
+	class HP9;
+	class HP10;
+	class HP11;
 	class Twizzy;
 	class BrontoBurt;
 	class Cappy;
@@ -34,6 +44,9 @@ namespace My
 
 		void SetStage2(class Stage2Scene* stage) { stage2 = stage; }
 
+		void SetUI(class HP* h) { hp = h; }
+
+
 		
 
 		class Kirby* GetKirby() { return mKirby; }
@@ -46,7 +59,18 @@ namespace My
 		Cappy* mCappy;
 		Twizzy* mTwizzy;
 		BrontoBurt* mBrontoBurt;
-		HP* hp;
+		class HP* hp;
+		class HP2* hp2;
+		class HP3* hp3;
+		class HP4* hp4;
+		class HP5* hp5;
+		class HP6* hp6;
+		class HP7* hp7;
+		class HP8* hp8;
+		class HP9* hp9;
+		class HP10* hp10;
+		class HP11* hp11;
+
 		Restrict* mRestrict;
 		StarMap* mStar;
 		Ground* mGround;

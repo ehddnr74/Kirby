@@ -29,6 +29,7 @@
 #include "MyRigidBody.h"
 #include "boomrect.h"
 #include "Grizzo.h"
+#include "SaveUI.h"
 
 namespace My
 {
@@ -134,6 +135,8 @@ namespace My
 
 	void Stage2Scene::OnEnter()
 	{
+		hp = SaveUI::GetUI();
+		AddGameObject(hp, eLayerType::UI);
 		MyKirby = SaveKirby::GetKirby();
 		AddGameObject(MyKirby, eLayerType::Player);
 		Transform* kr = MyKirby->GetComponent<Transform>();
@@ -204,9 +207,9 @@ namespace My
 		//boomrect* rect = object::Instantiate<boomrect>(eLayerType::Rectangle);
 		//rect->SetBoom(rb);
 
-		object::Instantiate<Grizzo>(Vector2(1500.f, 345.0f), Vector2(2.0f, 2.0f), eLayerType::Monster);
-	
-
+		mGrizzo = object::Instantiate<Grizzo>(Vector2(1500.f, 345.0f), Vector2(2.0f, 2.0f), eLayerType::Monster);
+		mGrizzo->SetGround(ground);
+		ground->SetGrizzo(mGrizzo);
 
 
 
@@ -247,6 +250,7 @@ namespace My
 	void Stage2Scene::OnExit()
 	{
 		SaveKirby::SetKirby(MyKirby);
+		SaveUI::SetUI(hp);
 		//mKirby->SetPos(Vector2(0.0f, 0.0f));
 	}
 

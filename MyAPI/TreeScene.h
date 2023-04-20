@@ -2,6 +2,8 @@
 #include "MyScene.h"
 #include "MyImage.h"
 namespace My {
+	//class Branch;
+	class TreeBoss;
 	class TreeScene : public Scene
 	{
 	public:
@@ -17,6 +19,10 @@ namespace My {
 		virtual void OnExit() override;
 
 	private:
+		class Kirby* mKirby;
+		class HP* hp;
+		class TreeBoss* mTree;
+		//class Branch* mBranch;
 	};
 }
 

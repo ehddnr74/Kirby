@@ -24,6 +24,8 @@
 #include "MyCappy.h"
 #include "MyWaddle.h"
 #include "SaveKirby.h"
+#include "SaveUI.h"
+#include "Grizzo.h"
 namespace My {
 	Stage1_3::Stage1_3()
 	{
@@ -48,7 +50,7 @@ namespace My {
 		{
 			if (Input::GetKeyDown(eKeyCode::Up))
 			{
-				SceneManager::LoadScene(eSceneType::Title);
+				SceneManager::LoadScene(eSceneType::TreeScene);
 			}
 		}
 		if (mCappy->GetHP() <= 0)
@@ -73,6 +75,8 @@ namespace My {
 	}
 	void Stage1_3::OnEnter()
 	{
+		hp = SaveUI::GetUI();
+		AddGameObject(hp, eLayerType::UI);
 		mKirby = SaveKirby::GetKirby();
 		AddGameObject(mKirby, eLayerType::Player);
 		Transform* kr = mKirby->GetComponent<Transform>();
@@ -85,6 +89,7 @@ namespace My {
 		mStage3Pt = object::Instantiate<Stage3Pt>(Vector2(275.0f, 200.f), Vector2(1.0f, 1.0f), (eLayerType::Portal));
 		
 		mGround = object::Instantiate<R3Ground>(eLayerType::Ground);
+		mKirby->SetGround3(mGround);
 		SetGround(mGround);
 		Rectangle1* rectangle = object::Instantiate<Rectangle1>(eLayerType::Rectangle);
 
@@ -102,8 +107,15 @@ namespace My {
 
 
 		Waddle* mWaddle = object::Instantiate<Waddle>(Vector2(510.f, 910.f), Vector2(2.2f, 2.2f), (eLayerType::Monster));
+
+		mWaddle->SetGround(mGround);
+
 		mCappy = object::Instantiate<Cappy>(Vector2(400, 350), Vector2(1.8f, 2.0f), (eLayerType::Monster));
+		mCappy->SetGround3(mGround);
 		mGround->SetCappy(mCappy);
+
+		Grizzo* mGrizzo = object::Instantiate<Grizzo>(Vector2(250.f, 760.f), Vector2(2.0f, 2.0f), (eLayerType::Monster));
+		mGrizzo->SetGround3(mGround);
 
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
@@ -118,6 +130,7 @@ namespace My {
 
 	void Stage1_3::OnExit()
 	{
-
+		SaveKirby::SetKirby(mKirby);
+		SaveUI::SetUI(hp);
 	}
 }

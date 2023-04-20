@@ -18,6 +18,9 @@ namespace My
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
+
+		void SetGround(class R2Ground* gr) { mGround = gr; }
+		class R2Ground* GetGround() { return mGround; }
 		
 
 	private:
@@ -27,6 +30,7 @@ namespace My
 		class RigidBody* mRigidBody;
 
 		class Explosion* mExplosion;
+		class R2Ground* mGround;
 
 
 	};

@@ -14,6 +14,7 @@
 #include "Bros.h"
 #include "MyCappy.h"
 #include "BoomBros.h"
+#include "TreeBoss.h"
 namespace My
 {
 	AbsorbLeftEffect::AbsorbLeftEffect()
@@ -76,63 +77,73 @@ namespace My
 	{
 		Waddle* mWaddle = dynamic_cast<Waddle*>(other->GetOwner());
 		Bros* mBros = dynamic_cast<Bros*>(other->GetOwner());
-		BoomBros* mBoomBros = dynamic_cast<BoomBros*>(other->GetOwner());
 
-		if (other->GetOwner() == mWaddle)
+		BoomBros* mBoomBros = dynamic_cast<BoomBros*>(other->GetOwner()); 
+		TreeBoss* mTree = dynamic_cast<TreeBoss*>(other->GetOwner());
+
+		if (other->GetOwner() != mTree)
 		{
-			Collision = 2;
-		}
-		else if (other->GetOwner() == mBros || other->GetOwner() == mBoomBros)
-		{
-			Collision = 3;
-		}
-		else
-		{
-			Collision = 1;
+			if (other->GetOwner() == mWaddle)
+			{
+				Collision = 2;
+			}
+			else if (other->GetOwner() == mBros || other->GetOwner() == mBoomBros)
+			{
+				Collision = 3;
+			}
+			else
+			{
+				Collision = 1;
+			}
 		}
 	}
 	void AbsorbLeftEffect::OnCollisionStay(Collider* other)
 	{
-		Transform* tr = other->GetOwner()->GetComponent<Transform>();
+		TreeBoss* mTree = dynamic_cast<TreeBoss*>(other->GetOwner());
 
-		Vector2 otherPos = tr->GetPos();
-
-		Transform* Effecttr = this->GetComponent<Transform>();
-
-		Vector2 EffectPos = Effecttr->GetPos();
-
-		mTime += Time::DeltaTime();
-
-		otherPos.x += 250.0f * Time::DeltaTime();
-
-		tr->SetPos(otherPos);
-	
-		if (EffectPos.x + 20.0f < otherPos.x)
+		if (other->GetOwner() != mTree)
 		{
-			if (BoomBros* mBoomBros = dynamic_cast<BoomBros*>(other->GetOwner()))
+			Transform* tr = other->GetOwner()->GetComponent<Transform>();
+
+			Vector2 otherPos = tr->GetPos();
+
+			Transform* Effecttr = this->GetComponent<Transform>();
+
+			Vector2 EffectPos = Effecttr->GetPos();
+
+			mTime += Time::DeltaTime();
+
+			otherPos.x += 250.0f * Time::DeltaTime();
+
+			tr->SetPos(otherPos);
+
+			if (EffectPos.x + 20.0f < otherPos.x)
 			{
-				mBoomBros->SetDamage(100);
-				object::Destroy(other->GetOwner());
-				object::Destroy(this);
+				if (BoomBros* mBoomBros = dynamic_cast<BoomBros*>(other->GetOwner()))
+				{
+					mBoomBros->SetDamage(100);
+					object::Destroy(other->GetOwner());
+					object::Destroy(this);
+				}
+				else if (Cappy* mCappy = dynamic_cast<Cappy*>(other->GetOwner()))
+				{
+					mCappy->SetDamage(100);
+					object::Destroy(other->GetOwner());
+					object::Destroy(this);
+				}
+				else if (Bros* mBros = dynamic_cast<Bros*>(other->GetOwner()))
+				{
+					mBros->SetDamage(100);
+					object::Destroy(other->GetOwner());
+					object::Destroy(this);
+				}
+				else
+				{
+					object::Destroy(other->GetOwner());
+					object::Destroy(this);
+				}
+
 			}
-			else if (Cappy* mCappy = dynamic_cast<Cappy*>(other->GetOwner()))
-			{
-				mCappy->SetDamage(100);
-				object::Destroy(other->GetOwner());
-				object::Destroy(this);
-			}
-			else if (Bros* mBros = dynamic_cast<Bros*>(other->GetOwner()))
-			{
-				mBros->SetDamage(100);
-				object::Destroy(other->GetOwner());
-				object::Destroy(this);
-			}
-			else
-			{
-				object::Destroy(other->GetOwner());
-				object::Destroy(this);
-			}
-		
 		}
 	}
 	void AbsorbLeftEffect::OnCollisionExit(Collider* other)

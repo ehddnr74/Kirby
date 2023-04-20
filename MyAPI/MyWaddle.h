@@ -23,7 +23,8 @@ namespace My
 			LeftHitKirbyBase,
 			HitSliding,
 			HitSlidingLeft,
-			HitStar
+			HitStar,
+			HitBoom,
 		};
 
 		
@@ -46,6 +47,9 @@ namespace My
 		void SetDamage(int damage) { WaddleHP -= damage; }
 		void SetPlayer(class Kirby* player) { mkirby = player; }
 
+		void SetGround(class R3Ground* gr) { mGround = gr; }
+		class R3Ground* GetGround() { return mGround; }
+
 
 	private:
 			void leftmove();
@@ -62,7 +66,7 @@ namespace My
 			void hitsliding();
 			void hitslidingleft();
 			void hitstar();
-
+			void hitboom();
 	private:
 		WaddleState mState;
 		Animator* mAnimator;
@@ -91,6 +95,9 @@ namespace My
 		class Star* mStar;
 		class Beam* mBeam;
 		class LeftBeam* mLeftBeam;
+		class kirbyRightBoom* mKrb;
+		class kirbyLeftBoom* mKlb;
+		class R3Ground* mGround;
 
 	};
 }

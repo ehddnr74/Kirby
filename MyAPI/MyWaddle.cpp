@@ -17,6 +17,9 @@
 #include "Star.h"
 #include "Beam.h"
 #include "LeftBeam.h"
+#include "KirbyRightBoom.h"
+#include "KirbyLeftBoom.h"
+#include "R3Ground.h"
 
 namespace My
 {
@@ -118,6 +121,9 @@ namespace My
 		case My::Waddle::WaddleState::HitStar:
 			hitstar();
 			break;
+		case My::Waddle::WaddleState::HitBoom:
+			hitboom();
+			break;
 		}
 	}
 
@@ -167,12 +173,12 @@ namespace My
 			}
 			if (mkirby->GetState() == Kirby::eKirbyState::LeftHit)
 			{
-				SetDamage(40);
+				SetDamage(0);
 				mState = WaddleState::LeftHitKirbyBase;
 			}
 			if (mkirby->GetState() == Kirby::eKirbyState::RightHit)
 			{
-				SetDamage(40);
+				SetDamage(0);
 				mState = WaddleState::HitKirbyBase;
 			}
 
@@ -202,6 +208,18 @@ namespace My
 		{
 			SetDamage(100);
 			mState = WaddleState::HitStar;
+		}
+		if (mKrb = dynamic_cast<kirbyRightBoom*>(other->GetOwner()))
+		{
+			GetGround()->SetKirBoomb(nullptr);
+			SetDamage(100);
+			mState = WaddleState::HitBoom;
+		}
+		if (mKlb = dynamic_cast<kirbyLeftBoom*>(other->GetOwner()))
+		{
+			GetGround()->SetKirLeftBoomb(nullptr);
+			SetDamage(100);
+			mState = WaddleState::HitBoom;
 		}
 	}
 
@@ -613,6 +631,10 @@ namespace My
 			object::Destroy(mStar);
 			object::Destroy(this);
 		}
+	}
+	void Waddle::hitboom()
+	{
+		object::Destroy(this);
 	}
 }
 

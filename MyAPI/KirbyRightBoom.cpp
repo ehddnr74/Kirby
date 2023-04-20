@@ -12,6 +12,7 @@
 #include "MyCollider.h"
 #include "MyRigidBody.h"
 #include "Explosion.h"
+#include "R2Ground.h"
 
 namespace My
 {
@@ -58,8 +59,9 @@ namespace My
 	void kirbyRightBoom::OnCollisionEnter(Collider* other)
 	{
 		Transform* tr = GetComponent<Transform>();
-		object::Destroy(this);
 		class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(tr->GetPos().x, tr->GetPos().y + 100), Vector2(1.f, 1.f), eLayerType::Effect);
+		object::Destroy(this);
+		//GetGround()->SetKirBoomb(nullptr);
 	}
 	void kirbyRightBoom::OnCollisionStay(Collider* other)
 	{

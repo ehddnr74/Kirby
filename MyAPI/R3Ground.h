@@ -21,12 +21,15 @@ namespace My
 		void SetPlayer(class Kirby* player) { mKirby = player; }
 		void SetCappy(class Cappy* cappy) { mCappy = cappy; }
 
+		void SetKirBoomb(class kirbyRightBoom* krb) { mkrb = krb; }
+		void SetKirLeftBoomb(class kirbyLeftBoom* klb) { mklb = klb; }
 
 	private:
 		class Collider* mCollider;
 		class Image* mImage;
 		class Kirby* mKirby;
 		class Cappy* mCappy;
-
+		class kirbyRightBoom* mkrb;
+		class kirbyLeftBoom* mklb;
 	};
 }

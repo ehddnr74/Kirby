@@ -134,10 +134,12 @@
     <ClInclude Include="AbsorbLeftEffect.h" />
     <ClInclude Include="Air.h" />
     <ClInclude Include="AirLeft.h" />
+    <ClInclude Include="Apple.h" />
     <ClInclude Include="Beam.h" />
     <ClInclude Include="BoomBros.h" />
     <ClInclude Include="boomrect.h" />
     <ClInclude Include="Box.h" />
+    <ClInclude Include="Breath.h" />
     <ClInclude Include="BrontoBurt.h" />
     <ClInclude Include="Bros.h" />
     <ClInclude Include="Commoninclude.h" />
@@ -190,6 +192,7 @@
     <ClInclude Include="MyMath.h" />
     <ClInclude Include="Room3.h" />
     <ClInclude Include="SaveKirby.h" />
+    <ClInclude Include="SaveUI.h" />
     <ClInclude Include="SecretRoom.h" />
     <ClInclude Include="SecretRoomScene.h" />
     <ClInclude Include="Stage1_1.h" />
@@ -214,7 +217,9 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TreeBK.h" />
     <ClInclude Include="TreeBoss.h" />
+    <ClInclude Include="TreeBranch.h" />
     <ClInclude Include="TreeGround.h" />
+    <ClInclude Include="TreeHP.h" />
     <ClInclude Include="TreeScene.h" />
     <ClInclude Include="TreeStage.h" />
     <ClInclude Include="Ttitle.h" />
@@ -225,10 +230,12 @@
     <ClCompile Include="AbsorbLeftEffect.cpp" />
     <ClCompile Include="Air.cpp" />
     <ClCompile Include="AirLeft.cpp" />
+    <ClCompile Include="Apple.cpp" />
     <ClCompile Include="Beam.cpp" />
     <ClCompile Include="BoomBros.cpp" />
     <ClCompile Include="boomrect.cpp" />
     <ClCompile Include="Box.cpp" />
+    <ClCompile Include="Breath.cpp" />
     <ClCompile Include="BrontoBurt.cpp" />
     <ClCompile Include="Bros.cpp" />
     <ClCompile Include="EnergyBeam.cpp" />
@@ -276,6 +283,7 @@
     <ClCompile Include="MyMath.cpp" />
     <ClCompile Include="Room3.cpp" />
     <ClCompile Include="SaveKirby.cpp" />
+    <ClCompile Include="SaveUI.cpp" />
     <ClCompile Include="SecretRoom.cpp" />
     <ClCompile Include="SecretRoomScene.cpp" />
     <ClCompile Include="Stage1_1.cpp" />
@@ -298,7 +306,9 @@
     <ClCompile Include="StarMap.cpp" />
     <ClCompile Include="TreeBK.cpp" />
     <ClCompile Include="TreeBoss.cpp" />
+    <ClCompile Include="TreeBranch.cpp" />
     <ClCompile Include="TreeGround.cpp" />
+    <ClCompile Include="TreeHP.cpp" />
     <ClCompile Include="TreeScene.cpp" />
     <ClCompile Include="TreeStage.cpp" />
     <ClCompile Include="Ttitle.cpp" />

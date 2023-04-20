@@ -20,7 +20,8 @@ namespace My
 			HitKirbyBase,
 			LeftHitKirbyBase,
 			HitSliding,
-			HitSlidingLeft
+			HitSlidingLeft,
+			HitBoom,
 		};
 
 	Cappy();
@@ -42,6 +43,9 @@ namespace My
 		void SetDie(bool Die) { die = Die; }
 		bool GetDie() { return die; }
 
+		void SetGround3(class R3Ground* gg) { gr3 = gg; }
+		class R3Ground* GetGround3() { return gr3; }
+
 
 	private:
 		void leftmove();
@@ -57,6 +61,7 @@ namespace My
 		void lefthitkirbybase();
 		void hitsliding();
 		void hitslidingleft();
+		void hitboom();
 
 
 
@@ -89,6 +94,9 @@ namespace My
 		class LeftKirbyBeam* mLeftKirbyBeam;
 		class EnergyBeam* mEnergyBeam;
 		class LeftEnergyBeam* mLeftEnergyBeam;
+		class R3Ground* gr3;
+		class kirbyRightBoom* mKrb;
+		class kirbyLeftBoom* mKlb;
 
 		bool die;
 

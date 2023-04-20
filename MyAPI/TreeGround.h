@@ -21,10 +21,25 @@ namespace My
 		void SetPlayer(class Kirby* player) { mKirby = player; }
 
 
+		void SetKirBoomb(class kirbyRightBoom* krb) { mkrb = krb; }
+		void SetKirLeftBoomb(class kirbyLeftBoom* klb) { mklb = klb; }
+
+		
+
+		void SetTree(class TreeBoss* tree) { mTree = tree; }
+		void SetApple(class Apple* apple) { mApple = apple; }
+		void SetApple2(class Apple* apple2) { mApple2 = apple2; }
+
+
 	private:
 		class Collider* mCollider;
 		class Image* mImage;
 		class Kirby* mKirby;
+		class kirbyRightBoom* mkrb;
+		class kirbyLeftBoom* mklb;
+		class TreeBoss* mTree;
+		class Apple* mApple;
+		class Apple* mApple2;
 
 	};
 }

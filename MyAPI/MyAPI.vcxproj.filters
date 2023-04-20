@@ -173,6 +173,9 @@
     <Filter Include="Contents\Skill\BrosBoom">
       <UniqueIdentifier>{c687bf76-ab06-49c7-9f73-d656b186045b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\SaveUI">
+      <UniqueIdentifier>{7a656c6d-cf5b-45b1-8cf3-a16b32b3f515}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -438,6 +441,21 @@
     <ClInclude Include="RightZoom.h">
       <Filter>Contents\Skill\KirbyBoom</Filter>
     </ClInclude>
+    <ClInclude Include="SaveUI.h">
+      <Filter>Contents\SaveUI</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeBranch.h">
+      <Filter>Contents\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeHP.h">
+      <Filter>Contents\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Breath.h">
+      <Filter>Contents\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Apple.h">
+      <Filter>Contents\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc">
@@ -694,6 +712,21 @@
     </ClCompile>
     <ClCompile Include="RightZoom.cpp">
       <Filter>Contents\Skill\KirbyBoom</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveUI.cpp">
+      <Filter>Contents\SaveUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeBranch.cpp">
+      <Filter>Contents\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeHP.cpp">
+      <Filter>Contents\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Breath.cpp">
+      <Filter>Contents\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Apple.cpp">
+      <Filter>Contents\Boss</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

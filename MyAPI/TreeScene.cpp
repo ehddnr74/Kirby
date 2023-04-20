@@ -20,6 +20,11 @@
 #include "MyRigidBody.h"
 #include "TreeGround.h"
 #include "TreeBK.h"
+#include "SaveKirby.h"
+#include "SaveUI.h"
+#include "TreeBoss.h"
+#include "TreeBranch.h"
+#include "TreeHP.h"
 
 namespace My {
 	TreeScene::TreeScene()
@@ -48,17 +53,57 @@ namespace My {
 	}
 	void TreeScene::OnEnter()
 	{
-		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(150.0f, 100.0f), Vector2(2.0f, 2.0f), eLayerType::Player);
+		hp = SaveUI::GetUI();
+		AddGameObject(hp, eLayerType::UI);
+		mKirby = SaveKirby::GetKirby();
+		AddGameObject(mKirby, eLayerType::Player);
+		Transform* kr = mKirby->GetComponent<Transform>();
+		kr->SetPos(Vector2(100.f, 50.0f));
 
 		TreeGround* treegr = object::Instantiate<TreeGround>(eLayerType::Ground);
+		mKirby->SetGround4(treegr);
 		treegr->SetPlayer(mKirby);
 
+
 		TreeBk* treebk = object::Instantiate<TreeBk>(eLayerType::BG);
+
+
 
 		Camera::SetTarget(mKirby);
 		Camera::SetTreeScene(this);
 		object::Instantiate<TreeStage>(eLayerType::Stage);
 		object::Instantiate<HP>(eLayerType::UI);
+
+		mTree = object::Instantiate<TreeBoss>(Vector2(375.f, 1430.f), Vector2(2.0f, 2.0f), (eLayerType::Boss));
+		treegr->SetTree(mTree);
+		mTree->SetGround(treegr);
+		mTree->SetKirby(mKirby);
+
+		TreeBranch* mBranch = object::Instantiate<TreeBranch>(Vector2(410.f, 1320.f), Vector2(6.0f, 6.0f), (eLayerType::Branch));
+		TreeHP* treehp = object::Instantiate<TreeHP>/*(Vector2(315, 865), Vector2(1.f, 1.f), */ (eLayerType::UI);
+		
+		treehp->SetKirby(mKirby);
+		treehp->SetTree(mTree);
+
+		
+
+
+
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterSkill, true);
+		//CollisionManager::SetLayer(eLayerType::Player, eLayerType::Box, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Air, true);
+		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Star, true);
+		CollisionManager::SetLayer(eLayerType::Skill, eLayerType::Monster, true);
+
+
+		CollisionManager::SetLayer(eLayerType::Boss, eLayerType::Star, true);
+		CollisionManager::SetLayer(eLayerType::Skill, eLayerType::Boss, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Boss, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::BossSkill, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Apple, true);
+		CollisionManager::SetLayer(eLayerType::Skill, eLayerType::Apple, true);
 	}
 	void TreeScene::OnExit()
 	{

@@ -18,6 +18,9 @@
 #include "LeftEnergyBeam.h"
 #include "MyRigidBody.h"
 #include "MyObject.h"
+#include "R3Ground.h"
+#include "KirbyRightBoom.h"
+#include "KirbyLeftBoom.h"
 
 
 namespace My
@@ -106,6 +109,9 @@ namespace My
 			break;
 		case Cappy::CappyState::HitSlidingLeft:
 			hitslidingleft();
+			break;
+		case Cappy::CappyState::HitBoom:
+			hitboom();
 			break;
 		}
 	}
@@ -243,6 +249,21 @@ namespace My
 			{
 				SetDamage(100);
 				mState = CappyState::CappyDeath;
+			}
+			if (GetGround3() != nullptr)
+			{
+				if (mKrb = dynamic_cast<kirbyRightBoom*>(other->GetOwner()))
+				{
+					GetGround3()->SetKirBoomb(nullptr);
+					SetDamage(100);
+					mState = CappyState::HitBoom;
+				}
+				if (mKlb = dynamic_cast<kirbyLeftBoom*>(other->GetOwner()))
+				{
+					GetGround3()->SetKirLeftBoomb(nullptr);
+					SetDamage(100);
+					mState = CappyState::HitBoom;
+				}
 			}
 		}
 	
@@ -596,5 +617,9 @@ namespace My
 			hitslidingtime = 0.0f;
 			object::Destroy(this);
 		}
+	}
+	void Cappy::hitboom()
+	{
+		object::Destroy(this);
 	}
 }

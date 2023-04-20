@@ -758,7 +758,7 @@ namespace My
 
 	void BoomBros::hitboom()
 	{
-			object::Destroy(this);
+		object::Destroy(this);
 	}
 	
 }

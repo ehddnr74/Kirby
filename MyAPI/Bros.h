@@ -78,8 +78,8 @@ namespace My
 		class RigidBody* mRigidBody;
 		class Air* mAir;
 		class AirLeft* mAirLeft;
-		class Star* mStar;
 		class Kirby* mkirby;
+		class Star* mStar;
 		class KirbyBeam* mKirbyBeam;
 		class LeftKirbyBeam* mLeftKirbyBeam;
 		class EnergyBeam* mEnergyBeam;

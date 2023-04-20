@@ -32,6 +32,8 @@ namespace My {
 		class Stage3Pt* mStage3Pt;
 		class Cappy* mCappy;
 		class R3Ground* mGround;
+		class HP* hp;
+		class Grizzo* mGrizzo;
 	};
 }
 

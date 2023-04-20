@@ -93,7 +93,7 @@ namespace My
 	}
 	void Star::OnCollisionEnter(Collider* other)
 	{
-
+		object::Destroy(this);
 	}
 	void Star::OnCollisionStay(Collider* other)
 	{
