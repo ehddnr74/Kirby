@@ -39,7 +39,7 @@ namespace My
 		void SetDamage(int damage) { twizzyHP -= damage; }
 		TwizzyState GetState() { return mState; }
 
-
+		int GetHP() { return twizzyHP; }
 		
 
 
@@ -90,5 +90,13 @@ namespace My
 		class LeftKirbyBeam* mLeftKirbyBeam;
 		class EnergyBeam* mEnergyBeam;
 		class LeftEnergyBeam* mLeftEnergyBeam;
+		class AttackEffect* mAttackEffect;
+		class AbsorbEffect* mAbsorbEffect;
+		class AbsorbLeftEffect* mLeftAbsorbEffect;
+
+		int a;
+		int b;
+
+
 	};
 }

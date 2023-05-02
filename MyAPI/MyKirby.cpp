@@ -41,6 +41,10 @@
 #include "TreeGround.h"
 #include "Apple.h"
 #include "Breath.h"
+#include "Grizzo.h"
+#include "AttackEffect.h"
+#include "MySound.h"
+#include "MyResources.h"
 
 
 namespace My
@@ -119,6 +123,13 @@ namespace My
 		, boomend(0.f)
 		, firstpos(0.f)
 		, endpos(0.f)
+		, leftboomhittime(0.f)
+		, rightboomhittime(0.f)
+		, boomjumphitreleasetime(0.f)
+		, boomdoublejumphittime(0.f)
+		, DashCheck(false)
+		, DashReleaseCheck(false)
+		, beamchar(true)
 	{
 	}
 	Kirby::~Kirby()
@@ -289,6 +300,20 @@ namespace My
 		mAnimator->CreateAnimation(L"RightBoomRelease", mKirby, Vector2(0.0f, 2440.0f), 16, 100, 1, Vector2::Zero, 0.1);
 		mAnimator->CreateAnimation(L"RightBoomShot", mKirby, Vector2(0.0f, 2480.0f), 16, 100, 1, Vector2::Zero, 0.1);
 
+
+		// BoomKirby HitAnimation
+		mAnimator->CreateAnimation(L"LeftBoomKirbyHit", mKirby, Vector2(0.0f, 2560.0f), 16, 100, 7, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"LeftBoomJumpHitRelease", mKirby, Vector2(0.0f, 2560.0f), 16, 100, 1, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"LeftBoomJumpHit", mKirby, Vector2(0.0f, 2560.0f), 16, 100, 7, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"LeftBoomDoubleJumpHit", mKirby, Vector2(0.0f, 2640.0f), 16, 100, 3, Vector2::Zero, 0.05);
+
+
+		mAnimator->CreateAnimation(L"RightBoomKirbyHit", mKirby, Vector2(0.0f, 2520.0f), 16, 100, 7, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"RightBoomJumpHitRelease", mKirby, Vector2(0.0f, 2520.0f), 16, 100, 1, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"RightBoomJumpHit", mKirby, Vector2(0.0f, 2520.0f), 16, 100, 7, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"RightBoomDoubleJumpHit", mKirby, Vector2(0.0f, 2600.0f), 16, 100, 3, Vector2::Zero, 0.05);
+
+
 		
 
 
@@ -318,6 +343,66 @@ namespace My
 	void Kirby::Update()
 	{
 		GameObject::Update();
+
+		if (DashCheck == false && mState == eKirbyState::RightDash
+			|| DashCheck == false && mState == eKirbyState::RightBeamDash
+			|| DashCheck == false && mState == eKirbyState::RightBoombDash)
+		{
+			DashCheck = true;
+			Transform* tr = GetComponent<Transform>();
+			Vector2 thispos = tr->GetPos();
+			AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 40, thispos.y + 100), Vector2(2.5f, 2.5f), eLayerType(eLayerType::Effect));
+			mAttackEffect->SetKirby(this);
+			mAttackEffect->SetEffectState(AttackEffect::AttackState::Dash);
+		}
+		if (DashCheck == false && mState == eKirbyState::LeftDash
+			|| DashCheck == false && mState == eKirbyState::LeftBeamDash
+			|| DashCheck == false && mState == eKirbyState::LeftBoombDash)
+		{
+			DashCheck = true;
+			Transform* tr = GetComponent<Transform>();
+			Vector2 thispos = tr->GetPos();
+			AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x + 40, thispos.y + 100), Vector2(2.5f, 2.5f), eLayerType(eLayerType::Effect));
+			mAttackEffect->SetKirby(this);
+			mAttackEffect->SetEffectState(AttackEffect::AttackState::Dash);
+		}
+		if (mState != eKirbyState::LeftDash && mState != eKirbyState::RightDash
+			&& mState != eKirbyState::LeftBeamDash && mState != eKirbyState::RightBeamDash
+			&& mState != eKirbyState::LeftBoombDash && mState != eKirbyState::RightBoombDash)
+		{
+			DashCheck = false;
+		}
+
+		if (DashReleaseCheck == false && mState == eKirbyState::RightDashRelease 
+			|| DashReleaseCheck == false && mState == eKirbyState::RightBeamDashRelease
+			|| DashReleaseCheck == false && mState == eKirbyState::RightBoombDashRelease)
+		{
+			DashReleaseCheck = true;
+			Transform* tr = GetComponent<Transform>();
+			Vector2 thispos = tr->GetPos();
+			AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x + 40, thispos.y + 100), Vector2(2.5f, 2.5f), eLayerType(eLayerType::Effect));
+			mAttackEffect->SetKirby(this);
+			mAttackEffect->SetEffectState(AttackEffect::AttackState::DashRelease);
+		}
+		if (DashReleaseCheck == false && mState == eKirbyState::LeftDashRelease
+			|| DashReleaseCheck == false && mState == eKirbyState::LeftBeamDashRelease
+			|| DashReleaseCheck == false && mState == eKirbyState::LeftBoombDashRelease)
+		{
+			DashReleaseCheck = true;
+			Transform* tr = GetComponent<Transform>();
+			Vector2 thispos = tr->GetPos();
+			AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 40, thispos.y + 100), Vector2(2.5f, 2.5f), eLayerType(eLayerType::Effect));
+			mAttackEffect->SetKirby(this);
+			mAttackEffect->SetEffectState(AttackEffect::AttackState::DashRelease);
+		}
+		if (mState != eKirbyState::LeftDashRelease && mState != eKirbyState::RightDashRelease
+			&& mState != eKirbyState::LeftBeamDashRelease && mState != eKirbyState::RightBeamDashRelease
+			&& mState != eKirbyState::LeftBoombDashRelease && mState != eKirbyState::RightBoombDashRelease)
+		{
+			DashReleaseCheck = false;
+		}
+
+
 
 		switch (mState)
 		{
@@ -656,6 +741,30 @@ namespace My
 		case My::Kirby::eKirbyState::RightBoomShot:
 			rightboomshot();
 			break;
+		case My::Kirby::eKirbyState::LeftBoomBaseHit:
+			leftboombasehit();
+			break;
+		case My::Kirby::eKirbyState::RightBoomBaseHit:
+			rightboombasehit();
+			break;
+		case My::Kirby::eKirbyState::LeftBoomJumpHitRelease:
+			leftboomjumphitrelease();
+			break;
+		case My::Kirby::eKirbyState::RightBoomJumpHitRelease:
+			rightboomjumphitrelease();
+			break;
+		case My::Kirby::eKirbyState::LeftBoomJumpHit:
+			leftboomjumphit();
+			break;
+		case My::Kirby::eKirbyState::RightBoomJumpHit:
+			rightboomjumphit();
+			break;
+		case My::Kirby::eKirbyState::LeftBoomPigHit:
+			leftboompighit();
+			break;
+		case My::Kirby::eKirbyState::RightBoomPigHit:
+			rightboompighit();
+			break;
 		default:
 			break;
 		}
@@ -707,9 +816,158 @@ namespace My
 		//		kirbytr->SetPos(kirpos);
 		//	}
 		//}
+		if (mGrizzo = dynamic_cast<Grizzo*>(other->GetOwner()))
+		{
+			Sound* mSound = Resources::Load<Sound>(L"00ae - SE_MYDAMAGE", L"..\\Resources\\Sound\\00ae - SE_MYDAMAGE.wav");
+			mSound->Play(false);
+			if (GetState() == eKirbyState::LeftBoombIdle || GetState() == eKirbyState::LeftBoombWalk || GetState() == eKirbyState::LeftBoombDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBoomBaseHit;
+				mAnimator->Play(L"LeftBoomKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::RightBoombIdle || GetState() == eKirbyState::RightBoombWalk || GetState() == eKirbyState::RightBoombDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomBaseHit;
+				mAnimator->Play(L"RightBoomKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::RightBoombJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomJumpHitRelease;
+				mAnimator->Play(L"RightBoomJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftBoombJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBoomJumpHitRelease;
+				mAnimator->Play(L"LeftBoomJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::RightBoombDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomPigHit;
+				mAnimator->Play(L"RightBoomDoubleJumpHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBoombDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBoomPigHit;
+				mAnimator->Play(L"LeftBoomDoubleJumpHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBeamIdle || GetState() == eKirbyState::LeftBeamWalk || GetState() == eKirbyState::LeftBeamDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBeamBaseHit;
+				mAnimator->Play(L"LeftBeamKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::RightBeamIdle || GetState() == eKirbyState::RightBeamWalk || GetState() == eKirbyState::RightBeamDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBeamBaseHit;
+				mAnimator->Play(L"RightBeamKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::RightBeamJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBeamJumpHitRelease;
+				mAnimator->Play(L"RightBeamJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftBeamJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBeamJumpHitRelease;
+				mAnimator->Play(L"LeftBeamJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::RightBeamDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBeamPigHit;
+				mAnimator->Play(L"RightBeamDoubleJumpHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBeamDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBeamPigHit;
+				mAnimator->Play(L"LeftBeamDoubleJumpHit", false);
+			}
+			if (GetState() == eKirbyState::RightPigJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightPigJumpHitRelease;
+				mAnimator->Play(L"RightAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::LeftPigJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftPigJumpHitRelease;
+				mAnimator->Play(L"LeftAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::RightPigIdle || GetState() == eKirbyState::RightPigWalk || GetState() == eKirbyState::RightPigDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightPigBaseHit;
+				mAnimator->Play(L"RightAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::LeftPigIdle || GetState() == eKirbyState::LeftPigWalk || GetState() == eKirbyState::LeftPigDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftPigBaseHit;
+				mAnimator->Play(L"LeftAbsorbPigHit", false);
+			}
 
+			if (GetState() == eKirbyState::RightDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightAbsorbPigHit;
+				mAnimator->Play(L"RightAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::LeftDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftAbsorbPigHit;
+				mAnimator->Play(L"LeftAbsorbPigHit", false);
+			}
+			if (GetState() == eKirbyState::RightMove || GetState() == eKirbyState::RightIdle || GetState() == eKirbyState::RightDash)
+			{
+				SetDamage(10);;
+				mState = eKirbyState::RightHit;
+				mAnimator->Play(L"RightHit", false);
+			}
+			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::LeftDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftHit;
+				mAnimator->Play(L"LeftHit", false);
+			}
+			if (GetState() == eKirbyState::RightJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightJumpHitRelease;
+				mAnimator->Play(L"RightJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftJumpHitRelease;
+				mAnimator->Play(L"LeftJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftSliding)
+			{
+				mState = eKirbyState::LeftSlidingHit;
+				mAnimator->Play(L"LeftHit", false);
+			}
+			if (GetState() == eKirbyState::RightSliding)
+			{
+				mState = eKirbyState::RightSlidingHit;
+				mAnimator->Play(L"RightHit", false);
+			}
+		}
 		if (mBrontoBurt = dynamic_cast<BrontoBurt*>(other->GetOwner()))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00ae - SE_MYDAMAGE", L"..\\Resources\\Sound\\00ae - SE_MYDAMAGE.wav");
+			mSound->Play(false);
 			if (GetState() == eKirbyState::LeftBeamIdle || GetState() == eKirbyState::LeftBeamWalk || GetState() == eKirbyState::LeftBeamDash)
 			{
 				SetDamage(10);
@@ -821,6 +1079,8 @@ namespace My
 
 		if (mTwizzy = dynamic_cast<Twizzy*>(other->GetOwner()))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00ae - SE_MYDAMAGE", L"..\\Resources\\Sound\\00ae - SE_MYDAMAGE.wav");
+			mSound->Play(false);
 			if (GetState() == eKirbyState::LeftBeamIdle || GetState() == eKirbyState::LeftBeamWalk || GetState() == eKirbyState::LeftBeamDash)
 			{
 				SetDamage(10);
@@ -931,6 +1191,8 @@ namespace My
 		}
 		if (mBros = dynamic_cast<Bros*>(other->GetOwner()))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00ae - SE_MYDAMAGE", L"..\\Resources\\Sound\\00ae - SE_MYDAMAGE.wav");
+			mSound->Play(false);
 			if (GetState() == eKirbyState::LeftBeamIdle || GetState() == eKirbyState::LeftBeamWalk || GetState() == eKirbyState::LeftBeamDash)
 			{
 				SetDamage(10);
@@ -1042,6 +1304,44 @@ namespace My
 		}
 		if (mBoomBros = dynamic_cast<BoomBros*>(other->GetOwner()))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00ae - SE_MYDAMAGE", L"..\\Resources\\Sound\\00ae - SE_MYDAMAGE.wav");
+			mSound->Play(false);
+			if (GetState() == eKirbyState::LeftBoombIdle || GetState() == eKirbyState::LeftBoombWalk || GetState() == eKirbyState::LeftBoombDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBoomBaseHit;
+				mAnimator->Play(L"LeftBoomKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::RightBoombIdle || GetState() == eKirbyState::RightBoombWalk || GetState() == eKirbyState::RightBoombDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomBaseHit;
+				mAnimator->Play(L"RightBoomKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::RightBoombJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomJumpHitRelease;
+				mAnimator->Play(L"RightBoomJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftBoombJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBoomJumpHitRelease;
+				mAnimator->Play(L"LeftBoomJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::RightBoombDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomPigHit;
+				mAnimator->Play(L"RightBoomDoubleJumpHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBoombDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBoomPigHit;
+				mAnimator->Play(L"LeftBoomDoubleJumpHit", false);
+			}
 			if (GetState() == eKirbyState::LeftBeamIdle || GetState() == eKirbyState::LeftBeamWalk || GetState() == eKirbyState::LeftBeamDash)
 			{
 				SetDamage(10);
@@ -1153,6 +1453,44 @@ namespace My
 		}
 		if (mCappy = dynamic_cast<Cappy*>(other->GetOwner()))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00ae - SE_MYDAMAGE", L"..\\Resources\\Sound\\00ae - SE_MYDAMAGE.wav");
+			mSound->Play(false);
+			if (GetState() == eKirbyState::LeftBoombIdle || GetState() == eKirbyState::LeftBoombWalk || GetState() == eKirbyState::LeftBoombDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBoomBaseHit;
+				mAnimator->Play(L"LeftBoomKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::RightBoombIdle || GetState() == eKirbyState::RightBoombWalk || GetState() == eKirbyState::RightBoombDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomBaseHit;
+				mAnimator->Play(L"RightBoomKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::RightBoombJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomJumpHitRelease;
+				mAnimator->Play(L"RightBoomJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftBoombJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBoomJumpHitRelease;
+				mAnimator->Play(L"LeftBoomJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::RightBoombDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomPigHit;
+				mAnimator->Play(L"RightBoomDoubleJumpHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBoombDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBoomPigHit;
+				mAnimator->Play(L"LeftBoomDoubleJumpHit", false);
+			}
 			if (GetState() == eKirbyState::LeftBeamIdle || GetState() == eKirbyState::LeftBeamWalk || GetState() == eKirbyState::LeftBeamDash)
 			{
 				SetDamage(10);
@@ -1265,7 +1603,44 @@ namespace My
 
 		if (mWaddle = dynamic_cast<Waddle*>(other->GetOwner()))
 		{
-
+			Sound* mSound = Resources::Load<Sound>(L"00ae - SE_MYDAMAGE", L"..\\Resources\\Sound\\00ae - SE_MYDAMAGE.wav");
+			mSound->Play(false);
+			if (GetState() == eKirbyState::LeftBoombIdle || GetState() == eKirbyState::LeftBoombWalk || GetState() == eKirbyState::LeftBoombDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBoomBaseHit;
+				mAnimator->Play(L"LeftBoomKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::RightBoombIdle || GetState() == eKirbyState::RightBoombWalk || GetState() == eKirbyState::RightBoombDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomBaseHit;
+				mAnimator->Play(L"RightBoomKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::RightBoombJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomJumpHitRelease;
+				mAnimator->Play(L"RightBoomJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftBoombJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBoomJumpHitRelease;
+				mAnimator->Play(L"LeftBoomJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::RightBoombDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomPigHit;
+				mAnimator->Play(L"RightBoomDoubleJumpHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBoombDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBoomPigHit;
+				mAnimator->Play(L"LeftBoomDoubleJumpHit", false);
+			}
 			if (GetState() == eKirbyState::RightPigJump)
 			{
 				SetDamage(10);
@@ -1394,6 +1769,46 @@ namespace My
 		}
 		if (RightBoomb* mrb = dynamic_cast<RightBoomb*>(other->GetOwner()))
 		{
+			if (GetState() == eKirbyState::LeftBeamIdle || GetState() == eKirbyState::RightBeamIdle
+				|| GetState() == eKirbyState::LeftBeamWalk || GetState() == eKirbyState::RightBeamWalk
+				|| GetState() == eKirbyState::LeftBeamDash || GetState() == eKirbyState::RightBeamDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBeamBaseHit;
+				mAnimator->Play(L"LeftBeamKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBeamJump || GetState() == eKirbyState::RightBeamJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBeamJumpHitRelease;
+				mAnimator->Play(L"LeftBeamJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftBeamDoubleJump || GetState() == eKirbyState::RightBeamDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBeamPigHit;
+				mAnimator->Play(L"LeftBeamDoubleJumpHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBoombIdle || GetState() == eKirbyState::RightBoombIdle
+				|| GetState() == eKirbyState::LeftBoombWalk || GetState() == eKirbyState::RightBoombWalk
+				|| GetState() == eKirbyState::LeftBoombDash || GetState() == eKirbyState::RightBoombDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBoomBaseHit;
+				mAnimator->Play(L"LeftBoomKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBoombJump || GetState() == eKirbyState::RightBoombJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBoomJumpHitRelease;
+				mAnimator->Play(L"LeftBoomJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftBoombDoubleJump || GetState() == eKirbyState::RightBoombDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::LeftBoomPigHit;
+				mAnimator->Play(L"LeftBoomDoubleJumpHit", false);
+			}
 			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::RightMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::RightIdle
 				|| GetState() == eKirbyState::LeftDash || GetState() == eKirbyState::RightDash)
 			{
@@ -1418,6 +1833,46 @@ namespace My
 
 		if (LeftBoomb* mlb = dynamic_cast<LeftBoomb*>(other->GetOwner()))
 		{
+			if (GetState() == eKirbyState::LeftBeamIdle || GetState() == eKirbyState::RightBeamIdle
+				|| GetState() == eKirbyState::LeftBeamWalk || GetState() == eKirbyState::RightBeamWalk
+				|| GetState() == eKirbyState::LeftBeamDash || GetState() == eKirbyState::RightBeamDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBeamBaseHit;
+				mAnimator->Play(L"RightBeamKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBeamJump || GetState() == eKirbyState::RightBeamJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBeamJumpHitRelease;
+				mAnimator->Play(L"RightBeamJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftBeamDoubleJump || GetState() == eKirbyState::RightBeamDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBeamPigHit;
+				mAnimator->Play(L"RightBeamDoubleJumpHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBoombIdle || GetState() == eKirbyState::RightBoombIdle
+				|| GetState() == eKirbyState::LeftBoombWalk || GetState() == eKirbyState::RightBoombWalk
+				|| GetState() == eKirbyState::LeftBoombDash || GetState() == eKirbyState::RightBoombDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomBaseHit;
+				mAnimator->Play(L"RightBoomKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBoombJump || GetState() == eKirbyState::RightBoombJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomJumpHitRelease;
+				mAnimator->Play(L"RightBoomJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftBoombDoubleJump || GetState() == eKirbyState::RightBoombDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomPigHit;
+				mAnimator->Play(L"RightBoomDoubleJumpHit", false);
+			}
 			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::RightMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::RightIdle
 				|| GetState() == eKirbyState::LeftDash || GetState() == eKirbyState::RightDash)
 			{
@@ -1441,6 +1896,49 @@ namespace My
 		}
 		if (Breath* mBreath = dynamic_cast<Breath*>(other->GetOwner()))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00ae - SE_MYDAMAGE", L"..\\Resources\\Sound\\00ae - SE_MYDAMAGE.wav");
+			mSound->Play(false);
+
+			if (GetState() == eKirbyState::LeftBeamIdle || GetState() == eKirbyState::RightBeamIdle
+				|| GetState() == eKirbyState::LeftBeamWalk || GetState() == eKirbyState::RightBeamWalk
+				|| GetState() == eKirbyState::LeftBeamDash || GetState() == eKirbyState::RightBeamDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBeamBaseHit;
+				mAnimator->Play(L"RightBeamKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBeamJump || GetState() == eKirbyState::RightBeamJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBeamJumpHitRelease;
+				mAnimator->Play(L"RightBeamJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftBeamDoubleJump || GetState() == eKirbyState::RightBeamDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBeamPigHit;
+				mAnimator->Play(L"RightBeamDoubleJumpHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBoombIdle || GetState() == eKirbyState::RightBoombIdle
+				|| GetState() == eKirbyState::LeftBoombWalk || GetState() == eKirbyState::RightBoombWalk
+				|| GetState() == eKirbyState::LeftBoombDash || GetState() == eKirbyState::RightBoombDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomBaseHit;
+				mAnimator->Play(L"RightBoomKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBoombJump || GetState() == eKirbyState::RightBoombJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomJumpHitRelease;
+				mAnimator->Play(L"RightBoomJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftBoombDoubleJump || GetState() == eKirbyState::RightBoombDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomPigHit;
+				mAnimator->Play(L"RightBoomDoubleJumpHit", false);
+			}
 			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::RightMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::RightIdle
 				|| GetState() == eKirbyState::LeftDash || GetState() == eKirbyState::RightDash)
 			{
@@ -1464,6 +1962,48 @@ namespace My
 		}
 		if (Apple* mApple = dynamic_cast<Apple*>(other->GetOwner()))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00ae - SE_MYDAMAGE", L"..\\Resources\\Sound\\00ae - SE_MYDAMAGE.wav");
+			mSound->Play(false);
+			if (GetState() == eKirbyState::LeftBeamIdle || GetState() == eKirbyState::RightBeamIdle
+				|| GetState() == eKirbyState::LeftBeamWalk || GetState() == eKirbyState::RightBeamWalk
+				|| GetState() == eKirbyState::LeftBeamDash || GetState() == eKirbyState::RightBeamDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBeamBaseHit;
+				mAnimator->Play(L"RightBeamKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBeamJump || GetState() == eKirbyState::RightBeamJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBeamJumpHitRelease;
+				mAnimator->Play(L"RightBeamJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftBeamDoubleJump || GetState() == eKirbyState::RightBeamDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBeamPigHit;
+				mAnimator->Play(L"RightBeamDoubleJumpHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBoombIdle || GetState() == eKirbyState::RightBoombIdle
+				|| GetState() == eKirbyState::LeftBoombWalk || GetState() == eKirbyState::RightBoombWalk
+				|| GetState() == eKirbyState::LeftBoombDash || GetState() == eKirbyState::RightBoombDash)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomBaseHit;
+				mAnimator->Play(L"RightBoomKirbyHit", false);
+			}
+			if (GetState() == eKirbyState::LeftBoombJump || GetState() == eKirbyState::RightBoombJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomJumpHitRelease;
+				mAnimator->Play(L"RightBoomJumpHitRelease", false);
+			}
+			if (GetState() == eKirbyState::LeftBoombDoubleJump || GetState() == eKirbyState::RightBoombDoubleJump)
+			{
+				SetDamage(10);
+				mState = eKirbyState::RightBoomPigHit;
+				mAnimator->Play(L"RightBoomDoubleJumpHit", false);
+			}
 			if (GetState() == eKirbyState::LeftMove || GetState() == eKirbyState::RightMove || GetState() == eKirbyState::LeftIdle || GetState() == eKirbyState::RightIdle
 				|| GetState() == eKirbyState::LeftDash || GetState() == eKirbyState::RightDash)
 			{
@@ -1508,6 +2048,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+			mSound->Play(false);
 			KeyCheck = false;
 			JumpCheck = true;
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
@@ -1575,6 +2117,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+			mSound->Play(false);
 			KeyCheck = false;
 			JumpCheck = true;
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
@@ -1639,6 +2183,8 @@ namespace My
 		
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+			mSound->Play(false);
 			JumpCheck = true;
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
 			mState = eKirbyState::LeftJump;
@@ -1681,6 +2227,8 @@ namespace My
 
 		if (kirbytime <= 0.15f && KeyCheck && GetAsyncKeyState(VK_LEFT) & 0x8000)
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00fe - SE_DASHSTART", L"..\\Resources\\Sound\\00fe - SE_DASHSTART.wav");
+			mSound->Play(false);
 			mState = eKirbyState::LeftDash;
 			mAnimator->Play(L"LeftDash", true);
 		}
@@ -1698,6 +2246,9 @@ namespace My
 
 		if (/*mRigidBody->GetGround() &&*/Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+			mSound->Play(false);
+
 			KeyCheck = false;
 			JumpCheck = true;
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
@@ -1738,6 +2289,8 @@ namespace My
 
 		if (kirbytime <= 0.15f && KeyCheck && GetAsyncKeyState(VK_RIGHT) & 0x8000)
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00fe - SE_DASHSTART", L"..\\Resources\\Sound\\00fe - SE_DASHSTART.wav");
+			mSound->Play(false);
 			mState = eKirbyState::RightDash;
 			mAnimator->Play(L"RightDash", true);
 		}
@@ -1975,12 +2528,16 @@ namespace My
 
 		if (yamyam == true && Input::GetKeyDown(eKeyCode::Down))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"gain", L"..\\Resources\\Sound\\ability-gain.wav");
+			mSound->Play(false);
 			kirbytime = 0.0f;
 			mState = eKirbyState::LeftBeamTransform;
 			mAnimator->Play(L"LeftBeamTransform", false);
 		}
 		if (yamyam == false && boomyamyam == true && Input::GetKeyDown(eKeyCode::Down))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"gain", L"..\\Resources\\Sound\\ability-gain.wav");
+			mSound->Play(false);
 			kirbytime = 0.0f;
 			mState = eKirbyState::LeftBoombTransform;
 			mAnimator->Play(L"LeftBoombTransform", false);
@@ -2011,6 +2568,8 @@ namespace My
 
 		if (yamyam == true && Input::GetKeyDown(eKeyCode::Down))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"gain", L"..\\Resources\\Sound\\ability-gain.wav");
+			mSound->Play(false);
 			kirbytime = 0.0f;
 			mState = eKirbyState::BeamTransform;
 			mAnimator->Play(L"RightBeamTransform", false);
@@ -2018,6 +2577,8 @@ namespace My
 
 		if (yamyam == false && boomyamyam == true && Input::GetKeyDown(eKeyCode::Down))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"gain", L"..\\Resources\\Sound\\ability-gain.wav");
+			mSound->Play(false);
 			kirbytime = 0.0f;
 			mState = eKirbyState::BoombTransform;
 			mAnimator->Play(L"BoombTransform", false);
@@ -2041,12 +2602,16 @@ namespace My
 		}
 		if (yamyam == true && Input::GetKeyDown(eKeyCode::Down))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"gain", L"..\\Resources\\Sound\\ability-gain.wav");
+			mSound->Play(false);
 			kirbytime = 0.0f;
 			mState = eKirbyState::LeftBeamTransform;
 			mAnimator->Play(L"LeftBeamTransform", false);
 		}
 		if (boomyamyam == true && Input::GetKeyDown(eKeyCode::Down))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"gain", L"..\\Resources\\Sound\\ability-gain.wav");
+			mSound->Play(false);
 			kirbytime = 0.0f;
 			mState = eKirbyState::LeftBoombTransform;
 			mAnimator->Play(L"LeftBoombTransform", false);
@@ -2069,12 +2634,16 @@ namespace My
 
 		if (yamyam == true && Input::GetKeyDown(eKeyCode::Down))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"gain", L"..\\Resources\\Sound\\ability-gain.wav");
+			mSound->Play(false);
 			kirbytime = 0.0f;
 			mState = eKirbyState::BeamTransform;
 			mAnimator->Play(L"RightBeamTransform", false);
 		}
 		if (boomyamyam == true && Input::GetKeyDown(eKeyCode::Down))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"gain", L"..\\Resources\\Sound\\ability-gain.wav");
+			mSound->Play(false);
 			kirbytime = 0.0f;
 			mState = eKirbyState::BoombTransform;
 			mAnimator->Play(L"BoombTransform", false);
@@ -2098,12 +2667,16 @@ namespace My
 
 		if (yamyam == true && Input::GetKeyDown(eKeyCode::Down))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"gain", L"..\\Resources\\Sound\\ability-gain.wav");
+			mSound->Play(false);
 			kirbytime = 0.0f;
 			mState = eKirbyState::LeftBeamTransform;
 			mAnimator->Play(L"LeftBeamTransform", false);
 		}
 		if (boomyamyam == true && Input::GetKeyDown(eKeyCode::Down))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"gain", L"..\\Resources\\Sound\\ability-gain.wav");
+			mSound->Play(false);
 			kirbytime = 0.0f;
 			mState = eKirbyState::LeftBoombTransform;
 			mAnimator->Play(L"LeftBoombTransform", false);
@@ -2111,6 +2684,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+			mSound->Play(false);
 			JumpCheck = true;
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
 			mState = eKirbyState::LeftPigJump;
@@ -2144,12 +2719,16 @@ namespace My
 		//}
 		if (yamyam == false && boomyamyam == false && Input::GetKeyDown(eKeyCode::Down))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00f4 - SE_RAKKA", L"..\\Resources\\Sound\\00f4 - SE_RAKKA.wav");
+			mSound->Play(false);
 			kirbytime = 0.0f;
 			mState = eKirbyState::RightPigClear;
 			mAnimator->Play(L"RightPigClear", false);
 		}
 		if (kirbytime <= 0.15f && PigKeyCheck && GetAsyncKeyState(VK_LEFT) & 0x8000)
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00fe - SE_DASHSTART", L"..\\Resources\\Sound\\00fe - SE_DASHSTART.wav");
+			mSound->Play(false);
 			kirbytime = 0.0f;
 			mState = eKirbyState::LeftPigDash;
 			mAnimator->Play(L"LeftPigWalk", true);
@@ -2176,6 +2755,8 @@ namespace My
 
 		if (yamyam == true && Input::GetKeyDown(eKeyCode::Down))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"gain", L"..\\Resources\\Sound\\ability-gain.wav");
+			mSound->Play(false);
 			kirbytime = 0.0f;
 			mState = eKirbyState::BeamTransform;
 			mAnimator->Play(L"RightBeamTransform", false);
@@ -2183,6 +2764,8 @@ namespace My
 
 		if (boomyamyam == true && Input::GetKeyDown(eKeyCode::Down))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"gain", L"..\\Resources\\Sound\\ability-gain.wav");
+			mSound->Play(false);
 			kirbytime = 0.0f;
 			mState = eKirbyState::BoombTransform;
 			mAnimator->Play(L"BoombTransform", false);
@@ -2190,6 +2773,8 @@ namespace My
 	
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+			mSound->Play(false);
 			JumpCheck = true;
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
 			mState = eKirbyState::RightPigJump;
@@ -2212,12 +2797,16 @@ namespace My
 		//}
 		if (yamyam == false && boomyamyam == false && Input::GetKeyDown(eKeyCode::Down))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00f4 - SE_RAKKA", L"..\\Resources\\Sound\\00f4 - SE_RAKKA.wav");
+			mSound->Play(false);
 			kirbytime = 0.0f;
 			mState = eKirbyState::RightPigClear;
 			mAnimator->Play(L"RightPigClear", false);
 		}
 		if (kirbytime <= 0.15f && PigKeyCheck && GetAsyncKeyState(VK_RIGHT) & 0x8000)
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00fe - SE_DASHSTART", L"..\\Resources\\Sound\\00fe - SE_DASHSTART.wav");
+			mSound->Play(false);
 			kirbytime = 0.0f;
 			mState = eKirbyState::RightPigDash;
 			mAnimator->Play(L"RightPigWalk", true);
@@ -2283,6 +2872,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::Z))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00f4 - SE_RAKKA", L"..\\Resources\\Sound\\00f4 - SE_RAKKA.wav");
+			mSound->Play(false);
 			yamyam = false;
 			boomyamyam = false;
 			Leftstar = true;
@@ -2305,6 +2896,8 @@ namespace My
 
 			if (yamyam == true && Input::GetKeyDown(eKeyCode::Down))
 			{
+				Sound* mSound = Resources::Load<Sound>(L"gain", L"..\\Resources\\Sound\\ability-gain.wav");
+				mSound->Play(false);
 				kirbytime = 0.0f;
 				mState = eKirbyState::LeftBeamTransform;
 				mAnimator->Play(L"LeftBeamTransform", false);
@@ -2312,6 +2905,8 @@ namespace My
 
 			if (boomyamyam == true && Input::GetKeyDown(eKeyCode::Down))
 			{
+				Sound* mSound = Resources::Load<Sound>(L"gain", L"..\\Resources\\Sound\\ability-gain.wav");
+				mSound->Play(false);
 				kirbytime = 0.0f;
 				mState = eKirbyState::LeftBoombTransform;
 				mAnimator->Play(L"LeftBoombTransform", false);
@@ -2321,6 +2916,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+			mSound->Play(false);
 			JumpCheck = true;
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
 			mState = eKirbyState::LeftPigJump;
@@ -2354,6 +2951,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::Z))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00f4 - SE_RAKKA", L"..\\Resources\\Sound\\00f4 - SE_RAKKA.wav");
+			mSound->Play(false);
 			yamyam = false;
 			boomyamyam = false;
 			star = true;
@@ -2376,12 +2975,16 @@ namespace My
 
 		if (yamyam == true && Input::GetKeyDown(eKeyCode::Down))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"gain", L"..\\Resources\\Sound\\ability-gain.wav");
+			mSound->Play(false);
 			kirbytime = 0.0f;
 			mState = eKirbyState::BeamTransform;
 			mAnimator->Play(L"RightBeamTransform", false);
 		}
 		if (boomyamyam == true && Input::GetKeyDown(eKeyCode::Down))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"gain", L"..\\Resources\\Sound\\ability-gain.wav");
+			mSound->Play(false);
 			kirbytime = 0.0f;
 			mState = eKirbyState::BoombTransform;
 			mAnimator->Play(L"BoombTransform", false);
@@ -2389,6 +2992,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+			mSound->Play(false);
 			JumpCheck = true;
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
 			mState = eKirbyState::RightPigJump;
@@ -2507,6 +3112,8 @@ namespace My
 
 		if (yamyam == true && Input::GetKeyDown(eKeyCode::Z))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"gain", L"..\\Resources\\Sound\\ability-gain.wav");
+			mSound->Play(false);
 			yamyam = false;
 			Leftstar = true;
 			Star* mLeftstar = object::Instantiate<Star>(Vector2(pos.x - 50, pos.y - 20), Vector2(0.3f, 0.3f), (eLayerType::Star));
@@ -2516,6 +3123,8 @@ namespace My
 		}
 		if (boomyamyam == true && Input::GetKeyDown(eKeyCode::Z))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"gain", L"..\\Resources\\Sound\\ability-gain.wav");
+			mSound->Play(false);
 			boomyamyam = false;
 			Leftstar = true;
 			Star* mLeftstar = object::Instantiate<Star>(Vector2(pos.x - 50, pos.y - 20), Vector2(0.3f, 0.3f), (eLayerType::Star));
@@ -2537,6 +3146,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+			mSound->Play(false);
 			JumpCheck = true;
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
 			mState = eKirbyState::LeftPigJump;
@@ -2561,6 +3172,8 @@ namespace My
 
 		if (yamyam == true && Input::GetKeyDown(eKeyCode::Z))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"gain", L"..\\Resources\\Sound\\ability-gain.wav");
+			mSound->Play(false);
 			yamyam = false;
 			star = true;
 			Star* mstar = object::Instantiate<Star>(Vector2(pos.x + 50, pos.y - 20), Vector2(0.3f, 0.3f), (eLayerType::Star));
@@ -2570,6 +3183,8 @@ namespace My
 		}
 		if (boomyamyam == true && Input::GetKeyDown(eKeyCode::Z))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"gain", L"..\\Resources\\Sound\\ability-gain.wav");
+			mSound->Play(false);
 			boomyamyam = false;
 			star = true;
 			Star* mstar = object::Instantiate<Star>(Vector2(pos.x + 50, pos.y - 20), Vector2(0.3f, 0.3f), (eLayerType::Star));
@@ -2590,6 +3205,8 @@ namespace My
 		}
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+			mSound->Play(false);
 			JumpCheck = true;
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
 			mState = eKirbyState::RightPigJump;
@@ -2668,6 +3285,8 @@ namespace My
 
 			if (Input::GetKeyDown(eKeyCode::A))
 			{
+				Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+				mSound->Play(false);
 				JumpCheck = true;
 				mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
 				mState = eKirbyState::LeftJump;
@@ -2703,6 +3322,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+			mSound->Play(false);
 			JumpCheck = true;
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
 			mState = eKirbyState::RightJump;
@@ -2813,6 +3434,8 @@ namespace My
 		
 			if (Input::GetKeyDown(eKeyCode::X))
 			{
+				Sound* mSound2 = Resources::Load<Sound>(L"00fa - SE_SLIDING", L"..\\Resources\\Sound\\00fa - SE_SLIDING.wav");
+				mSound2->Play(false);
 				mState = eKirbyState::LeftSliding;
 				mAnimator->Play(L"LeftSliding", true);
 			}
@@ -2848,12 +3471,15 @@ namespace My
 		}
 		if (Input::GetKeyDown(eKeyCode::X))
 		{
+			Sound* mSound2 = Resources::Load<Sound>(L"00fa - SE_SLIDING", L"..\\Resources\\Sound\\00fa - SE_SLIDING.wav");
+			mSound2->Play(false);
 			mState = eKirbyState::RightSliding;
 			mAnimator->Play(L"RightSliding", true);
 		}
 	}
 	void Kirby::leftsliding()
 	{
+
 		leftslidingtime += Time::DeltaTime();
 		Leftsliding = true;
 		Transform* tr = GetComponent<Transform>();
@@ -2957,6 +3583,8 @@ namespace My
 
 		if (IsJump && Input::GetKeyDown(eKeyCode::A))//GetAsyncKeyState(0x41) & 0x8000)
 		{
+			Sound* mSound = Resources::Load<Sound>(L"fly", L"..\\Resources\\Sound\\fly.wav");
+			mSound->Play(false);
 			kirbytime = 0.0f;
 			jumptime = 0.0f;
 			Ljumptime = 0.0f;
@@ -3066,6 +3694,8 @@ namespace My
 
 		if (IsJump && Input::GetKeyDown(eKeyCode::A))//GetAsyncKeyState(0x41) & 0x8000)
 		{	
+			Sound* mSound = Resources::Load<Sound>(L"fly", L"..\\Resources\\Sound\\fly.wav");
+			mSound->Play(false);
 			kirbytime = 0.0f;
 			jumptime = 0.0f;
 			Ljumptime = 0.0f;
@@ -3118,6 +3748,8 @@ namespace My
 
 		if (DoubleJump && Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"fly", L"..\\Resources\\Sound\\fly.wav");
+			mSound->Play(false);
 			JumpCheck = true;
 			AirShot = true;
 			mAnimator->Play(L"LeftJumpRelease", true);
@@ -3143,7 +3775,7 @@ namespace My
 			AirShot = false;
 			mRigidBody->SetGravity(Vector2(0.0f, 1000.0f));
 			mAnimator->Play(L"LeftAir", false);
-			object::Instantiate<AirLeft>(Vector2(pos.x - 10, pos.y), Vector2(2.0f, 2.0f), eLayerType::Air);
+			object::Instantiate<AirLeft>(Vector2(pos.x - 10, pos.y + 10), Vector2(2.5f, 2.5f), eLayerType::Air);
 		}
 		if (Input::GetKey(eKeyCode::Right))
 		{
@@ -3189,7 +3821,7 @@ namespace My
 			AirShot = false;
 			mRigidBody->SetGravity(Vector2(0.0f, 1000.0f));
 			mAnimator->Play(L"RightAir", false);
-			object::Instantiate<Air>(Vector2(pos.x + 10, pos.y), Vector2(2.0f, 2.0f), eLayerType::Air);
+			object::Instantiate<Air>(Vector2(pos.x + 10, pos.y + 10), Vector2(2.5f, 2.5f), eLayerType::Air);
 		}
 		if (jumptime > 0.2f)
 		{
@@ -3199,6 +3831,8 @@ namespace My
 
 		if (DoubleJump && Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"fly", L"..\\Resources\\Sound\\fly.wav");
+			mSound->Play(false);
 			JumpCheck = true;
 			AirShot = true;
 			mAnimator->Play(L"RightJumpRelease", true);
@@ -3276,6 +3910,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00f4 - SE_RAKKA", L"..\\Resources\\Sound\\00f4 - SE_RAKKA.wav");
+			mSound->Play(false);
 			yamyam = false;
 			mState = eKirbyState::LeftPigClear;
 			mAnimator->Play(L"LeftPigClear", false);
@@ -3283,12 +3919,23 @@ namespace My
 
 		if (Input::GetKey(eKeyCode::Z))
 		{
+			if (beamchar == true)
+			{
+				beamchar = false;
+				Sound* mSound = Resources::Load<Sound>(L"beam-charging", L"..\\Resources\\Sound\\beam-charging.wav");
+				mSound->Play(true);
+			}
 			chargingtime += Time::DeltaTime();
 			mAnimator->Play(L"LeftEnergyBeam", false);
 		}
 
 		if (beamjumping == false && Input::GetKeyUp(eKeyCode::Z) && chargingtime <= 0.5f)
 		{
+			beamchar = true;
+			Sound* mSound = Resources::Load<Sound>(L"beam-charging", L"..\\Resources\\Sound\\beam-charging.wav");
+			mSound->Stop(false);
+			Sound* mSound2 = Resources::Load<Sound>(L"00b0 - SE_BEAM", L"..\\Resources\\Sound\\00b0 - SE_BEAM.wav");
+			mSound2->Play(false);
 			chargingtime = 0.0f;
 			mLeftKirbyBeam = object::Instantiate<LeftKirbyBeam>(Vector2(pos.x - 100, pos.y + 80), Vector2(1.2f, 1.2f), eLayerType::Skill);
 
@@ -3300,6 +3947,12 @@ namespace My
 
 		if (Input::GetKeyUp(eKeyCode::Z) && chargingtime >= 0.5f)
 		{
+
+			beamchar = true;
+			Sound* mSound = Resources::Load<Sound>(L"beam-charging", L"..\\Resources\\Sound\\beam-charging.wav");
+			mSound->Stop(false);
+			Sound* mSound2 = Resources::Load<Sound>(L"beam-charged-hit", L"..\\Resources\\Sound\\beam-charged-hit.wav");
+			mSound2->Play(false);
 			chargingtime = 0.0f;
 			mLeftEnergyBeam = object::Instantiate<LeftEnergyBeam>(Vector2(pos.x - 100, pos.y + 35), Vector2(1.5f, 1.5f), eLayerType::Skill);
 
@@ -3309,6 +3962,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+			mSound->Play(false);
 			JumpCheck = true;
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
 			mState = eKirbyState::LeftBeamJump;
@@ -3341,6 +3996,8 @@ namespace My
 
 		if (beamkirbytime <= 0.15f && BeamKeyCheck && GetAsyncKeyState(VK_LEFT) & 0x8000)
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00fe - SE_DASHSTART", L"..\\Resources\\Sound\\00fe - SE_DASHSTART.wav");
+			mSound->Play(false);
 			mState = eKirbyState::LeftBeamDash;
 			mAnimator->Play(L"LeftBeamDash", true);
 		}
@@ -3355,19 +4012,32 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00f4 - SE_RAKKA", L"..\\Resources\\Sound\\00f4 - SE_RAKKA.wav");
+			mSound->Play(false);
 			yamyam = false;
 			mState = eKirbyState::RightPigClear;
 			mAnimator->Play(L"RightPigClear", false);
 		}
 
 		if (Input::GetKey(eKeyCode::Z))
-		{
+		{	
+			if (beamchar == true)
+			{
+				beamchar = false;
+				Sound* mSound = Resources::Load<Sound>(L"beam-charging", L"..\\Resources\\Sound\\beam-charging.wav");
+				mSound->Play(true);
+			}
 			chargingtime += Time::DeltaTime();
 			mAnimator->Play(L"RightEnergyBeam", false);
 		}
 
 		if (beamjumping == false && Input::GetKeyUp(eKeyCode::Z) && chargingtime <=0.5f)
 		{
+			beamchar = true;
+			Sound* mSound = Resources::Load<Sound>(L"beam-charging", L"..\\Resources\\Sound\\beam-charging.wav");
+			mSound->Stop(false);
+			Sound* mSound2 = Resources::Load<Sound>(L"00b0 - SE_BEAM", L"..\\Resources\\Sound\\00b0 - SE_BEAM.wav");
+			mSound2->Play(false);
 			chargingtime = 0.0f;
 			mKirbyBeam = object::Instantiate<KirbyBeam>(Vector2(pos.x + 100, pos.y +80), Vector2(1.2f, 1.2f), eLayerType::Skill);
 			mKirbyBeam->SetKirby(this);
@@ -3378,6 +4048,11 @@ namespace My
 
 		if (Input::GetKeyUp(eKeyCode::Z) && chargingtime >= 0.5f)
 		{
+			beamchar = true;
+			Sound* mSound = Resources::Load<Sound>(L"beam-charging", L"..\\Resources\\Sound\\beam-charging.wav");
+			mSound->Stop(false);
+			Sound* mSound2 = Resources::Load<Sound>(L"beam-charged-hit", L"..\\Resources\\Sound\\beam-charged-hit.wav");
+			mSound2->Play(false);
 			chargingtime = 0.0f;
 			mEnergyBeam = object::Instantiate<EnergyBeam>(Vector2(pos.x + 100, pos.y + 35), Vector2(1.5f, 1.5f), eLayerType::Skill);
 
@@ -3387,6 +4062,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+			mSound->Play(false);
 			JumpCheck = true;
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
 			mState = eKirbyState::RightBeamJump;
@@ -3419,6 +4096,8 @@ namespace My
 
 		if (beamkirbytime <= 0.15f && BeamKeyCheck && GetAsyncKeyState(VK_RIGHT) & 0x8000)
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00fe - SE_DASHSTART", L"..\\Resources\\Sound\\00fe - SE_DASHSTART.wav");
+			mSound->Play(false);
 			mState = eKirbyState::RightBeamDash;
 			mAnimator->Play(L"RightBeamDash", true);
 		}
@@ -3439,6 +4118,12 @@ namespace My
 
 		if (beamuse == true && Input::GetKey(eKeyCode::Z))
 		{
+			if (beamchar == true)
+			{
+				beamchar = false;
+				Sound* mSound = Resources::Load<Sound>(L"beam-charging", L"..\\Resources\\Sound\\beam-charging.wav");
+				mSound->Play(true);
+			}
 			beamcharging = true;
 			chargingtime += Time::DeltaTime();
 			mAnimator->Play(L"LeftEnergyBeam", false);
@@ -3446,6 +4131,11 @@ namespace My
 
 		if (beamjumping == false && Input::GetKeyUp(eKeyCode::Z) && chargingtime <= 0.5f)
 		{
+			beamchar = true;
+			Sound* mSound = Resources::Load<Sound>(L"beam-charging", L"..\\Resources\\Sound\\beam-charging.wav");
+			mSound->Stop(false);
+			Sound* mSound2 = Resources::Load<Sound>(L"00b0 - SE_BEAM", L"..\\Resources\\Sound\\00b0 - SE_BEAM.wav");
+			mSound2->Play(false);
 			beamcharging = false;
 			chargingtime = 0.0f;
 
@@ -3459,6 +4149,11 @@ namespace My
 
 		if (Input::GetKeyUp(eKeyCode::Z) && chargingtime >= 0.5f)
 		{
+			beamchar = true;
+			Sound* mSound = Resources::Load<Sound>(L"beam-charging", L"..\\Resources\\Sound\\beam-charging.wav");
+			mSound->Stop(false);
+			Sound* mSound2 = Resources::Load<Sound>(L"beam-charged-hit", L"..\\Resources\\Sound\\beam-charged-hit.wav");
+			mSound2->Play(false);
 			beamcharging = false;
 			chargingtime = 0.0f;
 			mLeftEnergyBeam = object::Instantiate<LeftEnergyBeam>(Vector2(pos.x - 100, pos.y + 35), Vector2(1.5f, 1.5f), eLayerType::Skill);
@@ -3471,12 +4166,16 @@ namespace My
 		{
 			if (Input::GetKeyDown(eKeyCode::S))
 			{
+				Sound* mSound = Resources::Load<Sound>(L"00f4 - SE_RAKKA", L"..\\Resources\\Sound\\00f4 - SE_RAKKA.wav");
+				mSound->Play(false);
 				yamyam = false;
 				mState = eKirbyState::LeftPigClear;
 				mAnimator->Play(L"LeftPigClear", false);
 			}
 			if (Input::GetKeyDown(eKeyCode::A))
 			{
+				Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+				mSound->Play(false);
 				BeamKeyCheck = false;
 				JumpCheck = true;
 				mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
@@ -3539,6 +4238,14 @@ namespace My
 
 		if (beamuse = true && Input::GetKey(eKeyCode::Z))
 		{
+			if (beamchar == true)
+			{
+				beamchar = false;
+				Sound* mSound = Resources::Load<Sound>(L"beam-charging", L"..\\Resources\\Sound\\beam-charging.wav");
+				mSound->Play(true);
+			}
+			Sound* mSound = Resources::Load<Sound>(L"beam-charging", L"..\\Resources\\Sound\\beam-charging.wav");
+			mSound->Play(true);
 			beamcharging = true;
 			chargingtime += Time::DeltaTime();
 			mAnimator->Play(L"RightEnergyBeam", false);
@@ -3546,6 +4253,11 @@ namespace My
 
 		if (beamjumping == false && Input::GetKeyUp(eKeyCode::Z) && chargingtime <= 0.5f)
 		{
+			beamchar = true;
+			Sound* mSound = Resources::Load<Sound>(L"beam-charging", L"..\\Resources\\Sound\\beam-charging.wav");
+			mSound->Stop(false);
+			Sound* mSound2 = Resources::Load<Sound>(L"00b0 - SE_BEAM", L"..\\Resources\\Sound\\00b0 - SE_BEAM.wav");
+			mSound2->Play(false);
 			beamcharging = false;
 			chargingtime = 0.0f;
 			mKirbyBeam = object::Instantiate<KirbyBeam>(Vector2(pos.x + 100, pos.y + 80), Vector2(1.2f, 1.2f), eLayerType::Skill);
@@ -3557,6 +4269,11 @@ namespace My
 
 		if (Input::GetKeyUp(eKeyCode::Z) && chargingtime >= 0.5f)
 		{
+			beamchar = true;
+			Sound* mSound = Resources::Load<Sound>(L"beam-charging", L"..\\Resources\\Sound\\beam-charging.wav");
+			mSound->Stop(false);
+			Sound* mSound2 = Resources::Load<Sound>(L"beam-charged-hit", L"..\\Resources\\Sound\\beam-charged-hit.wav");
+			mSound2->Play(false);
 			beamcharging = false;
 			chargingtime = 0.0f;
 			mEnergyBeam = object::Instantiate<EnergyBeam>(Vector2(pos.x + 100, pos.y + 35), Vector2(1.5f, 1.5f), eLayerType::Skill);
@@ -3571,12 +4288,16 @@ namespace My
 		{
 			if (Input::GetKeyDown(eKeyCode::S))
 			{
+				Sound* mSound = Resources::Load<Sound>(L"00f4 - SE_RAKKA", L"..\\Resources\\Sound\\00f4 - SE_RAKKA.wav");
+				mSound->Play(false);
 				yamyam = false;
 				mState = eKirbyState::RightPigClear;
 				mAnimator->Play(L"RightPigClear", false);
 			}
 			if (Input::GetKeyDown(eKeyCode::A))
 			{
+				Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+				mSound->Play(false);
 				BeamKeyCheck = false;
 				JumpCheck = true;
 				mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
@@ -3651,6 +4372,8 @@ namespace My
 		}
 		if (Input::GetKeyDown(eKeyCode::X))
 		{
+			Sound* mSound2 = Resources::Load<Sound>(L"00fa - SE_SLIDING", L"..\\Resources\\Sound\\00fa - SE_SLIDING.wav");
+			mSound2->Play(false);
 			mState = eKirbyState::LeftBeamSliding;
 			mAnimator->Play(L"LeftBeamSliding", false);
 		}
@@ -3677,6 +4400,8 @@ namespace My
 		}
 		if (Input::GetKeyDown(eKeyCode::X))
 		{
+			Sound* mSound2 = Resources::Load<Sound>(L"00fa - SE_SLIDING", L"..\\Resources\\Sound\\00fa - SE_SLIDING.wav");
+			mSound2->Play(false);
 			mState = eKirbyState::RightBeamSliding;
 			mAnimator->Play(L"RightBeamSliding", false);
 		}
@@ -3773,6 +4498,8 @@ namespace My
 
 		if (jatime > 0.4f && Input::GetKeyDown(eKeyCode::Z))
 		{
+			Sound* mSound2 = Resources::Load<Sound>(L"00b0 - SE_BEAM", L"..\\Resources\\Sound\\00b0 - SE_BEAM.wav");
+			mSound2->Play(false);
 			jatime = 0.0f;
 			LRjumpchange = false;
 			RLjumpchange = false;
@@ -3813,6 +4540,8 @@ namespace My
 
 		if (BeamIsJump && Input::GetKeyDown(eKeyCode::A))//GetAsyncKeyState(0x41) & 0x8000)
 		{
+			Sound* mSound = Resources::Load<Sound>(L"fly", L"..\\Resources\\Sound\\fly.wav");
+			mSound->Play(false);
 			beamkirbytime = 0.0f;
 			beamjumptime = 0.0f;
 			Ljumptime = 0.0f;
@@ -3866,6 +4595,8 @@ namespace My
 
 		if (jatime > 0.4f &&Input::GetKeyDown(eKeyCode::Z))
 		{
+			Sound* mSound2 = Resources::Load<Sound>(L"00b0 - SE_BEAM", L"..\\Resources\\Sound\\00b0 - SE_BEAM.wav");
+			mSound2->Play(false);
 			jatime = 0.0f;
 			LRjumpchange = false;
 			RLjumpchange = false;
@@ -3912,6 +4643,8 @@ namespace My
 
 		if (BeamIsJump && Input::GetKeyDown(eKeyCode::A))//GetAsyncKeyState(0x41) & 0x8000)
 		{
+			Sound* mSound = Resources::Load<Sound>(L"fly", L"..\\Resources\\Sound\\fly.wav");
+			mSound->Play(false);
 			beamkirbytime = 0.0f;
 			beamjumptime = 0.0f;
 			Ljumptime = 0.0f;
@@ -3956,6 +4689,8 @@ namespace My
 
 		if (BeamDoubleJump && Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"fly", L"..\\Resources\\Sound\\fly.wav");
+			mSound->Play(false);
 			BeamAirShot = true;
 			mAnimator->Play(L"LeftBeamJumpRelease", true);
 			Vector2 velocity = mRigidBody->GetVelocity();
@@ -3970,7 +4705,7 @@ namespace My
 			BeamAirShot = false;
 			mRigidBody->SetGravity(Vector2(0.0f, 1000.0f));
 			mAnimator->Play(L"LeftBeamAir", false);
-			object::Instantiate<AirLeft>(Vector2(pos.x - 10, pos.y), Vector2(2.0f, 2.0f), eLayerType::Effect);
+			object::Instantiate<AirLeft>(Vector2(pos.x - 10, pos.y + 10), Vector2(2.5f, 2.5f), eLayerType::Air);
 		}
 		if (Input::GetKey(eKeyCode::Right))
 		{
@@ -4011,7 +4746,7 @@ namespace My
 			BeamAirShot = false;
 			mRigidBody->SetGravity(Vector2(0.0f, 1000.0f));
 			mAnimator->Play(L"RightBeamAir", false);
-			object::Instantiate<Air>(Vector2(pos.x + 10, pos.y), Vector2(2.0f, 2.0f), eLayerType::Effect);
+			object::Instantiate<Air>(Vector2(pos.x + 10, pos.y + 10), Vector2(2.5f, 2.5f), eLayerType::Air);
 		}
 
 		if (beamjumptime > 0.2f)
@@ -4021,6 +4756,8 @@ namespace My
 		}
 		if (BeamDoubleJump && Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"fly", L"..\\Resources\\Sound\\fly.wav");
+			mSound->Play(false);
 			BeamAirShot = true;
 			mAnimator->Play(L"RightBeamJumpRelease", true);
 			Vector2 velocity = mRigidBody->GetVelocity();
@@ -4064,6 +4801,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00f4 - SE_RAKKA", L"..\\Resources\\Sound\\00f4 - SE_RAKKA.wav");
+			mSound->Play(false);
 			yamyam = false;
 			mState = eKirbyState::LeftPigClear;
 			mAnimator->Play(L"LeftPigClear", false);
@@ -4071,6 +4810,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+			mSound->Play(false);
 			JumpCheck = true;
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
 			mState = eKirbyState::LeftBeamJump;
@@ -4104,6 +4845,8 @@ namespace My
 		}
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00f4 - SE_RAKKA", L"..\\Resources\\Sound\\00f4 - SE_RAKKA.wav");
+			mSound->Play(false);
 			yamyam = false;
 			mState = eKirbyState::RightPigClear;
 			mAnimator->Play(L"RightPigClear", false);
@@ -4111,6 +4854,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+			mSound->Play(false);
 			JumpCheck = true;
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
 			mState = eKirbyState::RightBeamJump;
@@ -5031,6 +5776,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00f4 - SE_RAKKA", L"..\\Resources\\Sound\\00f4 - SE_RAKKA.wav");
+			mSound->Play(false);
 			boomyamyam = false;
 			mState = eKirbyState::LeftPigClear;
 			mAnimator->Play(L"LeftPigClear", false);
@@ -5072,6 +5819,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+			mSound->Play(false);
 			JumpCheck = true;
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
 			mState = eKirbyState::LeftBoombJump;
@@ -5104,6 +5853,8 @@ namespace My
 
 		if (boombkirbytime <= 0.15f && BoombKeyCheck && GetAsyncKeyState(VK_LEFT) & 0x8000)
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00fe - SE_DASHSTART", L"..\\Resources\\Sound\\00fe - SE_DASHSTART.wav");
+			mSound->Play(false);
 			mState = eKirbyState::LeftBoombDash;
 			mAnimator->Play(L"LeftBoombDash", true);
 		}
@@ -5117,6 +5868,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00f4 - SE_RAKKA", L"..\\Resources\\Sound\\00f4 - SE_RAKKA.wav");
+			mSound->Play(false);
 			boomyamyam = false;
 			mState = eKirbyState::RightPigClear;
 			mAnimator->Play(L"RightPigClear", false);
@@ -5157,6 +5910,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+			mSound->Play(false);
 			JumpCheck = true;
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
 			mState = eKirbyState::RightBoombJump;
@@ -5189,6 +5944,8 @@ namespace My
 
 		if (boombkirbytime <= 0.15f && BoombKeyCheck && GetAsyncKeyState(VK_RIGHT) & 0x8000)
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00fe - SE_DASHSTART", L"..\\Resources\\Sound\\00fe - SE_DASHSTART.wav");
+			mSound->Play(false);
 			mState = eKirbyState::RightBoombDash;
 			mAnimator->Play(L"RightBoombDash", true);
 		}
@@ -5204,6 +5961,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00f4 - SE_RAKKA", L"..\\Resources\\Sound\\00f4 - SE_RAKKA.wav");
+			mSound->Play(false);
 			boomyamyam = false;
 			mState = eKirbyState::LeftPigClear;
 			mAnimator->Play(L"LeftPigClear", false);
@@ -5240,6 +5999,8 @@ namespace My
 		}
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+			mSound->Play(false);
 			BoombKeyCheck = false;
 			JumpCheck = true;
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
@@ -5301,6 +6062,8 @@ namespace My
 
 			if (Input::GetKeyDown(eKeyCode::S))
 			{
+				Sound* mSound = Resources::Load<Sound>(L"00f4 - SE_RAKKA", L"..\\Resources\\Sound\\00f4 - SE_RAKKA.wav");
+				mSound->Play(false);
 				boomyamyam = false;
 				mState = eKirbyState::RightPigClear;
 				mAnimator->Play(L"RightPigClear", false);
@@ -5340,6 +6103,8 @@ namespace My
 
 			if (Input::GetKeyDown(eKeyCode::A))
 			{
+				Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+				mSound->Play(false);
 				BoombKeyCheck = false;
 				JumpCheck = true;
 				mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
@@ -5423,6 +6188,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00f4 - SE_RAKKA", L"..\\Resources\\Sound\\00f4 - SE_RAKKA.wav");
+			mSound->Play(false);
 			yamyam = false;
 			mState = eKirbyState::LeftPigClear;
 			mAnimator->Play(L"LeftPigClear", false);
@@ -5458,6 +6225,8 @@ namespace My
 		}
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+			mSound->Play(false);
 			JumpCheck = true;
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
 			mState = eKirbyState::LeftBoombJump;
@@ -5493,6 +6262,8 @@ namespace My
 		}
 		if (Input::GetKeyDown(eKeyCode::S))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00f4 - SE_RAKKA", L"..\\Resources\\Sound\\00f4 - SE_RAKKA.wav");
+			mSound->Play(false);
 			yamyam = false;
 			mState = eKirbyState::RightPigClear;
 			mAnimator->Play(L"RightPigClear", false);
@@ -5530,6 +6301,8 @@ namespace My
 
 		if (Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"jump", L"..\\Resources\\Sound\\jump.wav");
+			mSound->Play(false);
 			JumpCheck = true;
 			mRigidBody->SetGravity(Vector2(0.0f, 800.0f));
 			mState = eKirbyState::RightBoombJump;
@@ -5623,6 +6396,8 @@ namespace My
 		}
 		if (Input::GetKeyDown(eKeyCode::X))
 		{
+			Sound* mSound2 = Resources::Load<Sound>(L"00fa - SE_SLIDING", L"..\\Resources\\Sound\\00fa - SE_SLIDING.wav");
+			mSound2->Play(false);
 			mState = eKirbyState::LeftBoombSliding;
 			mAnimator->Play(L"LeftBoombSliding", false);
 		}
@@ -5649,6 +6424,8 @@ namespace My
 		}
 		if (Input::GetKeyDown(eKeyCode::X))
 		{
+			Sound* mSound2 = Resources::Load<Sound>(L"00fa - SE_SLIDING", L"..\\Resources\\Sound\\00fa - SE_SLIDING.wav");
+			mSound2->Play(false);
 			mState = eKirbyState::RightBoombSliding;
 			mAnimator->Play(L"RightBoombSliding", false);
 		}
@@ -5764,6 +6541,8 @@ namespace My
 
 		if (BoombIsJump && Input::GetKeyDown(eKeyCode::A))//GetAsyncKeyState(0x41) & 0x8000)
 		{
+			Sound* mSound = Resources::Load<Sound>(L"fly", L"..\\Resources\\Sound\\fly.wav");
+			mSound->Play(false);
 			boombkirbytime = 0.0f;
 			boombjumptime = 0.0f;
 			Ljumptime = 0.0f;
@@ -5838,6 +6617,8 @@ namespace My
 
 		if (BoombIsJump && Input::GetKeyDown(eKeyCode::A))//GetAsyncKeyState(0x41) & 0x8000)
 		{
+			Sound* mSound = Resources::Load<Sound>(L"fly", L"..\\Resources\\Sound\\fly.wav");
+			mSound->Play(false);
 			boombkirbytime = 0.0f;
 			boombjumptime = 0.0f;
 			Ljumptime = 0.0f;
@@ -5876,6 +6657,8 @@ namespace My
 
 		if (BoombDoubleJump && Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"fly", L"..\\Resources\\Sound\\fly.wav");
+			mSound->Play(false);
 			BoombAirShot = true;
 			mAnimator->Play(L"LeftBoombJumpRelease", true);
 			Vector2 velocity = mRigidBody->GetVelocity();
@@ -5890,7 +6673,7 @@ namespace My
 			BoombAirShot = false;
 			mRigidBody->SetGravity(Vector2(0.0f, 1000.0f));
 			mAnimator->Play(L"LeftBoombAir", false);
-			object::Instantiate<AirLeft>(Vector2(pos.x - 10, pos.y), Vector2(2.0f, 2.0f), eLayerType::Effect);
+			object::Instantiate<AirLeft>(Vector2(pos.x - 10, pos.y + 10), Vector2(2.5f, 2.5f), eLayerType::Air);
 		}
 		if (Input::GetKey(eKeyCode::Right))
 		{
@@ -5930,7 +6713,7 @@ namespace My
 			BoombAirShot = false;
 			mRigidBody->SetGravity(Vector2(0.0f, 1000.0f));
 			mAnimator->Play(L"RightBoombAir", false);
-			object::Instantiate<Air>(Vector2(pos.x + 10, pos.y), Vector2(2.0f, 2.0f), eLayerType::Effect);
+			object::Instantiate<Air>(Vector2(pos.x + 10, pos.y+ 10), Vector2(2.5f, 2.5f), eLayerType::Air);
 		}
 
 		if (boombjumptime > 0.2f)
@@ -5940,6 +6723,8 @@ namespace My
 		}
 		if (BoombDoubleJump && Input::GetKeyDown(eKeyCode::A))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"fly", L"..\\Resources\\Sound\\fly.wav");
+			mSound->Play(false);
 			BoombAirShot = true;
 			mAnimator->Play(L"RightBoombJumpRelease", true);
 			Vector2 velocity = mRigidBody->GetVelocity();
@@ -6122,6 +6907,220 @@ namespace My
 			boomend = 0.0f;
 			mState = eKirbyState::RightBoombIdle;
 			mAnimator->Play(L"RightBoombIdle", true);
+		}
+	}
+	void Kirby::leftboombasehit()
+	{
+		leftboomhittime += Time::DeltaTime();
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		pos.x += 150.0f * Time::DeltaTime();
+
+		if (leftboomhittime >= 0.3f)
+		{
+			leftboomhittime = 0.0f;
+			mState = eKirbyState::LeftBoombIdle;
+			mAnimator->Play(L"LeftBoombIdle", true);
+		}
+		tr->SetPos(pos);
+	}
+	void Kirby::rightboombasehit()
+	{
+		rightboomhittime += Time::DeltaTime();
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		pos.x -= 150.0f * Time::DeltaTime();
+
+		if (rightboomhittime >= 0.3f)
+		{
+			rightboomhittime = 0.0f;
+			mState = eKirbyState::RightBoombIdle;
+			mAnimator->Play(L"RightBoombIdle", true);
+		}
+
+		tr->SetPos(pos);
+	}
+	void Kirby::leftboomjumphitrelease()
+	{
+		boomjumphitreleasetime += Time::DeltaTime();
+
+		Vector2 velocity = mRigidBody->GetVelocity();
+
+		mRigidBody->SetVelocity(Vector2::Zero);
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		pos.y -= 200.0f * Time::DeltaTime();
+		pos.x += 250.0f * Time::DeltaTime();
+
+		tr->SetPos(pos);
+
+		if (boomjumphitreleasetime >= 0.3f)
+		{
+			boomjumphitreleasetime = 0.0f;
+			mState = eKirbyState::LeftBoomJumpHit;
+			mAnimator->Play(L"LeftBoomJumpHit", false);
+		}
+
+		if (IsJump && Input::GetKeyDown(eKeyCode::A))
+		{
+			JumpCheck = true;
+			mState = eKirbyState::LeftBoombDoubleJump;
+			mAnimator->Play(L"LeftBoombDoubleJump", false);
+
+			Vector2 velocity = mRigidBody->GetVelocity();
+			mRigidBody->SetGravity(Vector2(0.0f, 200.0f));
+			velocity.x = 0.0f;
+			velocity.y = -120.0f;
+
+			mRigidBody->SetVelocity(velocity);
+		}
+	}
+	void Kirby::rightboomjumphitrelease()
+	{
+		boomjumphitreleasetime += Time::DeltaTime();
+
+		Vector2 velocity = mRigidBody->GetVelocity();
+
+		mRigidBody->SetVelocity(Vector2::Zero);
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		pos.y -= 200.0f * Time::DeltaTime();
+		pos.x -= 250.0f * Time::DeltaTime();
+
+		tr->SetPos(pos);
+
+		if (boomjumphitreleasetime >= 0.3f)
+		{
+			boomjumphitreleasetime = 0.0f;
+			mState = eKirbyState::RightBoomJumpHit;
+			mAnimator->Play(L"RightBoomJumpHit", false);
+		}
+
+		if (IsJump && Input::GetKeyDown(eKeyCode::A))//GetAsyncKeyState(0x41) & 0x8000)
+		{
+			JumpCheck = true;
+			mState = eKirbyState::RightBoombDoubleJump;
+			mAnimator->Play(L"RightBoombDoubleJump", false);
+
+			Vector2 velocity = mRigidBody->GetVelocity();
+			mRigidBody->SetGravity(Vector2(0.0f, 200.0f));
+			velocity.x = 0.0f;
+			velocity.y = -120.0f;
+
+			mRigidBody->SetVelocity(velocity);
+		}
+	}
+	void Kirby::leftboomjumphit()
+	{
+		if (mRigidBody->GetGround() == true)
+		{
+			mState = eKirbyState::LeftBoombIdle;
+			mAnimator->Play(L"LeftBoombIdle", true);
+		}
+		if (IsJump && Input::GetKeyDown(eKeyCode::A))
+		{
+			JumpCheck = true;
+			mState = eKirbyState::LeftBoombDoubleJump;
+			mAnimator->Play(L"LeftBoombDoubleJump", false);
+
+			Vector2 velocity = mRigidBody->GetVelocity();
+			mRigidBody->SetGravity(Vector2(0.0f, 200.0f));
+			velocity.x = 0.0f;
+			velocity.y = -120.0f;
+
+			mRigidBody->SetVelocity(velocity);
+		}
+	}
+	void Kirby::rightboomjumphit()
+	{
+		if (mRigidBody->GetGround() == true)
+		{
+			mState = eKirbyState::RightBoombIdle;
+			mAnimator->Play(L"RightBoombIdle", true);
+		}
+
+		if (IsJump && Input::GetKeyDown(eKeyCode::A))//GetAsyncKeyState(0x41) & 0x8000)
+		{
+			JumpCheck = true;
+			mState = eKirbyState::RightBoombDoubleJump;
+			mAnimator->Play(L"RightBoombDoubleJump", false);
+
+			Vector2 velocity = mRigidBody->GetVelocity();
+			mRigidBody->SetGravity(Vector2(0.0f, 200.0f));
+			velocity.x = 0.0f;
+			velocity.y = -120.0f;
+
+			mRigidBody->SetVelocity(velocity);
+		}
+	}
+	void Kirby::leftboompighit()
+	{
+		boomdoublejumphittime += Time::DeltaTime();
+
+		Vector2 velocity = mRigidBody->GetVelocity();
+
+		mRigidBody->SetVelocity(Vector2::Zero);
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		pos.y -= 50.0f * Time::DeltaTime();
+		pos.x += 100.0f * Time::DeltaTime();
+
+		tr->SetPos(pos);
+
+		if (boomdoublejumphittime >= 0.4f)
+		{
+			JumpCheck = true;
+			boomdoublejumphittime = 0.0f;
+			mState = eKirbyState::LeftBoombDoubleJump;
+			mAnimator->Play(L"LeftBoombDoubleJump", false);
+
+			Vector2 velocity = mRigidBody->GetVelocity();
+			mRigidBody->SetGravity(Vector2(0.0f, 200.0f));
+			velocity.x = 0.0f;
+			velocity.y = -120.0f;
+
+			mRigidBody->SetVelocity(velocity);
+		}
+	}
+	void Kirby::rightboompighit()
+	{
+		boomdoublejumphittime += Time::DeltaTime();
+
+		Vector2 velocity = mRigidBody->GetVelocity();
+
+		mRigidBody->SetVelocity(Vector2::Zero);
+
+		Transform* tr = GetComponent<Transform>();
+		Vector2 pos = tr->GetPos();
+
+		pos.y -= 50.0f * Time::DeltaTime();
+		pos.x -= 100.0f * Time::DeltaTime();
+
+		tr->SetPos(pos);
+
+		if (boomdoublejumphittime >= 0.4f)
+		{
+			JumpCheck = true;
+			boomdoublejumphittime = 0.0f;
+			mState = eKirbyState::RightBoombDoubleJump;
+			mAnimator->Play(L"RightBoombDoubleJump", false);
+
+			Vector2 velocity = mRigidBody->GetVelocity();
+			mRigidBody->SetGravity(Vector2(0.0f, 200.0f));
+			velocity.x = 0.0f;
+			velocity.y = -120.0f;
+
+			mRigidBody->SetVelocity(velocity);
 		}
 	}
 	}

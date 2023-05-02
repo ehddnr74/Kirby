@@ -10,6 +10,8 @@
 #include "MyObject.h"
 #include "MyKirby.h"
 #include "MyCollider.h"
+#include "MySound.h"
+#include "MyResources.h"
 
 namespace My
 {
@@ -53,6 +55,8 @@ namespace My
 	{
 		if (mkirby = dynamic_cast<Kirby*>(other->GetOwner()))
 		{
+			Sound* mSound = Resources::Load<Sound>(L"00cd - SE_ITEM", L"..\\Resources\\Sound\\00cd - SE_ITEM.wav");
+			mSound->Play(false);
 			if (mkirby->GetHP() < 90)
 			{
 				mkirby->SetHill(20);

@@ -10,13 +10,16 @@
 #include "MyScene.h"
 #include "MyObject.h"
 #include "MyKirby.h"
+#include "MySound.h"
+#include "MyResources.h"
 
 namespace My
 {
 	Beam::Beam()
 		:beamtime(0.f)
 	{
-
+		Sound* mSound2 = Resources::Load<Sound>(L"00b0 - SE_BEAM", L"..\\Resources\\Sound\\00b0 - SE_BEAM.wav");
+		mSound2->Play(false);
 	}
 	Beam::~Beam()
 	{

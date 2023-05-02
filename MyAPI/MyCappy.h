@@ -46,6 +46,8 @@ namespace My
 		void SetGround3(class R3Ground* gg) { gr3 = gg; }
 		class R3Ground* GetGround3() { return gr3; }
 
+		void SetEffect(class AttackEffect* mAttack) { mAttackEffect = mAttack; }
+
 
 	private:
 		void leftmove();
@@ -97,9 +99,15 @@ namespace My
 		class R3Ground* gr3;
 		class kirbyRightBoom* mKrb;
 		class kirbyLeftBoom* mKlb;
+		class AttackEffect* mAttackEffect;
 
 		bool die;
 
+		class AbsorbEffect* mAbsorbEffect;
+		class AbsorbLeftEffect* mLeftAbsorbEffect;
 
+		int a = 0;
+		int b = 0;
 	};
+
 }

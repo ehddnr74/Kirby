@@ -16,8 +16,11 @@
 #include "LeftKirbyBeam.h"
 #include "EnergyBeam.h"
 #include "LeftEnergyBeam.h"
-
-
+#include "AttackEffect.h"
+#include "MySound.h"
+#include "MyResources.h"
+#include "AbsorbEffect.h"
+#include "AbsorbLeftEffect.h"
 namespace My
 {
 	Bros::Bros()
@@ -32,6 +35,8 @@ namespace My
 		, brostimetwo(0.f)
 		, death(false)
 		, deathtime(0.f)
+		, a(1)
+		, b(1)
 	{
 	}
 	Bros::~Bros()
@@ -115,121 +120,395 @@ namespace My
 		{
 			if (mkirby->GetState() == Kirby::eKirbyState::LeftBeamBaseHit)
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Base);
 				SetDamage(50);
+				if (this->GetHP() > 0 && this->GetHP() <= 99)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit2", L"..\\Resources\\Sound\\hit2.wav");
+					mSound->Play(false);
+				}
+				if (this->GetHP() <= 0)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+					mSound->Play(false);
+				}
 				mState = BrosState::LeftHitKirbyBase;
 			}
 			if (mkirby->GetState() == Kirby::eKirbyState::RightBeamBaseHit)
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Base);
 				SetDamage(50);
+				if (this->GetHP() > 0 && this->GetHP() <= 99)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit2", L"..\\Resources\\Sound\\hit2.wav");
+					mSound->Play(false);
+				}
+				if (this->GetHP() <= 0)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+					mSound->Play(false);
+				}
 				mState = BrosState::HitKirbyBase;
 			}
 			if (mkirby->GetState() == Kirby::eKirbyState::LeftBeamJumpHitRelease)
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Base);
 				SetDamage(50);
+				if (this->GetHP() > 0 && this->GetHP() <= 99)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit2", L"..\\Resources\\Sound\\hit2.wav");
+					mSound->Play(false);
+				}
+				if (this->GetHP() <= 0)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+					mSound->Play(false);
+				}
 				mState = BrosState::LeftHitKirbyBase;
 			}
 			if (mkirby->GetState() == Kirby::eKirbyState::RightBeamJumpHitRelease)
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Base);
 				SetDamage(50);
+				if (this->GetHP() > 0 && this->GetHP() <= 99)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit2", L"..\\Resources\\Sound\\hit2.wav");
+					mSound->Play(false);
+				}
+				if (this->GetHP() <= 0)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+					mSound->Play(false);
+				}
 				mState = BrosState::HitKirbyBase;
 			}
 			if (mkirby->GetState() == Kirby::eKirbyState::LeftBeamPigHit)
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Base);
 				SetDamage(50);
+				if (this->GetHP() > 0 && this->GetHP() <= 99)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit2", L"..\\Resources\\Sound\\hit2.wav");
+					mSound->Play(false);
+				}
+				if (this->GetHP() <= 0)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+					mSound->Play(false);
+				}
 				mState = BrosState::LeftHitKirbyBase;
 			}
 			if (mkirby->GetState() == Kirby::eKirbyState::RightBeamPigHit)
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Base);
 				SetDamage(50);
+				if (this->GetHP() > 0 && this->GetHP() <= 99)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit2", L"..\\Resources\\Sound\\hit2.wav");
+					mSound->Play(false);
+				}
+				if (this->GetHP() <= 0)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+					mSound->Play(false);
+				}
 				mState = BrosState::HitKirbyBase;
 			}
 
 			if (mkirby->GetState() == Kirby::eKirbyState::LeftPigJumpHitRelease)
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Base);
 				SetDamage(50);
+				if (this->GetHP() > 0 && this->GetHP() <= 99)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit2", L"..\\Resources\\Sound\\hit2.wav");
+					mSound->Play(false);
+				}
+				if (this->GetHP() <= 0)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+					mSound->Play(false);
+				}
 				mState = BrosState::LeftHitKirbyBase;
 			}
 			if (mkirby->GetState() == Kirby::eKirbyState::RightPigJumpHitRelease)
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Base);
 				SetDamage(50);
+				if (this->GetHP() > 0 && this->GetHP() <= 99)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit2", L"..\\Resources\\Sound\\hit2.wav");
+					mSound->Play(false);
+				}
+				if (this->GetHP() <= 0)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+					mSound->Play(false);
+				}
 				mState = BrosState::HitKirbyBase;
 			}
 			if (mkirby->GetState() == Kirby::eKirbyState::LeftPigBaseHit)
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Base);
 				SetDamage(50);
+				if (this->GetHP() > 0 && this->GetHP() <= 99)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit2", L"..\\Resources\\Sound\\hit2.wav");
+					mSound->Play(false);
+				}
+				if (this->GetHP() <= 0)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+					mSound->Play(false);
+				}
 				mState = BrosState::LeftHitKirbyBase;
 			}
 			if (mkirby->GetState() == Kirby::eKirbyState::RightPigBaseHit)
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Base);
 				SetDamage(50);
+				if (this->GetHP() > 0 && this->GetHP() <= 99)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit2", L"..\\Resources\\Sound\\hit2.wav");
+					mSound->Play(false);
+				}
+				if (this->GetHP() <= 0)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+					mSound->Play(false);
+				}
 				mState = BrosState::HitKirbyBase;
 			}
 			if (mkirby->GetState() == Kirby::eKirbyState::LeftJumpHitRelease || mkirby->GetState() == Kirby::eKirbyState::LeftAbsorbPigHit)
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Base);
 				SetDamage(50);
+				if (this->GetHP() > 0 && this->GetHP() <= 99)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit2", L"..\\Resources\\Sound\\hit2.wav");
+					mSound->Play(false);
+				}
+				if (this->GetHP() <= 0)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+					mSound->Play(false);
+				}
 				mState = BrosState::LeftHitKirbyBase;
 			}
 			if (mkirby->GetState() == Kirby::eKirbyState::RightJumpHitRelease || mkirby->GetState() == Kirby::eKirbyState::RightAbsorbPigHit)
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Base);
 				SetDamage(50);
+				if (this->GetHP() > 0 && this->GetHP() <= 99)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit2", L"..\\Resources\\Sound\\hit2.wav");
+					mSound->Play(false);
+				}
+				if (this->GetHP() <= 0)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+					mSound->Play(false);
+				}
 				mState = BrosState::HitKirbyBase;
 			}
 
 			if (mkirby->GetState() == Kirby::eKirbyState::LeftHit)
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Base);
 				SetDamage(40);
+				if (this->GetHP() > 0 && this->GetHP() <= 99)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit2", L"..\\Resources\\Sound\\hit2.wav");
+					mSound->Play(false);
+				}
+				if (this->GetHP() <= 0)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+					mSound->Play(false);
+				}
 				object::Destroy(this);
 			}
 			if (mkirby->GetState() == Kirby::eKirbyState::RightHit)
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Base);
 				SetDamage(40);
+				if (this->GetHP() > 0 && this->GetHP() <= 99)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit2", L"..\\Resources\\Sound\\hit2.wav");
+					mSound->Play(false);
+				}
+				if (this->GetHP() <= 0)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+					mSound->Play(false);
+				}
 				mState = BrosState::HitKirbyBase;
 			}
 
 			if (mkirby->GetSliding())
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Attack);
 				SetDamage(100);
+				if (this->GetHP() > 0 && this->GetHP() <= 99)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit2", L"..\\Resources\\Sound\\hit2.wav");
+					mSound->Play(false);
+				}
+				if (this->GetHP() <= 0)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+					mSound->Play(false);
+				}
 				mState = BrosState::HitSliding;
 			}
 			if (mkirby->GetLeftSliding())
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Attack);
 				SetDamage(100);
+				if (this->GetHP() > 0 && this->GetHP() <= 99)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit2", L"..\\Resources\\Sound\\hit2.wav");
+					mSound->Play(false);
+				}
+				if (this->GetHP() <= 0)
+				{
+					Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+					mSound->Play(false);
+				}
 				mState = BrosState::HitSlidingLeft;
 			}
 		}
 
 		if (mAir = dynamic_cast<Air*>(other->GetOwner()))
 		{
+			Transform* tr = GetComponent<Transform>();
+			Vector2 thispos = tr->GetPos();
+			AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+			mAttackEffect->SetEffectState(AttackEffect::AttackState::Air);
 			SetDamage(50);
+			if (this->GetHP() > 0 && this->GetHP() <= 99)
+			{
+				Sound* mSound = Resources::Load<Sound>(L"hit2", L"..\\Resources\\Sound\\hit2.wav");
+				mSound->Play(false);
+			}
+			if (this->GetHP() <= 0)
+			{
+				Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+				mSound->Play(false);
+			}
 			mState = BrosState::HitAir;
 		}
 		if (mAirLeft = dynamic_cast<AirLeft*>(other->GetOwner()))
 		{
+			Transform* tr = GetComponent<Transform>();
+			Vector2 thispos = tr->GetPos();
+			AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+			mAttackEffect->SetEffectState(AttackEffect::AttackState::Air);
 			SetDamage(50);
+			if (this->GetHP() > 0 && this->GetHP() <= 99)
+			{
+				Sound* mSound = Resources::Load<Sound>(L"hit2", L"..\\Resources\\Sound\\hit2.wav");
+				mSound->Play(false);
+			}
+			if (this->GetHP() <= 0)
+			{
+				Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+				mSound->Play(false);
+			}
 			mState = BrosState::LeftHitAir;
 		}
 		if (mStar = dynamic_cast<Star*>(other->GetOwner()))
 		{
+			Transform* tr = GetComponent<Transform>();
+			Vector2 thispos = tr->GetPos();
+			AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+			mAttackEffect->SetEffectState(AttackEffect::AttackState::Attack);
 			SetDamage(100);
+			Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+			mSound->Play(false);
 			mState = BrosState::HitStar;
 		}
 		if (mKirbyBeam = dynamic_cast<KirbyBeam*>(other->GetOwner()))
 		{
+			Transform* tr = GetComponent<Transform>();
+			Vector2 thispos = tr->GetPos();
+			AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+			mAttackEffect->SetEffectState(AttackEffect::AttackState::Beam);
 			SetDamage(100);
 			mState = BrosState::BrosDeath;
 		}
 		if (mLeftKirbyBeam = dynamic_cast<LeftKirbyBeam*>(other->GetOwner()))
 		{
+			Transform* tr = GetComponent<Transform>();
+			Vector2 thispos = tr->GetPos();
+			AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+			mAttackEffect->SetEffectState(AttackEffect::AttackState::Beam);
 			SetDamage(100);
 			mState = BrosState::BrosDeath;
 		}
 		if (mEnergyBeam = dynamic_cast<EnergyBeam*>(other->GetOwner()))
 		{
+			Transform* tr = GetComponent<Transform>();
+			Vector2 thispos = tr->GetPos();
+			AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+			mAttackEffect->SetEffectState(AttackEffect::AttackState::Beam);
 			SetDamage(100);
 			mState = BrosState::BrosDeath;
 		}
 		if (mLeftEnergyBeam = dynamic_cast<LeftEnergyBeam*>(other->GetOwner()))
 		{
+			Transform* tr = GetComponent<Transform>();
+			Vector2 thispos = tr->GetPos();
+			AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 50), Vector2(2.0f, 2.0f), eLayerType(eLayerType::Effect));
+			mAttackEffect->SetEffectState(AttackEffect::AttackState::Beam);
 			SetDamage(100);
 			mState = BrosState::BrosDeath;
 		}

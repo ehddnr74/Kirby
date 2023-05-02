@@ -30,6 +30,8 @@
 #include "boomrect.h"
 #include "Grizzo.h"
 #include "SaveUI.h"
+#include "MySound.h"
+#include "MyResources.h"
 
 namespace My
 {
@@ -80,15 +82,17 @@ namespace My
 
 	void Stage2Scene::Update()
 	{
-		if (Input::GetKeyState(eKeyCode::Enter) == eKeyState::Down)
-		{
-			SceneManager::LoadScene(eSceneType::Stage1_3);
-		}
+		//if (Input::GetKeyState(eKeyCode::Enter) == eKeyState::Down)
+		//{
+		//	SceneManager::LoadScene(eSceneType::Stage1_3);
+		//}
 
 		if (mStage2Pt->GetPortal())
 		{
 			if (Input::GetKeyDown(eKeyCode::Up))
 			{
+				Sound* mSound = Resources::Load<Sound>(L"enter-door", L"..\\Resources\\Sound\\enter-door.wav");
+				mSound->Play(false);
 				SceneManager::LoadScene(eSceneType::Stage1_3);
 			}
 		}

@@ -13,6 +13,8 @@
 #include "MyRigidBody.h"
 #include "Explosion.h"
 #include "R2Ground.h"
+#include "MySound.h"
+#include "MyResources.h"
 
 namespace My
 {
@@ -23,7 +25,8 @@ namespace My
 	}
 	RightBoomb::~RightBoomb()
 	{
-
+		Sound* mSound = Resources::Load<Sound>(L"00ed - SE_ENEBOMB", L"..\\Resources\\Sound\\00ed - SE_ENEBOMB.wav");
+		mSound->Play(false);
 	}
 	void RightBoomb::Initialize()
 	{
@@ -101,7 +104,7 @@ namespace My
 		if (mkirby = dynamic_cast<Kirby*>(other->GetOwner()));
 		{
 			Transform* boomTr = GetComponent<Transform>();
-			class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(boomTr->GetPos().x, boomTr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+			class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(boomTr->GetPos().x, boomTr->GetPos().y + 150), Vector2(2.f, 2.f), eLayerType::Effect);
 			GetGround()->SetBoomb(nullptr);
 			object::Destroy(this);
 			//SetDestroy(true);	

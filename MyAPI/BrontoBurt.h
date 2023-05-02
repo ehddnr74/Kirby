@@ -39,6 +39,8 @@ namespace My
 
 		void SetPlayer(class Kirby* Player) { mkirby = Player; }
 
+		int GetHP() { return brontoburtHP; }
+
 	private:
 		void none();
 		void leftfly();
@@ -86,6 +88,12 @@ namespace My
 		class LeftKirbyBeam* mLeftKirbyBeam;
 		class EnergyBeam* mEnergyBeam;
 		class LeftEnergyBeam* mLeftEnergyBeam;
+		class AttackEffect* mAttackEffect;
 
+		class AbsorbEffect* mAbsorbEffect;
+		class AbsorbLeftEffect* mLeftAbsorbEffect;
+
+		int a;
+		int b;
 	};
 }

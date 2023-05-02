@@ -155,6 +155,16 @@ namespace My
 			LeftBoomShot,
 			RightBoomShot,
 
+			//빔 커비 히트
+				LeftBoomBaseHit,
+				RightBoomBaseHit,
+				LeftBoomJumpHitRelease,
+				RightBoomJumpHitRelease,
+				LeftBoomJumpHit,
+				RightBoomJumpHit,
+				LeftBoomPigHit,
+				RightBoomPigHit,
+
 		};
 
 
@@ -217,6 +227,11 @@ namespace My
 
 		void SetRightZoom(class RightZoom* rz) { mRightZoom = rz; }
 		void SetLeftZoom(class LeftZoom* rl) { mLeftZoom = rl; }
+
+		void SetYamYam(bool yam) { yamyam = yam; }
+		bool GetYamYam() { return yamyam; }
+		void SetBoomYamYam(bool boomyam) { boomyamyam = boomyam; }
+		bool GetBoomYamYam() { return boomyamyam; }
 
 	private:
 		void leftmove();
@@ -349,7 +364,15 @@ namespace My
 		void leftboomshot();
 		void rightboomshot();
 
-		
+		// 붐커비 히트 애니메이션
+		void leftboombasehit();
+		void rightboombasehit();
+		void leftboomjumphitrelease();
+		void rightboomjumphitrelease();
+		void leftboomjumphit();
+		void rightboomjumphit();
+		void leftboompighit();
+		void rightboompighit();
 
 	private:
 		eKirbyState mState;
@@ -407,6 +430,7 @@ namespace My
 		class LeftBeam* mLeftBeam;
 		class Bros* mBros;
 		class BoomBros* mBoomBros;
+		class Grizzo* mGrizzo;
 
 		class kirbyRightBoom* mRightBoom;
 		class kirbyLeftBoom* mLeftBoom;
@@ -484,6 +508,18 @@ namespace My
 
 		class Breath* mBreath;
 		class Apple* mApple;
+		class AttackEffect* mAttackEffect;
+
+
+		double leftboomhittime;
+		double rightboomhittime;
+		double boomjumphitreleasetime;
+		double boomdoublejumphittime;
+		
+
+		bool DashCheck;
+		bool DashReleaseCheck;
+		bool beamchar;
 	};
 }
 

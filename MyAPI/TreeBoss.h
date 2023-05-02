@@ -66,6 +66,8 @@ namespace My
 		class Apple* mApple;
 		class Apple* mApple2;
 		class Kirby* mKirby;
+		class AttackEffect* mAttackEffect;
+		class EndingStar* mEndingStar;
 		int TreeHP;
 
 		double breathtime;
@@ -106,5 +108,14 @@ namespace My
 		double applereleasetime;
 
 		bool AppleUse;
+
+		class Waddle* mWaddle;
+		class BoomBros* mBoomBros;
+
+		bool WaddleRespawn;
+		bool BoomBrosRespawn;
+
+		bool ending;
+		double endingtime;
 	};
 }

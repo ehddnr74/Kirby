@@ -17,6 +17,8 @@
 #include "BoomBros.h"
 #include "TreeBoss.h"
 #include "Apple.h"
+#include "MySound.h"
+#include "MyResources.h"
 
 namespace My
 {
@@ -24,9 +26,13 @@ namespace My
 		: mTime(0.0f)
 		, Collision(0)
 	{
+		Sound* mSound = Resources::Load<Sound>(L"00f5 - SE_SUIKOMI", L"..\\Resources\\Sound\\00f5 - SE_SUIKOMI.wav");
+		mSound->Play(false);
 	}
 	AbsorbEffect::~AbsorbEffect()
 	{
+		Sound* mSound = Resources::Load<Sound>(L"00f5 - SE_SUIKOMI", L"..\\Resources\\Sound\\00f5 - SE_SUIKOMI.wav");
+		mSound->Stop(false);
 	}
 	void AbsorbEffect::Initialize()
 	{
@@ -141,19 +147,19 @@ namespace My
 
 				if (BoomBros* mBoomBros = dynamic_cast<BoomBros*>(other->GetOwner()))
 				{
-					mBoomBros->SetDamage(100);
+					//mBoomBros->SetDamage(100);
 					object::Destroy(other->GetOwner());
 					object::Destroy(this);
 				}
 				else if (Bros* mBros = dynamic_cast<Bros*>(other->GetOwner()))
 				{
-					mBros->SetDamage(100);
+					//mBros->SetDamage(100);
 					object::Destroy(other->GetOwner());
 					object::Destroy(this);
 				}
 				else if (Cappy* mCappy = dynamic_cast<Cappy*>(other->GetOwner()))
 				{
-					mCappy->SetDamage(100);
+					//mCappy->SetDamage(100);
 					object::Destroy(other->GetOwner());
 					object::Destroy(this);
 				}

@@ -13,6 +13,9 @@
 #include "MyRigidBody.h"
 #include "Explosion.h"
 #include "R2Ground.h"
+#include "MySound.h"
+#include "MyResources.h"
+
 
 namespace My
 {
@@ -22,7 +25,8 @@ namespace My
 	}
 	kirbyRightBoom ::~kirbyRightBoom()
 	{
-
+		Sound* mSound = Resources::Load<Sound>(L"011d - SE_BOMB", L"..\\Resources\\Sound\\011d - SE_BOMB.wav");
+		mSound->Play(false);
 	}
 	void kirbyRightBoom::Initialize()
 	{
@@ -59,7 +63,7 @@ namespace My
 	void kirbyRightBoom::OnCollisionEnter(Collider* other)
 	{
 		Transform* tr = GetComponent<Transform>();
-		class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(tr->GetPos().x, tr->GetPos().y + 100), Vector2(1.f, 1.f), eLayerType::Effect);
+		class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(tr->GetPos().x, tr->GetPos().y + 180), Vector2(2.f, 2.f), eLayerType::Effect);
 		object::Destroy(this);
 		//GetGround()->SetKirBoomb(nullptr);
 	}

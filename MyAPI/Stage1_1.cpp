@@ -32,6 +32,8 @@
 #include "Stage1_2.h"
 #include "SaveKirby.h"
 #include "SaveUI.h"
+#include "MySound.h"
+#include "MyResources.h"
 
 namespace My
 {
@@ -50,7 +52,6 @@ namespace My
 		Scene::Initialize();
 
 
-
 		Kirby* mKirby = object::Instantiate<Kirby>(Vector2(129.0f, 100.0f), Vector2(2.0f, 2.0f), (eLayerType::Player));
 		SetPlayer(mKirby);
 		
@@ -63,12 +64,14 @@ namespace My
 
 	void Stage1Scene::Update()
 	{
-		if (Input::GetKeyState(eKeyCode::Enter) == eKeyState::Down)
-		{
-			SceneManager::LoadScene(eSceneType::Stage1_2);
-		}
+		//if (Input::GetKeyState(eKeyCode::Enter) == eKeyState::Down)
+		//{
+		//	SceneManager::LoadScene(eSceneType::Stage1_2);
+		//}
 		if (mKirby->GetStarCol() == true)
 		{
+			Sound* mSound = Resources::Load<Sound>(L"enter-door", L"..\\Resources\\Sound\\enter-door.wav");
+			mSound->Play(false);
 			SceneManager::LoadScene(eSceneType::Stage1_2);
 		}		
 		if (mCappy->GetHP() <= 0)
@@ -99,10 +102,13 @@ namespace My
 
 	void Stage1Scene::OnEnter()
 	{
+		Sound* mSound = Resources::Load<Sound>(L"6-26-Green-Greens", L"..\\Resources\\Sound\\6-26-Green-Greens.wav");
+		mSound->Play(true);
+		mSound->SetVolume(10.f);
 
 		Camera::SetCameraType(Camera::eCameraEffectType::FadeIn);
 
-		Rectangle1* rectangle = object::Instantiate<Rectangle1>(eLayerType::Rectangle);
+		//Rectangle1* rectangle = object::Instantiate<Rectangle1>(eLayerType::Rectangle);
 
 		Ground* mGround = object::Instantiate<Ground>(eLayerType::Ground);
 
@@ -124,7 +130,7 @@ namespace My
 		if (mKirby != nullptr)
 		{
 			mGround->SetPlayer(mKirby);
-			rectangle->SetPlayer(mKirby);
+			//rectangle->SetPlayer(mKirby);
 			mWaddle->SetPlayer(mKirby);
 			mBrontoBurt->SetPlayer(mKirby);
 			mKirby->SetGround(mGround);

@@ -50,6 +50,8 @@ namespace My
 		void SetGround(class R3Ground* gr) { mGround = gr; }
 		class R3Ground* GetGround() { return mGround; }
 
+		int GetHP() { return WaddleHP; }
+
 
 	private:
 			void leftmove();
@@ -98,6 +100,17 @@ namespace My
 		class kirbyRightBoom* mKrb;
 		class kirbyLeftBoom* mKlb;
 		class R3Ground* mGround;
+		class KirbyBeam* mKirbyBeam;
+		class LeftKirbyBeam* mLeftKirbyBeam;
+		class EnergyBeam* mEnergyBeam;
+		class LeftEnergyBeam* mLeftEnergyBeam;
+		class AttackEffect* mAttackEffect;
+		class AbsorbEffect* mAbsorbEffect;
+		class AbsorbLeftEffect* mLeftAbsorbEffect;
+
+
+		int a;
+		int b;
 
 	};
 }

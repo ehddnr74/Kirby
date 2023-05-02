@@ -4,6 +4,7 @@
 
 namespace My
 {
+	class Animator;
 	class Title : public GameObject
 	{
 	public:
@@ -19,5 +20,10 @@ namespace My
 
 	private:
 		Image* mTitle;
+		class Animator* mAnimator;
+
+		double time;
+		bool Check;
+		bool Check2;
 	};
 }

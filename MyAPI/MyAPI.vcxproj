@@ -135,6 +135,7 @@
     <ClInclude Include="Air.h" />
     <ClInclude Include="AirLeft.h" />
     <ClInclude Include="Apple.h" />
+    <ClInclude Include="AttackEffect.h" />
     <ClInclude Include="Beam.h" />
     <ClInclude Include="BoomBros.h" />
     <ClInclude Include="boomrect.h" />
@@ -143,6 +144,9 @@
     <ClInclude Include="BrontoBurt.h" />
     <ClInclude Include="Bros.h" />
     <ClInclude Include="Commoninclude.h" />
+    <ClInclude Include="Ending.h" />
+    <ClInclude Include="EndingScene.h" />
+    <ClInclude Include="Endingstar.h" />
     <ClInclude Include="EnergyBeam.h" />
     <ClInclude Include="Explosion.h" />
     <ClInclude Include="framework.h" />
@@ -166,6 +170,8 @@
     <ClInclude Include="MyCollisionManager.h" />
     <ClInclude Include="MyfadeIn.h" />
     <ClInclude Include="MyfadeOut.h" />
+    <ClInclude Include="MySound.h" />
+    <ClInclude Include="MySoundManager.h" />
     <ClInclude Include="Portion1.h" />
     <ClInclude Include="portion2.h" />
     <ClInclude Include="portion3.h" />
@@ -231,6 +237,7 @@
     <ClCompile Include="Air.cpp" />
     <ClCompile Include="AirLeft.cpp" />
     <ClCompile Include="Apple.cpp" />
+    <ClCompile Include="AttackEffect.cpp" />
     <ClCompile Include="Beam.cpp" />
     <ClCompile Include="BoomBros.cpp" />
     <ClCompile Include="boomrect.cpp" />
@@ -238,6 +245,9 @@
     <ClCompile Include="Breath.cpp" />
     <ClCompile Include="BrontoBurt.cpp" />
     <ClCompile Include="Bros.cpp" />
+    <ClCompile Include="Ending.cpp" />
+    <ClCompile Include="EndingScene.cpp" />
+    <ClCompile Include="Endingstar.cpp" />
     <ClCompile Include="EnergyBeam.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="Grizzo.cpp" />
@@ -260,6 +270,8 @@
     <ClCompile Include="MyCollider.cpp" />
     <ClCompile Include="MyfadeIn.cpp" />
     <ClCompile Include="MyfadeOut.cpp" />
+    <ClCompile Include="MySound.cpp" />
+    <ClCompile Include="MySoundManager.cpp" />
     <ClCompile Include="Portion1.cpp" />
     <ClCompile Include="portion2.cpp" />
     <ClCompile Include="portion3.cpp" />

@@ -4,6 +4,7 @@
 #include "MyInput.h"
 #include "MyCollisionManager.h"
 #include "MyCamera.h"
+#include "MySoundManager.h"
 
 namespace My
 {
@@ -48,6 +49,7 @@ namespace My
 
 		Time::Initialize();
 		Input::Initialize();
+		SoundManager::Initialize();
 		SceneManager::Initialize();
 		Camera::Initialize();
 	}

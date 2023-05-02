@@ -84,11 +84,17 @@ namespace My
 		class LeftKirbyBeam* mLeftKirbyBeam;
 		class EnergyBeam* mEnergyBeam;
 		class LeftEnergyBeam* mLeftEnergyBeam;
+		class AttackEffect* mAttackEffect;
 
 
 		double brostimetwo;
 
 		double deathtime;
 		bool death;
+		class AbsorbEffect* mAbsorbEffect;
+		class AbsorbLeftEffect* mLeftAbsorbEffect;
+
+		int a;
+		int b;
 	};
 }

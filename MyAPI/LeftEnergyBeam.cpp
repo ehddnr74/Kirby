@@ -10,7 +10,8 @@
 #include "MyScene.h"
 #include "MyObject.h"
 #include "MyKirby.h"
-
+#include "MySound.h"
+#include "MyResources.h"
 namespace My
 {
 	LeftEnergyBeam::LeftEnergyBeam()
@@ -71,6 +72,8 @@ namespace My
 	}
 	void LeftEnergyBeam::OnCollisionEnter(Collider* other)
 	{
+		Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+		mSound->Play(false);
 	}
 	void LeftEnergyBeam::OnCollisionStay(Collider* other)
 	{

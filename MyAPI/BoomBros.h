@@ -123,6 +123,8 @@ namespace My
 		class kirbyRightBoom* mKrb;
 		class kirbyLeftBoom* mKlb;
 
+		class AttackEffect* mAttackEffect;
+
 
 		double brostimetwo;
 
@@ -146,5 +148,10 @@ namespace My
 		bool leftfind;
 		bool leftBoomShot;
 		bool leftBoomCreate;
+		class AbsorbEffect* mAbsorbEffect;
+		class AbsorbLeftEffect* mLeftAbsorbEffect;
+
+		int a;
+		int b;
 	};
 }

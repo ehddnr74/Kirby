@@ -10,6 +10,8 @@
 #include "MyScene.h"
 #include "MyObject.h"
 #include "MyKirby.h"
+#include "MySound.h"
+#include "MyResources.h"
 
 namespace My
 {
@@ -83,6 +85,8 @@ namespace My
 	}
 	void KirbyBeam::OnCollisionEnter(Collider* other)
 	{
+		Sound* mSound = Resources::Load<Sound>(L"hit3", L"..\\Resources\\Sound\\hit3.wav");
+		mSound->Play(false);
 	}
 	void KirbyBeam::OnCollisionStay(Collider* other)
 	{

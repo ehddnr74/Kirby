@@ -25,6 +25,8 @@
 #include "TreeBoss.h"
 #include "TreeBranch.h"
 #include "TreeHP.h"
+#include "MySound.h"
+#include "MyResources.h"
 
 namespace My {
 	TreeScene::TreeScene()
@@ -41,6 +43,10 @@ namespace My {
 	}
 	void TreeScene::Update()
 	{
+		//if (Input::GetKeyState(eKeyCode::Enter) == eKeyState::Down)
+		//{
+		//	SceneManager::LoadScene(eSceneType::Ending);
+		//}
 		Scene::Update();
 	}
 	void TreeScene::Render(HDC hdc)
@@ -53,6 +59,13 @@ namespace My {
 	}
 	void TreeScene::OnEnter()
 	{
+		Sound* mSound2 = Resources::Load<Sound>(L"6-26-Green-Greens", L"..\\Resources\\Sound\\6-26-Green-Greens.wav");
+		mSound2->Stop(false);
+
+		Sound* mSound = Resources::Load<Sound>(L"05.-Battle-with-the-Boss", L"..\\Resources\\Sound\\05.-Battle-with-the-Boss.wav");
+		mSound->Play(true);
+		mSound->SetVolume(10.f);
+
 		hp = SaveUI::GetUI();
 		AddGameObject(hp, eLayerType::UI);
 		mKirby = SaveKirby::GetKirby();
@@ -93,6 +106,7 @@ namespace My {
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterSkill, true);
 		//CollisionManager::SetLayer(eLayerType::Player, eLayerType::Box, true);
+		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Portal, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Air, true);
 		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Star, true);
 		CollisionManager::SetLayer(eLayerType::Skill, eLayerType::Monster, true);
@@ -107,6 +121,5 @@ namespace My {
 	}
 	void TreeScene::OnExit()
 	{
-
 	}
 }

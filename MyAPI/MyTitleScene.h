@@ -22,7 +22,7 @@ namespace My
 		void SetTitle(class Title* title) { mtitle = title; }
 
 	private:
-		Title* mtitle;
+		class Title* mtitle;
 		class Stage1Scene* mstage1;
 		class Stage2Scene* mstage2;
 	};

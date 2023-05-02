@@ -91,7 +91,7 @@ namespace My
 						if (colorboom == RGB(255, 0, 255) || colorbooml == RGB(255, 0, 255) || colorboomr == RGB(255, 0, 255))
 						{
 							//GetBoomb()->SetDestroy(true);
-							class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(boomTr->GetPos().x, boomTr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+							class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(boomTr->GetPos().x, boomTr->GetPos().y + 150), Vector2(2.f, 2.f), eLayerType::Effect);
 							object::Destroy(GetBoomb());
 							SetBoomb(nullptr);
 						}
@@ -110,7 +110,7 @@ namespace My
 					|| colorkrboom == RGB(100, 0, 100) || colorkrbooml == RGB(100, 0, 100) || colorkrboomr == RGB(100, 0, 100)
 					|| colorkrboom == RGB(200, 0, 200) || colorkrbooml == RGB(200, 0, 200) || colorkrboomr == RGB(200, 0, 200))
 				{
-					class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(mkrbtr->GetPos().x, mkrbtr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+					class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(mkrbtr->GetPos().x, mkrbtr->GetPos().y + 150), Vector2(2.f, 2.f), eLayerType::Effect);
 					object::Destroy(mkrb);
 					SetKirBoomb(nullptr);
 				}
@@ -140,7 +140,7 @@ namespace My
 					|| klboom == RGB(100, 0, 100) || krbooml == RGB(100, 0, 100) || krboomr == RGB(100, 0, 100)
 					|| klboom == RGB(200, 0, 200) || krbooml == RGB(200, 0, 200) || krboomr == RGB(200, 0, 200))
 				{
-					class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(mklbtr->GetPos().x, mklbtr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+					class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(mklbtr->GetPos().x, mklbtr->GetPos().y + 150), Vector2(2.f, 2.f), eLayerType::Effect);
 					object::Destroy(mklb);
 					SetKirLeftBoomb(nullptr);
 				}
@@ -180,7 +180,7 @@ namespace My
 						{
 							//GetLeftBoomb()->SetDestroy(true);
 							object::Destroy(GetLeftBoomb());
-							class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(LboomTr->GetPos().x, LboomTr->GetPos().y + 50), Vector2(1.f, 1.f), eLayerType::Effect);
+							class Explosion* mExplosion = object::Instantiate<Explosion>(Vector2(LboomTr->GetPos().x, LboomTr->GetPos().y + 150), Vector2(2.f, 2.f), eLayerType::Effect);
 							SetLeftBoomb(nullptr);
 						}
 				}

@@ -13,6 +13,11 @@ namespace My
 			RightMove,
 			Death,
 			HitBoom,
+			HitKirbyBase,
+			LeftHitKirbyBase,
+			HitSliding,
+			HitSlidingLeft,
+			HitStar,
 		};
 
 		Grizzo();
@@ -44,6 +49,11 @@ namespace My
 		void leftmove();
 		void rightmove();
 		void death();
+		void hitkirbybase();
+		void lefthitkirbybase();
+		void hitsliding();
+		void hitslidingleft();
+		void hitstar();
 		void hitboom();
 
 
@@ -55,6 +65,14 @@ namespace My
 		Animator* mAnimator;
 		GrizzoState mState;
 		class Collider* mCollider;
+		class Air* mAir;
+		class AirLeft* mAirLeft;
+		class Kirby* mkirby;
+		class Star* mStar;
+		class KirbyBeam* mKirbyBeam;
+		class LeftKirbyBeam* mLeftKirbyBeam;
+		class EnergyBeam* mEnergyBeam;
+		class LeftEnergyBeam* mLeftEnergyBeam;
 		//class RigidBody* mRigidBody;
 		//double Grizzotime;
 		//double Gjumptime;
@@ -62,33 +80,26 @@ namespace My
 		int GrizzoHP;
 
 
-		//double hitairtime;
-		//double hitstartime;
+		double hitairtime;
+		double hitstartime;
 
-		//double hitkirbybasetime;
-		//double hitslidingtime;
+		double hitkirbybasetime;
+		double hitslidingtime;
 
-		//double deathtime;
+		double deathtime;
 
-
-		//class Air* mAir;
-		//class AirLeft* mAirLeft;
-		//class Star* mStar;
-		//class Kirby* mkirby;
-		//class KirbyBeam* mKirbyBeam;
-		//class LeftKirbyBeam* mLeftKirbyBeam;
-		//class EnergyBeam* mEnergyBeam;
-		//class LeftEnergyBeam* mLeftEnergyBeam;
-		//class LeftBooomb* mLeftBoomb;
-		//class RightBoomb* mRightBoomb;
-
-		//bool die;
 		class R2Ground* mGround;
 		class R3Ground* gr3;
 		class kirbyRightBoom* mKrb;
 		class kirbyLeftBoom* mKlb;
-		double grizzotime;
+		class AttackEffect* mAttackEffect;
 
+		double grizzotime;
+		class AbsorbEffect* mAbsorbEffect;
+		class AbsorbLeftEffect* mLeftAbsorbEffect;
+
+		int a;
+		int b;
 
 
 	};

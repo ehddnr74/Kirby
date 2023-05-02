@@ -30,7 +30,7 @@ namespace My
 
 		mAnimator = AddComponent<Animator>();
 
-		mAnimator->CreateAnimation(L"Explosion", explosion, Vector2::Zero, 10, 1, 10, Vector2::Zero, 0.05);
+		mAnimator->CreateAnimation(L"Explosion", explosion, Vector2(0.f,200.f), 10, 2, 8, Vector2::Zero, 0.04);
 
 		mAnimator->Play(L"Explosion", false);
 
@@ -40,7 +40,7 @@ namespace My
 	{
 		Explosiontime += Time::DeltaTime();
 
-		if (Explosiontime >= 0.5f)
+		if (Explosiontime >= 0.32f)
 		{
 			Explosiontime = 0.0f;
 			object::Destroy(this);

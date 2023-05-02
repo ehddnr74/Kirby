@@ -26,6 +26,8 @@
 #include "SaveKirby.h"
 #include "SaveUI.h"
 #include "Grizzo.h"
+#include "MySound.h"
+#include "MyResources.h"
 namespace My {
 	Stage1_3::Stage1_3()
 	{
@@ -42,14 +44,16 @@ namespace My {
 	}
 	void Stage1_3::Update()
 	{
-		if (Input::GetKeyState(eKeyCode::Enter) == eKeyState::Down)
-		{
-			SceneManager::LoadScene(eSceneType::TreeScene);
-		}
+		//if (Input::GetKeyState(eKeyCode::Enter) == eKeyState::Down)
+		//{
+		//	SceneManager::LoadScene(eSceneType::TreeScene);
+		//}
 		if (mStage3Pt->GetPortal())
 		{
 			if (Input::GetKeyDown(eKeyCode::Up))
 			{
+				Sound* mSound = Resources::Load<Sound>(L"enter-door", L"..\\Resources\\Sound\\enter-door.wav");
+				mSound->Play(false);
 				SceneManager::LoadScene(eSceneType::TreeScene);
 			}
 		}
@@ -91,11 +95,11 @@ namespace My {
 		mGround = object::Instantiate<R3Ground>(eLayerType::Ground);
 		mKirby->SetGround3(mGround);
 		SetGround(mGround);
-		Rectangle1* rectangle = object::Instantiate<Rectangle1>(eLayerType::Rectangle);
+		//Rectangle1* rectangle = object::Instantiate<Rectangle1>(eLayerType::Rectangle);
 
 		if (mKirby != nullptr)
 		{
-	    rectangle->SetPlayer(mKirby);
+	    //rectangle->SetPlayer(mKirby);
 		mGround->SetPlayer(mKirby);
 		SetPt(mStage3Pt);
 		}

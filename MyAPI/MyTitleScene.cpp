@@ -10,6 +10,9 @@
 #include "Stage1_1.h"
 #include "Stage1_2.h"
 
+#include "MySound.h"
+#include "MyResources.h"
+
 
 namespace My
 {
@@ -22,12 +25,13 @@ namespace My
 	void TitleScene::Initialize()
 	{
 		Scene::Initialize();
-
-
+		Sound* mSound = Resources::Load<Sound>(L"1-01-Title", L"..\\Resources\\Sound\\1-01-Title.wav");
+		mSound->Play(true);
+		mSound->SetVolume(10.f);
 		//mtitle = new Title();
 		//AddGameObject(mtitle, eLayerType::Stage);
 
-		Title* mtitle = object::Instantiate<Title>(eLayerType::BG);
+		mtitle = object::Instantiate<Title>(Vector2(267.0f,790.0f),Vector2(1.f,1.f),(eLayerType::BG));
 	}
 	void TitleScene::Update()
 	{
@@ -51,6 +55,7 @@ namespace My
 	}
 	void TitleScene::OnExit()
 	{
-		
+		Sound* mSound = Resources::Load<Sound>(L"1-01-Title", L"..\\Resources\\Sound\\1-01-Title.wav");
+		mSound->Stop(false);
 	}
 }

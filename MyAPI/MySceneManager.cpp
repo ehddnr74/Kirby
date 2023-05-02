@@ -7,6 +7,7 @@
 #include "TreeScene.h"
 #include "SecretRoomScene.h"
 #include "MyObject.h"
+#include "EndingScene.h"
 
 namespace My
 {
@@ -23,6 +24,7 @@ namespace My
 		mScenes[(UINT)eSceneType::Stage1_3] = new Stage1_3();
 		mScenes[(UINT)eSceneType::TreeScene] = new TreeScene();
 		mScenes[(UINT)eSceneType::SecretRoomScene] = new SecretRoomScene();
+		mScenes[(UINT)eSceneType::Ending] = new EndingScene();
 
 		for (Scene* scene : mScenes)
 		{

@@ -53,9 +53,6 @@
     <Filter Include="Contents\Scene\MyTitleScene">
       <UniqueIdentifier>{70bc8e35-de43-467d-8b79-f9b11a2ef5af}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Scene\MyEndScene">
-      <UniqueIdentifier>{688cac28-28be-40ff-bb6b-1090c2e34947}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Scene\MyStageScene">
       <UniqueIdentifier>{9d0d7c36-ee03-4167-8fb0-6596bc27e985}</UniqueIdentifier>
     </Filter>
@@ -175,6 +172,9 @@
     </Filter>
     <Filter Include="Contents\SaveUI">
       <UniqueIdentifier>{7a656c6d-cf5b-45b1-8cf3-a16b32b3f515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Scene\MyEndingScene">
+      <UniqueIdentifier>{688cac28-28be-40ff-bb6b-1090c2e34947}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -456,6 +456,24 @@
     <ClInclude Include="Apple.h">
       <Filter>Contents\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="AttackEffect.h">
+      <Filter>Contents\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="MySound.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="MySoundManager.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Endingstar.h">
+      <Filter>Contents\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Ending.h">
+      <Filter>Contents\Scene\MyEndingScene</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingScene.h">
+      <Filter>Contents\Scene\MyEndingScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MyAPI.rc">
@@ -727,6 +745,24 @@
     </ClCompile>
     <ClCompile Include="Apple.cpp">
       <Filter>Contents\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackEffect.cpp">
+      <Filter>Contents\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="MySound.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="MySoundManager.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Endingstar.cpp">
+      <Filter>Contents\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Ending.cpp">
+      <Filter>Contents\Scene\MyEndingScene</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingScene.cpp">
+      <Filter>Contents\Scene\MyEndingScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

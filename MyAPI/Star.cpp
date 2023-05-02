@@ -10,13 +10,16 @@
 #include "MyObject.h"
 #include "MyKirby.h"
 #include "MyCollider.h"
+#include "MySound.h"
+#include "MyResources.h"
 
 namespace My
 {
 	Star::Star()
 		:startime(0.f)
 	{
-
+		Sound* mSound2 = Resources::Load<Sound>(L"00f8 - SE_STARSHOT", L"..\\Resources\\Sound\\00f8 - SE_STARSHOT.wav");
+		mSound2->Play(false);
 	}
 	Star::~Star()
 	{
@@ -78,9 +81,6 @@ namespace My
 			}
 			tr->SetPos(Pos);
 		}
-
-		
-		
 		GameObject::Update();
 	}
 	void Star::Render(HDC hdc)

@@ -23,6 +23,12 @@
 #include "TreeGround.h"
 #include "Breath.h"
 #include "Apple.h"
+#include "AttackEffect.h"
+#include "MyWaddle.h"
+#include "BoomBros.h"
+#include "Endingstar.h"
+#include "MySound.h"
+#include "MyResources.h"
 
 namespace My
 {
@@ -40,6 +46,10 @@ namespace My
 		, applet(0.f)
 		, applereleasetime(0.f)
 		, AppleUse(true)
+		, WaddleRespawn(true)
+		, BoomBrosRespawn(false)
+		, ending(true)
+		, endingtime(0.0f)
 	{
 	}
 	TreeBoss::~TreeBoss()
@@ -72,12 +82,32 @@ namespace My
 	{
 		GameObject::Update();
 
+		if (TreeHP <= 0)
+		{
+			endingtime += Time::DeltaTime();
+
+			if (ending == true && endingtime>=3.0f)
+			{
+				Sound* mSound2 = Resources::Load<Sound>(L"00b8 - SE_WARPSTAR2", L"..\\Resources\\Sound\\00b8 - SE_WARPSTAR2.wav");
+				mSound2->Play(true);
+				ending = false;
+				object::Instantiate<EndingStar>(Vector2(200.f, 1400.f), Vector2(1.5f, 1.5f), eLayerType(eLayerType::Portal));
+			}
+		}
+
+		
+
 		if (mState != TreeState::Death)
 		{
 			if (TreeHP <= 0)
 			{
+				Sound* mSound = Resources::Load<Sound>(L"05.-Battle-with-the-Boss", L"..\\Resources\\Sound\\05.-Battle-with-the-Boss.wav");
+				mSound->Stop(false);
+				Sound* mSound2 = Resources::Load<Sound>(L"00b2 - SE_BOSSDEAD1", L"..\\Resources\\Sound\\00b2 - SE_BOSSDEAD1.wav");
+				mSound2->Play(false);
 				mState = TreeState::Death;
 				mAnimator->Play(L"Death", false);
+
 			}
 		}
 
@@ -108,8 +138,8 @@ namespace My
 					airtime += Time::DeltaTime();
 					if (airtime >= 6.f)
 					{
-						airtime = 0.0f;
-						mState = TreeState::Breath;
+					 airtime = 0.0f;
+					 mState = TreeState::Breath;
 					}
 				}
 			}
@@ -173,30 +203,50 @@ namespace My
         	}
 			if (mStar = dynamic_cast<Star*>(other->GetOwner()))
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 150), Vector2(3.0f, 3.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Attack);
 				mAnimator->Play(L"Hit", false);
 				SetDamage(15);
 				//mState = BrosState::HitStar;
 			}
 			if (mKirbyBeam = dynamic_cast<KirbyBeam*>(other->GetOwner()))
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 150), Vector2(3.0f, 3.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Beam);
 				mAnimator->Play(L"Hit", false);
 				SetDamage(15);
 				//mState = BrosState::BrosDeath;
 			}
 			if (mLeftKirbyBeam = dynamic_cast<LeftKirbyBeam*>(other->GetOwner()))
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 150), Vector2(3.0f, 3.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Beam);
 				mAnimator->Play(L"Hit", false);
 				SetDamage(15);
 				//mState = BrosState::BrosDeath;
 			}
 			if (mEnergyBeam = dynamic_cast<EnergyBeam*>(other->GetOwner()))
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 150), Vector2(3.0f, 3.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Beam);
 				mAnimator->Play(L"Hit", false);
 				SetDamage(15);
 				//mState = BrosState::BrosDeath;
 			}
 			if (mLeftEnergyBeam = dynamic_cast<LeftEnergyBeam*>(other->GetOwner()))
 			{
+				Transform* tr = GetComponent<Transform>();
+				Vector2 thispos = tr->GetPos();
+				AttackEffect* mAttackEffect = object::Instantiate<AttackEffect>(Vector2(thispos.x - 10, thispos.y + 150), Vector2(3.0f, 3.0f), eLayerType(eLayerType::Effect));
+				mAttackEffect->SetEffectState(AttackEffect::AttackState::Beam);
 				mAnimator->Play(L"Hit", false);
 				SetDamage(15);
 				//mState = BrosState::BrosDeath;
