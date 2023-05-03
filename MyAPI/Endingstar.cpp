@@ -13,11 +13,13 @@
 #include "MySound.h"
 #include "MyResources.h"
 #include "MyCamera.h"
+#include "MyfadeOut.h"
 
 namespace My
 {
 	EndingStar::EndingStar()
 		:GetEnd(false)
+		,time(0.f)
 	{
 
 	}
@@ -45,10 +47,24 @@ namespace My
 	{
 		if (GetEnd == true)
 		{
+			GetEnd = false;
 			Sound* mSound2 = Resources::Load<Sound>(L"00b8 - SE_WARPSTAR2", L"..\\Resources\\Sound\\00b8 - SE_WARPSTAR2.wav");
 			mSound2->Stop(false);
-			SceneManager::LoadScene(eSceneType::Ending);
+			Sound* mSound = Resources::Load<Sound>(L"enter-door", L"..\\Resources\\Sound\\enter-door.wav");
+			mSound->Play(false);
+			FadeOut* mFadeOut = object::Instantiate<FadeOut>(eLayerType::Rectangle);
+			SetFade(mFadeOut);
 		}
+
+		if (mFadeOut != nullptr)
+		{
+			if (mFadeOut->GetAmount() >= 250.f)
+			{
+				SceneManager::LoadScene(eSceneType::Ending);
+			}
+		}
+
+
 		GameObject::Update();
 	}
 	void EndingStar::Render(HDC hdc)

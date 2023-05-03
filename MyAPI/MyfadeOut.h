@@ -15,9 +15,14 @@ namespace My
 		virtual void Render(HDC hdc) override;
 		virtual void Release() override;
 
+		double GetAmount() { return fadeAmount; }
+
+		bool GetFadeClear() { return FadeClear; }
+
 
 	private:
 		Image* fadeOut;
 		double fadeAmount;
+		bool FadeClear;
 	};
 }

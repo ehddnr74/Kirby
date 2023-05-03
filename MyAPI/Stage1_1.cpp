@@ -64,10 +64,10 @@ namespace My
 
 	void Stage1Scene::Update()
 	{
-		//if (Input::GetKeyState(eKeyCode::Enter) == eKeyState::Down)
-		//{
-		//	SceneManager::LoadScene(eSceneType::Stage1_2);
-		//}
+		if (Input::GetKeyState(eKeyCode::Enter) == eKeyState::Down)
+		{
+			SceneManager::LoadScene(eSceneType::Stage1_2);
+		}
 		if (mKirby->GetStarCol() == true)
 		{
 			Sound* mSound = Resources::Load<Sound>(L"enter-door", L"..\\Resources\\Sound\\enter-door.wav");
@@ -106,7 +106,9 @@ namespace My
 		mSound->Play(true);
 		mSound->SetVolume(10.f);
 
-		Camera::SetCameraType(Camera::eCameraEffectType::FadeIn);
+		//Camera::SetCameraType(Camera::eCameraEffectType::FadeIn);
+
+		object::Instantiate<FadeIn>(eLayerType::Rectangle);
 
 		//Rectangle1* rectangle = object::Instantiate<Rectangle1>(eLayerType::Rectangle);
 
@@ -155,7 +157,7 @@ namespace My
 		SaveUI::SetUI(hp);
 
 
-		//Camera::SetCameraType(Camera::eCameraEffectType::None);
+		//Camera::SetCameraType(Camera::eCameraEffectType::FadeOut);
 		//object::Instantiate<FadeOut>(eLayerType::fade);
 		//mKirby->SetPos(Vector2(0.0f, 0.0f));
 	}

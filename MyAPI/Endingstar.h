@@ -2,6 +2,7 @@
 #include "MyGameObject.h"
 namespace My
 {
+	class FadeOut;
 	class Animator;
 	class EndingStar : public GameObject
 	{
@@ -18,10 +19,17 @@ namespace My
 		virtual void OnCollisionStay(class Collider* other) override;
 		virtual void OnCollisionExit(class Collider* other) override;
 
+		void SetFade(class FadeOut* mfade) { mFadeOut = mfade; }
+		class FadeOut* GetFade() { return mFadeOut; }
+
 	private:
 		Animator* mAnimator;
 		class Kirby* mKirby;
 
 		bool GetEnd;
+		class FadeOut* mFadeOut;
+
+
+		double time;
 	};
 }

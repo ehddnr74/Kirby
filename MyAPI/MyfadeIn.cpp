@@ -33,7 +33,7 @@ namespace My
 	{
 		GameObject::Update();
 
-		fadeAmount -= 80 * Time::DeltaTime();
+		fadeAmount -= 50 * Time::DeltaTime();
 
 		if (fadeAmount <= 0)
 		{
@@ -66,9 +66,10 @@ namespace My
 		Vector2 pos = tr->GetPos();
 		pos = Camera::CalculatePos(pos);
 
-		AlphaBlend(hdc, pos.x, pos.y
+
+		AlphaBlend(hdc, 0, 0
 			, Fadein->GetWidth()
-			, 403.0f
+			, Fadein->GetHeight()
 			, Fadein->GetHdc()
 			, 0, 0
 			, Fadein->GetWidth()

@@ -11,6 +11,7 @@ namespace My
 {
 	FadeOut::FadeOut()
 		:fadeAmount(0.0f)
+		, FadeClear(false)
 	{
 
 	}
@@ -34,10 +35,10 @@ namespace My
 
 		fadeAmount += 80 * Time::DeltaTime();
 
-		if (fadeAmount >= 255)
-		{
-			object::Destroy(this);
-		}
+		//if (fadeAmount >= 255)
+		//{
+		//	object::Destroy(this);
+		//}
 	}
 
 	void My::FadeOut::Render(HDC hdc)

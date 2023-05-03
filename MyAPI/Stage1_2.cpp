@@ -82,10 +82,10 @@ namespace My
 
 	void Stage2Scene::Update()
 	{
-		//if (Input::GetKeyState(eKeyCode::Enter) == eKeyState::Down)
-		//{
-		//	SceneManager::LoadScene(eSceneType::Stage1_3);
-		//}
+		if (Input::GetKeyState(eKeyCode::Enter) == eKeyState::Down)
+		{
+			SceneManager::LoadScene(eSceneType::Stage1_3);
+		}
 
 		if (mStage2Pt->GetPortal())
 		{
@@ -139,6 +139,8 @@ namespace My
 
 	void Stage2Scene::OnEnter()
 	{
+		//Camera::SetCameraType(Camera::eCameraEffectType::FadeIn);
+
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterSkill, true);
@@ -161,8 +163,6 @@ namespace My
 		//Stage1Scene* mstage1 = new Stage1Scene;
 		//SetStage1(mstage1);
 		//MyKirby = mstage1->GetKirby();
-
-		Camera::Camera::SetCameraType(Camera::eCameraEffectType::FadeIn);
 
 		R2Ground* ground = object::Instantiate<R2Ground>(eLayerType::Ground);
 		MyKirby->SetGround2(ground);

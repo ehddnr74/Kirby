@@ -9,6 +9,7 @@
 #include "MySound.h"
 #include "MyResources.h"
 #include "Ending.h"
+#include "MyfadeOut.h"
 
 
 namespace My
@@ -50,6 +51,7 @@ namespace My
 		Sound* mSound2 = Resources::Load<Sound>(L"Ending", L"..\\Resources\\Sound\\Ending.wav");
 		mSound2->Play(false);
 		mSound2->SetVolume(10.f);
+
 	}
 	void EndingScene::OnExit()
 	{

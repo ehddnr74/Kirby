@@ -44,10 +44,10 @@ namespace My {
 	}
 	void Stage1_3::Update()
 	{
-		//if (Input::GetKeyState(eKeyCode::Enter) == eKeyState::Down)
-		//{
-		//	SceneManager::LoadScene(eSceneType::TreeScene);
-		//}
+		if (Input::GetKeyState(eKeyCode::Enter) == eKeyState::Down)
+		{
+			SceneManager::LoadScene(eSceneType::TreeScene);
+		}
 		if (mStage3Pt->GetPortal())
 		{
 			if (Input::GetKeyDown(eKeyCode::Up))
